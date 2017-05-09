@@ -11,10 +11,11 @@ import javax.persistence.Persistence;
 import java.util.ArrayList;
 
 public class UserService {
-    private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
-    private static EntityManager entityManager = emFactory.createEntityManager();
+    
 
     public static void create(User user) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
 
         entityManager.getTransaction().begin();
         entityManager.persist(user);
@@ -25,11 +26,17 @@ public class UserService {
     }
 
     public static User read(int userid) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
         User user = entityManager.find(User.class, userid);
         return user;
     }
 
     public static void update(User user) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
         entityManager.getTransaction().begin();
         entityManager.persist(user);
         entityManager.getTransaction().commit();
@@ -39,6 +46,9 @@ public class UserService {
     }
 
     public static void delete(User user) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
         entityManager.getTransaction().begin();
         entityManager.remove(user);
         entityManager.getTransaction().commit();
