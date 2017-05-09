@@ -16,7 +16,7 @@ public class AdminFirstpage {
 
         MenuBarAdmin x = new MenuBarAdmin(pane, window);
 
-        Scene welcomeScene = new Scene(pane, 1280,720);
+        Scene welcomeScene = new Scene(pane, 1600,900);
         window.setScene(welcomeScene);
         window.centerOnScreen();
 
