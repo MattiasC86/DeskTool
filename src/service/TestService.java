@@ -15,28 +15,16 @@ public class TestService {
     private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
     private static EntityManager entityManager = emFactory.createEntityManager();
 
-    public static void create(Test test, ArrayList<Question> questions, ArrayList<Answer> answers, User user) {
-
+    public static void create(Test test, ArrayList<Question> questions, ArrayList<Answer> answers) {
         entityManager.getTransaction().begin();
-
-        entityManager.persist(user);
         entityManager.persist(test);
-
-        for(Question element : questions) {
-            entityManager.persist(element);
-        }
-
-        for(Answer element : answers) {
-            entityManager.persist(element);
-        }
-
         entityManager.getTransaction().commit();
 
         entityManager.close();
         emFactory.close();
 
-        /*createQuestion(question);
-        createAnswer(answer);*/
+        QuestionService.create(questions);
+        AnswerService.create(answers);
     }
 
     public static Test read(int testId) {
@@ -78,6 +66,7 @@ public class TestService {
         ArrayList<Answer> answers = new ArrayList<Answer>();
         answers.add(answer1);
 
-        create(test1, questions, answers, user1);
+        UserService.create(user1);
+        create(test1, questions, answers);
     }
 }
