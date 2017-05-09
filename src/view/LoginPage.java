@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class LoginPage {
 
 
-    LoginPage(Stage window) {
+   public LoginPage(Stage window) {
 
 
 
@@ -26,7 +26,7 @@ public class LoginPage {
 
         //Adding HBox
         HBox hb = new HBox();
-        hb.setPadding(new Insets(20,20,20,60));
+        hb.setPadding(new Insets(20,20,20,70));
 
         //Adding GridPane
         GridPane gridPane = new GridPane();
@@ -62,7 +62,7 @@ public class LoginPage {
         dropShadow.setOffsetY(5);
 
         //Adding text and DropShadow effect to it
-        Text text = new Text("Prov Portalen");
+        Text text = new Text("Provportalen");
         text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
         text.setEffect(dropShadow);
 

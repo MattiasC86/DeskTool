@@ -15,7 +15,7 @@ public class MenuBarAdmin {
 
     StartView sv;
 
-    MenuBarAdmin(Pane pane, Stage window){
+    public MenuBarAdmin(Pane pane, Stage window){
         sv = new StartView();
 
         //skapar en huvudmeny med namn arkiv
