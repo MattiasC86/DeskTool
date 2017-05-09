@@ -64,7 +64,7 @@ public class TestService {
 
     public static void main(String[] args) {
 
-        User user1 = new User("Mattias", "Crusell", "goteborg", "Admin");
+        User user1 = new User("Mattias", "Crusell", "Crusse", "crusell@mail.com", "goteborg", "Admin");
 
         Test test1 = new Test("Djungeltest", 20, 100, 1, user1);
 
