@@ -32,12 +32,26 @@ public class UserService {
         emFactory.close();
     }
 
-    public static void readUser() {
-        User user = entityManager.find(User.class, 1);
-        return chosenTest;
+    public static User readUser(int userid) {
+        User user = entityManager.find(User.class, userid);
+        return user;
     }
 
-    public static void updateUser(User user) {}
+    public static void updateUser(User user) {
+        entityManager.getTransaction().begin();
+        entityManager.persist(user);
+        entityManager.getTransaction().commit();
 
-    public static void deleteUser(User user) {}
+        entityManager.close();
+        emFactory.close();
+    }
+
+    public static void deleteUser(User user) {
+        entityManager.getTransaction().begin();
+        entityManager.remove(user);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        emFactory.close();
+    }
 }
