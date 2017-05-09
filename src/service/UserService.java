@@ -14,17 +14,9 @@ public class UserService {
     private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
     private static EntityManager entityManager = emFactory.createEntityManager();
 
-    public static void createUser(User user) {
+    public static void create(User user) {
 
         entityManager.getTransaction().begin();
-
-        user.setFirstName();
-        user.setLastName();
-        user.userName();
-        user.email();
-        user.setPassword();
-        user.setRole();
-
         entityManager.persist(user);
         entityManager.getTransaction().commit();
 
@@ -32,12 +24,12 @@ public class UserService {
         emFactory.close();
     }
 
-    public static User readUser(int userid) {
+    public static User read(int userid) {
         User user = entityManager.find(User.class, userid);
         return user;
     }
 
-    public static void updateUser(User user) {
+    public static void update(User user) {
         entityManager.getTransaction().begin();
         entityManager.persist(user);
         entityManager.getTransaction().commit();
@@ -46,7 +38,7 @@ public class UserService {
         emFactory.close();
     }
 
-    public static void deleteUser(User user) {
+    public static void delete(User user) {
         entityManager.getTransaction().begin();
         entityManager.remove(user);
         entityManager.getTransaction().commit();
