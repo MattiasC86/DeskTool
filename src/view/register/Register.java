@@ -1,10 +1,9 @@
 package view.register;
 
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -49,6 +48,10 @@ public class Register {
 
         Button registerButton = new Button("Registrera");
 
+        ChoiceBox privilege = new ChoiceBox();
+        privilege.setItems(FXCollections.observableArrayList("Student", "Lärare", "Admin"));
+        privilege.setValue("Student");
+
 
         gp.add(firstname, 0 ,0);
         gp.add(texfieldFirstname, 1 ,0);
@@ -66,6 +69,7 @@ public class Register {
         gp.add(textFieldPassword, 1 ,4);
 
         gp.add(registerButton,0,5);
+        gp.add(privilege, 1,5);
 
         DropShadow dropShadow = new DropShadow();
         dropShadow.setOffsetX(5);
