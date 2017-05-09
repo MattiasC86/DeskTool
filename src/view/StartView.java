@@ -2,7 +2,7 @@ package view;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.register.RegisterTeacher;
+import view.register.Register;
 
 /**
  * Created by Rasmus on 2017-05-03.
@@ -33,6 +33,6 @@ public class StartView extends Application{
     }
 
     public void registerATeacher(Stage window){
-        RegisterTeacher rt = new RegisterTeacher(window);
+        Register rt = new Register(window);
     }
 }

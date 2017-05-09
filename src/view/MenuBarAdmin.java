@@ -33,9 +33,9 @@ public class MenuBarAdmin {
 
 
         //skapar en submeny med namn registrera till menyn arkiv
-        Menu registerMenu = new Menu("Registrera");
-        MenuItem registerStudent = new MenuItem("Registrera Student");
-        MenuItem registerTeacher = new MenuItem("Registrera Lärare");
+        MenuItem registerMenu = new MenuItem("Registrera Användare");
+        /*MenuItem registerStudent = new MenuItem("Registrera Student");
+        MenuItem registerTeacher = new MenuItem("Registrera Lärare");*/
 
         //skapar en huvudmeny med namn Inställningar
         Menu menu2 = new Menu("Inställningar");
@@ -53,7 +53,7 @@ public class MenuBarAdmin {
         menu1.getItems().addAll(createMenu, registerMenu);
 
         createMenu.getItems().addAll(createTest, correctTest, changeTest, doTest, reuseTest);
-        registerMenu.getItems().addAll(registerStudent, registerTeacher);
+        //registerMenu.getItems().addAll(registerStudent, registerTeacher);
 
         menu2.getItems().addAll(changePassword, changeEmail);
 
@@ -67,7 +67,7 @@ public class MenuBarAdmin {
         });
 
         //ActionEvent för Registrera lärare.
-        registerTeacher.setOnAction(e->{
+        registerMenu.setOnAction(e->{
             sv.registerATeacher(window);
         });
 
