@@ -79,30 +79,5 @@ public class TestService {
         answers.add(answer1);
 
         create(test1, questions, answers, user1);
-
-        /*EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("Eclipselink_JPA" );
-
-        EntityManager entitymanager = emfactory.createEntityManager( );
-        entitymanager.getTransaction( ).begin( );
-
-        User user1 = new User("Mattias", "Crusell", "goteborg", "Admin");
-        entitymanager.persist(user1);
-
-        Test test1 = new Test("Djungeltest", 20, 100, 1, user1);
-        Test test2 = new Test("Djungeltest2", 20, 100, 1, user1);
-        entitymanager.persist(test1);
-        entitymanager.persist(test2);
-
-        Question question1 = new Question("Hur många bor det i skogen?", 2, "Single", 1, "G", test1);
-        Question question2 = new Question("Vad är en björn?", 2, "Multiple", 2, "G", test1);
-        entitymanager.persist(question1);
-        entitymanager.persist(question2);
-        question2.setTest(test2);
-        entitymanager.persist(question2);
-
-        entitymanager.getTransaction( ).commit( );
-
-        entitymanager.close( );
-        emfactory.close( );*/
     }
 }
