@@ -1,5 +1,6 @@
 package view.register;
 
+import entity.User;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import service.UserService;
 import view.MenuBarAdmin;
 
 /**
@@ -40,7 +42,7 @@ public class Register {
         Label email = new Label("Email:");
         Label password = new Label("Lösenord:");
 
-        TextField texfieldFirstname = new TextField();
+        TextField textFieldFirstname = new TextField();
         TextField textFieldLastname = new TextField();
         TextField textFieldUsername = new TextField();
         TextField textFieldEmail = new TextField();
@@ -54,7 +56,7 @@ public class Register {
 
 
         gp.add(firstname, 0 ,0);
-        gp.add(texfieldFirstname, 1 ,0);
+        gp.add(textFieldFirstname, 1 ,0);
 
         gp.add(lastname, 0 ,1);
         gp.add(textFieldLastname, 1 ,1);
@@ -89,15 +91,14 @@ public class Register {
         mainBorderPane.setTop(pane);
         mainBorderPane.setCenter(bp);
 
-
-
-
-
         Scene welcomeScene = new Scene(mainBorderPane, 1600,900);
         window.setScene(welcomeScene);
         window.centerOnScreen();
 
-
+        registerButton.setOnAction(e->{
+            UserService.create(new User(textFieldFirstname.getText(), textFieldLastname.getText(), textFieldUsername.getText(),
+                    textFieldEmail.getText(), textFieldPassword.getText(), privilege.getSelectionModel().getSelectedItem().toString()));
+        });
 
     }
 }
