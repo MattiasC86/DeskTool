@@ -1,7 +1,5 @@
 package logic;
 
-
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import service.UserService;
 
 
@@ -12,10 +10,6 @@ public class loginLogic {
     boolean access = false;
 
     public String loginValidation(String formUsername, String formPassword){
-
-
-        user.readByName(dataUsername);
-
 
         user.read(username, dataUsername);
         user.read(password, dataPassword);
