@@ -95,7 +95,7 @@ public class LoginPage {
         loginLogic loginvali = new loginLogic();
 
         btnLogin.setOnAction(e->{
-
+             /*
              if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Student")) {
                  StartView sv = new StartView();
                  AdminFirstpage afp = new AdminFirstpage(window);
@@ -109,7 +109,10 @@ public class LoginPage {
              if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Admin")) {
                   StartView sv = new StartView();
                   AdminFirstpage afp = new AdminFirstpage(window);
-             }
+             }*/
+
+             StartView sv = new StartView();
+             AdminFirstpage afp = new AdminFirstpage(window);
         });
     }
 }

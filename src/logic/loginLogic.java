@@ -11,10 +11,6 @@ public class loginLogic {
     String dataUsername, dataPassword, userLevel, username = "userName", password = "password", role = "role";
     boolean access = false;
 
-
-
-        user.readByName(dataUsername);
-
     public String loginValidation(String formUsername, String formPassword){
 
 
