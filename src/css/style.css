@@ -37,3 +37,6 @@
     -fx-background-repeat: stretch;
     -fx-background-position: center center;
 }
+#errorMessageLogin{
+    -fx-text-fill: red;
+}

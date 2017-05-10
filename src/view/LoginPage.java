@@ -41,7 +41,9 @@ public class LoginPage {
         Label lblPassword = new Label("Password");
         final PasswordField pf = new PasswordField();
         Button btnLogin = new Button("Login");
-        final Label lblMessage = new Label();
+
+        final Label errorMessage = new Label();
+        errorMessage.setFont(Font.font("Courier New", FontWeight.BOLD, 16));
 
         //Adding Nodes to GridPane layout
         gridPane.add(lblUserName, 0, 0);
@@ -49,7 +51,7 @@ public class LoginPage {
         gridPane.add(lblPassword, 0, 1);
         gridPane.add(pf, 1, 1);
         gridPane.add(btnLogin, 2, 1);
-        gridPane.add(lblMessage, 1, 2);
+        gridPane.add(errorMessage, 1, 2);
 
 
         //Reflection for gridPane
@@ -76,6 +78,7 @@ public class LoginPage {
         gridPane.setId("root");
         btnLogin.setId("btnLogin");
         text.setId("text");
+        errorMessage.setId("errorMessageLogin");
 
 
 
@@ -110,8 +113,6 @@ public class LoginPage {
                   StartView sv = new StartView();
                   AdminFirstpage afp = new AdminFirstpage(window);
              }*/
-
-             StartView sv = new StartView();
              AdminFirstpage afp = new AdminFirstpage(window);
         });
     }
