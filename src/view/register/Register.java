@@ -101,10 +101,13 @@ public class Register {
                     textFieldEmail.getText(), textFieldPassword.getText(), privilege.getSelectionModel().getSelectedItem().toString());
             switch(result) {
                 case 1:
+                    //username upptagen
                     break;
                 case 2:
+                    //email upptagen
                     break;
                 case 3:
+                    //användaren har skapats
                     break;
             }
 

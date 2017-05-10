@@ -62,7 +62,7 @@ public class LoginPage {
         dropShadow.setOffsetY(5);
 
         //Adding text and DropShadow effect to it
-        Text text = new Text("Provportalen");
+        Text text = new Text("");
         text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
         text.setEffect(dropShadow);
 
@@ -81,10 +81,12 @@ public class LoginPage {
         //Add HBox and GridPane layout to BorderPane Layout
         bp.setTop(hb);
         bp.setCenter(gridPane);
+        bp.setId("loginPane");
 
         //Adding BorderPane to the scene and loading CSS
         Scene scene = new Scene(bp,450,250);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
+        window.setTitle("Newton");
         window.setScene(scene);
         window.centerOnScreen();
         window.show();
