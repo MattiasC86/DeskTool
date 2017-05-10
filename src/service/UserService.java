@@ -25,32 +25,32 @@ public class UserService {
         emFactory.close();
     }
 
-    public static User readById(int userid) {
-        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
-        EntityManager entityManager = emFactory.createEntityManager();
-
-        User user = entityManager.find(User.class, userid);
-        return user;
-    }
-
-    public static String readByName(String username){
+    public static String read(String criteria, String keyword){
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entitymanager = emfactory.createEntityManager();
         String userinfo = "";
-        String userFisrtName = username;
 
+        switch(criteria) {
+            case "userName":
+                Query userNameQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.userName" + "= '" + keyword + "'");
 
-        Query query = entitymanager.createQuery( "Select u " + "from User u " + "where u.firstName" +"="+"'"+ username +"'");
+                List<User> userNameList=(List<User>)userNameQuery.getResultList( );
 
-        List<User> list=(List<User>)query.getResultList( );
+                for( User u:userNameList ){
+                    System.out.println("Email: " + u.getEmail());
+                    userinfo = u.getUserName();
+                }
+                break;
+            case "email":
+                Query emailQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.email" + "= '" + keyword + "'");
 
-        for( User u:list ){
-            System.out.print("user ID :" + u.getUserId( ));
-            System.out.println("\t user name :" + u.getFirstName( ));
-            System.out.println("\t user Access Level :" + u.getRole());
-            userinfo = u.getFirstName();
+                List<User> passwordList=(List<User>)emailQuery.getResultList( );
+
+                for( User u:passwordList ){
+                    userinfo = u.getUserName();
+                }
+                break;
         }
-
         return userinfo;
     }
 
@@ -87,7 +87,7 @@ public class UserService {
         System.out.println("employee Name = "+user.getFirstName( ));*/
 
 
-        readByName("apple");
+        System.out.println("Username " + read("email", "crusell@mail.com"));
         //readByName("Mattias");
     }
 }
