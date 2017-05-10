@@ -24,3 +24,9 @@
 
 
 }
+
+#firstpagePane{
+    -fx-background-image: url('../pic/bakgrundquiz.jpg');
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}

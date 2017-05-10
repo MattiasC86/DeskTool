@@ -15,6 +15,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.MenuBarAdmin;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
+
 public class FxView {
 
 
@@ -22,11 +25,9 @@ public class FxView {
     Label numberOfQuestion;
     ListView<Pane> QuestionList;
 
+    ArrayList<Integer> QuestionTypeList = new ArrayList<Integer>();
+
     public FxView(Stage window) {
-
-        ObservableList<Object> items = FXCollections.observableArrayList ();
-
-        int counter = 1;
 
         Pane pane = new Pane();
 
@@ -85,9 +86,9 @@ public class FxView {
 
         btn.setOnAction(e->{
             OneQuestion OneQuestion = new OneQuestion(QuestionList);
-            items.add(OneQuestion);
             setNumberOfQuestions();
-            System.out.println(items);
+            QuestionTypeList.add(0);
+            System.out.println(QuestionTypeList);
         });
 
         Button btn1 = new Button("Flera Svar fråga");
@@ -96,9 +97,9 @@ public class FxView {
 
         btn1.setOnAction(e->{
             ManyQuestion ManyQuestion = new ManyQuestion(QuestionList);
-            items.add(ManyQuestion);
             setNumberOfQuestions();
-            System.out.println(items);
+            QuestionTypeList.add(1);
+            System.out.println(QuestionTypeList);
         });
 
         Button btn2 = new Button("Rangordnings fråga");
@@ -107,8 +108,9 @@ public class FxView {
 
         btn2.setOnAction(e->{
             RankQuestion RankQuestion = new RankQuestion(QuestionList);
-            items.add(RankQuestion);
             setNumberOfQuestions();
+            QuestionTypeList.add(2);
+            System.out.println(QuestionTypeList);
         });
 
         Button btn3 = new Button("Ta bort markerad fråga");
@@ -116,10 +118,10 @@ public class FxView {
         pane.getChildren().add(btn3);
 
         btn3.setOnAction(e->{
-            items.remove(QuestionList.getSelectionModel().getSelectedIndex());
+            QuestionTypeList.remove(QuestionList.getSelectionModel().getSelectedIndex());
+            System.out.println(QuestionTypeList);
             QuestionList.getItems().remove(QuestionList.getSelectionModel().getSelectedItem());
             setNumberOfQuestions();
-            System.out.println(items);
         });
 
 

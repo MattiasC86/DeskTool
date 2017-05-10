@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import logic.registerLogic;
 import service.UserService;
 import view.MenuBarAdmin;
 
@@ -96,8 +97,17 @@ public class Register {
         window.centerOnScreen();
 
         registerButton.setOnAction(e->{
-            UserService.create(new User(textFieldFirstname.getText(), textFieldLastname.getText(), textFieldUsername.getText(),
-                    textFieldEmail.getText(), textFieldPassword.getText(), privilege.getSelectionModel().getSelectedItem().toString()));
+            int result = registerLogic.registerUser(textFieldFirstname.getText(), textFieldLastname.getText(), textFieldUsername.getText(),
+                    textFieldEmail.getText(), textFieldPassword.getText(), privilege.getSelectionModel().getSelectedItem().toString());
+            switch(result) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+
         });
 
     }
