@@ -87,6 +87,7 @@ public class FxView {
             OneQuestion OneQuestion = new OneQuestion(QuestionList);
             items.add(OneQuestion);
             setNumberOfQuestions();
+            System.out.println(items);
         });
 
         Button btn1 = new Button("Flera Svar fråga");
@@ -97,6 +98,7 @@ public class FxView {
             ManyQuestion ManyQuestion = new ManyQuestion(QuestionList);
             items.add(ManyQuestion);
             setNumberOfQuestions();
+            System.out.println(items);
         });
 
         Button btn2 = new Button("Rangordnings fråga");
@@ -117,6 +119,7 @@ public class FxView {
             items.remove(QuestionList.getSelectionModel().getSelectedIndex());
             QuestionList.getItems().remove(QuestionList.getSelectionModel().getSelectedItem());
             setNumberOfQuestions();
+            System.out.println(items);
         });
 
 

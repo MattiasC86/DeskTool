@@ -102,5 +102,8 @@ public class OneQuestion {
 
     }
 
+    public int getType(){
+        return 0;
+    }
 }
 

@@ -91,5 +91,9 @@ public class ManyQuestion {
         QuestionPane.setPrefHeight(200 + (number * 30));
 
     }
+
+    public int getType(){
+        return 1;
+    }
 }
 

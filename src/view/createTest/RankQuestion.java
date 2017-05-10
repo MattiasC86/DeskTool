@@ -85,7 +85,10 @@ public class RankQuestion {
         }
 
         QuestionPane.setPrefHeight(200 + (number * 30));
+    }
 
+    public int getType(){
+        return 2;
     }
 
 }
