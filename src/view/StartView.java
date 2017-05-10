@@ -2,6 +2,7 @@ package view;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import view.createTest.FxView;
 import view.register.Register;
 
 /**
@@ -23,16 +24,14 @@ public class StartView extends Application{
 
 
 
-    public void goToHomepage(Stage window){
-        AdminFirstpage afp = new AdminFirstpage(window);
-
-    }
+    public void goToHomepage(Stage window){ AdminFirstpage afp = new AdminFirstpage(window); }
 
     public void logout (Stage window){
         LoginPage sv = new LoginPage(window);
     }
 
-    public void registerATeacher(Stage window){
-        Register rt = new Register(window);
-    }
+    public void registerATeacher(Stage window){Register rt = new Register(window); }
+
+    public void goToCreateTest(Stage window) {FxView fv = new FxView(window); }
+
 }

@@ -1,6 +1,5 @@
 package view.createTest;
 
-import java.awt.Color;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -9,20 +8,19 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.MenuBarAdmin;
 
-public class FxView extends Application {
+public class FxView {
 
-    public static void main(String[] args){
-        launch();
-    }
+
 
     Label numberOfQuestion;
     ListView<Pane> QuestionList;
 
-    @Override
-    public void start(Stage PrimaryStage) throws Exception {
+    public FxView(Stage window) {
 
         int counter = 1;
 
@@ -124,13 +122,25 @@ public class FxView extends Application {
         });
 
 
-        PrimaryStage.setTitle("Skapa test");
-        PrimaryStage.setOnCloseRequest(e -> Platform.exit());
-        Scene scene = new Scene(pane, 1600, 900);
+
+
+        BorderPane bp = new BorderPane();
+        Pane menubarpane = new Pane();
+        MenuBarAdmin mba = new MenuBarAdmin(menubarpane, window);
+        bp.setTop(menubarpane);
+        bp.setCenter(pane);
+
+        window.setTitle("Skapa test");
+        window.setOnCloseRequest(e -> Platform.exit());
+        Scene scene = new Scene(bp, 1600, 900);
         //PrimaryStage.setMaximized(true);
-        PrimaryStage.setScene(scene);
-        PrimaryStage.show();
+        window.setScene(scene);
+        window.show();
+
+
     }
+
+
 
     private void setNumberOfQuestions(){
         numberOfQuestion.setText("Antal frågor: " + QuestionList.getItems().size());

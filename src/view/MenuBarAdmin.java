@@ -77,8 +77,13 @@ public class MenuBarAdmin {
             sv.registerATeacher(window);
         });
 
+        //ActionEvent för hemknappen.
         home.setOnAction(e->{
             sv.goToHomepage(window);
+        });
+
+        createTest.setOnAction(e->{
+            sv.goToCreateTest(window);
         });
 
     }
