@@ -64,6 +64,7 @@ public class MenuBarAdmin {
         menu3.getItems().addAll(changePassword, changeEmail);
 
         MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3, menu4);
+        menuAdmin.setPrefWidth(1600);
 
         pane.getChildren().addAll(menuAdmin);
 

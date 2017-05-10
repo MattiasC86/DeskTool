@@ -24,9 +24,7 @@ public class FxView {
 
     public FxView(Stage window) {
 
-
         ObservableList<Object> items = FXCollections.observableArrayList ();
-
 
         int counter = 1;
 
@@ -116,7 +114,7 @@ public class FxView {
         pane.getChildren().add(btn3);
 
         btn3.setOnAction(e->{
-            items.remove();
+            items.remove(QuestionList.getSelectionModel().getSelectedIndex());
             QuestionList.getItems().remove(QuestionList.getSelectionModel().getSelectedItem());
             setNumberOfQuestions();
         });
