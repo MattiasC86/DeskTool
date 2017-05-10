@@ -157,10 +157,12 @@ public class FxView {
         bp.setTop(menubarpane);
         bp.setCenter(pane);
 
+        bp.setId("createTestPane");
+
         window.setTitle("Skapa test");
         window.setOnCloseRequest(e -> Platform.exit());
         Scene scene = new Scene(bp, 1600, 900);
-        //PrimaryStage.setMaximized(true);
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(scene);
         window.show();
 

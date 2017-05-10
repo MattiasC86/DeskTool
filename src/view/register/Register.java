@@ -92,7 +92,12 @@ public class Register {
         mainBorderPane.setTop(pane);
         mainBorderPane.setCenter(bp);
 
+        textFieldUsername.setId("errorPromt");
+        textFieldEmail.setId("errorPromt");
+
+
         Scene welcomeScene = new Scene(mainBorderPane, 1600,900);
+        welcomeScene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(welcomeScene);
         window.centerOnScreen();
 
@@ -103,10 +108,13 @@ public class Register {
                 case 1:
                     //username upptagen
                     textFieldUsername.setText("");
+                    textFieldUsername.setPromptText("Upptaget användarnamn!");
+
                     break;
                 case 2:
                     //email upptagen
                     textFieldEmail.setText("");
+                    textFieldEmail.setPromptText("Upptagen email!");
                     break;
                 case 3:
                     //användaren har skapats
