@@ -2,6 +2,8 @@ package view.createTest;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -21,6 +23,10 @@ public class FxView {
     ListView<Pane> QuestionList;
 
     public FxView(Stage window) {
+
+
+        ObservableList<Object> items = FXCollections.observableArrayList ();
+
 
         int counter = 1;
 
@@ -81,6 +87,7 @@ public class FxView {
 
         btn.setOnAction(e->{
             OneQuestion OneQuestion = new OneQuestion(QuestionList);
+            items.add(OneQuestion);
             setNumberOfQuestions();
         });
 
@@ -90,6 +97,7 @@ public class FxView {
 
         btn1.setOnAction(e->{
             ManyQuestion ManyQuestion = new ManyQuestion(QuestionList);
+            items.add(ManyQuestion);
             setNumberOfQuestions();
         });
 
@@ -99,6 +107,7 @@ public class FxView {
 
         btn2.setOnAction(e->{
             RankQuestion RankQuestion = new RankQuestion(QuestionList);
+            items.add(RankQuestion);
             setNumberOfQuestions();
         });
 
@@ -107,6 +116,7 @@ public class FxView {
         pane.getChildren().add(btn3);
 
         btn3.setOnAction(e->{
+            items.remove();
             QuestionList.getItems().remove(QuestionList.getSelectionModel().getSelectedItem());
             setNumberOfQuestions();
         });
@@ -118,7 +128,7 @@ public class FxView {
         pane.getChildren().add(btnSaveTest);
 
         btnSaveTest.setOnAction(e->{
-            
+
         });
 
 
