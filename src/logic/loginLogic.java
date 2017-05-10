@@ -8,7 +8,7 @@ import service.UserService;
 public class loginLogic {
 
     UserService user;
-    String dataUsername, dataPassword, userLevel, username = "username", password = "password", role = "role";
+    String dataUsername, dataPassword, userLevel, username = "userName", password = "password", role = "role";
     boolean access = false;
 
 
@@ -21,20 +21,20 @@ public class loginLogic {
         user.read(username, dataUsername);
         user.read(password, dataPassword);
 
-        if (formUsername == dataUsername){
-            if (formPassword == dataPassword){
-                access = true;
+        if (formUsername.equals(dataUsername)){
+            if (formPassword.equals(dataPassword)){
+                //access = true;
                 userLevel = user.read(role, dataUsername);
             }
 
             else {
-                access = false;
+                //access = false;
                 System.out.println("Wrong username or password!");
             }
         }
 
         else {
-            access = false;
+            //access = false;
             System.out.println("Wrong username or password!");
         }
 
