@@ -26,6 +26,7 @@ public class testLogic {
         Test test = new Test(title, timeMin, nrOfQuestions, selfCorrecting, user);
 
         TestService.create(test);
+        //TestService.create(test, questions, answers);
     }
 
 }
