@@ -16,6 +16,7 @@
 #btnLogin {
     -fx-background-radius: 30, 30, 29, 28;
     -fx-padding: 3px 10px 3px 10px;
+    -fx-text-fill: #ede7f3;
     -fx-background-color: linear-gradient(#623318, #b35612 );
 }
 
