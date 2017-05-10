@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -99,20 +100,30 @@ public class LoginPage {
 
         btnLogin.setOnAction(e->{
              /*
-             if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Student")) {
-                 StartView sv = new StartView();
-                 AdminFirstpage afp = new AdminFirstpage(window);
-             }
+             Platform.runLater(() -> {
+                       //Checks if username and password are the same as a student.
+                       if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Student")) {
+                            //AdminFirstpage afp = new AdminFirstpage(window);
+                            System.out.println("Student!");
+                       }
 
-             if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Lärare")) {
-                  StartView sv = new StartView();
-                  AdminFirstpage afp = new AdminFirstpage(window);
-             }
+                       //Checks if username and password are the same as a Teacher.
+                       else if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Lärare")) {
+                            //AdminFirstpage afp = new AdminFirstpage(window);
+                            System.out.println("Techer!");
+                       }
 
-             if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Admin")) {
-                  StartView sv = new StartView();
-                  AdminFirstpage afp = new AdminFirstpage(window);
-             }*/
+                       //Checks if username and password are the same as a Admin.
+                       else if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Admin")) {
+                            //AdminFirstpage afp = new AdminFirstpage(window);
+                            System.out.println("Admin!");
+                       }
+
+                       if (loginvali.Accesslevel() == false){
+                            errorMessage.setText("Your username or password are incorrect!");
+                       }
+             });*/
+
              AdminFirstpage afp = new AdminFirstpage(window);
         });
     }

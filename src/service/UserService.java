@@ -32,8 +32,28 @@ public class UserService {
 
         switch(criteria) {
 
+            case "firstName":
+                Query firstNameQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.firstName" + "= '" + keyword + "'");
+
+                List<User> firstNameList=(List<User>)firstNameQuery.getResultList( );
+
+                for( User u:firstNameList ){
+                    userinfo = u.getFirstName();
+                }
+                break;
+
+            case "lastName":
+                Query lastNameQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.lastName" + "= '" + keyword + "'");
+
+                List<User> lastNameList=(List<User>)lastNameQuery.getResultList( );
+
+                for( User u:lastNameList ){
+                    userinfo = u.getLastName();
+                }
+                break;
+
             case "password":
-                Query passwordQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.email" + "= '" + keyword + "'");
+                Query passwordQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.password" + "= '" + keyword + "'");
 
                 List<User> passwordList=(List<User>)passwordQuery.getResultList( );
 
@@ -41,16 +61,17 @@ public class UserService {
                     userinfo = u.getPassword();
                 }
                 break;
+
             case "userName":
                 Query userNameQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.userName" + "= '" + keyword + "'");
 
                 List<User> userNameList=(List<User>)userNameQuery.getResultList( );
 
                 for( User u:userNameList ){
-                    System.out.println("Email: " + u.getEmail());
                     userinfo = u.getUserName();
                 }
                 break;
+
             case "email":
                 Query emailQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.email" + "= '" + keyword + "'");
 
@@ -60,8 +81,9 @@ public class UserService {
                     userinfo = u.getEmail();
                 }
                 break;
+
             case "role":
-                Query roleQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.email" + "= '" + keyword + "'");
+                Query roleQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.role" + "= '" + keyword + "'");
 
                 List<User> roleList=(List<User>)roleQuery.getResultList( );
 
@@ -106,7 +128,7 @@ public class UserService {
         System.out.println("employee Name = "+user.getFirstName( ));*/
 
 
-        System.out.println("Username " + read("email", "crusell@mail.com"));
+        System.out.println("Username " + read("userName", "Mattias"));
         //readByName("Mattias");
     }
 }
