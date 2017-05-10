@@ -12,10 +12,12 @@ import java.util.ArrayList;
 
 
 public class TestService {
-    private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
-    private static EntityManager entityManager = emFactory.createEntityManager();
+
 
     public static void create(Test test) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
         entityManager.getTransaction().begin();
         entityManager.persist(test);
         entityManager.getTransaction().commit();
@@ -26,6 +28,9 @@ public class TestService {
     }
 
     public static void create(Test test, ArrayList<Question> questions, ArrayList<Answer> answers) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
         entityManager.getTransaction().begin();
         entityManager.persist(test);
         entityManager.getTransaction().commit();
@@ -38,11 +43,17 @@ public class TestService {
     }
 
     public static Test read(int testId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
         Test chosenTest = entityManager.find(Test.class, testId);
         return chosenTest;
     }
 
     public static void update(Test test) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
         entityManager.getTransaction().begin();
         entityManager.persist(test);
         entityManager.getTransaction().commit();
@@ -52,6 +63,9 @@ public class TestService {
     }
 
     public static void delete(Test test) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
         entityManager.getTransaction().begin();
         entityManager.remove(test);
         entityManager.getTransaction().commit();
