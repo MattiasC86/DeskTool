@@ -16,7 +16,8 @@
 #btnLogin {
     -fx-background-radius: 30, 30, 29, 28;
     -fx-padding: 3px 10px 3px 10px;
-    -fx-background-color: linear-gradient(dodgerblue, lightblue );
+    -fx-text-fill: #ede7f3;
+    -fx-background-color: linear-gradient(#623318, #b35612 );
 }
 
 #text {
@@ -27,6 +28,12 @@
 
 #firstpagePane{
     -fx-background-image: url('../pic/bakgrundquiz.jpg');
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}
+
+#loginPane {
+    -fx-background-image: url('../pic/loginbakgrund.jpg');
     -fx-background-repeat: stretch;
     -fx-background-position: center center;
 }

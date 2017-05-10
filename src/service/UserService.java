@@ -31,6 +31,16 @@ public class UserService {
         String userinfo = "";
 
         switch(criteria) {
+
+            case "password":
+                Query passwordQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.email" + "= '" + keyword + "'");
+
+                List<User> passwordList=(List<User>)passwordQuery.getResultList( );
+
+                for( User u:passwordList ){
+                    userinfo = u.getPassword();
+                }
+                break;
             case "userName":
                 Query userNameQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.userName" + "= '" + keyword + "'");
 
@@ -44,10 +54,19 @@ public class UserService {
             case "email":
                 Query emailQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.email" + "= '" + keyword + "'");
 
-                List<User> passwordList=(List<User>)emailQuery.getResultList( );
+                List<User> emailList=(List<User>)emailQuery.getResultList( );
 
-                for( User u:passwordList ){
-                    userinfo = u.getUserName();
+                for( User u:emailList ){
+                    userinfo = u.getEmail();
+                }
+                break;
+            case "role":
+                Query roleQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.email" + "= '" + keyword + "'");
+
+                List<User> roleList=(List<User>)roleQuery.getResultList( );
+
+                for( User u:roleList ){
+                    userinfo = u.getRole();
                 }
                 break;
         }
