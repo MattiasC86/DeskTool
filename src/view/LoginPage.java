@@ -91,7 +91,7 @@ public class LoginPage {
 
         btnLogin.setOnAction(e->{
             StartView sv = new StartView();
-            sv.goToHomepage(window);
+             AdminFirstpage afp = new AdminFirstpage(window);
         });
     }
 }

@@ -7,6 +7,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.createTest.FxView;
+import view.register.Register;
 
 /**
  * Created by Rasmus on 2017-05-03.
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 public class MenuBarAdmin {
 
     StartView sv;
+
 
     public MenuBarAdmin(Pane pane, Stage window){
         sv = new StartView();
@@ -70,21 +73,22 @@ public class MenuBarAdmin {
 
         //ActionEvent för loginknappen.
         logoutItem.setOnAction(e -> {
-            sv.logout(window);
+            LoginPage sv = new LoginPage(window);
         });
 
         //ActionEvent för Registrera lärare.
         registerMenu.setOnAction(e->{
-            sv.registerATeacher(window);
+            Register rt = new Register(window);
         });
 
         //ActionEvent för hemknappen.
         home.setOnAction(e->{
-            sv.goToHomepage(window);
+            AdminFirstpage afp = new AdminFirstpage(window);
         });
 
+        //ActionEvent för SkapaTest.
         createTest.setOnAction(e->{
-            sv.goToCreateTest(window);
+            FxView fv = new FxView(window);
         });
 
     }
