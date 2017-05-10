@@ -18,8 +18,14 @@ public class MenuBarAdmin {
     public MenuBarAdmin(Pane pane, Stage window){
         sv = new StartView();
 
+        Menu menu1 = new Menu("Hem");
+
+        MenuItem home = new MenuItem("Hem");
+
+        menu1.getItems().addAll(home);
+
         //skapar en huvudmeny med namn arkiv
-        Menu menu1 = new Menu("Arkiv");
+        Menu menu2 = new Menu("Arkiv");
 
         //skapar en submeny med namn test i menyn arkiv
         Menu createMenu = new Menu("Test");
@@ -38,26 +44,26 @@ public class MenuBarAdmin {
         MenuItem registerTeacher = new MenuItem("Registrera Lärare");*/
 
         //skapar en huvudmeny med namn Inställningar
-        Menu menu2 = new Menu("Inställningar");
+        Menu menu3 = new Menu("Inställningar");
 
         //skapar menuItems som ska fylla menyn Inställningar
         MenuItem changePassword = new MenuItem("Byt Lösenord");
         MenuItem changeEmail = new MenuItem("Byt Email");
 
         //Skapar en huvudmeny med namn logga ut
-        Menu menu3 = new Menu("Logga ut");
+        Menu menu4 = new Menu("Logga ut");
 
         MenuItem logoutItem = new MenuItem("Logga ut");
-        menu3.getItems().addAll(logoutItem);
+        menu4.getItems().addAll(logoutItem);
 
-        menu1.getItems().addAll(createMenu, registerMenu);
+        menu2.getItems().addAll(createMenu, registerMenu);
 
         createMenu.getItems().addAll(createTest, correctTest, changeTest, doTest, reuseTest);
         //registerMenu.getItems().addAll(registerStudent, registerTeacher);
 
-        menu2.getItems().addAll(changePassword, changeEmail);
+        menu3.getItems().addAll(changePassword, changeEmail);
 
-        MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3);
+        MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3, menu4);
 
         pane.getChildren().addAll(menuAdmin);
 
@@ -71,6 +77,9 @@ public class MenuBarAdmin {
             sv.registerATeacher(window);
         });
 
+        home.setOnAction(e->{
+            sv.goToHomepage(window);
+        });
 
     }
 
