@@ -99,7 +99,7 @@ public class LoginPage {
         loginLogic loginvali = new loginLogic();
 
         btnLogin.setOnAction(e->{
-             /*
+
              Platform.runLater(() -> {
                        //Checks if username and password are the same as a student.
                        if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Student")) {
@@ -115,16 +115,14 @@ public class LoginPage {
 
                        //Checks if username and password are the same as a Admin.
                        else if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Admin")) {
-                            //AdminFirstpage afp = new AdminFirstpage(window);
+                            AdminFirstpage afp = new AdminFirstpage(window);
                             System.out.println("Admin!");
                        }
 
                        if (loginvali.Accesslevel() == false){
-                            errorMessage.setText("Your username or password are incorrect!");
+                            errorMessage.setText("Wrong username or password!");
                        }
-             });*/
-
-             AdminFirstpage afp = new AdminFirstpage(window);
+             });
         });
     }
 }

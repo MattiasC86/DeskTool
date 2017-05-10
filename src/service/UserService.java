@@ -95,6 +95,73 @@ public class UserService {
         return userinfo;
     }
 
+    public static String read2(String criteria, String keyword, String youwant){
+        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
+        EntityManager entitymanager = emfactory.createEntityManager();
+        String userinfo = "";
+
+        switch(criteria) {
+
+            case "userName":
+                Query username2Query = entitymanager.createQuery( "Select u " + "from User u " + "where u.userName" + "= '" + keyword + "'");
+
+                List<User> username2List=(List<User>)username2Query.getResultList( );
+
+                for( User u:username2List ){
+
+                    switch (youwant) {
+
+                        case "userId":
+                            userinfo = Integer.toString(u.getUserId());
+                            break;
+
+                        case "userName":
+                            userinfo = u.getUserName();
+                            break;
+
+                        case "password":
+                            userinfo = u.getPassword();
+                            break;
+
+                        case "role":
+                            userinfo = u.getRole();
+                            break;
+
+                    }
+                }
+                break;
+
+            case "password":
+                Query password2Query = entitymanager.createQuery( "Select u " + "from User u " + "where u.password" + "= '" + keyword + "'");
+
+                List<User> password2List=(List<User>)password2Query.getResultList( );
+
+                for( User u:password2List ){
+                    switch (youwant) {
+
+                        case "userId":
+                            userinfo = Integer.toString(u.getUserId());
+                            break;
+
+                        case "userName":
+                            userinfo = u.getUserName();
+                            break;
+
+                        case "password":
+                            userinfo = u.getPassword();
+                            break;
+
+                        case "role":
+                            userinfo = u.getRole();
+                            break;
+
+                    }
+                }
+                break;
+        }
+        return userinfo;
+    }
+
     public static void update(User user) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
@@ -122,13 +189,8 @@ public class UserService {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
-        /*Integer userid = 1;
-        User user = entityManager.find(User.class, userid);
-        System.out.println("employee ID = "+user.getUserId( ));
-        System.out.println("employee Name = "+user.getFirstName( ));*/
+        System.out.println("Username " + read("userName", "Crusse"));
+        System.out.println("Username " + read2("userName", "Crusse", "password"));
 
-
-        System.out.println("Username " + read("userName", "Mattias"));
-        //readByName("Mattias");
     }
 }
