@@ -119,6 +119,10 @@ public class FxView extends Application {
         btnSaveTest.setStyle("-fx-font-size: 14pt");
         pane.getChildren().add(btnSaveTest);
 
+        btnSaveTest.setOnAction(e->{
+            
+        });
+
 
         PrimaryStage.setTitle("Skapa test");
         PrimaryStage.setOnCloseRequest(e -> Platform.exit());
