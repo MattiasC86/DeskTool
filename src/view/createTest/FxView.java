@@ -113,6 +113,13 @@ public class FxView extends Application {
             setNumberOfQuestions();
         });
 
+
+        Button btnSaveTest = new Button("Spara Test");
+        btnSaveTest.relocate(1390, 820);
+        btnSaveTest.setStyle("-fx-font-size: 14pt");
+        pane.getChildren().add(btnSaveTest);
+
+
         PrimaryStage.setTitle("Skapa test");
         PrimaryStage.setOnCloseRequest(e -> Platform.exit());
         Scene scene = new Scene(pane, 1600, 900);
