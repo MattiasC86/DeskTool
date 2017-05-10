@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import logic.loginLogic;
 
 /**
  * Created by Rasmus on 2017-05-04.
@@ -91,9 +92,24 @@ public class LoginPage {
         window.centerOnScreen();
         window.show();
 
+        loginLogic loginvali = new loginLogic();
+
         btnLogin.setOnAction(e->{
-            StartView sv = new StartView();
-             AdminFirstpage afp = new AdminFirstpage(window);
+
+             if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Student")) {
+                 StartView sv = new StartView();
+                 AdminFirstpage afp = new AdminFirstpage(window);
+             }
+
+             if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Lärare")) {
+                  StartView sv = new StartView();
+                  AdminFirstpage afp = new AdminFirstpage(window);
+             }
+
+             if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Admin")) {
+                  StartView sv = new StartView();
+                  AdminFirstpage afp = new AdminFirstpage(window);
+             }
         });
     }
 }

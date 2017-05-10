@@ -1,25 +1,41 @@
 package logic;
 
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import service.UserService;
 
 
 public class loginLogic {
 
     UserService user;
-    int userLevel;
-    String dataUsername, datapassword;
+    String dataUsername, dataPassword, userLevel, username = "username", password = "password", role = "role";
+    boolean access = false;
 
-    public int loginValidation(String username, String password){
 
-        //user.readByName(dataUsername);
 
-        if (username == dataUsername){
-            System.out.println("username ok but not password");
+        user.readByName(dataUsername);
+
+    public String loginValidation(String formUsername, String formPassword){
+
+
+        user.read(username, dataUsername);
+        user.read(password, dataPassword);
+
+        if (formUsername == dataUsername){
+            if (formPassword == dataPassword){
+                access = true;
+                userLevel = user.read(role, dataUsername);
+            }
+
+            else {
+                access = false;
+                System.out.println("Wrong username or password!");
+            }
         }
 
         else {
-            System.out.println("do not work");
+            access = false;
+            System.out.println("Wrong username or password!");
         }
 
         return(userLevel);
