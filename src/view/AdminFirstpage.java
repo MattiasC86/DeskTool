@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -16,7 +17,14 @@ public class AdminFirstpage {
 
         MenuBarAdmin x = new MenuBarAdmin(pane, window);
 
-        Scene welcomeScene = new Scene(pane, 1600,900);
+        BorderPane bp = new BorderPane();
+
+        bp.setTop(pane);
+
+        bp.setId("firstpagePane");
+
+        Scene welcomeScene = new Scene(bp, 1600,900);
+        welcomeScene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(welcomeScene);
         window.centerOnScreen();
 
