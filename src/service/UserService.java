@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class UserService {
-    
+
 
     public static void create(User user) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
@@ -33,27 +33,25 @@ public class UserService {
         return user;
     }
 
-    public static void readByName(String userName){
+    public static String readByName(String username){
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entitymanager = emfactory.createEntityManager();
+        String userinfo = "";
+        String userFisrtName = username;
 
-        /*Query query = entitymanager.createQuery( "Select u " + "from user u " + "where u.firstname ");
+
+        Query query = entitymanager.createQuery( "Select u " + "from User u " + "where u.firstName" +"="+"'"+ username +"'");
 
         List<User> list=(List<User>)query.getResultList( );
 
         for( User u:list ){
             System.out.print("user ID :" + u.getUserId( ));
             System.out.println("\t user name :" + u.getFirstName( ));
-        }*/
-
-        Query query = entitymanager.
-                createQuery("Select UPPER(u.firstName) from User u");
-        List<String> list = query.getResultList();
-
-        for(String e:list) {
-            System.out.println("Employee NAME :"+e);
+            System.out.println("\t user Access Level :" + u.getRole());
+            userinfo = u.getFirstName();
         }
 
+        return userinfo;
     }
 
     public static void update(User user) {
@@ -83,12 +81,13 @@ public class UserService {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
-        Integer userid = 1;
+        /*Integer userid = 1;
         User user = entityManager.find(User.class, userid);
         System.out.println("employee ID = "+user.getUserId( ));
-        System.out.println("employee Name = "+user.getFirstName( ));
+        System.out.println("employee Name = "+user.getFirstName( ));*/
 
 
-
+        readByName("apple");
+        //readByName("Mattias");
     }
 }
