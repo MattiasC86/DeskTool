@@ -15,6 +15,16 @@ public class TestService {
     private static EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
     private static EntityManager entityManager = emFactory.createEntityManager();
 
+    public static void create(Test test) {
+        entityManager.getTransaction().begin();
+        entityManager.persist(test);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        emFactory.close();
+
+    }
+
     public static void create(Test test, ArrayList<Question> questions, ArrayList<Answer> answers) {
         entityManager.getTransaction().begin();
         entityManager.persist(test);

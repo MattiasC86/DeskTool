@@ -1,5 +1,6 @@
 package view.createTest;
 
+import entity.User;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logic.testLogic;
 import view.MenuBarAdmin;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -132,6 +134,18 @@ public class FxView {
 
         btnSaveTest.setOnAction(e->{
 
+            int selfCorrect;
+
+
+            if(box.isSelected()){
+                selfCorrect = 1;
+            }
+            else{
+                selfCorrect = 0;
+            }
+
+            testLogic.saveTest(QuestionList, titleTest.getText(), selfCorrect, 0, new User("Olle", "Olsson", "Ol",
+                    "olle@mail.com", "olle123", "Admin"));
         });
 
 

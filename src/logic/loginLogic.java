@@ -12,7 +12,7 @@ public class loginLogic {
 
     public int loginValidation(String username, String password){
 
-        user.readByName(dataUsername);
+        //user.readByName(dataUsername);
 
         if (username == dataUsername){
             System.out.println("username ok but not password");
