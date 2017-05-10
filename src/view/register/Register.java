@@ -1,6 +1,5 @@
 package view.register;
 
-import entity.User;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -12,8 +11,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.registerLogic;
-import service.UserService;
 import view.MenuBarAdmin;
+
 
 /**
  * Created by Rasmus on 2017-05-09.
@@ -49,6 +48,9 @@ public class Register {
         TextField textFieldEmail = new TextField();
         TextField textFieldPassword = new TextField();
 
+        Text verifyText = new Text();
+        verifyText.relocate(730, 350);
+
         Button registerButton = new Button("Registrera");
 
         ChoiceBox privilege = new ChoiceBox();
@@ -74,6 +76,7 @@ public class Register {
         gp.add(registerButton,0,5);
         gp.add(privilege, 1,5);
 
+
         DropShadow dropShadow = new DropShadow();
         dropShadow.setOffsetX(5);
         dropShadow.setOffsetY(5);
@@ -87,13 +90,14 @@ public class Register {
         bp.setTop(text);
         bp.setCenter(gp);
 
-        BorderPane mainBorderPane = new BorderPane();
+        Pane mainBorderPane = new Pane();
+        bp.relocate(600,50);
 
-        mainBorderPane.setTop(pane);
-        mainBorderPane.setCenter(bp);
+        mainBorderPane.getChildren().addAll(pane,bp,verifyText);
 
         textFieldUsername.setId("errorPromt");
         textFieldEmail.setId("errorPromt");
+        verifyText.setId("verifyText");
 
 
         Scene welcomeScene = new Scene(mainBorderPane, 1600,900);
@@ -101,6 +105,7 @@ public class Register {
         window.setScene(welcomeScene);
         window.centerOnScreen();
 
+        
         registerButton.setOnAction(e->{
             int result = registerLogic.registerUser(textFieldFirstname.getText(), textFieldLastname.getText(), textFieldUsername.getText(),
                     textFieldEmail.getText(), textFieldPassword.getText(), privilege.getSelectionModel().getSelectedItem().toString());
@@ -118,6 +123,12 @@ public class Register {
                     break;
                 case 3:
                     //användaren har skapats
+                    textFieldFirstname.setText("");
+                    textFieldLastname.setText("");
+                    textFieldUsername.setText("");
+                    textFieldEmail.setText("");
+                    textFieldPassword.setText("");
+                    verifyText.setText("Användaren är registrerad!");
                     break;
             }
 

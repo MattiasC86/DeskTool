@@ -4,9 +4,7 @@
     -fx-border-radius: 20;
     -fx-padding: 10 10 10 10;
     -fx-background-radius: 20;
-
 }
-
 
 #btnLogin {
     -fx-background-radius: 30, 30, 29, 28;
@@ -14,7 +12,6 @@
     -fx-text-fill: #ede7f3;
     -fx-background-color: linear-gradient(#623318, #b35612 );
 }
-
 
 #firstpagePane{
     -fx-background-image: url('../pic/bakgrundquiz.jpg');
@@ -33,6 +30,7 @@
     -fx-background-repeat: stretch;
     -fx-background-position: center center;
 }
+
 #errorMessageLogin{
     -fx-text-fill: red;
 }
@@ -44,5 +42,9 @@
 
 #errorPromt:focused{
     -fx-prompt-text-fill: rgba(255, 0, 12, 0);
+}
 
+#verifyText{
+    -fx-text-fill: green;
+    -fx-font-weight: Bold;
 }
