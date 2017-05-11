@@ -9,7 +9,7 @@ import entity.User;
 import service.UserService;
 
 
-public class registerLogic {
+public class RegisterLogic {
 
     public static int registerUser(String firstName, String lastName, String userName, String email, String password, String role) {
         String result1 = UserService.read("userName", userName, "userName");

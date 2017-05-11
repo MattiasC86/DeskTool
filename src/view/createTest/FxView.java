@@ -1,10 +1,7 @@
 package view.createTest;
 
 import entity.User;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -14,10 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import logic.testLogic;
+import logic.TestLogic;
 import view.MenuBarAdmin;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 
 public class FxView {
@@ -144,7 +140,7 @@ public class FxView {
                 selfCorrect = 0;
             }
 
-            testLogic.saveTest(QuestionList, titleTest.getText(), selfCorrect, 0, new User("Olle", "Olsson", "Ol",
+            TestLogic.saveTest(QuestionList, titleTest.getText(), selfCorrect, 0, new User("Olle", "Olsson", "Ol",
                     "olle@mail.com", "olle123", "Admin"));
         });
 

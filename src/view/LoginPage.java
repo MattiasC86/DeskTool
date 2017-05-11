@@ -11,7 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import logic.loginLogic;
+import logic.LoginLogic;
 
 /**
  * Created by Rasmus on 2017-05-04.
@@ -96,7 +96,7 @@ public class LoginPage {
         window.centerOnScreen();
         window.show();
 
-        loginLogic loginvali = new loginLogic();
+        LoginLogic loginvali = new LoginLogic();
 
         btnLogin.setOnAction(e->{
 

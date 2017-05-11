@@ -9,7 +9,7 @@ import service.UserService;
 /**
  * Created by matti on 2017-05-10.
  */
-public class testLogic {
+public class TestLogic {
 
     public static void saveTest(ListView list, String title, int selfCorrecting, int timeMin, User user) {
 

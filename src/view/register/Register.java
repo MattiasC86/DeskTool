@@ -10,7 +10,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import logic.registerLogic;
+import logic.RegisterLogic;
 import view.MenuBarAdmin;
 
 
@@ -107,7 +107,7 @@ public class Register {
 
         
         registerButton.setOnAction(e->{
-            int result = registerLogic.registerUser(textFieldFirstname.getText(), textFieldLastname.getText(), textFieldUsername.getText(),
+            int result = RegisterLogic.registerUser(textFieldFirstname.getText(), textFieldLastname.getText(), textFieldUsername.getText(),
                     textFieldEmail.getText(), textFieldPassword.getText(), privilege.getSelectionModel().getSelectedItem().toString());
             switch(result) {
                 case 1:

@@ -3,7 +3,7 @@ package logic;
 import service.UserService;
 
 
-public class loginLogic {
+public class LoginLogic {
 
     UserService user;
     String dataUsername, dataPassword, userLevel;
