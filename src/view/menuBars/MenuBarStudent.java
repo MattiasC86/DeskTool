@@ -1,25 +1,25 @@
-package view;
+package view.menuBars;
 
-import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.AdminFirstpage;
+import view.LoginPage;
+import view.Settings;
 import view.createTest.FxView;
 import view.register.Register;
 
 /**
- * Created by Rasmus on 2017-05-03.
+ * Created by Rasmus on 2017-05-11.
  */
-public class MenuBarAdmin {
-
-    StartView sv;
+public class MenuBarStudent {
 
 
-    public MenuBarAdmin(Pane pane, Stage window){
-        sv = new StartView();
+    public MenuBarStudent(Pane pane, Stage window) {
+
+
 
         Menu menu1 = new Menu("Hem");
 
@@ -31,20 +31,12 @@ public class MenuBarAdmin {
         Menu menu2 = new Menu("Arkiv");
 
         //skapar en submeny med namn test i menyn arkiv
-        Menu createMenu = new Menu("Test");
+        Menu testMenu = new Menu("Test");
 
         //skapar menuItems att fylla submenyn Test med
-        MenuItem createTest = new MenuItem("Skapa Test");
-        MenuItem correctTest = new MenuItem("Rätta Test");
-        MenuItem changeTest = new MenuItem("Ändra Test");
         MenuItem doTest = new MenuItem("Gör Test");
-        MenuItem reuseTest = new MenuItem("Återanvända Test");
+        MenuItem doneTest = new MenuItem("Rättade Test");
 
-
-        //skapar en submeny med namn registrera till menyn arkiv
-        MenuItem registerMenu = new MenuItem("Registrera Användare");
-        /*MenuItem registerStudent = new MenuItem("Registrera Student");
-        MenuItem registerTeacher = new MenuItem("Registrera Lärare");*/
 
         //skapar en huvudmeny med namn Inställningar
         Menu menu3 = new Menu("Inställningar");
@@ -58,9 +50,9 @@ public class MenuBarAdmin {
         MenuItem logoutItem = new MenuItem("Logga ut");
         menu4.getItems().addAll(logoutItem);
 
-        menu2.getItems().addAll(createMenu, registerMenu);
+        menu2.getItems().addAll(testMenu);
 
-        createMenu.getItems().addAll(createTest, correctTest, changeTest, doTest, reuseTest);
+        testMenu.getItems().addAll(doTest, doneTest);
 
         menu3.getItems().addAll(editUser);
 
@@ -71,23 +63,15 @@ public class MenuBarAdmin {
 
         //ActionEvent för loginknappen.
         logoutItem.setOnAction(e -> {
-            LoginPage sv = new LoginPage(window);
+            LoginPage lp = new LoginPage(window);
         });
 
-        //ActionEvent för Registrera lärare.
-        registerMenu.setOnAction(e->{
-            Register rt = new Register(window);
-        });
 
         //ActionEvent för hemknappen.
         home.setOnAction(e->{
             AdminFirstpage afp = new AdminFirstpage(window);
         });
 
-        //ActionEvent för SkapaTest.
-        createTest.setOnAction(e->{
-            FxView fv = new FxView(window);
-        });
 
         editUser.setOnAction(e->{
             Settings st = new Settings(window);
@@ -96,3 +80,4 @@ public class MenuBarAdmin {
     }
 
 }
+

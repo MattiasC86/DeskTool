@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import logic.LoginLogic;
 
 /**
  * Created by Rasmus on 2017-05-04.
@@ -109,7 +110,7 @@ public class LoginPage {
                        //Checks if username and password are the same as a Teacher.
                        else if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Lärare")) {
                             AdminFirstpage afp = new AdminFirstpage(window);
-                            System.out.println("Techer!");
+                            System.out.println("Teacher!");
                        }
 
                        //Checks if username and password are the same as a Admin.
