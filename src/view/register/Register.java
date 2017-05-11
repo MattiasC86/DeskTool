@@ -48,7 +48,7 @@ public class Register {
         TextField textFieldEmail = new TextField();
         TextField textFieldPassword = new TextField();
 
-        Text verifyText = new Text();
+        Label verifyText = new Label();
         verifyText.relocate(730, 350);
 
         Button registerButton = new Button("Registrera");
