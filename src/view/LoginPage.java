@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Reflection;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -88,6 +90,8 @@ public class LoginPage {
         bp.setCenter(gridPane);
         bp.setId("loginPane");
 
+        btnLogin.setDefaultButton(true);
+
         //Adding BorderPane to the scene and loading CSS
         Scene scene = new Scene(bp,450,250);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
@@ -96,8 +100,10 @@ public class LoginPage {
         window.centerOnScreen();
         window.show();
 
+
         LoginLogic loginvali = new LoginLogic();
 
+        //ActionEvent som körs när man trycker på loginknappen.
         btnLogin.setOnAction(e->{
 
              Platform.runLater(() -> {

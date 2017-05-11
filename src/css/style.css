@@ -12,6 +12,9 @@
     -fx-text-fill: #ede7f3;
     -fx-background-color: linear-gradient(#623318, #b35612 );
 }
+#btnRegister{
+    -fx-background-color: linear-gradient(#623318, #b35612 );
+}
 
 #firstpagePane{
     -fx-background-image: url('../pic/bakgrundquiz.jpg');
@@ -47,4 +50,13 @@
 #verifyText{
     -fx-text-fill: green;
     -fx-font-weight: Bold;
+}
+#registerLabels{
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+    -fx-font-size: 16px;
+}
+
+#registerBackground{
+    -fx-background-color: linear-gradient(#623318, #b35612 );
 }
