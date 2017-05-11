@@ -28,23 +28,23 @@ public class Settings {
 
         bp.setTop(pane);
 
-        Label labelFirstname = new Label("Förnamn: ");
+        Label labelFirstname = new Label("Förnamn: ");  //+ currUser.getFirstName()
         Label currentFirstname = new Label();
 
-        Label labelLastname = new Label("Efternamn: ");
+        Label labelLastname = new Label("Efternamn: "); //+ currUser.getLastName()
         Label currentLastname = new Label();
 
-        Label labelEmail = new Label("Email: ");
+        Label labelEmail = new Label("Email: "); //+ currUser.getEmail()
         Label currentEmail = new Label();
 
-        Label labelUsername = new Label("Användarnamn: ");
+        Label labelUsername = new Label("Användarnamn: "); //+ currUser.getUserName()
         Label currentUsername = new Label();
 
-        Label labelPassword = new Label("Lösenord: ");
+        Label labelPassword = new Label("Lösenord: "); //+ currUser.getPassword()
         Label currentPassword = new Label();
 
-        Label newEmail = new Label("Byt lösenord: ");
-        Label newPassword = new Label("Byt email: ");
+        Label newEmail = new Label("Nytt lösenord: ");
+        Label newPassword = new Label("Ny email: ");
 
         TextField changeEmail = new TextField();
         TextField changePassword = new TextField();
