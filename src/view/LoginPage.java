@@ -11,7 +11,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import logic.LoginLogic;
 
 /**
  * Created by Rasmus on 2017-05-04.

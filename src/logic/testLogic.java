@@ -6,8 +6,6 @@ import javafx.scene.control.ListView;
 import service.TestService;
 import service.UserService;
 
-
-
 /**
  * Created by matti on 2017-05-10.
  */
