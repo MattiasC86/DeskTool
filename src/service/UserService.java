@@ -274,6 +274,7 @@ public class UserService {
                 user.setUserName(newData);
                 break;
         }
+
         entityManager.getTransaction().commit();
 
         entityManager.close();
