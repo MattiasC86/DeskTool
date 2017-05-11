@@ -50,8 +50,7 @@ public class MenuBarAdmin {
         Menu menu3 = new Menu("Inställningar");
 
         //skapar menuItems som ska fylla menyn Inställningar
-        MenuItem changePassword = new MenuItem("Byt Lösenord");
-        MenuItem changeEmail = new MenuItem("Byt Email");
+        MenuItem editUser = new MenuItem("Redigera användare");
 
         //Skapar en huvudmeny med namn logga ut
         Menu menu4 = new Menu("Logga ut");
@@ -62,9 +61,8 @@ public class MenuBarAdmin {
         menu2.getItems().addAll(createMenu, registerMenu);
 
         createMenu.getItems().addAll(createTest, correctTest, changeTest, doTest, reuseTest);
-        //registerMenu.getItems().addAll(registerStudent, registerTeacher);
 
-        menu3.getItems().addAll(changePassword, changeEmail);
+        menu3.getItems().addAll(editUser);
 
         MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3, menu4);
         menuAdmin.setPrefWidth(1600);
@@ -89,6 +87,10 @@ public class MenuBarAdmin {
         //ActionEvent för SkapaTest.
         createTest.setOnAction(e->{
             FxView fv = new FxView(window);
+        });
+
+        editUser.setOnAction(e->{
+            Settings st = new Settings(window);
         });
 
     }
