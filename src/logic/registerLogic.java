@@ -15,12 +15,17 @@ public class RegisterLogic {
         String result1 = UserService.read("userName", userName, "userName");
         String result2 = UserService.read("email", email, "email");
 
+        //if some field is empty
+        if(firstName.equals("") || lastName.equals("") || userName.equals("") || email.equals("") || password.equals("")) {
+            return 0;
+        }
+
         //If username already exists in db - return 1
-        if(result1.equals(userName)) {
+        else if(result1.equals(userName)) {
             return 1;
         }
         //If email already exists in db - return 2
-        if(result2.equals(email)) {
+        else if(result2.equals(email)) {
             return 2;
         }
         //If username and email is not taken, save new user in db - return 3
