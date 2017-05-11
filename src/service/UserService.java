@@ -25,7 +25,7 @@ public class UserService {
         emFactory.close();
     }
 
-    public static String read(String criteria, String keyword){
+    public static String read(String criteria, String keyword, String youwant){
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entitymanager = emfactory.createEntityManager();
         String userinfo = "";
@@ -38,7 +38,30 @@ public class UserService {
                 List<User> firstNameList=(List<User>)firstNameQuery.getResultList( );
 
                 for( User u:firstNameList ){
-                    userinfo = u.getFirstName();
+                    switch (youwant) {
+
+                        case "userId": userinfo = Integer.toString(u.getUserId());
+                            break;
+
+                        case "firstName": userinfo = u.getFirstName();
+                            break;
+
+                        case "lastName": userinfo = u.getLastName();
+                            break;
+
+                        case "email": userinfo = u.getEmail();
+                            break;
+
+                        case "userName": userinfo = u.getUserName();
+                            break;
+
+                        case "password": userinfo = u.getPassword();
+                            break;
+
+                        case "role": userinfo = u.getRole();
+                            break;
+
+                    }
                 }
                 break;
 
@@ -48,71 +71,56 @@ public class UserService {
                 List<User> lastNameList=(List<User>)lastNameQuery.getResultList( );
 
                 for( User u:lastNameList ){
-                    userinfo = u.getLastName();
-                }
-                break;
+                    switch (youwant) {
 
-            case "password":
-                Query passwordQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.password" + "= '" + keyword + "'");
+                        case "userId": userinfo = Integer.toString(u.getUserId());
+                            break;
 
-                List<User> passwordList=(List<User>)passwordQuery.getResultList( );
+                        case "firstName": userinfo = u.getFirstName();
+                            break;
 
-                for( User u:passwordList ){
-                    userinfo = u.getPassword();
+                        case "lastName": userinfo = u.getLastName();
+                            break;
+
+                        case "email": userinfo = u.getEmail();
+                            break;
+
+                        case "userName": userinfo = u.getUserName();
+                            break;
+
+                        case "password": userinfo = u.getPassword();
+                            break;
+
+                        case "role": userinfo = u.getRole();
+                            break;
+
+                    }
                 }
                 break;
 
             case "userName":
-                Query userNameQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.userName" + "= '" + keyword + "'");
+                Query usernameQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.userName" + "= '" + keyword + "'");
 
-                List<User> userNameList=(List<User>)userNameQuery.getResultList( );
+                List<User> usernameList=(List<User>)usernameQuery.getResultList( );
 
-                for( User u:userNameList ){
-                    userinfo = u.getUserName();
-                }
-                break;
-
-            case "email":
-                Query emailQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.email" + "= '" + keyword + "'");
-
-                List<User> emailList=(List<User>)emailQuery.getResultList( );
-
-                for( User u:emailList ){
-                    userinfo = u.getEmail();
-                }
-                break;
-
-            case "role":
-                Query roleQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.role" + "= '" + keyword + "'");
-
-                List<User> roleList=(List<User>)roleQuery.getResultList( );
-
-                for( User u:roleList ){
-                    userinfo = u.getRole();
-                }
-                break;
-        }
-        return userinfo;
-    }
-
-    public static String read2(String criteria, String keyword, String youwant){
-        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
-        EntityManager entitymanager = emfactory.createEntityManager();
-        String userinfo = "";
-
-        switch(criteria) {
-
-            case "userName":
-                Query username2Query = entitymanager.createQuery( "Select u " + "from User u " + "where u.userName" + "= '" + keyword + "'");
-
-                List<User> username2List=(List<User>)username2Query.getResultList( );
-
-                for( User u:username2List ){
+                for( User u:usernameList ){
 
                     switch (youwant) {
 
                         case "userId":
                             userinfo = Integer.toString(u.getUserId());
+                            break;
+
+                        case "firstName":
+                            userinfo = u.getFirstName();
+                            break;
+
+                        case "lastName":
+                            userinfo = u.getLastName();
+                            break;
+
+                        case "email":
+                            userinfo = u.getEmail();
                             break;
 
                         case "userName":
@@ -132,15 +140,27 @@ public class UserService {
                 break;
 
             case "password":
-                Query password2Query = entitymanager.createQuery( "Select u " + "from User u " + "where u.password" + "= '" + keyword + "'");
+                Query passwordQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.password" + "= '" + keyword + "'");
 
-                List<User> password2List=(List<User>)password2Query.getResultList( );
+                List<User> passwordList=(List<User>)passwordQuery.getResultList( );
 
-                for( User u:password2List ){
+                for( User u:passwordList ){
                     switch (youwant) {
 
                         case "userId":
                             userinfo = Integer.toString(u.getUserId());
+                            break;
+
+                        case "firstName":
+                            userinfo = u.getFirstName();
+                            break;
+
+                        case "lastName":
+                            userinfo = u.getLastName();
+                            break;
+
+                        case "email":
+                            userinfo = u.getEmail();
                             break;
 
                         case "userName":
@@ -155,6 +175,84 @@ public class UserService {
                             userinfo = u.getRole();
                             break;
 
+                    }
+                }
+                break;
+
+            case "email":
+                Query emailQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.email" + "= '" + keyword + "'");
+
+                List<User> emailList=(List<User>)emailQuery.getResultList( );
+
+                for( User u:emailList ){
+                    switch (youwant) {
+
+                        case "userId":
+                            userinfo = Integer.toString(u.getUserId());
+                            break;
+
+                        case "firstName":
+                            userinfo = u.getFirstName();
+                            break;
+
+                        case "lastName":
+                            userinfo = u.getLastName();
+                            break;
+
+                        case "email":
+                            userinfo = u.getEmail();
+                            break;
+
+                        case "userName":
+                            userinfo = u.getUserName();
+                            break;
+
+                        case "password":
+                            userinfo = u.getPassword();
+                            break;
+
+                        case "role":
+                            userinfo = u.getRole();
+                            break;
+                    }
+                }
+                break;
+
+            case "role":
+                Query roleQuery = entitymanager.createQuery( "Select u " + "from User u " + "where u.role" + "= '" + keyword + "'");
+
+                List<User> roleList=(List<User>)roleQuery.getResultList( );
+
+                for( User u:roleList ){
+                    switch (youwant) {
+
+                        case "userId":
+                            userinfo = Integer.toString(u.getUserId());
+                            break;
+
+                        case "firstName":
+                            userinfo = u.getFirstName();
+                            break;
+
+                        case "lastName":
+                            userinfo = u.getLastName();
+                            break;
+
+                        case "email":
+                            userinfo = u.getEmail();
+                            break;
+
+                        case "userName":
+                            userinfo = u.getUserName();
+                            break;
+
+                        case "password":
+                            userinfo = u.getPassword();
+                            break;
+
+                        case "role":
+                            userinfo = u.getRole();
+                            break;
                     }
                 }
                 break;
@@ -189,8 +287,7 @@ public class UserService {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
-        System.out.println("Username " + read("userName", "Crusse"));
-        System.out.println("Username " + read2("userName", "Crusse", "password"));
+        System.out.println("Username " + read("userName", "Crusse", "role"));
 
     }
 }

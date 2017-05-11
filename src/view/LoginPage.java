@@ -103,13 +103,13 @@ public class LoginPage {
              Platform.runLater(() -> {
                        //Checks if username and password are the same as a student.
                        if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Student")) {
-                            //AdminFirstpage afp = new AdminFirstpage(window);
+                            AdminFirstpage afp = new AdminFirstpage(window);
                             System.out.println("Student!");
                        }
 
                        //Checks if username and password are the same as a Teacher.
                        else if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Lärare")) {
-                            //AdminFirstpage afp = new AdminFirstpage(window);
+                            AdminFirstpage afp = new AdminFirstpage(window);
                             System.out.println("Techer!");
                        }
 
