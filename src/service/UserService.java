@@ -260,12 +260,20 @@ public class UserService {
         return userinfo;
     }
 
-    public static void update(User user) {
+    public static void update(User user, String dataToChange, String newData) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
         entityManager.getTransaction().begin();
-        entityManager.persist(user);
+
+        switch(dataToChange) {
+            case "password":
+                user.setPassword(newData);
+                break;
+            case "email":
+                user.setUserName(newData);
+                break;
+        }
         entityManager.getTransaction().commit();
 
         entityManager.close();
