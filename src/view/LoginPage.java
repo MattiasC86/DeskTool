@@ -76,18 +76,18 @@ public class LoginPage {
         //Adding text to HBox
         hb.getChildren().add(text);
 
+
+
+        //Add HBox and GridPane layout to BorderPane Layout
+        bp.setTop(hb);
+        bp.setCenter(gridPane);
+
         //Add ID's to Nodes
         bp.setId("bp");
         gridPane.setId("root");
         btnLogin.setId("btnLogin");
         text.setId("text");
         errorMessage.setId("errorMessageLogin");
-
-
-
-        //Add HBox and GridPane layout to BorderPane Layout
-        bp.setTop(hb);
-        bp.setCenter(gridPane);
         bp.setId("loginPane");
 
         btnLogin.setDefaultButton(true);

@@ -43,6 +43,7 @@ public class Register {
         TextField textFieldPassword = new TextField();
 
         Label verifyText = new Label("");
+        Label emptyFields = new Label("");
         Button registerButton = new Button("Registrera");
 
         ChoiceBox privilege = new ChoiceBox();
@@ -110,6 +111,7 @@ public class Register {
         password.setId("registerLabels");
         mainPane.setId("registerBackground");
         registerButton.setId("btnRegister");
+        emptyFields.setId("emptyFields");
 
 
 
@@ -124,6 +126,12 @@ public class Register {
             int result = RegisterLogic.registerUser(textFieldFirstname.getText(), textFieldLastname.getText(), textFieldUsername.getText(),
                     textFieldEmail.getText(), textFieldPassword.getText(), privilege.getSelectionModel().getSelectedItem().toString());
             switch(result) {
+                case 0:
+                    //Om något fält är tomt
+                    verifyText.setText("");
+                    emptyFields.setText("Alla fält är inte ifyllda!");
+                    break;
+
                 case 1:
                     //username upptagen
                     textFieldUsername.setText("");
@@ -144,6 +152,7 @@ public class Register {
                     textFieldUsername.setText("");
                     textFieldEmail.setText("");
                     textFieldPassword.setText("");
+                    emptyFields.setText("");
                     verifyText.setText("Användaren är registrerad!");
                     break;
             }
