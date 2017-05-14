@@ -1,5 +1,6 @@
 package view;
 
+import entity.User;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,6 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logic.LoginLogic;
+import service.UserService;
 import view.menuBars.MenuBarAdmin;
 
 
@@ -20,6 +23,8 @@ public class Settings {
 
     public Settings(Stage window) {
 
+        User user = UserService.read(LoginLogic.getCurrId());
+
         Pane pane = new Pane();
 
         MenuBarAdmin x = new MenuBarAdmin(pane, window);
@@ -29,23 +34,23 @@ public class Settings {
 
         bp.setTop(pane);
 
-        Label labelFirstname = new Label("Förnamn: ");  //+ currUser.getFirstName()
+        Label labelFirstname = new Label("Förnamn: " + user.getFirstName());
         Label currentFirstname = new Label();
 
-        Label labelLastname = new Label("Efternamn: "); //+ currUser.getLastName()
+        Label labelLastname = new Label("Efternamn: " + user.getLastName());
         Label currentLastname = new Label();
 
-        Label labelEmail = new Label("Email: "); //+ currUser.getEmail()
+        Label labelEmail = new Label("Email: " + user.getEmail());
         Label currentEmail = new Label();
 
-        Label labelUsername = new Label("Användarnamn: "); //+ currUser.getUserName()
+        Label labelUsername = new Label("Användarnamn: " + user.getUserName());
         Label currentUsername = new Label();
 
-        Label labelPassword = new Label("Lösenord: "); //+ currUser.getPassword()
+        Label labelPassword = new Label("Lösenord: " + user.getPassword());
         Label currentPassword = new Label();
 
-        Label newEmail = new Label("Nytt lösenord: ");
-        Label newPassword = new Label("Ny email: ");
+        Label newEmail = new Label("Ny email: ");           //UserService.update(user.getUserId(), "email", changeEmail.getText());
+        Label newPassword = new Label("Nytt lösenord: ");   //UserService.update(user.getUserId(), "password", changePassword.getText());
 
         TextField changeEmail = new TextField();
         TextField changePassword = new TextField();
