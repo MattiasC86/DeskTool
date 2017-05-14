@@ -105,81 +105,13 @@ public class LoginPage {
 
         //ActionEvent som körs när man trycker på loginknappen.
         btnLogin.setOnAction(e->{
-
              Platform.runLater(() -> {
-
-                  //Checks if username and password are the same as a student.
-                  if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Student")) {
+                  int statusCode = LoginLogic.loginValidation(txtUserName.getText(), pf.getText());
+                  if (statusCode == 0) {
+                       errorMessage.setText("Wrong username or password!");
+                  } else if (statusCode == 1){
                        AdminFirstpage afp = new AdminFirstpage(window);
-                       System.out.println("Student!");/*
-                            if (loginvali.Accesslevel() == 1) {
-                                 AdminFirstpage afp = new AdminFirstpage(window);
-                            }
-
-                            else if (loginvali.Accesslevel() == 0){
-                                 errorMessage.setText("Wrong username or password!");
-                            }
-
-                            else if (loginvali.Accesslevel() == 2){
-                                 errorMessage.setText("Please enter a username.");
-                            }
-
-                            else if (loginvali.Accesslevel() == 3){
-                                 errorMessage.setText("Please enter a password.");
-                            }*/
-
                   }
-
-                  //Checks if username and password are the same as a Teacher.
-                  else if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Lärare")) {
-                       AdminFirstpage afp = new AdminFirstpage(window);
-
-                       System.out.println("Techer!");/*
-                            if (loginvali.Accesslevel() == 1) {
-                                 AdminFirstpage afp = new AdminFirstpage(window);
-                            }
-
-                            else if (loginvali.Accesslevel() == 0){
-                                 errorMessage.setText("Wrong username or password!");
-                            }
-
-                            else if (loginvali.Accesslevel() == 2){
-                                 errorMessage.setText("Please enter a username.");
-                            }
-
-                            else if (loginvali.Accesslevel() == 3){
-                                 errorMessage.setText("Please enter a password.");
-                            }*/
-
-                       System.out.println("Teacher!");
-
-                  }
-
-                  //Checks if username and password are the same as a Admin.
-                  else if (loginvali.loginValidation(txtUserName.getText(), pf.getText()).equals("Admin")) {
-                       AdminFirstpage afp = new AdminFirstpage(window);
-                       System.out.println("Admin!");/*
-                            if (loginvali.Accesslevel() == 1) {
-                                 AdminFirstpage afp = new AdminFirstpage(window);
-                            }
-
-                            else if (loginvali.Accesslevel() == 0){
-                                 errorMessage.setText("Wrong username or password!");
-                            }
-
-                            else if (loginvali.Accesslevel() == 2){
-                                 errorMessage.setText("Please enter a username.");
-                            }
-
-                            else if (loginvali.Accesslevel() == 3){
-                                 errorMessage.setText("Please enter a password.");
-                            }*/
-                  }
-
-
-
-
-
              });
         });
     }

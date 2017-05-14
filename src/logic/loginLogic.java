@@ -1,67 +1,37 @@
 package logic;
+import entity.User;
 import service.UserService;
 import logic.UserLogic;
 
 
 public class LoginLogic {
 
-    UserService user;
-    UserLogic currentUser;
-    String dataUsername, dataPassword, userLevel;
-    String curUserFirstName, curUserlastName,  curUseruserName,  curUserpassword, curUseremail, curUserrole ;
-    public static int access = 1; //0 = false, 1 = true, 2 = username empty, 3 = password empty
+    private static int currId;
 
-    public String loginValidation(String formUsername, String formPassword){
+    public static int loginValidation(String formUsername, String formPassword){
+        setCurrId(0);
+        String userNameHolder = "";
 
-        dataUsername = user.read("userName", formUsername, "userId");
-        dataPassword = user.read("password", formPassword, "userId");
-
-        curUserFirstName = user.read("userName", formUsername, "firstName");
-        curUserlastName = user.read("userName", formUsername, "lastName");
-        curUseruserName = user.read("userName", formUsername, "userName");
-        curUserpassword = user.read("userName", formUsername, "password");
-        curUseremail = user.read("userName", formUsername, "email");
-        curUserrole = user.read("userName", formUsername, "role");
-/*
-        if (dataUsername != null && !dataUsername.isEmpty()){
-            access = 2;
+        userNameHolder = UserService.read("userName", formUsername, "userName");
+        if(userNameHolder.equals(null) || userNameHolder.equals("")) {
+            return 0;
         }
 
-        else {
-            if (dataPassword != null && !dataPassword.isEmpty()){
-                access = 3;
-            }
+        setCurrId(Integer.parseInt(UserService.read("userName", formUsername, "userId")));
+        User user = UserService.read(getCurrId());
 
-            else {
-                if (dataUsername.equals(dataPassword)){
-                    access = 1;
-                    userLevel = user.read("userName", formUsername, "role");
-                    //currentUser = new UserLogic(curUserFirstName, curUserlastName, curUseruserName, curUserpassword, curUseremail, curUserrole);
-                }
-
-                else {
-                    access = 0;
-                    System.out.println("Wrong username or password!");
-                }
-            }
-        }*/
-
-        if (dataUsername.equals(dataPassword)){
-            access = 1;
-            userLevel = user.read("userName", formUsername, "role");
-            //currentUser = new UserLogic(curUserFirstName, curUserlastName, curUseruserName, curUserpassword, curUseremail, curUserrole);
+        if(user.getPassword().equals(formPassword)) {
+            return 1;
+        } else {
+            setCurrId(0);
+            return 0;
         }
-
-        else {
-            access = 0;
-            System.out.println("Wrong username or password!");
-        }
-
-
-        return(userLevel);
     }
 
-    public int Accesslevel(){
-        return access;
+    public static int getCurrId() {
+        return currId;
+    }
+    public static void setCurrId(int currId) {
+        LoginLogic.currId = currId;
     }
 }

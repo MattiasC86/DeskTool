@@ -25,6 +25,13 @@ public class UserService {
         emFactory.close();
     }
 
+    public static User read(int userId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        return entityManager.find(User.class, userId);
+    }
+
     public static String read(String criteria, String keyword, String youwant){
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
         EntityManager entitymanager = emfactory.createEntityManager();
