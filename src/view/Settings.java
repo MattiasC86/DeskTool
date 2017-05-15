@@ -92,5 +92,15 @@ public class Settings {
         window.setScene(scene);
         window.setTitle("Inställnigar");
 
+        // Email is updated for user
+        buttonChangeEmail.setOnAction(e->{
+            UserService.update(user.getUserId(), "email", changeEmail.getText());
+        });
+
+        // Password is updated for user
+        buttonChangePassword.setOnAction(e->{
+            UserService.update(user.getUserId(), "password", changePassword.getText());
+        });
+
     }
 }
