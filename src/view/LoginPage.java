@@ -108,6 +108,15 @@ public class LoginPage {
                   if (statusCode == 0) {
                        errorMessage.setText("Wrong username or password!");
                   } else if (statusCode == 1){
+                       //Elev start page
+                       AdminFirstpage afp = new AdminFirstpage(window);
+                  }
+                  else if (statusCode == 2){
+                       //Lärare start page
+                       AdminFirstpage afp = new AdminFirstpage(window);
+                  }
+                  else if (statusCode == 3){
+                       //Admin start page
                        AdminFirstpage afp = new AdminFirstpage(window);
                   }
              });
