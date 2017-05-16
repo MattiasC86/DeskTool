@@ -26,7 +26,7 @@ public class LoginPage {
 
 
         BorderPane bp = new BorderPane();
-        bp.setPadding(new Insets(10,50,50,50));
+        bp.setPadding(new Insets(10,50,100,50));
 
         //Adding HBox
         HBox hb = new HBox();
@@ -39,14 +39,13 @@ public class LoginPage {
         gridPane.setVgap(5);
 
         //Implementing Nodes for GridPane
-        Label lblUserName = new Label("Username");
+        Label lblUserName = new Label("Användarnamn");
         final TextField txtUserName = new TextField();
-        Label lblPassword = new Label("Password");
+        Label lblPassword = new Label("Lösenord");
         final PasswordField pf = new PasswordField();
         Button btnLogin = new Button("Login");
-
         final Label errorMessage = new Label();
-        errorMessage.setFont(Font.font("Courier New", FontWeight.BOLD, 11));
+        errorMessage.setFont(Font.font("Courier New", FontWeight.BOLD, 12));
 
         //Adding Nodes to GridPane layout
         gridPane.add(lblUserName, 0, 0);
@@ -94,7 +93,7 @@ public class LoginPage {
         btnLogin.setDefaultButton(true);
 
         //Adding BorderPane to the scene and loading CSS
-        Scene scene = new Scene(bp,450,250);
+        Scene scene = new Scene(bp,500,250);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setTitle("Newton");
         window.setScene(scene);
@@ -107,7 +106,7 @@ public class LoginPage {
              Platform.runLater(() -> {
                   int statusCode = LoginLogic.loginValidation(txtUserName.getText(), pf.getText());
                   if (statusCode == 0) {
-                       errorMessage.setText("Invalid username or password!");
+                       errorMessage.setText("Fel användarnamn/lösenord!");
                   } else if (statusCode == 1){
                        //Elev start page
                        AdminFirstpage afp = new AdminFirstpage(window);
