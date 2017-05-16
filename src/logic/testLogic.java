@@ -23,7 +23,7 @@ public class TestLogic {
         System.out.println("selfCorrecting: " + selfCorrecting);
         System.out.println("User: " + user.getUserName());
 
-        Test test = new Test(title, timeMin, nrOfQuestions, selfCorrecting, user);
+        Test test = new Test(title, timeMin, nrOfQuestions, selfCorrecting, UserService.read(LoginLogic.getCurrId()));
 
         TestService.create(test);
         //TestService.create(test, questions, answers);

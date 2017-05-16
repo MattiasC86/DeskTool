@@ -95,11 +95,15 @@ public class Settings {
         // Email is updated for user
         buttonChangeEmail.setOnAction(e->{
             UserService.update(user.getUserId(), "email", changeEmail.getText());
+            user.setEmail(changeEmail.getText());
+            labelEmail.setText("Email: " + user.getEmail());
         });
 
         // Password is updated for user
         buttonChangePassword.setOnAction(e->{
             UserService.update(user.getUserId(), "password", changePassword.getText());
+            user.setPassword(changePassword.getText());
+            labelPassword.setText("Lösenord: " + user.getPassword());
         });
 
     }
