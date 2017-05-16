@@ -43,7 +43,7 @@ public class LoginPage {
         final TextField txtUserName = new TextField();
         Label lblPassword = new Label("Lösenord");
         final PasswordField pf = new PasswordField();
-        Button btnLogin = new Button("Login");
+        Button btnLogin = new Button("Logga in");
         final Label errorMessage = new Label();
         errorMessage.setFont(Font.font("Courier New", FontWeight.BOLD, 12));
 
