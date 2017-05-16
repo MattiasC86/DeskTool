@@ -49,8 +49,8 @@ public class Settings {
         Label labelPassword = new Label("Lösenord: " + user.getPassword());
         Label currentPassword = new Label();
 
-        Label newEmail = new Label("Ny email: ");           //UserService.update(user.getUserId(), "email", changeEmail.getText());
-        Label newPassword = new Label("Nytt lösenord: ");   //UserService.update(user.getUserId(), "password", changePassword.getText());
+        Label newEmail = new Label("Ny email: ");
+        Label newPassword = new Label("Nytt lösenord: ");
 
         TextField changeEmail = new TextField();
         TextField changePassword = new TextField();

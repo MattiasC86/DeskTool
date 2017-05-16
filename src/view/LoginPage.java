@@ -101,8 +101,6 @@ public class LoginPage {
         window.show();
 
 
-        LoginLogic loginvali = new LoginLogic();
-
         //ActionEvent som körs när man trycker på loginknappen.
         btnLogin.setOnAction(e->{
              Platform.runLater(() -> {
