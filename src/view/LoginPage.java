@@ -23,8 +23,6 @@ public class LoginPage {
 
    public LoginPage(Stage window) {
 
-
-
         BorderPane bp = new BorderPane();
         bp.setPadding(new Insets(10,50,100,50));
 

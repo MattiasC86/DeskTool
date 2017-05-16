@@ -14,6 +14,8 @@ public class AdminFirstpage {
 
     public AdminFirstpage(Stage window){
 
+        window.setTitle("Hem");
+
         Pane pane = new Pane();
 
         MenuBarAdmin x = new MenuBarAdmin(pane, window);
