@@ -6,14 +6,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Reflection;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.LoginLogic;
+import view.homepage.AdminFirstpage;
+import view.homepage.StudentFirstpage;
+import view.homepage.TeacherFirstpage;
 
 /**
  * Created by Rasmus on 2017-05-04.
@@ -24,7 +24,7 @@ public class LoginPage {
    public LoginPage(Stage window) {
 
         BorderPane bp = new BorderPane();
-        bp.setPadding(new Insets(10,50,100,50));
+        bp.setPadding(new Insets(40,50,100,50));
 
         //Adding HBox
         HBox hb = new HBox();
@@ -64,16 +64,6 @@ public class LoginPage {
         dropShadow.setOffsetX(5);
         dropShadow.setOffsetY(5);
 
-        //Adding text and DropShadow effect to it
-        Text text = new Text("");
-        text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
-        text.setEffect(dropShadow);
-
-
-        //Adding text to HBox
-        hb.getChildren().add(text);
-
-
 
         //Add HBox and GridPane layout to BorderPane Layout
         bp.setTop(hb);
@@ -83,7 +73,6 @@ public class LoginPage {
         bp.setId("bp");
         gridPane.setId("root");
         btnLogin.setId("btnLogin");
-        text.setId("text");
         errorMessage.setId("errorMessageLogin");
         bp.setId("loginPane");
 
@@ -107,11 +96,11 @@ public class LoginPage {
                        errorMessage.setText("Fel användarnamn/lösenord!");
                   } else if (statusCode == 1){
                        //Elev start page
-                       AdminFirstpage afp = new AdminFirstpage(window);
+                       StudentFirstpage sfp = new StudentFirstpage(window);
                   }
                   else if (statusCode == 2){
                        //Lärare start page
-                       AdminFirstpage afp = new AdminFirstpage(window);
+                       TeacherFirstpage tfp = new TeacherFirstpage(window);
                   }
                   else if (statusCode == 3){
                        //Admin start page
