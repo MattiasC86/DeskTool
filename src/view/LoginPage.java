@@ -24,7 +24,7 @@ public class LoginPage {
    public LoginPage(Stage window) {
 
         BorderPane bp = new BorderPane();
-        bp.setPadding(new Insets(10,50,100,50));
+        bp.setPadding(new Insets(40,50,100,50));
 
         //Adding HBox
         HBox hb = new HBox();
@@ -64,16 +64,6 @@ public class LoginPage {
         dropShadow.setOffsetX(5);
         dropShadow.setOffsetY(5);
 
-        //Adding text and DropShadow effect to it
-        Text text = new Text("");
-        text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
-        text.setEffect(dropShadow);
-
-
-        //Adding text to HBox
-        hb.getChildren().add(text);
-
-
 
         //Add HBox and GridPane layout to BorderPane Layout
         bp.setTop(hb);
@@ -83,7 +73,6 @@ public class LoginPage {
         bp.setId("bp");
         gridPane.setId("root");
         btnLogin.setId("btnLogin");
-        text.setId("text");
         errorMessage.setId("errorMessageLogin");
         bp.setId("loginPane");
 
