@@ -21,7 +21,17 @@ public class LoginLogic {
         User user = UserService.read(getCurrId());
 
         if(user.getPassword().equals(formPassword)) {
-            return 1;
+            if(user.getRole().equals("Student")){
+                return 1;
+            }
+            else if(user.getRole().equals("Lärare")){
+                return 2;
+            }
+            else if(user.getRole().equals("Admin")){
+                return 3;
+            }
+            else { return 0;}
+
         } else {
             setCurrId(0);
             return 0;
