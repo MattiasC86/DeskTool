@@ -23,7 +23,7 @@ public class FxView {
     Label numberOfQuestion;
     ListView<Pane> QuestionList;
 
-    ArrayList<Integer> QuestionTypeList = new ArrayList<Integer>();
+    ArrayList<Question> Questions = new ArrayList<Question>();
 
     public FxView(Stage window) {
 
@@ -83,8 +83,9 @@ public class FxView {
         pane.getChildren().add(btn);
 
         btn.setOnAction(e->{
-            Question Question = new Question(QuestionList);
-            Question.oneAnswerQuestion();
+            Question Question1 = new Question(QuestionList);
+            Question1.oneAnswerQuestion();
+            Questions.add(Question1);
             setNumberOfQuestions();
         });
 
@@ -93,8 +94,9 @@ public class FxView {
         pane.getChildren().add(btn1);
 
         btn1.setOnAction(e->{
-            Question Question = new Question(QuestionList);
-            Question.manyAnswerQuestion();
+            Question Question2 = new Question(QuestionList);
+            Question2.manyAnswerQuestion();
+            Questions.add(Question2);
             setNumberOfQuestions();
         });
 
@@ -103,8 +105,9 @@ public class FxView {
         pane.getChildren().add(btn2);
 
         btn2.setOnAction(e->{
-            Question Question = new Question(QuestionList);
-            Question.rankedQuestion();
+            Question Question3 = new Question(QuestionList);
+            Question3.rankedQuestion();
+            Questions.add(Question3);   
             setNumberOfQuestions();
         });
 
@@ -126,7 +129,6 @@ public class FxView {
 
             int selfCorrect;
 
-
             if(box.isSelected()){
                 selfCorrect = 1;
             }
@@ -137,9 +139,6 @@ public class FxView {
             TestLogic.saveTest(QuestionList, titleTest.getText(), selfCorrect, 0, new User("Olle", "Olsson", "Ol",
                     "olle@mail.com", "olle123", "Admin"));
         });
-
-
-
 
         BorderPane bp = new BorderPane();
         Pane menubarpane = new Pane();
@@ -155,8 +154,6 @@ public class FxView {
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(scene);
         window.show();
-
-
     }
 
 
