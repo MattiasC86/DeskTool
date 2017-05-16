@@ -5,7 +5,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.AdminFirstpage;
+import view.homepage.AdminFirstpage;
 import view.LoginPage;
 import view.Settings;
 import view.createTest.FxView;
