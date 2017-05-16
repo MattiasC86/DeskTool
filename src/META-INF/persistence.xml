@@ -15,7 +15,7 @@
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testtooldesk"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="123456789"/>
+            <property name="javax.persistence.jdbc.password" value="cofems89"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.ddl-generation" value="create-tables"/>
