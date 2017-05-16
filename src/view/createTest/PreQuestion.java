@@ -10,17 +10,18 @@ import javafx.scene.layout.Pane;
 
 
 
-public class Question {
+public class PreQuestion {
 
         Pane QuestionPane;
         CheckBox[] answerBox;
         TextField[] answerField;
         Label[] answerLabel;
         ComboBox<Integer> CBox;
+        public TextField QuestionField;
 
         int questionType;
 
-        public Question(ListView<Pane> List){
+        public PreQuestion(ListView<Pane> List){
 
             QuestionPane = new Pane();
             QuestionPane.setPrefHeight(200);
@@ -31,7 +32,7 @@ public class Question {
             label.relocate(20, 5);
             QuestionPane.getChildren().add(label);
 
-            TextField QuestionField = new TextField();
+            QuestionField = new TextField();
             QuestionField.setStyle("-fx-font-size: 14pt");
             QuestionField.setPromptText("Fråga");
             QuestionField.setMinWidth(400);

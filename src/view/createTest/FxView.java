@@ -1,6 +1,5 @@
 package view.createTest;
 
-import entity.User;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,7 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logic.LoginLogic;
 import logic.TestLogic;
+import service.UserService;
 import view.menuBars.MenuBarAdmin;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class FxView {
     Label numberOfQuestion;
     ListView<Pane> QuestionList;
 
-    ArrayList<Question> Questions = new ArrayList<Question>();
+    ArrayList<PreQuestion> questions = new ArrayList<PreQuestion>();
 
     public FxView(Stage window) {
 
@@ -83,9 +84,9 @@ public class FxView {
         pane.getChildren().add(btn);
 
         btn.setOnAction(e->{
-            Question Question1 = new Question(QuestionList);
+            PreQuestion Question1 = new PreQuestion(QuestionList);
             Question1.oneAnswerQuestion();
-            Questions.add(Question1);
+            questions.add(Question1);
             setNumberOfQuestions();
         });
 
@@ -94,9 +95,9 @@ public class FxView {
         pane.getChildren().add(btn1);
 
         btn1.setOnAction(e->{
-            Question Question2 = new Question(QuestionList);
+            PreQuestion Question2 = new PreQuestion(QuestionList);
             Question2.manyAnswerQuestion();
-            Questions.add(Question2);
+            questions.add(Question2);
             setNumberOfQuestions();
         });
 
@@ -105,9 +106,9 @@ public class FxView {
         pane.getChildren().add(btn2);
 
         btn2.setOnAction(e->{
-            Question Question3 = new Question(QuestionList);
+            PreQuestion Question3 = new PreQuestion(QuestionList);
             Question3.rankedQuestion();
-            Questions.add(Question3);
+            questions.add(Question3);
             setNumberOfQuestions();
         });
 
@@ -136,8 +137,7 @@ public class FxView {
                 selfCorrect = 0;
             }
 
-            TestLogic.saveTest(QuestionList, titleTest.getText(), selfCorrect, 0, new User("Olle", "Olsson", "Ol",
-                    "olle@mail.com", "olle123", "Admin"));
+            TestLogic.saveTest(questions, titleTest.getText(), selfCorrect, 0, UserService.read(LoginLogic.getCurrId()));
         });
 
         BorderPane bp = new BorderPane();

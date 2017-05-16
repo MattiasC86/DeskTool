@@ -24,7 +24,6 @@ public class TestService {
 
         entityManager.close();
         emFactory.close();
-
     }
 
     public static void create(Test test, ArrayList<Question> questions, ArrayList<Answer> answers) {
