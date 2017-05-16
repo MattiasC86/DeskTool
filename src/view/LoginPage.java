@@ -46,7 +46,7 @@ public class LoginPage {
         Button btnLogin = new Button("Login");
 
         final Label errorMessage = new Label();
-        errorMessage.setFont(Font.font("Courier New", FontWeight.BOLD, 16));
+        errorMessage.setFont(Font.font("Courier New", FontWeight.BOLD, 11));
 
         //Adding Nodes to GridPane layout
         gridPane.add(lblUserName, 0, 0);
@@ -90,6 +90,7 @@ public class LoginPage {
         errorMessage.setId("errorMessageLogin");
         bp.setId("loginPane");
 
+
         btnLogin.setDefaultButton(true);
 
         //Adding BorderPane to the scene and loading CSS
@@ -106,7 +107,7 @@ public class LoginPage {
              Platform.runLater(() -> {
                   int statusCode = LoginLogic.loginValidation(txtUserName.getText(), pf.getText());
                   if (statusCode == 0) {
-                       errorMessage.setText("Wrong username or password!");
+                       errorMessage.setText("Invalid username or password!");
                   } else if (statusCode == 1){
                        //Elev start page
                        AdminFirstpage afp = new AdminFirstpage(window);
