@@ -107,7 +107,7 @@ public class FxView {
         btn2.setOnAction(e->{
             Question Question3 = new Question(QuestionList);
             Question3.rankedQuestion();
-            Questions.add(Question3);   
+            Questions.add(Question3);
             setNumberOfQuestions();
         });
 
