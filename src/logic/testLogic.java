@@ -49,7 +49,7 @@ public class TestLogic {
             // Creates Answer entities and puts in ArrayList answers
             for(int d = 0; d < element.CBox.getValue(); d++){
                 int correct;
-                if(element.answerBox[d].isSelected()){
+                if((element.getType() == 0) || (element.getType() == 1) && element.answerBox[d].isSelected()){
                     correct = 1;
                 }
                 else{
@@ -63,7 +63,6 @@ public class TestLogic {
         // Saves all Question and Answer objects to database
         QuestionService.create(questions);
         AnswerService.create(answers);
-
     }
 
 }
