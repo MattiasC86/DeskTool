@@ -1,8 +1,10 @@
 package logic;
 
+import entity.Answer;
 import entity.Question;
 import entity.Test;
 import entity.User;
+import service.AnswerService;
 import service.QuestionService;
 import service.TestService;
 import service.UserService;
@@ -19,20 +21,15 @@ public class TestLogic {
 
         int nrOfQuestions = list.size();
 
-        System.out.println("Title: " + title);
-        System.out.println("timeMin: " + timeMin);
-        System.out.println("nrOfQuestions/points: " + nrOfQuestions);
-        System.out.println("selfCorrecting: " + selfCorrecting);
-        System.out.println("User: " + user.getUserName());
-
+        // Saves Test entity to database
         Test test = new Test(title, timeMin, nrOfQuestions, selfCorrecting, user);
-
-
         TestService.create(test);
 
+        // ArrayLists for Question and Answer entities
         ArrayList<entity.Question> questions = new ArrayList<>();
+        ArrayList<entity.Answer> answers = new ArrayList<>();
 
-
+        // Creates Question entities and puts in ArrayList questions
         int i = 0;
         for(PreQuestion element: list) {
             System.out.println(i);
@@ -48,9 +45,25 @@ public class TestLogic {
             Question question = new Question(element.QuestionField.getText(), 1, questionType, i, "G", test);
             questions.add(question);
             i++;
+
+            // Creates Answer entities and puts in ArrayList answers
+            for(int d = 0; d < element.CBox.getValue(); d++){
+                int correct;
+                if(element.answerBox[d].isSelected()){
+                    correct = 1;
+                }
+                else{
+                    correct = 0;
+                }
+                Answer answer = new Answer(element.answerField[d].getText(), correct, d, question);
+                answers.add(answer);
+            }
         }
+
+        // Saves all Question and Answer objects to database
         QuestionService.create(questions);
-        //TestService.create(test, questions, answers);
+        AnswerService.create(answers);
+
     }
 
 }

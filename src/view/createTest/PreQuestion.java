@@ -13,10 +13,10 @@ import javafx.scene.layout.Pane;
 public class PreQuestion {
 
         Pane QuestionPane;
-        CheckBox[] answerBox;
-        TextField[] answerField;
+        public CheckBox[] answerBox;
+        public TextField[] answerField;
         Label[] answerLabel;
-        ComboBox<Integer> CBox;
+        public ComboBox<Integer> CBox;
         public TextField QuestionField;
 
         int questionType;
