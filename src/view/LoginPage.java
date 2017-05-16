@@ -12,6 +12,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import logic.LoginLogic;
 import view.homepage.AdminFirstpage;
+import view.homepage.StudentFirstpage;
+import view.homepage.TeacherFirstpage;
 
 /**
  * Created by Rasmus on 2017-05-04.
@@ -94,11 +96,11 @@ public class LoginPage {
                        errorMessage.setText("Fel användarnamn/lösenord!");
                   } else if (statusCode == 1){
                        //Elev start page
-                       AdminFirstpage afp = new AdminFirstpage(window);
+                       StudentFirstpage sfp = new StudentFirstpage(window);
                   }
                   else if (statusCode == 2){
                        //Lärare start page
-                       AdminFirstpage afp = new AdminFirstpage(window);
+                       TeacherFirstpage tfp = new TeacherFirstpage(window);
                   }
                   else if (statusCode == 3){
                        //Admin start page
