@@ -22,9 +22,9 @@ public class MenuBarAdmin {
 
         Menu menu1 = new Menu("Hem");
 
-        MenuItem home = new MenuItem("Hem");
+        //MenuItem home = new MenuItem("Hem");
 
-        menu1.getItems().addAll(home);
+        //menu1.getItems().addAll(home);
 
         //skapar en huvudmeny med namn arkiv
         Menu menu2 = new Menu("Arkiv");
@@ -53,8 +53,8 @@ public class MenuBarAdmin {
         //Skapar en huvudmeny med namn logga ut
         Menu menu4 = new Menu("Logga ut");
 
-        MenuItem logoutItem = new MenuItem("Logga ut");
-        menu4.getItems().addAll(logoutItem);
+        /*MenuItem logoutItem = new MenuItem("Logga ut");
+        menu4.getItems().addAll(logoutItem);*/
 
         menu2.getItems().addAll(createMenu, registerMenu);
 
@@ -67,8 +67,11 @@ public class MenuBarAdmin {
 
         pane.getChildren().addAll(menuAdmin);
 
+        MenuBarHelper.onAction(menu1);
+        MenuBarHelper.onAction(menu4);
+
         //ActionEvent för loginknappen.
-        logoutItem.setOnAction(e -> {
+        menu4.setOnAction(e -> {
             LoginPage lp = new LoginPage(window);
         });
 
@@ -78,7 +81,7 @@ public class MenuBarAdmin {
         });
 
         //ActionEvent för hemknappen.
-        home.setOnAction(e->{
+        menu1.setOnAction(e->{
             AdminFirstpage afp = new AdminFirstpage(window);
         });
 
