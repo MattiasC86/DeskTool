@@ -3,6 +3,8 @@ package view.menuBars;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.homepage.AdminFirstpage;
@@ -10,6 +12,9 @@ import view.LoginPage;
 import view.Settings;
 import view.createTest.FxView;
 import view.register.Register;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * Created by Rasmus on 2017-05-03.
@@ -19,11 +24,21 @@ public class MenuBarAdmin {
 
     public MenuBarAdmin(Pane pane, Stage window){
 
+        FileInputStream homeIcon = null;
+        try {
+            homeIcon = new FileInputStream("src/pic/homeIcon.png");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Image image = new Image(homeIcon);
+        ImageView homeIV = new ImageView(image);
+        homeIV.setFitHeight(15);
+        homeIV.setFitWidth(15);
+        homeIV.setPreserveRatio(true);
 
-        Menu menu1 = new Menu("Hem");
+        Menu menu1 = new Menu("", homeIV);
 
         //MenuItem home = new MenuItem("Hem");
-
         //menu1.getItems().addAll(home);
 
         //skapar en huvudmeny med namn arkiv
@@ -63,7 +78,7 @@ public class MenuBarAdmin {
         menu3.getItems().addAll(editUser);
 
         MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3, menu4);
-        menuAdmin.setPrefWidth(1600);
+        menuAdmin.setPrefWidth(Double.MAX_VALUE);
 
         pane.getChildren().addAll(menuAdmin);
 
