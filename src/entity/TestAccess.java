@@ -10,13 +10,11 @@ public class TestAccess {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int testAccessId;
 
-    @OneToOne
-    private
-    User user;
+    @ManyToOne
+    private User user;
 
-    @OneToOne
-    private
-    Test test;
+    @ManyToOne
+    private Test test;
 
     public TestAccess(User user, Test test) {
         this.setUser(user);
