@@ -12,23 +12,23 @@ import javafx.scene.layout.Pane;
 
 public class PreQuestion {
 
-        Pane QuestionPane;
-        public CheckBox[] answerBox;
-        public TextField[] answerField;
-        Label[] answerLabel;
-        public ComboBox<Integer> CBox;
-        public TextField QuestionField;
-        Label label;
+    Pane QuestionPane;
+    public CheckBox[] answerBox;
+    public TextField[] answerField;
+    Label[] answerLabel;
+    public ComboBox<Integer> CBox;
+    public TextField QuestionField;
+    public Label label;
 
-        int questionType;
+    int questionType;
 
-        public PreQuestion(ListView<Pane> List){
+    public PreQuestion(ListView<Pane> List){
 
             QuestionPane = new Pane();
             QuestionPane.setPrefHeight(200);
             QuestionPane.setStyle("-fx-border-color: black");
 
-            Label label = new Label();
+            label = new Label();
             label.setStyle("-fx-font-size: 14pt; -fx-underline: true");
             label.relocate(20, 5);
             QuestionPane.getChildren().add(label);
@@ -59,9 +59,6 @@ public class PreQuestion {
             List.scrollTo(List.getItems().size() - 1);
 
         }
-
-
-
 
     public void oneAnswerQuestion(){
 

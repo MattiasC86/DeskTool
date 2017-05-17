@@ -1,12 +1,9 @@
 package view.createTest;
 
+import entity.Question;
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -19,10 +16,11 @@ import java.util.ArrayList;
 
 public class FxView {
 
-
-
     Label numberOfQuestion;
     ListView<Pane> QuestionList;
+    TextField titleTest;
+    CheckBox box1;
+    TextField minutesField;
 
     ArrayList<PreQuestion> questions = new ArrayList<PreQuestion>();
 
@@ -35,7 +33,7 @@ public class FxView {
         labeltitel.relocate(600, 50);
         pane.getChildren().add(labeltitel);
 
-        TextField titleTest = new TextField();
+        titleTest = new TextField();
         titleTest.setPromptText("Titel");
         titleTest.setStyle("-fx-font-size: 14pt");
         titleTest.relocate(660, 50);
@@ -47,13 +45,13 @@ public class FxView {
         box.relocate(1000, 60);
         pane.getChildren().add(box);
 
-        CheckBox box1 = new CheckBox("Tidsbegränsning");
+        box1 = new CheckBox("Tidsbegränsning");
         box1.setScaleX(1.5);
         box1.setScaleY(1.5);
         box1.relocate(650, 140);
         pane.getChildren().add(box1);
 
-        TextField minutesField = new TextField();
+        minutesField = new TextField();
         minutesField.setPromptText("Minuter");
         minutesField.setStyle("-fx-font-size: 14pt");
         minutesField.relocate(840, 130);
@@ -70,16 +68,19 @@ public class FxView {
         });
 
         numberOfQuestion = new Label("Antal frågor: 0");
-        numberOfQuestion.setStyle("-fx-font-size: 20pt");
+        numberOfQuestion.setStyle("-fx-font-size: 20pt; -fx-border-width: 2pt");
         numberOfQuestion.relocate(1300, 50);
         pane.getChildren().add(numberOfQuestion);
 
         QuestionList = new ListView<Pane>();
+        QuestionList.setStyle("-fx-border-color: black");
         QuestionList.setPrefSize(1200, 600);
         QuestionList.relocate(300, 200);
         pane.getChildren().add(QuestionList);
 
-        Button btn = new Button("Ett svar fråga");
+        Button btn = new Button("Envalsfråga");
+        btn.setStyle("-fx-font-size: 14pt");
+        btn.setPrefWidth(200);
         btn.relocate(300, 50);
         pane.getChildren().add(btn);
 
@@ -90,18 +91,25 @@ public class FxView {
             setNumberOfQuestions();
         });
 
-        Button btn1 = new Button("Flera Svar fråga");
+        Button btn1 = new Button("Flervalsfråga");
+        btn1.setStyle("-fx-font-size: 14pt");
+        btn1.setPrefWidth(200);
         btn1.relocate(300, 100);
         pane.getChildren().add(btn1);
 
         btn1.setOnAction(e->{
+
+            messageBox("Hejsan");
+
             PreQuestion Question2 = new PreQuestion(QuestionList);
             Question2.manyAnswerQuestion();
             questions.add(Question2);
             setNumberOfQuestions();
         });
 
-        Button btn2 = new Button("Rangordnings fråga");
+        Button btn2 = new Button("Rangordningsfråga");
+        btn2.setStyle("-fx-font-size: 14pt");
+        btn2.setPrefWidth(200);
         btn2.relocate(300, 150);
         pane.getChildren().add(btn2);
 
@@ -113,10 +121,13 @@ public class FxView {
         });
 
         Button btn3 = new Button("Ta bort markerad fråga");
+        btn3.setStyle("-fx-font-size: 12pt");
+        btn3.setPrefWidth(200);
         btn3.relocate(1300, 150);
         pane.getChildren().add(btn3);
 
         btn3.setOnAction(e->{
+            questions.remove(QuestionList.getSelectionModel().getSelectedIndex());
             QuestionList.getItems().remove(QuestionList.getSelectionModel().getSelectedItem());
             setNumberOfQuestions();
         });
@@ -127,17 +138,18 @@ public class FxView {
         pane.getChildren().add(btnSaveTest);
 
         btnSaveTest.setOnAction(e->{
+            validateInput();
 
+            /*
             int selfCorrect;
-
             if(box.isSelected()){
                 selfCorrect = 1;
             }
             else{
                 selfCorrect = 0;
             }
-
             TestLogic.saveTest(questions, titleTest.getText(), selfCorrect, 0, UserService.read(LoginLogic.getCurrId()));
+            */
         });
 
         BorderPane bp = new BorderPane();
@@ -154,12 +166,63 @@ public class FxView {
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(scene);
         window.show();
+
+
+
     }
-
-
 
     private void setNumberOfQuestions(){
         numberOfQuestion.setText("Antal frågor: " + QuestionList.getItems().size());
+    }
+
+
+    private boolean validateInput(){
+        //Kolla titel är anvigen
+        if(titleTest.getText().isEmpty()){
+            messageBox("Ange titel!");
+            return false;
+        }
+        //Kolla om tid är angiver
+        if(box1.isSelected()){
+            if(minutesField.getText().isEmpty()){
+                messageBox("Ange antal minuter!");
+                return false;
+            }
+
+            if (minutesField.getText().matches("[0-9]+")) {
+                //ok
+            }
+            else{
+                messageBox("Antal minuter får bara bestå av siffror!");
+                return false;
+            }
+        }
+        //Kolla så provet inte är tomt
+        if(QuestionList.getItems().size() == 0){
+            messageBox("Provet måste minst ha en fråga!");
+            return false;
+        }
+
+        //Kolla frågor
+        for(int i = 0; i < QuestionList.getItems().size(); i++){
+
+
+
+        }
+
+
+
+
+        return true;
+    }
+
+
+    private void messageBox(String text){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information saknas");
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
     }
 
 }
