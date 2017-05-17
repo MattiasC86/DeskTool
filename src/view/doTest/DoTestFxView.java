@@ -4,6 +4,7 @@ package view.doTest;
         import java.util.ArrayList;
         import java.util.List;
 
+        import entity.User;
         import javafx.application.Application;
         import javafx.application.Platform;
         import javafx.beans.property.ObjectProperty;
@@ -11,22 +12,31 @@ package view.doTest;
         import javafx.collections.FXCollections;
         import javafx.collections.ObservableList;
         import javafx.scene.Scene;
-        import javafx.scene.control.CheckBox;
-        import javafx.scene.control.Label;
-        import javafx.scene.control.ListCell;
-        import javafx.scene.control.ListView;
+        import javafx.scene.control.*;
         import javafx.scene.input.ClipboardContent;
         import javafx.scene.input.DragEvent;
         import javafx.scene.input.Dragboard;
         import javafx.scene.input.TransferMode;
         import javafx.scene.layout.Pane;
         import javafx.stage.Stage;
+        import logic.LoginLogic;
+        import service.UserService;
 
 public class DoTestFxView extends Application {
+    User user = UserService.read(LoginLogic.getCurrId());
 
     public static void main(String[] args) {
         launch();
     }
+
+
+    ObservableList<String> availableTests =
+            FXCollections.observableArrayList(
+                    "Option 1",
+                    "Option 2",
+                    "Option 3"
+            );
+    final ComboBox comboBox = new ComboBox(availableTests);
 
     ListView<Pane> TestList;
 

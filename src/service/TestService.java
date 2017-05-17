@@ -76,20 +76,38 @@ public class TestService {
     public static void main(String[] args) {
 
         User user1 = new User("Mattias", "Crusell", "Crusse", "crusell@mail.com", "goteborg", "Admin");
+        User user2 = new User("Olof", "Olofsson", "Olofmeister", "olof@meister.com", "olof", "Student");
+
 
         Test test1 = new Test("Djungeltest", 20, 100, 1, user1);
+        Test test2 = new Test("Newton Quiz", 15, 5, 1, user1);
 
-        Question question1 = new Question("Hur många bor det i skogen?", 2, "Single", 1, "G", test1);
-        Question question2 = new Question("Vad är en björn?", 2, "Multiple", 2, "G", test1);
+
+        Question question1 = new Question("Hur många bor det i skogen?", 1, "Single", 0, "G", test1);
+        Question question2 = new Question("Vad är en björn?", 1, "Multiple", 1, "G", test1);
+        Question question3 = new Question("Vad är en Newton?", 1, "Single", 0, "G", test2);
         ArrayList<Question> questions = new ArrayList<Question>();
         questions.add(question1);
         questions.add(question2);
+        questions.add(question3);
 
-        Answer answer1 = new Answer("20 personer", 5, 1, question1);
+        Answer answer1 = new Answer("20 personer", 1, 0, question1);
+        Answer answer2 = new Answer("En yrkeshögskola", 1, 0, question1);
+        Answer answer3 = new Answer("En förskola", 0, 1, question3);
         ArrayList<Answer> answers = new ArrayList<Answer>();
         answers.add(answer1);
+        answers.add(answer2);
+        answers.add(answer3);
+
 
         UserService.create(user1);
-        create(test1, questions, answers);
+        UserService.create(user2);
+        create(test1);
+        create(test2);
+        QuestionService.create(questions);
+        AnswerService.create(answers);
+        TestAccessService.create(user1, test1);
+        TestAccessService.create(user1, test2);
+        TestAccessService.create(user2, test2);
     }
 }

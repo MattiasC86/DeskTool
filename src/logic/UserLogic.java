@@ -1,6 +1,15 @@
 package logic;
 
+import entity.Test;
+import entity.User;
 import service.UserService;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserLogic {
 
@@ -19,6 +28,17 @@ public class UserLogic {
         this.password = password;
         this.email = email;
         this.role = role;
+    }
+
+    public static List<Test> getAvailableTests (User user) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        Query query = entityManager.createQuery( "Select t from Test t inner join TestAccess ta on ta.test.testId = " + user.getUserId());
+
+        List<Test> testList = (List<Test>)query.getResultList();
+
+        return testList;
     }
 
     public String getFirstName() {
