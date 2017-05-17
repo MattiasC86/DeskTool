@@ -18,6 +18,7 @@ public class PreQuestion {
         Label[] answerLabel;
         public ComboBox<Integer> CBox;
         public TextField QuestionField;
+        Label label;
 
         int questionType;
 
@@ -27,7 +28,7 @@ public class PreQuestion {
             QuestionPane.setPrefHeight(200);
             QuestionPane.setStyle("-fx-border-color: black");
 
-            Label label = new Label("Ett svar fråga");
+            Label label = new Label();
             label.setStyle("-fx-font-size: 14pt; -fx-underline: true");
             label.relocate(20, 5);
             QuestionPane.getChildren().add(label);
@@ -64,6 +65,8 @@ public class PreQuestion {
 
     public void oneAnswerQuestion(){
 
+        label.setText("Envalsfråga");
+
         answerBox = new CheckBox[6];
         answerField = new TextField[6];
 
@@ -94,6 +97,9 @@ public class PreQuestion {
     }
 
     public void manyAnswerQuestion(){
+
+        label.setText("Flervalsfråga");
+
         answerBox = new CheckBox[6];
         answerField = new TextField[6];
 
@@ -115,6 +121,8 @@ public class PreQuestion {
     }
 
     public void rankedQuestion(){
+
+        label.setText("Rangordningsfråga");
 
         CBox.setOnAction(e->{
             numberOfAnswersRanked(CBox.getValue());
