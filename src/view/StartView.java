@@ -13,6 +13,7 @@ public class StartView extends Application{
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
+        window.setResizable(false);
         LoginPage startView = new LoginPage(window);
 
 
