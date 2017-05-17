@@ -4,6 +4,7 @@ package view.doTest;
         import java.util.ArrayList;
         import java.util.List;
 
+        import entity.Test;
         import entity.User;
         import javafx.application.Application;
         import javafx.application.Platform;
@@ -20,30 +21,36 @@ package view.doTest;
         import javafx.scene.layout.Pane;
         import javafx.stage.Stage;
         import logic.LoginLogic;
+        import logic.UserLogic;
         import service.UserService;
 
 public class DoTestFxView extends Application {
-    User user = UserService.read(LoginLogic.getCurrId());
 
     public static void main(String[] args) {
         launch();
     }
 
-
-    ObservableList<String> availableTests =
-            FXCollections.observableArrayList(
-                    "Option 1",
-                    "Option 2",
-                    "Option 3"
-            );
-    final ComboBox comboBox = new ComboBox(availableTests);
-
     ListView<Pane> TestList;
 
     @Override
     public void start(Stage PrimaryStage) throws Exception {
-
         Pane pane = new Pane();
+
+        User user = UserService.read(1);
+        List<Test> tests = UserLogic.getAvailableTests(user);
+
+        List<String> testTitles = new ArrayList<>();
+        for(Test element : tests) {
+            testTitles.add(element.gettTitle());
+        }
+
+        ObservableList<String> availableTests =
+                FXCollections.observableArrayList(
+                        testTitles
+                );
+        final ComboBox testBox = new ComboBox(availableTests);
+
+        pane.getChildren().add(testBox);
 
         Label labeltitel = new Label("Prov:");
         labeltitel.setStyle("-fx-font-size: 40pt");

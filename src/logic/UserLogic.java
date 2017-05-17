@@ -34,7 +34,7 @@ public class UserLogic {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
-        Query query = entityManager.createQuery( "Select t from Test t inner join TestAccess ta on ta.test.testId = " + user.getUserId());
+        Query query = entityManager.createQuery( "Select t from Test t inner join TestAccess ta on ta.test.testId = t.testId WHERE ta.user.userId = " + user.getUserId());
 
         List<Test> testList = (List<Test>)query.getResultList();
 
