@@ -96,14 +96,14 @@ public class Settings {
         buttonChangeEmail.setOnAction(e->{
             UserService.update(user.getUserId(), "email", changeEmail.getText());
             user.setEmail(changeEmail.getText());
-            labelEmail.setText("Email: " + user.getEmail());
+            currentEmail.setText(user.getEmail());
         });
 
         // Password is updated for user
         buttonChangePassword.setOnAction(e->{
             UserService.update(user.getUserId(), "password", changePassword.getText());
             user.setPassword(changePassword.getText());
-            labelPassword.setText("Lösenord: " + user.getPassword());
+            currentPassword.setText(user.getPassword());
         });
 
     }
