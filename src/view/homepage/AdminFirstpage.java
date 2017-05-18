@@ -27,7 +27,6 @@ public class AdminFirstpage {
         bp.setTop(pane);
         bp.setId("firstpagePane");
 
-
         Label l1 = new Label("Välkommen till Newtons Provportal");
         l1.setStyle("-fx-font-size: 24pt");
         l1.relocate(100,100);
