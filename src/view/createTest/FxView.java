@@ -139,8 +139,7 @@ public class FxView {
 
         btnSaveTest.setOnAction(e->{
             validateInput();
-
-            /*
+            
             int selfCorrect;
             if(box.isSelected()){
                 selfCorrect = 1;
@@ -149,7 +148,7 @@ public class FxView {
                 selfCorrect = 0;
             }
             TestLogic.saveTest(questions, titleTest.getText(), selfCorrect, 0, UserService.read(LoginLogic.getCurrId()));
-            */
+
         });
 
         BorderPane bp = new BorderPane();
@@ -204,15 +203,72 @@ public class FxView {
         }
 
         //Kolla frågor
-        for(int i = 0; i < QuestionList.getItems().size(); i++){
+        for(int i = 0; i < questions.size(); i++){
+
+            if(questions.get(i).QuestionField.getText().isEmpty()){
+                messageBox("Ange fråga nr: " + (i + 1));
+                return false;
+            }
 
 
+            //Envalsfråga bara 1 alternativ får vara rätt
+            if(questions.get(i).getType() == 0){
+                int answers = questions.get(i).CBox.getValue();
+                int correctAnswerCount = 0;
 
+                for(int d = 0; d < answers; d++){
+                    if(questions.get(i).answerField[d].getText().isEmpty()){
+                        messageBox("Ange svar fråga: " + (i + 1) + " Rad: " + (d + 1));
+                        return false;
+                    }
+                    if(questions.get(i).answerBox[d].isSelected()) {
+                        correctAnswerCount++;
+                    }
+                }
+                if (correctAnswerCount == 1) {
+                    //Ok
+                }
+                else{
+                    messageBox("Markera rätt svar fråga: " + (i + 1));
+                    return false;
+                }
+            }
+            //Flervalsfråga
+            else if (questions.get(i).getType() == 1){
+
+                int answers = questions.get(i).CBox.getValue();
+                int correctAnswerCount = 0;
+
+                for(int d = 0; d < answers; d++){
+                    if(questions.get(i).answerField[d].getText().isEmpty()){
+                        messageBox("Ange svar fråga: " + (i + 1) + " Rad: " + (d + 1));
+                        return false;
+                    }
+                    if(questions.get(i).answerBox[d].isSelected()) {
+                        correctAnswerCount++;
+                    }
+                }
+
+                if (correctAnswerCount >= 1) {
+                    //Ok
+                }
+                else{
+                    messageBox("Markera minst ett rätt svar fråga: " + (i + 1));
+                    return false;
+                }
+            }
+            //Rangordningsfråga
+            else if (questions.get(i).getType() == 2) {
+                int answers = questions.get(i).CBox.getValue();
+
+                for (int d = 0; d < answers; d++) {
+                    if (questions.get(i).answerField[d].getText().isEmpty()) {
+                        messageBox("Ange svar fråga: " + (i + 1) + " Rad: " + (d + 1));
+                        return false;
+                    }
+                }
+            }
         }
-
-
-
-
         return true;
     }
 

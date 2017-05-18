@@ -57,7 +57,6 @@ public class PreQuestion {
 
             List.getItems().add(QuestionPane);
             List.scrollTo(List.getItems().size() - 1);
-
         }
 
     public void oneAnswerQuestion(){
