@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.doTest.DoTestFxView;
+import view.doTest.SelectTestView;
 import view.homepage.AdminFirstpage;
 import view.LoginPage;
 import view.Settings;
@@ -100,8 +101,7 @@ public class MenuBarTeacher {
                 });
 
                 doTest.setOnAction(e -> {
-                       //DoTestFxView dtfx = new DoTestFxView(window);
-
+                        SelectTestView stv = new SelectTestView(window);
                 });
 
         }
