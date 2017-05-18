@@ -102,10 +102,12 @@ public class SelectTestView {
         window.setScene(scene);
         window.show();
 
+        // Redirects user to DoTestFXView
         startTest.setOnAction(e->{
-            //ActionEvent för startknappen!
+
         });
 
+        // Shows all info on selected test
         testBox.setOnAction(e->{
             loadData();
             currentTestName.setText(getSelectedTest().gettTitle());
@@ -118,6 +120,7 @@ public class SelectTestView {
 
     }
 
+    // Loads all data from db on selected test
     public void loadData() {
         testBoxIndex = testBox.getSelectionModel().getSelectedIndex();
         // Chosen Test is saved as selectedTest
