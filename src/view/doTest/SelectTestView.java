@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logic.LoginLogic;
 import logic.UserLogic;
 import service.AnswerService;
 import service.QuestionService;
@@ -24,12 +25,16 @@ import java.util.List;
  * Created by matti on 2017-05-18.
  */
 public class SelectTestView {
-    ComboBox testBox;
-    List<Test> tests;
-    int testBoxIndex;
-    Test selectedTest;
-    List<Question> testQuestions;
-    List<List> testAnswers = new ArrayList<>();
+    User user;
+
+    private ComboBox testBox;
+    private List<Test> tests;
+    private int testBoxIndex;
+
+    //These variables have getters and will hold the selected test, questions and answers
+    private Test selectedTest;
+    private List<Question> testQuestions;
+    private List<List> testAnswers = new ArrayList<>();
 
     public SelectTestView(Stage window) {
 
@@ -39,8 +44,7 @@ public class SelectTestView {
 
         MenuBarAdmin x = new MenuBarAdmin(pane, window);
 
-        //------GETTING TEST, QUESTIONS AND ANSWERS FROM DB---------
-        User user = UserService.read(1);
+        user = UserService.read(LoginLogic.getCurrId());
         tests = UserLogic.getAvailableTests(user);
         List<String> testTitles = new ArrayList<>();
         for(Test element : tests) {
@@ -53,7 +57,7 @@ public class SelectTestView {
         testBox = new ComboBox(availableTests);
 
         Label chooseTest = new Label("Välj prov:");
-        Label testName = new Label("Prov:");
+        Label testName = new Label("Valt prov:");
         Label teacherName = new Label("Lärare:");
         Label timeLimit = new Label("Tidsgräns:");
         Label totalQuestion = new Label("Antal frågor:");
@@ -104,11 +108,11 @@ public class SelectTestView {
 
         testBox.setOnAction(e->{
             loadData();
-            currentTestName.setText(selectedTest.gettTitle());
-            currentTeacherName.setText(selectedTest.getUser().getFirstName() + " " + selectedTest.getUser().getLastName());
-            currentTimeLimit.setText(Integer.toString(selectedTest.gettTimeMin()));
-            currentTotalQuestion.setText(Integer.toString(testQuestions.size()));
-            currentMaxPoints.setText(Integer.toString(selectedTest.gettMaxPoints()));
+            currentTestName.setText(getSelectedTest().gettTitle());
+            currentTeacherName.setText(getSelectedTest().getUser().getFirstName() + " " + getSelectedTest().getUser().getLastName());
+            currentTimeLimit.setText(Integer.toString(getSelectedTest().gettTimeMin()) + " minuter");
+            currentTotalQuestion.setText(Integer.toString(getTestQuestions().size()));
+            currentMaxPoints.setText(Integer.toString(getSelectedTest().gettMaxPoints()));
         });
 
 
@@ -117,17 +121,40 @@ public class SelectTestView {
     public void loadData() {
         testBoxIndex = testBox.getSelectionModel().getSelectedIndex();
         // Chosen Test is saved as selectedTest
-        selectedTest = tests.get(testBoxIndex);
+        setSelectedTest(tests.get(testBoxIndex));
 
         // Questions are saved to testQuestions List
-        testQuestions = QuestionService.read(selectedTest.getTestId());
+        setTestQuestions(QuestionService.read(getSelectedTest().getTestId()));
 
         // testAnswers[0] will contain a List with all answers for 1st Question, testAnswers[1] all answers for 2nd Question etc.
-        testAnswers = new ArrayList<>();
-        for(Question q : testQuestions) {
-            testAnswers.add(AnswerService.read(q.getQuestionId()));
+        setTestAnswers(new ArrayList<>());
+        for(Question q : getTestQuestions()) {
+            getTestAnswers().add(AnswerService.read(q.getQuestionId()));
         }
     }
 
 
+    public Test getSelectedTest() {
+        return selectedTest;
+    }
+
+    public void setSelectedTest(Test selectedTest) {
+        this.selectedTest = selectedTest;
+    }
+
+    public List<Question> getTestQuestions() {
+        return testQuestions;
+    }
+
+    public void setTestQuestions(List<Question> testQuestions) {
+        this.testQuestions = testQuestions;
+    }
+
+    public List<List> getTestAnswers() {
+        return testAnswers;
+    }
+
+    public void setTestAnswers(List<List> testAnswers) {
+        this.testAnswers = testAnswers;
+    }
 }
