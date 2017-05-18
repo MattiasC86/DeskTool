@@ -10,10 +10,11 @@
     -fx-background-radius: 30, 30, 29, 28;
     -fx-padding: 3px 10px 3px 10px;
     -fx-text-fill: #ede7f3;
-    -fx-background-color: linear-gradient(#623318, #b35612 );
+    -fx-background-color: linear-gradient(#744417, #ff7717 );
 }
 #btnRegister{
-    -fx-background-color: linear-gradient(#623318, #b35612 );
+    -fx-background-color: linear-gradient(#834f19, #ff7717);
+    -fx-text-fill: #f9f3ff ;
 }
 
 #firstpagePane{
@@ -58,5 +59,5 @@
 }
 
 #registerBackground{
-    -fx-background-color: linear-gradient(#623318, #b35612 );
+    -fx-background-color: linear-gradient(#aa5515, #ff7717);
 }

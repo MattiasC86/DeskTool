@@ -72,8 +72,8 @@ public class Register {
         textFieldPassword.relocate(500,300);
         textFieldPassword.setPrefWidth(250);
 
-        registerButton.relocate(500,350);
-        privilege.relocate(650,350);
+        registerButton.relocate(650,350);
+        privilege.relocate(500,350);
         verifyText.relocate(780,460);
 
         DropShadow dropShadow = new DropShadow();

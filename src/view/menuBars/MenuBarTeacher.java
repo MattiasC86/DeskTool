@@ -5,6 +5,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.doTest.DoTestFxView;
@@ -76,10 +77,14 @@ public class MenuBarTeacher {
 
                 menu3.getItems().addAll(editUser);
 
-                MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3, menu4);
-                menuAdmin.setPrefWidth(1600);
+                MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3);
 
-                pane.getChildren().addAll(menuAdmin);
+                MenuBar menuAdmin2 = new MenuBar(menu4);
+                menuAdmin.setPrefWidth(1500); //Double.MAX_VALUE
+
+                HBox hb = new HBox();
+                hb.getChildren().addAll(menuAdmin, menuAdmin2);
+                pane.getChildren().addAll(hb);
 
                 //ActionEvent för loginknappen.
                 logoutItem.setOnAction(e -> {
