@@ -139,7 +139,7 @@ public class FxView {
 
         btnSaveTest.setOnAction(e->{
             validateInput();
-            
+
             int selfCorrect;
             if(box.isSelected()){
                 selfCorrect = 1;

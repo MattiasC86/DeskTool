@@ -19,11 +19,6 @@ public class AdminFirstpage {
 
         Pane pane = new Pane();
 
-        Label l1 = new Label("Välkommen till Newtons Provportal");
-        l1.setStyle("-fx-font-size: 24pt");
-        l1.relocate(100,100);
-
-        pane.getChildren().add(l1);
 
 
 
