@@ -108,7 +108,7 @@ public class MenuBarAdmin {
         });
 
         doTest.setOnAction(e->{
-            DoTestFxView dtfx = new DoTestFxView(window);
+            //DoTestFxView dtfx = new DoTestFxView(window);
         });
 
     }
