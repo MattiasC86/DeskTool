@@ -46,6 +46,8 @@ public class SelectTestView {
 
         user = UserService.read(LoginLogic.getCurrId());
         tests = UserLogic.getAvailableTests(user);
+
+        // Fills testBox with all tests available to user
         List<String> testTitles = new ArrayList<>();
         for(Test element : tests) {
             testTitles.add(element.gettTitle());
@@ -116,8 +118,6 @@ public class SelectTestView {
             currentTotalQuestion.setText(Integer.toString(getTestQuestions().size()));
             currentMaxPoints.setText(Integer.toString(getSelectedTest().gettMaxPoints()));
         });
-
-
     }
 
     // Loads all data from db on selected test
