@@ -75,6 +75,7 @@ public class Register {
         registerButton.relocate(650,350);
         privilege.relocate(500,350);
         verifyText.relocate(780,460);
+        emptyFields.relocate(780,460);
 
         DropShadow dropShadow = new DropShadow();
         dropShadow.setOffsetX(5);
@@ -88,7 +89,7 @@ public class Register {
 
 
         gp.getChildren().addAll(text,firstname, lastname, username, email, password, textFieldFirstname, textFieldLastname,
-                textFieldUsername, textFieldEmail, textFieldPassword, registerButton, privilege, verifyText);
+                textFieldUsername, textFieldEmail, textFieldPassword, registerButton, privilege);
 
 
         bp.setCenter(gp);
@@ -98,12 +99,12 @@ public class Register {
         bp.setPrefWidth(1200);
         bp.setPrefHeight(500);
 
-        mainPane.getChildren().addAll(pane,bp,verifyText);
+        mainPane.getChildren().addAll(pane,bp,verifyText,emptyFields);
 
         textFieldUsername.setId("errorPromt");
         textFieldEmail.setId("errorPromt");
         verifyText.setId("verifyText");
-        gp.setId("root");
+        gp.setId("rootRegister");
         firstname.setId("registerLabels");
         lastname.setId("registerLabels");
         username.setId("registerLabels");
@@ -112,6 +113,8 @@ public class Register {
         mainPane.setId("registerBackground");
         registerButton.setId("btnRegister");
         emptyFields.setId("emptyFields");
+
+
 
 
 
@@ -129,14 +132,16 @@ public class Register {
                 case 0:
                     //Om något fält är tomt
                     verifyText.setText("");
-                    emptyFields.setText("Alla fält är inte ifyllda!");
+                    emptyFields.setText("Fyll i alla tomma fält!");
                     break;
 
                 case 1:
                     //username upptagen
                     textFieldUsername.setText("");
                     textFieldUsername.setPromptText("Upptaget användarnamn!");
+                    emptyFields.setText("");
                     verifyText.setText("");
+
 
                     break;
                 case 2:
@@ -144,6 +149,7 @@ public class Register {
                     textFieldEmail.setText("");
                     textFieldEmail.setPromptText("Upptagen email!");
                     verifyText.setText("");
+                    emptyFields.setText("");
                     break;
                 case 3:
                     //användaren har skapats
