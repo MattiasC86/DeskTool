@@ -1,9 +1,6 @@
 package service;
 
-import entity.Answer;
-import entity.Question;
-import entity.Test;
-import entity.User;
+import entity.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -115,5 +112,7 @@ public class TestService {
         TestAccessService.create(user1, test1);
         TestAccessService.create(user1, test2);
         TestAccessService.create(user2, test2);
+
+        AnsweredTestService.create(new AnsweredTest(false, false, 5, 400, "G", user1, test2));
     }
 }

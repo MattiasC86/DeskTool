@@ -23,12 +23,14 @@ public class AnsweredTest {
     private
     Test test;
 
-    public AnsweredTest(boolean aTCorrected, boolean aTShowResult, int aTPoints, int aTTimeSec, String aTGrade) {
+    public AnsweredTest(boolean aTCorrected, boolean aTShowResult, int aTPoints, int aTTimeSec, String aTGrade, User user, Test test) {
         this.setaTCorrected(aTCorrected);
         this.setaTShowResult(aTShowResult);
         this.setaTPoints(aTPoints);
         this.setaTTimeSec(aTTimeSec);
         this.setaTGrade(aTGrade);
+        this.user = user;
+        this.test = test;
     }
 
     public AnsweredTest(){}

@@ -38,7 +38,55 @@ public class UserLogic {
 
         List<Test> testList = (List<Test>)query.getResultList();
 
+        entityManager.close();
+        emFactory.close();
+
+        List<Test> atList = checkIfAnswered(user);
+
+        System.out.println("KOLLA HÄR!!!! TESTLIST");
+        for(Test t : testList) {
+            System.out.println(t.gettTitle());
+        }
+
+        System.out.println("KOLLA HÄR!!!! ATTESTLIST");
+        for(Test at : atList) {
+            System.out.println(at.gettTitle());
+        }
+
+        List<Test> removeList = new ArrayList<>();
+
+        for(Test test : testList) {
+            for(Test aTest : atList) {
+                if(test.getTestId() == aTest.getTestId()) {
+                    System.out.println("Hittade matchning!!! " + test.gettTitle());
+                    removeList.add(test);
+                }
+            }
+        }
+
+        for(Test rTest : removeList) {
+            testList.remove(rTest);
+        }
+
         return testList;
+    }
+
+    public static List<Test> checkIfAnswered (User user) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        Query query = entityManager.createQuery( "Select t from Test t inner join AnsweredTest at on at.test.testId = t.testId WHERE at.user.userId = " + user.getUserId());
+
+        List<Test> atList = (List<Test>)query.getResultList();
+
+        for(Test at : atList) {
+            System.out.println(at.gettTitle());
+        }
+
+        entityManager.close();
+        emFactory.close();
+
+        return atList;
     }
 
     public String getFirstName() {

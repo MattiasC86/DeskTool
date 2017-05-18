@@ -34,7 +34,7 @@ public class SelectTestView {
     //These variables have getters and will hold the selected test, questions and answers
     private Test selectedTest;
     private List<Question> testQuestions;
-    private List<List> testAnswers = new ArrayList<>();
+    private List<List> testAnswers;
 
     public SelectTestView(Stage window) {
 
