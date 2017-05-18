@@ -29,16 +29,14 @@ package view.doTest;
         import service.TestService;
         import service.UserService;
 
-public class DoTestFxView extends Application {
+public class DoTestFxView {
 
-    public static void main(String[] args) {
-        launch();
-    }
 
     ListView<Pane> TestList;
 
-    @Override
-    public void start(Stage PrimaryStage) throws Exception {
+    public DoTestFxView(Stage window) {
+
+
         Pane pane = new Pane();
 
         Label labeltitel = new Label("Prov:");
@@ -51,12 +49,12 @@ public class DoTestFxView extends Application {
         TestList.relocate(300, 200);
         pane.getChildren().add(TestList);
 
-        PrimaryStage.setTitle("Göra test");
-        PrimaryStage.setOnCloseRequest(e -> Platform.exit());
-        Scene scene = new Scene(pane, 800, 600);
-        PrimaryStage.setMaximized(true);
-        PrimaryStage.setScene(scene);
-        PrimaryStage.show();
+        window.setTitle("Göra test");
+        window.setOnCloseRequest(e -> Platform.exit());
+        Scene scene = new Scene(pane, 1600, 900);
+        window.setMaximized(true);
+        window.setScene(scene);
+        window.show();
 
         addOneQuestion(6);
         addManyQuestion(4);

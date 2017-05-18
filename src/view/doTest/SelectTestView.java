@@ -106,7 +106,7 @@ public class SelectTestView {
 
         // Redirects user to DoTestFXView
         startTest.setOnAction(e->{
-
+            DoTestFxView dtfv = new DoTestFxView(window);
         });
 
         // Shows all info on selected test
