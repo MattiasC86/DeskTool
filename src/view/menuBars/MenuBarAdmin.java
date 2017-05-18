@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.doTest.DoTestFxView;
 import view.homepage.AdminFirstpage;
 import view.LoginPage;
 import view.Settings;
@@ -104,6 +105,10 @@ public class MenuBarAdmin {
 
         editUser.setOnAction(e->{
             Settings st = new Settings(window);
+        });
+
+        doTest.setOnAction(e->{
+            DoTestFxView dtfx = new DoTestFxView(window);
         });
 
     }
