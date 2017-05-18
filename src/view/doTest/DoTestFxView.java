@@ -40,7 +40,7 @@ public class DoTestFxView extends Application {
         Pane pane = new Pane();
 
         //------GETTING TEST, QUESTIONS AND ANSWERS FROM DB---------
-        /*User user = UserService.read(1);
+        User user = UserService.read(1);
         List<Test> tests = UserLogic.getAvailableTests(user);
         List<String> testTitles = new ArrayList<>();
         for(Test element : tests) {
@@ -55,13 +55,13 @@ public class DoTestFxView extends Application {
         int testBoxIndex = testBox.getSelectionModel().getSelectedIndex();
 
         // Chosen Test is saved as selectedTest
-        Test selectedTest = tests.get(testBoxIndex);
+        //Test selectedTest = tests.get(testBoxIndex);
 
         // Questions are saved to testQuestions List
-        List<Question> testQuestions = QuestionService.read(selectedTest.getTestId());
+        //List<Question> testQuestions = QuestionService.read(selectedTest.getTestId());
 
         // testAnswers[0] will contain a List with all answers for 1st Question, testAnswers[1] all answers for 2nd Question etc.
-        List<List> testAnswers = new ArrayList<>();
+       /* List<List> testAnswers = new ArrayList<>();
         for(Question q : testQuestions) {
             testAnswers.add(AnswerService.read(q.getQuestionId()));
         }*/
