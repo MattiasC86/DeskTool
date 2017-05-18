@@ -24,7 +24,7 @@ public class MenuBarAdmin {
 
     public MenuBarAdmin(Pane pane, Stage window){
 
-        FileInputStream homeIcon = null;
+        /*FileInputStream homeIcon = null;
         try {
             homeIcon = new FileInputStream("src/pic/homeIcon.png");
         } catch (FileNotFoundException e) {
@@ -32,11 +32,11 @@ public class MenuBarAdmin {
         }
         Image image = new Image(homeIcon);
         ImageView homeIV = new ImageView(image);
-        homeIV.setFitHeight(15);
-        homeIV.setFitWidth(15);
-        homeIV.setPreserveRatio(true);
+        //homeIV.setFitHeight(15);
+        //homeIV.setFitWidth(15);
+        //homeIV.setPreserveRatio(true);*/
 
-        Menu menu1 = new Menu("", homeIV);
+        Menu menu1 = new Menu("hem");
 
         //MenuItem home = new MenuItem("Hem");
         //menu1.getItems().addAll(home);
@@ -78,7 +78,7 @@ public class MenuBarAdmin {
         menu3.getItems().addAll(editUser);
 
         MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3, menu4);
-        menuAdmin.setPrefWidth(Double.MAX_VALUE);
+        menuAdmin.setPrefWidth(1600); //Double.MAX_VALUE
 
         pane.getChildren().addAll(menuAdmin);
 

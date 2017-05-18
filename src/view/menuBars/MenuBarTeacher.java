@@ -3,12 +3,17 @@ package view.menuBars;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.homepage.AdminFirstpage;
 import view.LoginPage;
 import view.Settings;
 import view.createTest.FxView;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * Created by Rasmus on 2017-05-11.
@@ -17,6 +22,17 @@ public class MenuBarTeacher {
 
         public MenuBarTeacher(Pane pane, Stage window){
 
+                /*FileInputStream homeIcon = null;
+                try {
+                        homeIcon = new FileInputStream("src/pic/homeIcon.png");
+                } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                }
+                Image image = new Image(homeIcon);
+                ImageView homeIV = new ImageView(image);
+                homeIV.setFitHeight(15);
+                homeIV.setFitWidth(15);
+                homeIV.setPreserveRatio(true);*/
 
         Menu menu1 = new Menu("Hem");
 
