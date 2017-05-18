@@ -101,6 +101,7 @@ public class MenuBarTeacher {
 
                 doTest.setOnAction(e -> {
                        // DoTestFxView dtfx = new DoTestFxView(window);
+
                 });
 
         }
