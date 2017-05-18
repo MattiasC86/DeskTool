@@ -75,13 +75,12 @@ public class LoginPage {
         btnLogin.setId("btnLogin");
         errorMessage.setId("errorMessageLogin");
         bp.setId("loginPane");
-
-
         btnLogin.setDefaultButton(true);
 
         //Adding BorderPane to the scene and loading CSS
         Scene scene = new Scene(bp,500,250);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
+        window.sizeToScene();
         window.setTitle("Newton");
         window.setScene(scene);
         window.centerOnScreen();

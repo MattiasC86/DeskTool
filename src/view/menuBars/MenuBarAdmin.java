@@ -36,10 +36,7 @@ public class MenuBarAdmin {
         //homeIV.setFitWidth(15);
         //homeIV.setPreserveRatio(true);*/
 
-        Menu menu1 = new Menu("hem");
-
-        //MenuItem home = new MenuItem("Hem");
-        //menu1.getItems().addAll(home);
+        Menu menu1 = new Menu("Hem");
 
         //skapar en huvudmeny med namn arkiv
         Menu menu2 = new Menu("Arkiv");
