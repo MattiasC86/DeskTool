@@ -4,6 +4,7 @@ package view.doTest;
         import java.util.ArrayList;
         import java.util.List;
 
+        import entity.Answer;
         import entity.Question;
         import entity.Test;
         import entity.User;
@@ -25,6 +26,7 @@ package view.doTest;
         import logic.UserLogic;
         import service.AnswerService;
         import service.QuestionService;
+        import service.TestService;
         import service.UserService;
 
 public class DoTestFxView extends Application {
@@ -38,33 +40,6 @@ public class DoTestFxView extends Application {
     @Override
     public void start(Stage PrimaryStage) throws Exception {
         Pane pane = new Pane();
-
-        //------GETTING TEST, QUESTIONS AND ANSWERS FROM DB---------
-        User user = UserService.read(1);
-        List<Test> tests = UserLogic.getAvailableTests(user);
-        List<String> testTitles = new ArrayList<>();
-        for(Test element : tests) {
-            testTitles.add(element.gettTitle());
-        }
-        ObservableList<String> availableTests =
-                FXCollections.observableArrayList(
-                        testTitles
-                );
-        final ComboBox testBox = new ComboBox(availableTests);
-        pane.getChildren().add(testBox);
-        int testBoxIndex = testBox.getSelectionModel().getSelectedIndex();
-
-        // Chosen Test is saved as selectedTest
-        //Test selectedTest = tests.get(testBoxIndex);
-
-        // Questions are saved to testQuestions List
-        //List<Question> testQuestions = QuestionService.read(selectedTest.getTestId());
-
-        // testAnswers[0] will contain a List with all answers for 1st Question, testAnswers[1] all answers for 2nd Question etc.
-       /* List<List> testAnswers = new ArrayList<>();
-        for(Question q : testQuestions) {
-            testAnswers.add(AnswerService.read(q.getQuestionId()));
-        }*/
 
         Label labeltitel = new Label("Prov:");
         labeltitel.setStyle("-fx-font-size: 40pt");

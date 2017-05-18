@@ -92,12 +92,18 @@ public class TestService {
         questions.add(question3);
 
         Answer answer1 = new Answer("20 personer", 1, 0, question1);
-        Answer answer2 = new Answer("En yrkeshögskola", 1, 0, question1);
+        Answer answer4 = new Answer("10 personer", 1, 0, question1);
+        Answer answer5 = new Answer("Ett djur", 1, 0, question2);
+        Answer answer6 = new Answer("En stad", 1, 0, question2);
+        Answer answer2 = new Answer("En yrkeshögskola", 1, 0, question3);
         Answer answer3 = new Answer("En förskola", 0, 1, question3);
         ArrayList<Answer> answers = new ArrayList<Answer>();
         answers.add(answer1);
         answers.add(answer2);
         answers.add(answer3);
+        answers.add(answer4);
+        answers.add(answer5);
+        answers.add(answer6);
 
 
         UserService.create(user1);
