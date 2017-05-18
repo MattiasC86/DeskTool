@@ -32,9 +32,9 @@ public class SelectTestView {
     private int testBoxIndex;
 
     //These variables have getters and will hold the selected test, questions and answers
-    private Test selectedTest;
-    private List<Question> testQuestions;
-    private List<List> testAnswers;
+    static private Test selectedTest;
+    static private List<Question> testQuestions;
+    static private List<List> testAnswers;
 
     public SelectTestView(Stage window) {
 
@@ -137,7 +137,7 @@ public class SelectTestView {
     }
 
 
-    public Test getSelectedTest() {
+    static public Test getSelectedTest() {
         return selectedTest;
     }
 
@@ -145,7 +145,7 @@ public class SelectTestView {
         this.selectedTest = selectedTest;
     }
 
-    public List<Question> getTestQuestions() {
+    static public List<Question> getTestQuestions() {
         return testQuestions;
     }
 
@@ -153,7 +153,7 @@ public class SelectTestView {
         this.testQuestions = testQuestions;
     }
 
-    public List<List> getTestAnswers() {
+    static public List<List> getTestAnswers() {
         return testAnswers;
     }
 
