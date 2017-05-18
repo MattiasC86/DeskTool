@@ -1,6 +1,5 @@
 package view.doTest;
 
-import entity.Answer;
 import entity.Question;
 import entity.Test;
 import entity.User;
@@ -13,14 +12,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import logic.LoginLogic;
 import logic.UserLogic;
 import service.AnswerService;
 import service.QuestionService;
-import service.TestService;
 import service.UserService;
 import view.menuBars.MenuBarAdmin;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,30 +24,12 @@ import java.util.List;
  * Created by matti on 2017-05-18.
  */
 public class SelectTestView {
-
-    /*
-    Välja test
-    Vem som skapa test/ lärare
-    Tid
-    Antal frågor
-    Max poäng
-    Startknapp
-     */
-
-    int testBoxIndex;
-
-    List<Test> tests;
-
-    // Chosen Test is saved as selectedTest
-    Test selectedTest;
-
-    // Questions are saved to testQuestions List
-    List<Question> testQuestions;
-
-    // testAnswers[0] will contain a List with all answers for 1st Question, testAnswers[1] all answers for 2nd Question etc.
-    List<List> testAnswers = new ArrayList<>();
-
     ComboBox testBox;
+    List<Test> tests;
+    int testBoxIndex;
+    Test selectedTest;
+    List<Question> testQuestions;
+    List<List> testAnswers = new ArrayList<>();
 
     public SelectTestView(Stage window) {
 
@@ -73,20 +51,6 @@ public class SelectTestView {
                         testTitles
                 );
         testBox = new ComboBox(availableTests);
-
-        //PRINTAR UT VARJE FRÅGA FÖLJT AV SVAREN
-        /*int ii = 0;
-        for(Question q : testQuestions) {
-            System.out.println(q.getqText());
-            for(List t : testAnswers) {
-                List<Answer> answers = testAnswers.get(ii);
-                for(Answer a : answers) {
-                    System.out.println(a.getaText());
-                }
-                ii++;
-                break;
-            }
-        }*/
 
         Label chooseTest = new Label("Välj prov:");
         Label testName = new Label("Prov:");
