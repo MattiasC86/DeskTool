@@ -42,10 +42,12 @@ public class SelectTestView {
 
         Pane pane = new Pane();
 
-        MenuBarAdmin x = new MenuBarAdmin(pane, window);
 
         user = UserService.read(LoginLogic.getCurrId());
         tests = UserLogic.getAvailableTests(user);
+        
+        MenuBarAdmin x = new MenuBarAdmin(pane, window);
+
 
         // Fills testBox with all tests available to user
         List<String> testTitles = new ArrayList<>();
