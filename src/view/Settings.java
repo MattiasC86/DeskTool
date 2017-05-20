@@ -6,13 +6,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import logic.LoginLogic;
 import service.UserService;
 import view.menuBars.MenuBarAdmin;
+import view.menuBars.MenuBarHelper;
 
 
 /**
@@ -27,12 +34,13 @@ public class Settings {
 
         Pane pane = new Pane();
 
-        MenuBarAdmin x = new MenuBarAdmin(pane, window);
+        MenuBarHelper.getMenuBar(window, pane);
 
-        BorderPane bp = new BorderPane();
+        Pane bp = new Pane();
+        bp.setPadding(new Insets(20, 50, 50, 50));
 
+        Pane labelPane = new Pane();
 
-        bp.setTop(pane);
 
         Label labelFirstname = new Label("Förnamn: ");
         Label currentFirstname = new Label(user.getFirstName());
@@ -58,52 +66,100 @@ public class Settings {
         Button buttonChangeEmail = new Button("OK");
         Button buttonChangePassword = new Button("OK");
 
-        GridPane gp = new GridPane();
-        gp.setPadding(new Insets(20,20,20,20));
-        gp.setVgap(10);
-        gp.setHgap(10);
+        Text text = new Text("Redigera användare");
+        text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
+        text.setFill(Color.WHITE);
 
-        gp.add(labelFirstname, 0, 0);
-        gp.add(currentFirstname, 1, 0);
 
-        gp.add(labelLastname, 0, 1);
-        gp.add(currentLastname, 1, 1);
+        labelFirstname.relocate(400, 100);
+        currentFirstname.relocate(550, 100);
 
-        gp.add(labelUsername, 0, 2);
-        gp.add(currentUsername, 1, 2);
+        labelLastname.relocate(400,150);
+        currentLastname.relocate(550, 150);
 
-        gp.add(labelEmail, 0, 3);
-        gp.add(currentEmail, 1, 3);
+        labelUsername.relocate(400,200);
+        currentUsername.relocate(550, 200);
 
-        gp.add(labelPassword, 0, 4);
-        gp.add(currentPassword,1,4);
+        labelEmail.relocate(400, 250);
+        currentEmail.relocate(550,250);
 
-        gp.add(newEmail,0,5);
-        gp.add(changeEmail, 1, 5);
-        gp.add(buttonChangeEmail, 2, 5);
+        labelPassword.relocate(400, 300);
+        currentPassword.relocate(550,300);
 
-        gp.add(newPassword, 0, 6);
-        gp.add(changePassword, 1, 6);
-        gp.add(buttonChangePassword,2,6);
+        newEmail.relocate(400,350);
+        changeEmail.relocate(550,350);
+        changeEmail.setPrefWidth(200);
+        buttonChangeEmail.relocate(770, 350);
+        buttonChangeEmail.setPrefWidth(50);
 
-        bp.setCenter(gp);
+        newPassword.relocate(400,400);
+        changePassword.relocate(550,400);
+        changePassword.setPrefWidth(200);
+        buttonChangePassword.relocate(770, 400);
+        buttonChangePassword.setPrefWidth(50);
 
-        Scene scene = new Scene(bp, 1600, 900);
+        text.relocate(450,40);
+
+        labelPane.getChildren().addAll(labelFirstname,currentFirstname,labelLastname,currentLastname,labelUsername,currentUsername,labelEmail,currentEmail,labelPassword,currentPassword,
+                newEmail,changeEmail,buttonChangeEmail,newPassword,changePassword,buttonChangePassword,text);
+
+        bp.getChildren().addAll(labelPane);
+
+        Rectangle rect = new Rectangle(1200,600);
+        rect.setArcHeight(100.0);
+        rect.setArcWidth(100.0);
+
+        bp.setClip(rect);
+
+        Pane mainPane = new Pane();
+        bp.relocate(200,100);
+        bp.setPrefWidth(1200);
+        bp.setPrefHeight(600);
+
+        mainPane.getChildren().addAll(bp,pane);
+
+        bp.setId("settingsPane");
+        mainPane.setId("settingsBk");
+        labelFirstname.setId("settingsLabel");
+        labelLastname.setId("settingsLabel");
+        labelEmail.setId("settingsLabel");
+        labelUsername.setId("settingsLabel");
+        labelPassword.setId("settingsLabel");
+        newEmail.setId("settingsLabel");
+        newPassword.setId("settingsLabel");
+        currentFirstname.setId("settingsLabel");
+        currentLastname.setId("settingsLabel");
+        currentEmail.setId("settingsLabel");
+        currentPassword.setId("settingsLabel");
+        currentUsername.setId("settingsLabel");
+
+
+
+
+
+        Scene scene = new Scene(mainPane, 1600, 900);
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(scene);
         window.setTitle("Inställnigar");
 
         // Email is updated for user
         buttonChangeEmail.setOnAction(e->{
-            UserService.update(user.getUserId(), "email", changeEmail.getText());
-            user.setEmail(changeEmail.getText());
-            currentEmail.setText(user.getEmail());
+            if(!changeEmail.getText().equalsIgnoreCase("")) {
+                UserService.update(user.getUserId(), "email", changeEmail.getText());
+                user.setEmail(changeEmail.getText());
+                currentEmail.setText(user.getEmail());
+                changeEmail.setText("");
+            }
         });
 
         // Password is updated for user
         buttonChangePassword.setOnAction(e->{
-            UserService.update(user.getUserId(), "password", changePassword.getText());
-            user.setPassword(changePassword.getText());
-            currentPassword.setText(user.getPassword());
+            if (!changePassword.getText().equalsIgnoreCase("")) {
+                UserService.update(user.getUserId(), "password", changePassword.getText());
+                user.setPassword(changePassword.getText());
+                currentPassword.setText(user.getPassword());
+                changePassword.setText("");
+            }
         });
 
     }

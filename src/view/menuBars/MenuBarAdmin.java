@@ -82,7 +82,7 @@ public class MenuBarAdmin {
         MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3);
 
         MenuBar menuAdmin2 = new MenuBar(menu4);
-        menuAdmin.setPrefWidth(1500); //Double.MAX_VALUE
+        menuAdmin.setPrefWidth(1510); //Double.MAX_VALUE
 
         HBox hb = new HBox();
         hb.getChildren().addAll(menuAdmin, menuAdmin2);

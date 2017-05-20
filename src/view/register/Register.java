@@ -27,6 +27,7 @@ public class Register {
 
         BorderPane bp = new BorderPane();
         bp.setPadding(new Insets(20,50,50,50));
+
         Pane gp = new Pane();
 
 
@@ -122,9 +123,10 @@ public class Register {
         Scene welcomeScene = new Scene(mainPane, 1600,900);
         welcomeScene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(welcomeScene);
+        window.setTitle("Skapa användare");
         window.centerOnScreen();
 
-        
+
         registerButton.setOnAction(e->{
             int result = RegisterLogic.registerUser(textFieldFirstname.getText(), textFieldLastname.getText(), textFieldUsername.getText(),
                     textFieldEmail.getText(), textFieldPassword.getText(), privilege.getSelectionModel().getSelectedItem().toString());

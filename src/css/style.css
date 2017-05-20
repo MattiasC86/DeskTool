@@ -1,3 +1,5 @@
+/*LOGIN*/
+/*LOGIN*/
 #root {
     -fx-background-color:  linear-gradient(lightgray, lightgray);
     -fx-border-color: white;
@@ -12,25 +14,8 @@
     -fx-text-fill: #ede7f3;
     -fx-background-color: linear-gradient(#744417, #ff7717 );
 }
-#btnRegister{
-    -fx-background-color: linear-gradient(#834f19, #ff7717);
-    -fx-text-fill: #f9f3ff ;
-}
-
-#firstpagePane{
-    -fx-background-image: url('../pic/bakgrundquiz.jpg');
-    -fx-background-repeat: stretch;
-    -fx-background-position: center center;
-}
-
 #loginPane {
     -fx-background-image: url('../pic/loginPage2.jpg');
-    -fx-background-repeat: stretch;
-    -fx-background-position: center center;
-}
-
-#createTestPane{
-    -fx-background-image: url('../pic/bakgrundquiz2.jpg');
     -fx-background-repeat: stretch;
     -fx-background-position: center center;
 }
@@ -38,24 +23,36 @@
 #errorMessageLogin{
     -fx-text-fill: red;
 }
+/*LOGIN*/
+/*LOGIN*/
 
-#errorPromt{
-    -fx-prompt-text-fill: rgb(255, 0, 12);
-    -fx-opacity: 1;
-}
 
-#errorPromt:focused{
-    -fx-prompt-text-fill: rgba(255, 0, 12, 0);
+/*FIRSTPAGE*/
+/*FIRSTPAGE*/
+#firstpagePane{
+    -fx-background-image: url('../pic/bakgrundquiz.jpg');
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
 }
+/*FIRSTPAGE*/
+/*FIRSTPAGE*/
 
-#verifyText{
-    -fx-text-fill: green;
-    -fx-font-weight: Bold;
+
+/*CREATE TEST*/
+/*CREATE TEST*/
+#createTestPane{
+    -fx-background-image: url('../pic/bakgrundquiz2.jpg');
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
 }
-#emptyFields{
-    -fx-text-fill: red;
-    -fx-font-weight: Bold;
-}
+/*CREATE TEST*/
+/*CREATE TEST*/
+
+
+
+
+/*REGISTER*/
+/*REGISTER*/
 #registerLabels{
     -fx-font-weight: bold;
     -fx-font-style: italic;
@@ -76,3 +73,50 @@
     -fx-padding: 10 10 10 10;
     -fx-background-radius: 20;
 }
+
+#btnRegister{
+    -fx-background-color: linear-gradient(#834f19, #ff7717);
+    -fx-text-fill: #f9f3ff ;
+}
+
+#verifyText{
+    -fx-text-fill: green;
+    -fx-font-weight: Bold;
+}
+
+#emptyFields{
+    -fx-text-fill: red;
+    -fx-font-weight: Bold;
+}
+
+#errorPromt{
+    -fx-prompt-text-fill: rgb(255, 0, 12);
+    -fx-opacity: 1;
+}
+
+#errorPromt:focused{
+    -fx-prompt-text-fill: rgba(255, 0, 12, 0);
+}
+/*REGISTER*/
+/*REGISTER*/
+
+
+/*SETTINGS*/
+/*SETTINGS*/
+#settingsPane{
+    -fx-background-image: url('../pic/bkset2.jpg');
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}
+
+#settingsBk{
+    -fx-background-color: linear-gradient(#2f2f2f, rgb(163, 161, 141));
+}
+
+#settingsLabel{
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+/*SETTINGS*/
+/*SETTINGS*/

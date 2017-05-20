@@ -41,9 +41,6 @@ public class MenuBarStudent {
 
         Menu menu1 = new Menu("Hem");
 
-        MenuItem home = new MenuItem("Hem");
-
-        menu1.getItems().addAll(home);
 
         //skapar en huvudmeny med namn arkiv
         Menu menu2 = new Menu("Arkiv");
@@ -65,8 +62,6 @@ public class MenuBarStudent {
         //Skapar en huvudmeny med namn logga ut
         Menu menu4 = new Menu("Logga ut");
 
-        MenuItem logoutItem = new MenuItem("Logga ut");
-        menu4.getItems().addAll(logoutItem);
 
         menu2.getItems().addAll(testMenu);
 
@@ -77,20 +72,23 @@ public class MenuBarStudent {
         MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3);
 
         MenuBar menuAdmin2 = new MenuBar(menu4);
-        menuAdmin.setPrefWidth(1500); //Double.MAX_VALUE
+        menuAdmin.setPrefWidth(1510); //Double.MAX_VALUE
 
         HBox hb = new HBox();
         hb.getChildren().addAll(menuAdmin, menuAdmin2);
         pane.getChildren().addAll(hb);
 
+        MenuBarHelper.onAction(menu1);
+        MenuBarHelper.onAction(menu4);
+
         //ActionEvent för loginknappen.
-        logoutItem.setOnAction(e -> {
+        menu4.setOnAction(e -> {
             LoginPage lp = new LoginPage(window);
         });
 
 
         //ActionEvent för hemknappen.
-        home.setOnAction(e->{
+        menu1.setOnAction(e->{
             StudentFirstpage sfp = new StudentFirstpage(window);
         });
 
