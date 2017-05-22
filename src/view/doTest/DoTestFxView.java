@@ -33,16 +33,23 @@ public class DoTestFxView {
 
 
     ListView<Pane> TestList;
+    Label labeltitel;
+    Label testInfo;
 
     public DoTestFxView(Stage window) {
 
-
         Pane pane = new Pane();
 
-        Label labeltitel = new Label("Prov:");
+        labeltitel = new Label("Prov:");
         labeltitel.setStyle("-fx-font-size: 40pt");
         labeltitel.relocate(300, 50);
         pane.getChildren().add(labeltitel);
+
+        //Antal frågor och tid
+        testInfo = new Label();
+        testInfo.setStyle("-fx-font-size: 16pt");
+        testInfo.relocate(800, 50);
+        pane.getChildren().add(testInfo);
 
         TestList = new ListView<Pane>();
         TestList.setPrefSize(1200, 600);
@@ -55,13 +62,23 @@ public class DoTestFxView {
         window.setMaximized(true);
         window.setScene(scene);
         window.show();
-
-        addOneQuestion(6);
-        addManyQuestion(4);
-        addRankQuestion(3);
     }
 
-    private void addOneQuestion(int answerNumber) {
+
+    public void setTestInfo(String titel, int number, int time){
+
+        labeltitel.setText(titel);
+
+        testInfo.setText("Antal frågor: " + number + " Tidsgräns(minuter): " + time);
+
+
+    }
+
+
+
+
+
+    public void addOneQuestion(int answerNumber) {
 
         Pane pane = new Pane();
         pane.setStyle("-fx-border-color: black");
@@ -97,7 +114,7 @@ public class DoTestFxView {
         TestList.getItems().add(pane);
     }
 
-    private void addManyQuestion(int answerNumber) {
+    public void addManyQuestion(int answerNumber) {
 
         Pane pane = new Pane();
         pane.setStyle("-fx-border-color: black");
@@ -125,10 +142,9 @@ public class DoTestFxView {
 
     }
 
-
     private final ObjectProperty<ListCell<String>> dragSource = new SimpleObjectProperty<>();
 
-    private void addRankQuestion(int answerNumber) {
+    public void addRankQuestion(int answerNumber) {
 
         Pane pane = new Pane();
         pane.setStyle("-fx-border-color: black");
@@ -259,6 +275,9 @@ public class DoTestFxView {
 
 
     }
+
+
+
 
 }
 

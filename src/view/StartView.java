@@ -15,9 +15,9 @@ public class StartView extends Application{
         window = primaryStage;
         window.setResizable(false);
         LoginPage startView = new LoginPage(window);
-
-
     }
+
+
     public static void main(String[] args) {
         launch(args);
     }

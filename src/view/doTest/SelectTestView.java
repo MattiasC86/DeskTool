@@ -42,12 +42,10 @@ public class SelectTestView {
 
         Pane pane = new Pane();
 
-
         user = UserService.read(LoginLogic.getCurrId());
         tests = UserLogic.getAvailableTests(user);
         
         MenuBarAdmin x = new MenuBarAdmin(pane, window);
-
 
         // Fills testBox with all tests available to user
         List<String> testTitles = new ArrayList<>();
@@ -75,7 +73,6 @@ public class SelectTestView {
 
         Button startTest = new Button("Stata prov");
 
-
         chooseTest.relocate(400,50);
         testBox.relocate(500,50);
 
@@ -99,7 +96,6 @@ public class SelectTestView {
         pane.getChildren().addAll(chooseTest,testBox,testName,teacherName,timeLimit,totalQuestion,maxPoints,startTest);
         pane.getChildren().addAll(currentTestName, currentTeacherName, currentTimeLimit, currentTotalQuestion, currentMaxPoints);
 
-
         window.setOnCloseRequest(e -> Platform.exit());
         Scene scene = new Scene(pane, 1600, 900);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
@@ -109,6 +105,60 @@ public class SelectTestView {
         // Redirects user to DoTestFXView
         startTest.setOnAction(e->{
             DoTestFxView dtfv = new DoTestFxView(window);
+
+            /*
+            static private Test selectedTest;
+            static private List<Question> testQuestions;
+            static private List<List> testAnswers;
+           */
+
+
+
+            for(int i = 0; i < testAnswers.size(); i++) {
+
+                List dd = testAnswers.get(i);
+
+                for(int d = 0; d < testAnswers.get(i).size(); d++) {
+
+
+                    System.out.println(dd.get(d).);
+
+                }
+
+
+            }
+
+
+            dtfv.setTestInfo(selectedTest.gettTitle(), testQuestions.size(), selectedTest.gettTimeMin());
+
+            for(int i = 0; i < testQuestions.size(); i++) {
+
+                String qType = testQuestions.get(0).getqType();
+
+                if (qType.equalsIgnoreCase("Single")) {
+                    dtfv.addOneQuestion(2);
+
+
+
+                }
+
+
+                else if (qType.equalsIgnoreCase("Many")) {
+                    dtfv.addManyQuestion(2);
+
+
+
+
+                }
+
+
+                else if (qType.equalsIgnoreCase("Ranked")) {
+                    dtfv.addRankQuestion(2);
+
+
+
+                }
+            }
         });
 
         // Shows all info on selected test
