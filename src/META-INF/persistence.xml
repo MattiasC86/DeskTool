@@ -13,6 +13,8 @@
         <class>entity.Answer</class>
         <class>entity.TestAccess</class>
         <class>entity.AnsweredTest</class>
+        <class>entity.AnsweredQuestion</class>
+        <class>entity.UserAnswer</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testtooldesk"/>
