@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import view.StatisticsView;
 import view.doTest.DoTestFxView;
 import view.doTest.SelectTestView;
 import view.homepage.AdminFirstpage;
@@ -55,7 +56,7 @@ public class MenuBarAdmin {
         MenuItem changeTest = new MenuItem("Ändra Test");
         MenuItem doTest = new MenuItem("Gör Test");
         MenuItem reuseTest = new MenuItem("Återanvända Test");
-        MenuItem doneTest = new MenuItem("Rättade Test");
+        MenuItem doneTest = new MenuItem("Statistik");
 
 
         //skapar en submeny med namn registrera till menyn arkiv
@@ -119,6 +120,10 @@ public class MenuBarAdmin {
 
         doTest.setOnAction(e->{
             SelectTestView stv = new SelectTestView(window);
+        });
+
+        doneTest.setOnAction(e->{
+            StatisticsView ssv = new StatisticsView(window);
         });
 
     }

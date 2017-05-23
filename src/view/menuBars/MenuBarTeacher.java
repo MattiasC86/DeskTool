@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.StatisticsView;
 import view.doTest.DoTestFxView;
 import view.doTest.SelectTestView;
 import view.homepage.AdminFirstpage;
@@ -52,7 +53,7 @@ public class MenuBarTeacher {
                 MenuItem changeTest = new MenuItem("Ändra Test");
                 MenuItem doTest = new MenuItem("Gör Test");
                 MenuItem reuseTest = new MenuItem("Återanvända Test");
-                MenuItem doneTest = new MenuItem("Rättade Test");
+                MenuItem doneTest = new MenuItem("Statestik");
 
 
                 //skapar en huvudmeny med namn Inställningar
@@ -104,6 +105,10 @@ public class MenuBarTeacher {
 
                 doTest.setOnAction(e -> {
                         SelectTestView stv = new SelectTestView(window);
+                });
+
+                doneTest.setOnAction(e -> {
+                        StatisticsView ssv = new StatisticsView(window);
                 });
 
         }

@@ -3,8 +3,6 @@ package view.homepage;
 import entity.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -12,10 +10,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import service.TestService;
 import view.menuBars.MenuBarAdmin;
 
+import javax.persistence.TemporalType;
 import java.util.List;
 
 
@@ -23,6 +25,7 @@ import java.util.List;
  * Created by Rasmus on 2017-05-03.
  */
 public class AdminFirstpage {
+
     List<Test> testList;
 
 
@@ -36,15 +39,15 @@ public class AdminFirstpage {
 
         BorderPane bp = new BorderPane();
         bp.setTop(pane);
-        bp.setId("firstpagePane");
 
-        Label l1 = new Label("Välkommen till Newtons Provportal");
-        l1.setStyle("-fx-font-size: 24pt");
+
+        Text l1 = new Text("Välkommen till Newtons Provportal");
+        l1.setFont(Font.font("Courier New", FontWeight.BOLD, 32));
         l1.relocate(100, 100);
         pane.getChildren().add(l1);
 
-        Label l2 = new Label("Prov i databasen");
-        l2.setStyle("-fx-font-size: 24pt");
+        Text l2 = new Text("Prov i databasen");
+
         l2.relocate(700, 50);
         pane.getChildren().add(l2);
 
@@ -52,23 +55,19 @@ public class AdminFirstpage {
         testList = TestService.readAll();
 
 
-        //Namn, tid, antal frågor, lärare
-
-
-
-        TableColumn<Table, String> testName = new TableColumn<>("Name");
+        TableColumn<Table, String> testName = new TableColumn<>("Prov");
         testName.setMinWidth(200);
         testName.setCellValueFactory(new PropertyValueFactory<>("title"));
 
-        TableColumn<Table, Integer> testTime = new TableColumn<>("Time");
+        TableColumn<Table, Integer> testTime = new TableColumn<>("Tidsgräns");
         testTime.setMinWidth(200);
         testTime.setCellValueFactory(new PropertyValueFactory<>("timeLimit"));
 
-        TableColumn<Table, Integer> testQuestions = new TableColumn<>("Questions");
+        TableColumn<Table, Integer> testQuestions = new TableColumn<>("Antal frågor");
         testQuestions.setMinWidth(200);
         testQuestions.setCellValueFactory(new PropertyValueFactory<>("questions"));
 
-        TableColumn<Table, Integer> teacher = new TableColumn<>("Teacher");
+        TableColumn<Table, Integer> teacher = new TableColumn<>("Lärare");
         teacher.setMinWidth(200);
         teacher.setCellValueFactory(new PropertyValueFactory<>("user"));
 
@@ -76,9 +75,6 @@ public class AdminFirstpage {
         testTime.setStyle( "-fx-alignment: CENTER;");
         testQuestions.setStyle( "-fx-alignment: CENTER;");
         teacher.setStyle( "-fx-alignment: CENTER;");
-
-
-
 
 
         TableView<Table> table = new TableView();
@@ -91,6 +87,10 @@ public class AdminFirstpage {
 
         pane.getChildren().add(table);
 
+        bp.setId("firstpagePane");
+        l1.setId("firstpageL1");
+        l2.setId("firstpageL1");
+
 
         Scene welcomeScene = new Scene(bp, 1600, 900);
         welcomeScene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
@@ -100,6 +100,8 @@ public class AdminFirstpage {
 
 
     }
+
+
     public ObservableList<Table> getTests(){
         ObservableList<Table> tests = FXCollections.observableArrayList();
         for(int i = 0; i < testList.size(); i++) {

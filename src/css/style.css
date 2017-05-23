@@ -34,6 +34,11 @@
     -fx-background-repeat: stretch;
     -fx-background-position: center center;
 }
+
+#firstpageL1{
+    -fx-text-fill: white;
+
+}
 /*FIRSTPAGE*/
 /*FIRSTPAGE*/
 

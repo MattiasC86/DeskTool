@@ -17,6 +17,7 @@ import logic.StatisticsLogic;
 import service.AnsweredTestService;
 import service.TestService;
 import service.UserService;
+import view.menuBars.MenuBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import static view.doTest.SelectTestView.getSelectedTest;
 /**
  * Created by matti on 2017-05-23.
  */
-public class StatisticsView extends Application{
+public class StatisticsView{
     User currUser;
 
     List<User> userList;
@@ -36,7 +37,7 @@ public class StatisticsView extends Application{
     private ComboBox userBox;
     private ComboBox testBox;
     private ComboBox userTestBox;
-    FlowPane pane = new FlowPane();
+
 
     Label test;
     Label nrDone;
@@ -50,6 +51,8 @@ public class StatisticsView extends Application{
     Label grade;
     Label points;
     Label uTime;
+
+    FlowPane pane;
 
     /*
     - Välj elev
@@ -66,9 +69,18 @@ public class StatisticsView extends Application{
 
      */
 
-    public void start(Stage primaryStage) {
+    public StatisticsView (Stage window) {
         currUser = UserService.read(LoginLogic.getCurrId());
         userList = UserService.readAll();
+
+        Pane barpane = new Pane();
+
+        MenuBarHelper.getMenuBar(window, barpane);
+
+        pane = new FlowPane();
+        barpane.getChildren().add(pane);
+        pane.relocate(0,100);
+
 
         List<String> userNames = new ArrayList<>();
 
@@ -104,9 +116,9 @@ public class StatisticsView extends Application{
 
         pane.getChildren().addAll(userBox, testBox);
 
-        Scene scene = new Scene(pane, 1600, 900);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        Scene scene = new Scene(barpane, 1600, 900);
+        window.setScene(scene);
+        window.show();
 
         // When a user is selected in userBox
         userBox.setOnAction(e->{
@@ -206,10 +218,6 @@ public class StatisticsView extends Application{
             pane.getChildren().addAll(student, uTest, grade, points, uTime);
         }
 
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     public void loadTestBox() {
