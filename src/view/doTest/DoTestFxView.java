@@ -3,6 +3,8 @@ package view.doTest;
 
         import java.util.ArrayList;
         import java.util.List;
+        import java.util.Timer;
+        import java.util.TimerTask;
 
         import entity.Answer;
         import entity.Question;
@@ -32,6 +34,7 @@ public class DoTestFxView {
     ListView<Pane> TestList;
     Label labeltitel;
     Label testInfo;
+    Label timeLabel;
 
     public DoTestFxView(Stage window) {
 
@@ -44,11 +47,14 @@ public class DoTestFxView {
 
         //Antal frågor och tid
         testInfo = new Label();
-        testInfo.setStyle("-fx-font-size: 16pt");
-        testInfo.relocate(800, 50);
+        testInfo.setStyle("-fx-font-size: 20pt");
+        testInfo.relocate(600, 70);
         pane.getChildren().add(testInfo);
 
-        final SelectionMode NONE;
+        timeLabel = new Label();
+        timeLabel.setStyle("-fx-font-size: 20pt");
+        timeLabel.relocate(1200, 70);
+        pane.getChildren().add(timeLabel);
 
         TestList = new ListView<Pane>();
         TestList.setPrefSize(1200, 600);
@@ -56,8 +62,11 @@ public class DoTestFxView {
         TestList.setFocusTraversable( false );
         pane.getChildren().add(TestList);
 
-
-
+        Button testDone = new Button("Lämna in");
+        testDone.relocate(1350, 820);
+        testDone.setPrefSize(150,50);
+        testDone.setStyle("-fx-font-size: 16pt");
+        pane.getChildren().add(testDone);
 
         window.setTitle("Göra test");
         window.setOnCloseRequest(e -> Platform.exit());
@@ -71,15 +80,29 @@ public class DoTestFxView {
     public void setTestInfo(String titel, int number, int time){
 
         labeltitel.setText(titel);
+        testInfo.setText("Antal frågor: " + number + "          Tidsgräns(minuter): " + time);
 
-        testInfo.setText("Antal frågor: " + number + " Tidsgräns(minuter): " + time);
-
-
+        //Countdown
+        int minutes = time;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            int calcMinutes = minutes - 1;
+            int seconds = 60;
+            @Override
+            public void run() {
+                seconds--;
+                Platform.runLater(() -> timeLabel.setText("Minuter: " + calcMinutes + " Sekunder: " + seconds));
+                if(seconds == 0){
+                    calcMinutes--;
+                    seconds = 60;
+                    if(calcMinutes <= 0){
+                        System.out.println("Tiden ute");
+                        timer.cancel();
+                    }
+                }
+            }
+        }, 0, 1000);
     }
-
-
-
-
 
     public void addOneQuestion(int answerNumber, String Question, List<Answer> answersList) {
 
@@ -113,11 +136,10 @@ public class DoTestFxView {
                 answerBox[x].setSelected(true);
             });
         }
-
         TestList.getItems().add(pane);
     }
 
-    public void addManyQuestion(int answerNumber) {
+    public void addManyQuestion(int answerNumber, String Question, List<Answer> answersList) {
 
         Pane pane = new Pane();
         pane.setStyle("-fx-border-color: black");
@@ -128,7 +150,7 @@ public class DoTestFxView {
         label.relocate(20, 5);
         pane.getChildren().add(label);
 
-        Label label1 = new Label("Frågan....");
+        Label label1 = new Label(Question);
         label1.setStyle("-fx-font-size: 14pt");
         label1.relocate(20, 50);
         pane.getChildren().add(label1);
@@ -136,13 +158,12 @@ public class DoTestFxView {
         CheckBox[] answerBox = new CheckBox[answerNumber];
 
         for (int i = 0; i < answerNumber; i++) {
-            answerBox[i] = new CheckBox("Svar: " + (i + 1));
+            answerBox[i] = new CheckBox(answersList.get(i).getaText());
             answerBox[i].relocate(20 + (i * 190), 100);
             pane.getChildren().add(answerBox[i]);
         }
 
         TestList.getItems().add(pane);
-
     }
 
     private final ObjectProperty<ListCell<String>> dragSource = new SimpleObjectProperty<>();

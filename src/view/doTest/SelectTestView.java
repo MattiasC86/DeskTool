@@ -134,22 +134,18 @@ public class SelectTestView {
 
             for(int i = 0; i < testQuestions.size(); i++) {
 
-                String qType = testQuestions.get(0).getqType();
+                String qType = testQuestions.get(i).getqType();
 
                 List<Answer> list = testAnswers.get(i);
 
                 if (qType.equalsIgnoreCase("Single")) {
                     dtfv.addOneQuestion(list.size(), testQuestions.get(i).getqText(), list);
                 }
-
                 else if (qType.equalsIgnoreCase("Multiple")) {
-                    dtfv.addManyQuestion(2);
+                    dtfv.addManyQuestion(list.size(), testQuestions.get(i).getqText(), list);
                 }
-
-
                 else if (qType.equalsIgnoreCase("Ranked")) {
                     dtfv.addRankQuestion(2);
-
                 }
             }
         });
