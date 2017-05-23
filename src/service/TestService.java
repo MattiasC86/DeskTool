@@ -45,6 +45,10 @@ public class TestService {
         EntityManager entityManager = emFactory.createEntityManager();
 
         Test chosenTest = entityManager.find(Test.class, testId);
+
+        entityManager.close();
+        emFactory.close();
+
         return chosenTest;
     }
 
@@ -52,7 +56,28 @@ public class TestService {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
-        List<Test> testList = entityManager.createNamedQuery("Test.findAll").getResultList();
+        Query testsQuery = entityManager.createNamedQuery( "Test.findAll");
+        List<Test> testList = (List<Test>)testsQuery.getResultList();
+
+        return testList;
+    }
+
+    public static List<Test> readAll(int userId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        Query testsQuery = entityManager.createQuery( "Select t from Test t where t.user.userId = " + userId);
+        List<Test> testList = (List<Test>)testsQuery.getResultList();
+
+        return testList;
+    }
+
+    public static List<Test> readAllByStudent(int userId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        Query testsQuery = entityManager.createQuery( "Select t from Test t inner join TestAccess ta on t.testId = ta.test.testId where ta.user.userId = " + userId);
+        List<Test> testList = (List<Test>)testsQuery.getResultList();
 
         return testList;
     }
@@ -133,6 +158,6 @@ public class TestService {
         TestAccessService.create(user1, test2);
         TestAccessService.create(user2, test2);
 
-        //AnsweredTestService.create(new AnsweredTest(false, false, 5, 400, "G", user1, test2));
+        AnsweredTestService.create(new AnsweredTest(false, false, 5, 400, "G", user1, test2));
     }
 }
