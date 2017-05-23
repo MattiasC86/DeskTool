@@ -27,6 +27,8 @@ import static view.doTest.SelectTestView.getSelectedTest;
  * Created by matti on 2017-05-23.
  */
 public class StatisticsView extends Application{
+    User currUser;
+
     List<User> userList;
     List<Test> userTests;
     List<Test> testList;
@@ -65,6 +67,7 @@ public class StatisticsView extends Application{
      */
 
     public void start(Stage primaryStage) {
+        currUser = UserService.read(LoginLogic.getCurrId());
         userList = UserService.readAll();
 
         List<String> userNames = new ArrayList<>();
@@ -78,7 +81,16 @@ public class StatisticsView extends Application{
                 );
         userBox = new ComboBox(availableUsers);
 
-        testList = TestService.readAll(1); //LoginLogic.getCurrId() if teacher, readAll if admin
+        // If logged in user is Admin, all tests are shown
+        // If user is Teacher, only the tests created by this teacher is shown
+        switch (currUser.getRole()) {
+            case "Admin":
+                testList = TestService.readAll();
+                break;
+            case "Teacher":
+                testList = TestService.readAll(currUser.getUserId());
+                break;
+        }
 
         List<String> testNames = new ArrayList<>();
         for(Test element : testList) {
@@ -91,7 +103,6 @@ public class StatisticsView extends Application{
         testBox = new ComboBox(availableTests);
 
         pane.getChildren().addAll(userBox, testBox);
-
 
         Scene scene = new Scene(pane, 1600, 900);
         primaryStage.setScene(scene);
@@ -106,8 +117,6 @@ public class StatisticsView extends Application{
         testBox.setOnAction(e->{
             showTestStatistics();
         });
-
-
     }
 
     public void loadUserTestBox(){
