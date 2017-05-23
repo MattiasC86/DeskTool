@@ -120,11 +120,13 @@ public class TestService {
         Question question2 = new Question("Vad är en björn?", 1, "Multiple", 1, "G", test1);
         Question question3 = new Question("Vad är Newton?", 1, "Single", 0, "G", test2);
         Question question4 = new Question("Bästa elev på Newton?", 1, "Ranked", 1, "G", test2);
+        Question question5 = new Question("Ranka djurens effektivitet", 1, "Ranked", 2, "G", test1);
         ArrayList<Question> questions = new ArrayList<Question>();
         questions.add(question1);
         questions.add(question2);
         questions.add(question3);
         questions.add(question4);
+        questions.add(question5);
 
         Answer answer1 = new Answer("20 personer", 1, 0, question1);
         Answer answer4 = new Answer("10 personer", 0, 1, question1);
@@ -136,6 +138,9 @@ public class TestService {
         Answer answer8 = new Answer("Mattias", 0, 0, question4);
         Answer answer9 = new Answer("Övrigt", 0, 2, question4);
         Answer answer10 = new Answer("Okänd elev", 0, 1, question4);
+        Answer answer11 = new Answer("Björn", 0, 0, question5);
+        Answer answer12 = new Answer("Varg", 0, 1, question5);
+        Answer answer13 = new Answer("Gräshoppa", 0, 2, question5);
         ArrayList<Answer> answers = new ArrayList<Answer>();
         answers.add(answer1);
         answers.add(answer2);
@@ -147,6 +152,10 @@ public class TestService {
         answers.add(answer8);
         answers.add(answer9);
         answers.add(answer10);
+        answers.add(answer11);
+        answers.add(answer12);
+        answers.add(answer13);
+
 
         UserService.create(user1);
         UserService.create(user2);
