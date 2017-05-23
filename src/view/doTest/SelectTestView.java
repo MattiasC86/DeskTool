@@ -1,5 +1,6 @@
 package view.doTest;
 
+import entity.Answer;
 import entity.Question;
 import entity.Test;
 import entity.User;
@@ -106,56 +107,25 @@ public class SelectTestView {
         startTest.setOnAction(e->{
             DoTestFxView dtfv = new DoTestFxView(window);
 
-            /*
-            static private Test selectedTest;
-            static private List<Question> testQuestions;
-            static private List<List> testAnswers;
-           */
-
-
-
-            for(int i = 0; i < testAnswers.size(); i++) {
-
-                List dd = testAnswers.get(i);
-
-                for(int d = 0; d < testAnswers.get(i).size(); d++) {
-
-
-                    System.out.println(dd.get(d).);
-
-                }
-
-
-            }
-
-
             dtfv.setTestInfo(selectedTest.gettTitle(), testQuestions.size(), selectedTest.gettTimeMin());
 
             for(int i = 0; i < testQuestions.size(); i++) {
 
                 String qType = testQuestions.get(0).getqType();
 
+                List<Answer> list = testAnswers.get(i);
+
                 if (qType.equalsIgnoreCase("Single")) {
-                    dtfv.addOneQuestion(2);
-
-
-
+                    dtfv.addOneQuestion(list.size(), testQuestions.get(i).getqText(), list);
                 }
 
-
-                else if (qType.equalsIgnoreCase("Many")) {
+                else if (qType.equalsIgnoreCase("Multiple")) {
                     dtfv.addManyQuestion(2);
-
-
-
-
                 }
 
 
                 else if (qType.equalsIgnoreCase("Ranked")) {
                     dtfv.addRankQuestion(2);
-
-
 
                 }
             }
