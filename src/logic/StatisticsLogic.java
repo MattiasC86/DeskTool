@@ -114,4 +114,18 @@ public class StatisticsLogic {
 
         return avgTime;
     }
+
+    public static List<AnsweredTest> getCorrected(int userId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.user.userId = " + userId + " and " +
+                "(at.aTGrade = 'IG' or at.aTGrade = 'G' or at.aTGrade = 'VG')");
+        List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
+
+        entityManager.close();
+        emFactory.close();
+
+        return atList;
+    }
 }
