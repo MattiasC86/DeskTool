@@ -26,6 +26,11 @@ public class Test {
         this.tSelfCorrecting = tSelfCorrecting;
         this.setUser(user);
     }
+    public Test (String tTitle, int tTimeMin, int tMaxPoints){
+        this.tTitle = tTitle;
+        this.tTimeMin = tTimeMin;
+        this.tMaxPoints = tMaxPoints;
+    }
 
     public Test(){}
 

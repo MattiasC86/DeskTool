@@ -121,7 +121,7 @@ public class SelectTestView {
                 for(int d = 0; d < testAnswers.get(i).size(); d++) {
 
 
-                    System.out.println(dd.get(d).);
+                    //System.out.println(dd.get(d).);
 
                 }
 

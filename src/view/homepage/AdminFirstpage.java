@@ -1,10 +1,15 @@
 package view.homepage;
 
 import entity.Test;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -18,8 +23,10 @@ import java.util.List;
  * Created by Rasmus on 2017-05-03.
  */
 public class AdminFirstpage {
+    List<Test> testList;
 
-    public AdminFirstpage(Stage window){
+
+    public AdminFirstpage(Stage window) {
 
         window.setTitle("Hem");
 
@@ -33,48 +40,71 @@ public class AdminFirstpage {
 
         Label l1 = new Label("Välkommen till Newtons Provportal");
         l1.setStyle("-fx-font-size: 24pt");
-        l1.relocate(100,100);
+        l1.relocate(100, 100);
         pane.getChildren().add(l1);
 
         Label l2 = new Label("Prov i databasen");
         l2.setStyle("-fx-font-size: 24pt");
-        l2.relocate(700,50);
+        l2.relocate(700, 50);
         pane.getChildren().add(l2);
 
         // testList will contain all Tests from database
-        List<Test> testList = TestService.readAll();
+        testList = TestService.readAll();
 
-        TableView table = new TableView();
+
+        //Namn, tid, antal frågor, lärare
+
+
+
+        TableColumn<Table, String> testName = new TableColumn<>("Name");
+        testName.setPrefWidth(200);
+        testName.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<Table, Integer> testTime = new TableColumn<>("Time");
+        testTime.setPrefWidth(200);
+        testTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+
+        TableColumn<Table, Integer> testQuestions = new TableColumn<>("Questions");
+        testQuestions.setPrefWidth(200);
+        testQuestions.setCellValueFactory(new PropertyValueFactory<>("questions"));
+
+
+
+
+
+        TableView<Table> table = new TableView();
+        table.setItems(getTests());
+        table.getColumns().addAll(testName, testTime, testQuestions);
+
         table.relocate(700, 100);
         table.setPrefSize(800, 700);
         table.setStyle("-fx-font-size: 12pt");
+
         pane.getChildren().add(table);
 
 
-        TableColumn testCol = new TableColumn("Prov");
-        testCol.setPrefWidth(200);
-
-        TableColumn timeCol = new TableColumn("Tidsgräns");
-        timeCol.setPrefWidth(200);
-
-        TableColumn questionsCol = new TableColumn("Antal fråor");
-        questionsCol.setPrefWidth(200);
-
-        TableColumn createdCol = new TableColumn("Lärare");
-        createdCol.setPrefWidth(200);
+        System.out.println(testList.get(0).gettTitle());
+        System.out.println(testList.get(0).gettTimeMin());
+        System.out.println(testList.get(0).gettMaxPoints());
 
 
-        table.getColumns().addAll(testCol, timeCol, questionsCol, createdCol);
+       /* for (int i = 0; i < testList.size(); i++) {
+            System.out.println(testList.get(i).gettTitle());
 
 
-
-
-        Scene welcomeScene = new Scene(bp, 1600,900);
+        }
+*/
+        Scene welcomeScene = new Scene(bp, 1600, 900);
         welcomeScene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(welcomeScene);
         window.centerOnScreen();
 
 
 
+    }
+    public ObservableList<Table> getTests(){
+        ObservableList<Table> tests = FXCollections.observableArrayList();
+        tests.add(new Table("String", 10,100));
+            return tests;
     }
 }
