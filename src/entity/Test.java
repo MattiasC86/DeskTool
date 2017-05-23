@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
+@NamedQuery(name="Test.findAll", query="SELECT t FROM Test t")
 public class Test {
 
     @Id

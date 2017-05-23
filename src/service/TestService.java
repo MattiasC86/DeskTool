@@ -5,7 +5,9 @@ import entity.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class TestService {
@@ -44,6 +46,15 @@ public class TestService {
 
         Test chosenTest = entityManager.find(Test.class, testId);
         return chosenTest;
+    }
+
+    public static List<Test> readAll() {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        List<Test> testList = entityManager.createNamedQuery("Test.findAll").getResultList();
+
+        return testList;
     }
 
     public static void update(Test test) {

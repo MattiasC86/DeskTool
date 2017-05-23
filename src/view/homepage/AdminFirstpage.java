@@ -1,5 +1,6 @@
 package view.homepage;
 
+import entity.Test;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -7,7 +8,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import service.TestService;
 import view.menuBars.MenuBarAdmin;
+
+import java.util.List;
 
 
 /**
@@ -36,6 +40,9 @@ public class AdminFirstpage {
         l2.setStyle("-fx-font-size: 24pt");
         l2.relocate(700,50);
         pane.getChildren().add(l2);
+
+        // testList will contain all Tests from database
+        List<Test> testList = TestService.readAll();
 
         TableView table = new TableView();
         table.relocate(700, 100);
