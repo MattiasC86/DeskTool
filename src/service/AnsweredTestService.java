@@ -33,7 +33,11 @@ public class AnsweredTestService {
         EntityManager entityManager = emFactory.createEntityManager();
 
         Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.user.userId = " + userId + " and at.test.testId = " + testId);
-        AnsweredTest at = (AnsweredTest)query.getResultList();
+        List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
+        AnsweredTest at = null;
+        for(AnsweredTest element : atList) {
+            at = element;
+        }
 
         return at;
     }
