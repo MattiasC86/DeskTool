@@ -1,6 +1,7 @@
 package service;
 
 
+import entity.Test;
 import entity.User;
 
 import javax.persistence.EntityManager;
@@ -23,6 +24,15 @@ public class UserService {
 
         entityManager.close();
         emFactory.close();
+    }
+
+    public static List<User> readAll() {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        List<User> userList = entityManager.createNamedQuery("User.findAll").getResultList();
+
+        return userList;
     }
 
     public static User read(int userId) {

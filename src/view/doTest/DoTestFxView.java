@@ -16,10 +16,7 @@ package view.doTest;
         import javafx.collections.ObservableList;
         import javafx.scene.Scene;
         import javafx.scene.control.*;
-        import javafx.scene.input.ClipboardContent;
-        import javafx.scene.input.DragEvent;
-        import javafx.scene.input.Dragboard;
-        import javafx.scene.input.TransferMode;
+        import javafx.scene.input.*;
         import javafx.scene.layout.Pane;
         import javafx.stage.Stage;
         import logic.LoginLogic;
@@ -51,10 +48,16 @@ public class DoTestFxView {
         testInfo.relocate(800, 50);
         pane.getChildren().add(testInfo);
 
+        final SelectionMode NONE;
+
         TestList = new ListView<Pane>();
         TestList.setPrefSize(1200, 600);
         TestList.relocate(300, 200);
+        TestList.setFocusTraversable( false );
         pane.getChildren().add(TestList);
+
+
+
 
         window.setTitle("Göra test");
         window.setOnCloseRequest(e -> Platform.exit());
@@ -78,7 +81,7 @@ public class DoTestFxView {
 
 
 
-    public void addOneQuestion(int answerNumber) {
+    public void addOneQuestion(int answerNumber, String Question, List<Answer> answersList) {
 
         Pane pane = new Pane();
         pane.setStyle("-fx-border-color: black");
@@ -89,7 +92,7 @@ public class DoTestFxView {
         label.relocate(20, 5);
         pane.getChildren().add(label);
 
-        Label label1 = new Label("Frågan....");
+        Label label1 = new Label(Question);
         label1.setStyle("-fx-font-size: 14pt");
         label1.relocate(20, 50);
         pane.getChildren().add(label1);
@@ -97,7 +100,7 @@ public class DoTestFxView {
         CheckBox[] answerBox = new CheckBox[answerNumber];
 
         for (int i = 0; i < answerNumber; i++) {
-            answerBox[i] = new CheckBox("Svar: " + (i + 1));
+            answerBox[i] = new CheckBox(answersList.get(i).getaText());
             answerBox[i].relocate(20 + (i * 190), 100);
             pane.getChildren().add(answerBox[i]);
 
