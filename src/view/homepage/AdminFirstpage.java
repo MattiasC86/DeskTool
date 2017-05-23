@@ -57,16 +57,25 @@ public class AdminFirstpage {
 
 
         TableColumn<Table, String> testName = new TableColumn<>("Name");
-        testName.setPrefWidth(200);
-        testName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        testName.setMinWidth(200);
+        testName.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         TableColumn<Table, Integer> testTime = new TableColumn<>("Time");
-        testTime.setPrefWidth(200);
-        testTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+        testTime.setMinWidth(200);
+        testTime.setCellValueFactory(new PropertyValueFactory<>("timeLimit"));
 
         TableColumn<Table, Integer> testQuestions = new TableColumn<>("Questions");
-        testQuestions.setPrefWidth(200);
+        testQuestions.setMinWidth(200);
         testQuestions.setCellValueFactory(new PropertyValueFactory<>("questions"));
+
+        TableColumn<Table, Integer> teacher = new TableColumn<>("Teacher");
+        teacher.setMinWidth(200);
+        teacher.setCellValueFactory(new PropertyValueFactory<>("user"));
+
+        testName.setStyle( "-fx-alignment: CENTER;");
+        testTime.setStyle( "-fx-alignment: CENTER;");
+        testQuestions.setStyle( "-fx-alignment: CENTER;");
+        teacher.setStyle( "-fx-alignment: CENTER;");
 
 
 
@@ -74,7 +83,7 @@ public class AdminFirstpage {
 
         TableView<Table> table = new TableView();
         table.setItems(getTests());
-        table.getColumns().addAll(testName, testTime, testQuestions);
+        table.getColumns().addAll(testName, testTime, testQuestions, teacher) ;
 
         table.relocate(700, 100);
         table.setPrefSize(800, 700);
@@ -83,17 +92,6 @@ public class AdminFirstpage {
         pane.getChildren().add(table);
 
 
-        System.out.println(testList.get(0).gettTitle());
-        System.out.println(testList.get(0).gettTimeMin());
-        System.out.println(testList.get(0).gettMaxPoints());
-
-
-       /* for (int i = 0; i < testList.size(); i++) {
-            System.out.println(testList.get(i).gettTitle());
-
-
-        }
-*/
         Scene welcomeScene = new Scene(bp, 1600, 900);
         welcomeScene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(welcomeScene);
@@ -104,7 +102,10 @@ public class AdminFirstpage {
     }
     public ObservableList<Table> getTests(){
         ObservableList<Table> tests = FXCollections.observableArrayList();
-        tests.add(new Table("String", 10,100));
+        for(int i = 0; i < testList.size(); i++) {
+            tests.addAll(new Table(testList.get(i).gettTitle(), testList.get(i).gettTimeMin(), testList.get(i).gettMaxPoints(),
+                    testList.get(i).getUser().getFirstName() + " " + testList.get(i).getUser().getLastName()));
+        }
             return tests;
     }
 }

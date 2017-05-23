@@ -9,11 +9,13 @@ public class Table {
     private String title;
     private int timeLimit;
     private int questions;
+    private String user;
 
-    public Table(String title, int timeLimit, int questions) {
+    public Table(String title, int timeLimit, int questions, String user) {
         this.title = title;
         this.timeLimit = timeLimit;
         this.questions = questions;
+        this.user = user;
 
     }
 
@@ -39,5 +41,13 @@ public class Table {
 
     public void setQuestions(int questions) {
         this.questions = questions;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

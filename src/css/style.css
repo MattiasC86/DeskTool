@@ -30,7 +30,7 @@
 /*FIRSTPAGE*/
 /*FIRSTPAGE*/
 #firstpagePane{
-    -fx-background-image: url('../pic/bakgrundquiz.jpg');
+    -fx-background-image: url('../pic/bkreg.jpg');
     -fx-background-repeat: stretch;
     -fx-background-position: center center;
 }
@@ -41,7 +41,7 @@
 /*CREATE TEST*/
 /*CREATE TEST*/
 #createTestPane{
-    -fx-background-image: url('../pic/bakgrundquiz2.jpg');
+    -fx-background-image: url('../pic/bkreg.jpg');
     -fx-background-repeat: stretch;
     -fx-background-position: center center;
 }
