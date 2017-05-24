@@ -17,6 +17,13 @@ import java.util.ArrayList;
  */
 public class TestLogic {
 
+    public static void saveAnsweredTest() {
+        // Ta in test, frågor, svar, tidsåtgång, user
+    }
+
+
+
+
     public static void saveTest(ArrayList<PreQuestion> list, String title, int selfCorrecting, int timeMin, User user) {
 
         int nrOfQuestions = list.size();

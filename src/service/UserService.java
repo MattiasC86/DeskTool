@@ -32,6 +32,9 @@ public class UserService {
 
         List<User> userList = entityManager.createNamedQuery("User.findAll").getResultList();
 
+        entityManager.close();
+        emFactory.close();
+
         return userList;
     }
 
@@ -39,7 +42,26 @@ public class UserService {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
-        return entityManager.find(User.class, userId);
+        User user = entityManager.find(User.class, userId);
+
+        entityManager.close();
+        emFactory.close();
+
+        return user;
+    }
+
+    public static List<User> readStudents() {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        Query studentQuery = entityManager.createQuery( "Select u from User u where u.role = 'Student'");
+
+        List<User> studentList=(List<User>)studentQuery.getResultList();
+
+        entityManager.close();
+        emFactory.close();
+
+        return studentList;
     }
 
     public static String read(String criteria, String keyword, String youwant){
