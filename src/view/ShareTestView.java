@@ -9,9 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.LoginLogic;
 import service.*;
+import view.menuBars.MenuBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ import java.util.List;
  */
 public class ShareTestView {
     User currUser;
-    FlowPane pane = new FlowPane();
+    FlowPane flowpane = new FlowPane();
 
     ComboBox testBox;
     ComboBox shareTypeBox;
@@ -45,6 +47,14 @@ public class ShareTestView {
     public ShareTestView(Stage window){
         currUser = UserService.read(LoginLogic.getCurrId());
 
+        Pane menuPane = new Pane();
+
+        Pane mainPane = new Pane();
+
+        MenuBarHelper.getMenuBar(window,menuPane);
+
+
+
         // If logged in user is Admin, all tests are shown
         // If user is Teacher, only the tests created by this teacher is shown
         switch (currUser.getRole()) {
@@ -64,11 +74,16 @@ public class ShareTestView {
                         testNames
                 );
         testBox = new ComboBox(availableTests);
-        pane.getChildren().removeAll(userSelectBox, shareTypeBox, shareBtn);
-        pane.getChildren().addAll(testBox);
+        flowpane.getChildren().removeAll(userSelectBox, shareTypeBox, shareBtn);
+        flowpane.getChildren().addAll(testBox);
+        flowpane.relocate(200,100);
+        flowpane.setPrefWidth(1200);
+
+        mainPane.getChildren().addAll(menuPane, flowpane);
 
 
-        Scene scene = new Scene(pane, 1600, 900);
+        Scene scene = new Scene(mainPane, 1600, 900);
+        window.setTitle("Dela prov");
         window.setScene(scene);
         window.show();
 
@@ -85,7 +100,7 @@ public class ShareTestView {
     }
 
     public void displayShareTypeBox() {
-        pane.getChildren().removeAll(userSelectBox, shareTypeBox, shareBtn);
+        flowpane.getChildren().removeAll(userSelectBox, shareTypeBox, shareBtn);
         List<String> shareTypeL = new ArrayList<>();
         shareTypeL.add("Dela till enskild elev");
         shareTypeL.add("Dela till grupp");
@@ -95,7 +110,7 @@ public class ShareTestView {
                 );
         shareTypeBox = new ComboBox(shareTypes);
 
-        pane.getChildren().addAll(shareTypeBox);
+        flowpane.getChildren().addAll(shareTypeBox);
 
         // When type is selected in shareTypeBox
         shareTypeBox.setOnAction(e->{
@@ -105,7 +120,7 @@ public class ShareTestView {
     }
 
     public void displayUserSelectBox() {
-        pane.getChildren().removeAll(userSelectBox, shareBtn);
+        flowpane.getChildren().removeAll(userSelectBox, shareBtn);
         List<String> listItems = new ArrayList<>();
 
         if(shareTypeBox.getSelectionModel().getSelectedItem() == "Dela till enskild elev") {
@@ -126,11 +141,11 @@ public class ShareTestView {
                 );
         userSelectBox = new ComboBox(availableUsers);
 
-        pane.getChildren().addAll(userSelectBox);
+        flowpane.getChildren().addAll(userSelectBox);
 
         userSelectBox.setOnAction(e->{
             shareBtn = new Button("Dela prov");
-            pane.getChildren().addAll(shareBtn);
+            flowpane.getChildren().addAll(shareBtn);
             shareBtn.setOnAction(d->{
                 shareTest();
             });

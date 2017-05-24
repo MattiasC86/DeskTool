@@ -39,7 +39,7 @@ public class StatisticsView{
     private ComboBox userBox;
     private ComboBox testBox;
     private ComboBox userTestBox;
-    
+
 
     Label test;
     Label nrDone;

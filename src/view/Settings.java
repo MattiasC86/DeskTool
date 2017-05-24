@@ -36,7 +36,7 @@ public class Settings {
 
         MenuBarHelper.getMenuBar(window, pane);
 
-        Pane bp = new Pane();
+        BorderPane bp = new BorderPane();
         bp.setPadding(new Insets(20, 50, 50, 50));
 
         Pane labelPane = new Pane();
@@ -66,9 +66,14 @@ public class Settings {
         Button buttonChangeEmail = new Button("OK");
         Button buttonChangePassword = new Button("OK");
 
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setOffsetX(5);
+        dropShadow.setOffsetY(5);
+
         Text text = new Text("Redigera användare");
         text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
-        text.setFill(Color.WHITE);
+        text.setFill(Color.BLACK);
+        text.setEffect(dropShadow);
 
 
         labelFirstname.relocate(400, 100);
@@ -103,18 +108,14 @@ public class Settings {
         labelPane.getChildren().addAll(labelFirstname,currentFirstname,labelLastname,currentLastname,labelUsername,currentUsername,labelEmail,currentEmail,labelPassword,currentPassword,
                 newEmail,changeEmail,buttonChangeEmail,newPassword,changePassword,buttonChangePassword,text);
 
-        bp.getChildren().addAll(labelPane);
+        bp.setCenter(labelPane);
 
-        Rectangle rect = new Rectangle(1200,600);
-        rect.setArcHeight(100.0);
-        rect.setArcWidth(100.0);
 
-        bp.setClip(rect);
 
         Pane mainPane = new Pane();
-        bp.relocate(200,100);
+        bp.relocate(200,70);
         bp.setPrefWidth(1200);
-        bp.setPrefHeight(600);
+        bp.setPrefHeight(500);
 
         mainPane.getChildren().addAll(bp,pane);
 
@@ -132,6 +133,8 @@ public class Settings {
         currentEmail.setId("settingsLabel");
         currentPassword.setId("settingsLabel");
         currentUsername.setId("settingsLabel");
+        buttonChangeEmail.setId("btnSettings");
+        buttonChangePassword.setId("btnSettings");
 
 
 

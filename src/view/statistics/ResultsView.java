@@ -10,10 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.StatisticsLogic;
 import service.TestService;
 import service.UserService;
+import view.menuBars.MenuBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,8 @@ import java.util.List;
 public class ResultsView {
 
     User currUser;
-    FlowPane pane = new FlowPane();
+    FlowPane flowpane = new FlowPane();
+    Pane pane;
 
     List<AnsweredTest> tests;
     ComboBox testBox;
@@ -38,6 +41,15 @@ public class ResultsView {
     public ResultsView(Stage window) {
         currUser = UserService.read(1); //LoginLogic.getCurrId();
 
+        Pane menuPane = new Pane();
+
+        Pane mainPane = new Pane();
+
+        pane = new Pane();
+        pane.relocate(200,100);
+
+        MenuBarHelper.getMenuBar(window, menuPane);
+
         tests = StatisticsLogic.getCorrected(1);
 
         List<String> testNames = new ArrayList<>();
@@ -49,11 +61,16 @@ public class ResultsView {
                 FXCollections.observableArrayList(
                         testNames
                 );
+
+
         testBox = new ComboBox(availableTests);
+        testBox.relocate(100,100);
 
         pane.getChildren().addAll(testBox);
 
-        Scene scene = new Scene(pane, 1600, 900);
+        mainPane.getChildren().addAll(menuPane, pane);
+
+        Scene scene = new Scene(mainPane, 1600, 900);
         window.setScene(scene);
         window.show();
 
@@ -80,6 +97,11 @@ public class ResultsView {
         time = new Label("Tidåtgång: " + timeMin + " min "
                 + leftOverSec + " sek / " + selectedTest.getTest().gettTimeMin() + " min");
         grade = new Label("Betyg: " + selectedTest.getaTGrade());
+
+        testTitle.relocate(100,150);
+        points.relocate(100, 200);
+        time.relocate(100, 250);
+        grade.relocate(100, 300);
 
         pane.getChildren().addAll(testTitle, points, time, grade);
     }
