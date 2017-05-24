@@ -64,7 +64,6 @@ public class LoginPage {
         dropShadow.setOffsetX(5);
         dropShadow.setOffsetY(5);
 
-
         //Add HBox and GridPane layout to BorderPane Layout
         bp.setTop(hb);
         bp.setCenter(gridPane);

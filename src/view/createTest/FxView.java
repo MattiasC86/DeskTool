@@ -165,9 +165,6 @@ public class FxView {
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(scene);
         window.show();
-
-
-
     }
 
     private void setNumberOfQuestions(){

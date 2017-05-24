@@ -5,6 +5,7 @@ import entity.Question;
 import entity.Test;
 import entity.User;
 import javafx.application.Platform;
+import javafx.beans.binding.ListBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -34,8 +35,9 @@ public class SelectTestView {
 
     //These variables have getters and will hold the selected test, questions and answers
     static private Test selectedTest;
-    static private List<Question> testQuestions;
-    static private List<List> testAnswers;
+    static public List<Question> testQuestions;
+    static public List<List> testAnswers;
+    static public List<doTestQuestion> doTestQuestionsList;
 
     public SelectTestView(Stage window) {
 
@@ -106,30 +108,6 @@ public class SelectTestView {
         // Redirects user to DoTestFXView
         startTest.setOnAction(e->{
             DoTestFxView dtfv = new DoTestFxView(window);
-
-            /*
-            static private Test selectedTest;
-            static private List<Question> testQuestions;
-            static private List<List> testAnswers;
-           */
-
-
-
-            for(int i = 0; i < testAnswers.size(); i++) {
-
-                List dd = testAnswers.get(i);
-
-                for(int d = 0; d < testAnswers.get(i).size(); d++) {
-
-
-                    //System.out.println(dd.get(d).);
-
-                }
-
-
-            }
-
-
             dtfv.setTestInfo(selectedTest.gettTitle(), testQuestions.size(), selectedTest.gettTimeMin());
 
             for(int i = 0; i < testQuestions.size(); i++) {
@@ -138,14 +116,22 @@ public class SelectTestView {
 
                 List<Answer> list = testAnswers.get(i);
 
+                doTestQuestionsList = new ArrayList();
+
                 if (qType.equalsIgnoreCase("Single")) {
-                    dtfv.addOneQuestion(list.size(), testQuestions.get(i).getqText(), list);
+                    doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.TestList);
+                    q.singleQuestion();
+                    doTestQuestionsList.add(q);
                 }
                 else if (qType.equalsIgnoreCase("Multiple")) {
-                    dtfv.addManyQuestion(list.size(), testQuestions.get(i).getqText(), list);
+                    doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.TestList);
+                    q.manyQuestion();
+                    doTestQuestionsList.add(q);
                 }
                 else if (qType.equalsIgnoreCase("Ranked")) {
-                    dtfv.addRankQuestion(2);
+                    doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.TestList);
+                    q.rankedQuestion();
+                    doTestQuestionsList.add(q);
                 }
             }
         });
