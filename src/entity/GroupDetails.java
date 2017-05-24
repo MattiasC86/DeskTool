@@ -15,11 +15,18 @@ public class GroupDetails {
 
     @OneToOne
     private
-    StudentGroup StudentGroup;
+    StudentGroup studentGroup;
 
     @OneToOne
     private
     User user;
+
+    public GroupDetails(StudentGroup studentGroup, User user) {
+        this.studentGroup = studentGroup;
+        this.user = user;
+    }
+
+    public GroupDetails() {}
 
     public int getGroupDetailsId() {
         return GroupDetailsId;
@@ -30,11 +37,11 @@ public class GroupDetails {
     }
 
     public entity.StudentGroup getStudentGroup() {
-        return StudentGroup;
+        return studentGroup;
     }
 
     public void setStudentGroup(entity.StudentGroup studentGroup) {
-        StudentGroup = studentGroup;
+        studentGroup = studentGroup;
     }
 
     public User getUser() {

@@ -1,5 +1,6 @@
 package service;
 
+import entity.GroupDetails;
 import entity.StudentGroup;
 import entity.User;
 
@@ -19,6 +20,22 @@ public class StudentGroupService {
 
         entityManager.getTransaction().begin();
         entityManager.persist(studentGroup);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        emFactory.close();
+    }
+
+    public static void create(String groupName, List<User> users) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+            StudentGroup studentGroup = new StudentGroup(groupName);
+            entityManager.persist(studentGroup);
+            for(User user : users) {
+                entityManager.persist(new GroupDetails(studentGroup, user));
+            }
         entityManager.getTransaction().commit();
 
         entityManager.close();
