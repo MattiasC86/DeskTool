@@ -210,6 +210,37 @@ public class StatisticsView{
         });
     }
 
+    public void loadGroupTestBox(){
+        // Loads selected StudentGroup from db
+        int selectedUserIndex = userBox.getSelectionModel().getSelectedIndex();
+        User selectedUser = userList.get(selectedUserIndex);
+
+        // Loads all tests shared with selected user from db
+        userTests = TestService.readAllByStudent(selectedUser.getUserId());
+
+
+        // Creates new ComboBox userTestBox to show all tests shared with selected user
+        List<String> testNames = new ArrayList<>();
+        for(Test element : userTests) {
+            testNames.add(element.gettTitle());
+        }
+        ObservableList<String> availableTests =
+                FXCollections.observableArrayList(
+                        testNames
+                );
+        studentpane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
+        userTestBox = new ComboBox(availableTests);
+        userTestBox.setPrefWidth(200);
+
+        studentpane.getChildren().addAll(userTestBox);
+        userTestBox.relocate(350,100);
+
+        // When a test is selected for the user selected in userBox
+        userTestBox.setOnAction(e-> {
+            showUserTestStatistics(selectedUser);
+        });
+    }
+
     // Shows statistics for selected test
     public void showTestStatistics() {
         testpane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
