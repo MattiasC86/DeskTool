@@ -33,23 +33,29 @@ public class AdminFirstpage {
 
         window.setTitle("Hem");
 
-        Pane pane = new Pane();
+        Pane menuPane = new Pane();
 
-        MenuBarAdmin x = new MenuBarAdmin(pane, window);
+        MenuBarAdmin x = new MenuBarAdmin(menuPane, window);
 
-        BorderPane bp = new BorderPane();
-        bp.setTop(pane);
+        Pane mainPane = new Pane();
+
+        Pane textPane = new Pane();
+        textPane.relocate(100,100);
+        textPane.setPrefHeight(700);
+        textPane.setPrefWidth(500);
 
 
-        Label l1 = new Label("Välkommen till Newtons Provportal");
+
+
+        Label l1 = new Label("Välkommen!");
         l1.setStyle("-fx-font-size: 24pt");
-        l1.relocate(100, 100);
-        pane.getChildren().add(l1);
+        l1.relocate(50, 20);
+        textPane.getChildren().add(l1);
 
         Label l2 = new Label("Prov i databasen");
         l2.setStyle("-fx-font-size: 24pt");
         l2.relocate(700, 50);
-        pane.getChildren().add(l2);
+        mainPane.getChildren().add(l2);
 
         // testList will contain all Tests from database
         testList = TestService.readAll();
@@ -85,14 +91,15 @@ public class AdminFirstpage {
         table.setPrefSize(800, 700);
         table.setStyle("-fx-font-size: 12pt");
 
-        pane.getChildren().add(table);
+        mainPane.getChildren().addAll(menuPane, table, textPane);
 
-        bp.setId("firstpagePane");
+        mainPane.setId("firstpagePane");
+        textPane.setId("textPane");
         l1.getStyleClass().add("firstpageL1");
         l2.getStyleClass().add("firstpageL1");
 
 
-        Scene welcomeScene = new Scene(bp, 1600, 900);
+        Scene welcomeScene = new Scene(mainPane, 1600, 900);
         welcomeScene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(welcomeScene);
         window.centerOnScreen();

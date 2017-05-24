@@ -36,8 +36,16 @@
 }
 
 .firstpageL1{
-    -fx-text-fill: white;
+    -fx-text-fill: #000000;
 
+}
+
+#textPane{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-color: #000000;
+    -fx-border-radius: 20;
+    -fx-padding: 10 10 10 10;
+    -fx-background-radius: 20;
 }
 /*FIRSTPAGE*/
 /*FIRSTPAGE*/
