@@ -15,6 +15,8 @@
         <class>entity.AnsweredTest</class>
         <class>entity.AnsweredQuestion</class>
         <class>entity.UserAnswer</class>
+        <class>entity.StudentGroup</class>
+        <class>entity.GroupDetails</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testtooldesk"/>

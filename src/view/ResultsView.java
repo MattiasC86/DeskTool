@@ -65,7 +65,7 @@ public class ResultsView extends Application {
 
     public void showTestResults() {
         pane.getChildren().removeAll(testTitle, points, time, grade);
-        
+
         // Loads selected AnsweredTest from db
         int selectedTestIndex = testBox.getSelectionModel().getSelectedIndex();
         AnsweredTest selectedTest = tests.get(selectedTestIndex);
