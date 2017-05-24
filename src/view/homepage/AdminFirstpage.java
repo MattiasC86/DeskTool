@@ -41,13 +41,13 @@ public class AdminFirstpage {
         bp.setTop(pane);
 
 
-        Text l1 = new Text("Välkommen till Newtons Provportal");
-        l1.setFont(Font.font("Courier New", FontWeight.BOLD, 32));
+        Label l1 = new Label("Välkommen till Newtons Provportal");
+        l1.setStyle("-fx-font-size: 24pt");
         l1.relocate(100, 100);
         pane.getChildren().add(l1);
 
-        Text l2 = new Text("Prov i databasen");
-
+        Label l2 = new Label("Prov i databasen");
+        l2.setStyle("-fx-font-size: 24pt");
         l2.relocate(700, 50);
         pane.getChildren().add(l2);
 
@@ -59,7 +59,7 @@ public class AdminFirstpage {
         testName.setMinWidth(200);
         testName.setCellValueFactory(new PropertyValueFactory<>("title"));
 
-        TableColumn<Table, Integer> testTime = new TableColumn<>("Tidsgräns");
+        TableColumn<Table, Integer> testTime = new TableColumn<>("Tidsgräns / min");
         testTime.setMinWidth(200);
         testTime.setCellValueFactory(new PropertyValueFactory<>("timeLimit"));
 
@@ -88,8 +88,8 @@ public class AdminFirstpage {
         pane.getChildren().add(table);
 
         bp.setId("firstpagePane");
-        l1.setId("firstpageL1");
-        l2.setId("firstpageL1");
+        l1.getStyleClass().add("firstpageL1");
+        l2.getStyleClass().add("firstpageL1");
 
 
         Scene welcomeScene = new Scene(bp, 1600, 900);

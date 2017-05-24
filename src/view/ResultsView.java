@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by matti on 2017-05-23.
  */
-public class ResultsView extends Application {
+public class ResultsView {
 
     User currUser;
     FlowPane pane = new FlowPane();
@@ -34,8 +34,8 @@ public class ResultsView extends Application {
     Label time;
     Label grade;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+
+    public ResultsView(Stage window) {
         currUser = UserService.read(1); //LoginLogic.getCurrId();
 
         tests = StatisticsLogic.getCorrected(1);
@@ -54,8 +54,8 @@ public class ResultsView extends Application {
         pane.getChildren().addAll(testBox);
 
         Scene scene = new Scene(pane, 1600, 900);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        window.setScene(scene);
+        window.show();
 
         // When a test is selected in testBox
         testBox.setOnAction(e->{
@@ -84,7 +84,5 @@ public class ResultsView extends Application {
         pane.getChildren().addAll(testTitle, points, time, grade);
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 }

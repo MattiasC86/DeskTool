@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.ResultsView;
 import view.doTest.DoTestFxView;
 import view.doTest.SelectTestView;
 import view.homepage.AdminFirstpage;
@@ -101,6 +102,9 @@ public class MenuBarStudent {
             SelectTestView stv = new SelectTestView(window);
         });
 
+        doneTest.setOnAction(e->{
+            ResultsView rv = new ResultsView(window);
+        });
     }
 
 }
