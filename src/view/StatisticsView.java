@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -52,6 +54,9 @@ public class StatisticsView{
     Label points;
     Label uTime;
 
+    Pane studentpane;
+    Pane testpane;
+
     FlowPane pane;
 
     /*
@@ -73,14 +78,34 @@ public class StatisticsView{
         currUser = UserService.read(LoginLogic.getCurrId());
         userList = UserService.readAll();
 
+        Pane mainpane = new Pane();
+
         Pane barpane = new Pane();
+
+        //Pane tabpane = new Pane();
+
 
         MenuBarHelper.getMenuBar(window, barpane);
 
-        pane = new FlowPane();
-        barpane.getChildren().add(pane);
-        pane.relocate(0,100);
 
+        TabPane tp = new TabPane();
+        tp.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
+        Tab student = new Tab("Student");
+        studentpane = new Pane();
+        studentpane.setPrefWidth(1200);
+        studentpane.setPrefHeight(600);
+
+        Tab test = new Tab("Prov");
+        testpane = new Pane();
+        testpane.setPrefWidth(1200);
+        testpane.setPrefHeight(600);
+
+        tp.getTabs().addAll(student, test);
+
+
+        tp.relocate(200,100);
+        mainpane.getChildren().addAll(barpane,tp);
 
         List<String> userNames = new ArrayList<>();
 
@@ -92,6 +117,11 @@ public class StatisticsView{
                         userNames
                 );
         userBox = new ComboBox(availableUsers);
+        userBox.setPrefWidth(200);
+
+        userTestBox = new ComboBox();
+        userTestBox.setPrefWidth(200);
+
 
         // If logged in user is Admin, all tests are shown
         // If user is Teacher, only the tests created by this teacher is shown
@@ -113,12 +143,30 @@ public class StatisticsView{
                         testNames
                 );
         testBox = new ComboBox(availableTests);
+        testBox.setPrefWidth(200);
 
-        pane.getChildren().addAll(userBox, testBox);
 
-        Scene scene = new Scene(barpane, 1600, 900);
+
+        userTestBox.relocate(350, 100);
+        userBox.relocate(100,100);
+        studentpane.getChildren().addAll(userBox, userTestBox);
+        student.setContent(studentpane);
+
+        testBox.relocate(100,100);
+        testpane.getChildren().addAll(testBox);
+        test.setContent(testpane);
+
+        Scene scene = new Scene(mainpane, 1600, 900);
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(scene);
         window.show();
+
+        //////////////////////////////////////////////////////////////////////////////
+
+        pane = new FlowPane();
+        //barpane.getChildren().add(pane);
+        pane.relocate(0,100);
+
 
         // When a user is selected in userBox
         userBox.setOnAction(e->{
@@ -139,6 +187,7 @@ public class StatisticsView{
         // Loads all tests shared with selected user from db
         userTests = TestService.readAllByStudent(selectedUser.getUserId());
 
+
         // Creates new ComboBox userTestBox to show all tests shared with selected user
         List<String> testNames = new ArrayList<>();
         for(Test element : userTests) {
@@ -148,10 +197,12 @@ public class StatisticsView{
                 FXCollections.observableArrayList(
                         testNames
                 );
-        pane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
+        studentpane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
         userTestBox = new ComboBox(availableTests);
+        userTestBox.setPrefWidth(200);
 
-        pane.getChildren().addAll(userTestBox);
+        studentpane.getChildren().addAll(userTestBox);
+        userTestBox.relocate(350,100);
 
         // When a test is selected for the user selected in userBox
         userTestBox.setOnAction(e-> {
@@ -161,7 +212,7 @@ public class StatisticsView{
 
     // Shows statistics for selected test
     public void showTestStatistics() {
-        pane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
+        testpane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
 
         // Loads selected test from db
         int selectedTestIndex = testBox.getSelectionModel().getSelectedIndex();
@@ -171,7 +222,11 @@ public class StatisticsView{
         test  = new Label("Prov: " + selectedTest.gettTitle());
         nrDone = new Label("Antal genomförda: " + StatisticsLogic.getNrDone(selectedTest.getTestId()) +
                 " / " + StatisticsLogic.getNrAccess(selectedTest.getTestId()));
-        pane.getChildren().addAll(test, nrDone);
+
+        test.relocate(100, 150);
+        nrDone.relocate(100, 200);
+
+        testpane.getChildren().addAll(test, nrDone);
 
         // If any student has done the test
         if(StatisticsLogic.getNrDone(selectedTest.getTestId()) != 0) {
@@ -185,13 +240,18 @@ public class StatisticsView{
             avgTime = new Label("Snittid: " + avgTimeMin + " min " +
                     leftOverSec + " sek / " + selectedTest.gettTimeMin() + " min");
 
-            pane.getChildren().addAll(nrPassed, avgScore, avgTime);
+            nrPassed.relocate(100, 250);
+            avgScore.relocate(100, 300);
+            avgTime.relocate(100, 350);
+
+
+            testpane.getChildren().addAll(nrPassed, avgScore, avgTime);
         }
     }
 
     // Shows statistics for selected user and test
     public void showUserTestStatistics(User selectedUser) {
-        pane.getChildren().removeAll(test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
+        studentpane.getChildren().removeAll(test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
 
         // Loads selected test from db
         int selectedTestIndex = userTestBox.getSelectionModel().getSelectedIndex();
@@ -205,17 +265,25 @@ public class StatisticsView{
         // If student havn't yet completed the test
         if(at == null) {
             status = new Label(selectedUser.getFirstName() + " " + selectedUser.getLastName() + " har ännu inte genomfört detta test");
-            pane.getChildren().addAll(status);
+            status.relocate(100, 150);
+            studentpane.getChildren().addAll(status);
 
         //If student has completed the test
         } else {
+
             student = new Label("Elev: " + selectedUser.getFirstName() + " " + selectedUser.getLastName());
             uTest  = new Label("Prov: " + selectedTest.gettTitle());
             grade = new Label("Betyg: " + at.getaTGrade());
             points = new Label("Poäng:" + at.getaTPoints());
             uTime = new Label("Tidåtgång: " + (at.getaTTimeSec() / 60) + " minuter");
 
-            pane.getChildren().addAll(student, uTest, grade, points, uTime);
+            student.relocate(100,150);
+            uTest.relocate(100, 200);
+            grade.relocate(100, 250);
+            points.relocate(100, 300);
+            uTime.relocate(100, 350);
+
+            studentpane.getChildren().addAll(student, uTest, grade, points, uTime);
         }
 
     }

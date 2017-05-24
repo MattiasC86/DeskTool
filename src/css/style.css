@@ -125,3 +125,29 @@
 }
 /*SETTINGS*/
 /*SETTINGS*/
+
+/*STATICS*/
+/*STATICS*/
+.tab-pane *.tab-header-area *.tab-header-background {
+    -fx-background-color:transparent;
+}
+
+.tab-pane {
+    -fx-tab-min-width:100px;
+    -fx-tab-max-width:100px;
+    -fx-tab-min-height:30px;
+    -fx-tab-max-height:30px;
+}
+
+.tab {
+    -fx-font-family: Arial;
+    -fx-font-size: 18;
+    /*-fx-background-color:royalblue ;*/
+}
+
+.tab:selected {
+    /*-fx-background-color:blue ;*/
+}
+
+/*STATICS*/
+/*STATICS*/
