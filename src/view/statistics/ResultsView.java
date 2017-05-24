@@ -1,4 +1,4 @@
-package view;
+package view.statistics;
 
 import entity.AnsweredTest;
 import entity.Test;

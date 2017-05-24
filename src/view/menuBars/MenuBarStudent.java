@@ -3,21 +3,14 @@ package view.menuBars;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.ResultsView;
-import view.doTest.DoTestFxView;
+import view.statistics.ResultsView;
 import view.doTest.SelectTestView;
-import view.homepage.AdminFirstpage;
 import view.LoginPage;
 import view.Settings;
 import view.homepage.StudentFirstpage;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 /**
  * Created by Rasmus on 2017-05-11.

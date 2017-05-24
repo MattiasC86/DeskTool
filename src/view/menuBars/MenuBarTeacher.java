@@ -3,22 +3,16 @@ package view.menuBars;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.StatisticsView;
-import view.doTest.DoTestFxView;
+import view.ShareTestView;
+import view.statistics.StatisticsView;
 import view.doTest.SelectTestView;
-import view.homepage.AdminFirstpage;
 import view.LoginPage;
 import view.Settings;
 import view.createTest.FxView;
 import view.homepage.TeacherFirstpage;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 /**
  * Created by Rasmus on 2017-05-11.
@@ -49,6 +43,7 @@ public class MenuBarTeacher {
 
                 //skapar menuItems att fylla submenyn Test med
                 MenuItem createTest = new MenuItem("Skapa Test");
+                MenuItem shareTest = new MenuItem("Dela Test");
                 MenuItem correctTest = new MenuItem("Rätta Test");
                 MenuItem changeTest = new MenuItem("Ändra Test");
                 MenuItem doTest = new MenuItem("Gör Test");
@@ -109,6 +104,10 @@ public class MenuBarTeacher {
 
                 doneTest.setOnAction(e -> {
                         StatisticsView ssv = new StatisticsView(window);
+                });
+
+                shareTest.setOnAction(e->{
+                        ShareTestView stv = new ShareTestView(window);
                 });
 
         }

@@ -3,24 +3,17 @@ package view.menuBars;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import view.StatisticsView;
-import view.doTest.DoTestFxView;
+import view.ShareTestView;
+import view.statistics.StatisticsView;
 import view.doTest.SelectTestView;
 import view.homepage.AdminFirstpage;
 import view.LoginPage;
 import view.Settings;
 import view.createTest.FxView;
 import view.register.Register;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 /**
  * Created by Rasmus on 2017-05-03.
@@ -30,17 +23,6 @@ public class MenuBarAdmin {
 
     public MenuBarAdmin(Pane pane, Stage window){
 
-        /*FileInputStream homeIcon = null;
-        try {
-            homeIcon = new FileInputStream("src/pic/homeIcon.png");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        Image image = new Image(homeIcon);
-        ImageView homeIV = new ImageView(image);
-        //homeIV.setFitHeight(15);
-        //homeIV.setFitWidth(15);
-        //homeIV.setPreserveRatio(true);*/
 
         Menu menu1 = new Menu("Hem");
 
@@ -52,6 +34,7 @@ public class MenuBarAdmin {
 
         //skapar menuItems att fylla submenyn Test med
         MenuItem createTest = new MenuItem("Skapa Test");
+        MenuItem shareTest = new MenuItem("Dela Test");
         MenuItem correctTest = new MenuItem("Rätta Test");
         MenuItem changeTest = new MenuItem("Ändra Test");
         MenuItem doTest = new MenuItem("Gör Test");
@@ -76,7 +59,7 @@ public class MenuBarAdmin {
 
         menu2.getItems().addAll(createMenu, registerMenu);
 
-        createMenu.getItems().addAll(createTest, correctTest, changeTest, doTest, reuseTest, doneTest);
+        createMenu.getItems().addAll(createTest, shareTest, correctTest, changeTest, doTest, reuseTest, doneTest);
 
         menu3.getItems().addAll(editUser);
 
@@ -124,6 +107,10 @@ public class MenuBarAdmin {
 
         doneTest.setOnAction(e->{
             StatisticsView ssv = new StatisticsView(window);
+        });
+
+        shareTest.setOnAction(e->{
+            ShareTestView stv = new ShareTestView(window);
         });
 
     }

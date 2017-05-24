@@ -1,10 +1,8 @@
 package view;
 
-import entity.AnsweredTest;
 import entity.StudentGroup;
 import entity.Test;
 import entity.User;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -12,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+import logic.LoginLogic;
 import service.*;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ import java.util.List;
 /**
  * Created by matti on 2017-05-24.
  */
-public class ShareTestView extends Application {
+public class ShareTestView {
     User currUser;
     FlowPane pane = new FlowPane();
 
@@ -43,9 +42,8 @@ public class ShareTestView extends Application {
 
     */
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        currUser = UserService.read(1); //LoginLogic.getCurrId()
+    public ShareTestView(Stage window){
+        currUser = UserService.read(LoginLogic.getCurrId());
 
         // If logged in user is Admin, all tests are shown
         // If user is Teacher, only the tests created by this teacher is shown
@@ -71,8 +69,8 @@ public class ShareTestView extends Application {
 
 
         Scene scene = new Scene(pane, 1600, 900);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        window.setScene(scene);
+        window.show();
 
         // When a test is selected in testBox
         testBox.setOnAction(e->{
