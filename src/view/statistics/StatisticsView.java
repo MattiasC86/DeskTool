@@ -1,6 +1,7 @@
 package view.statistics;
 
 import entity.AnsweredTest;
+import entity.StudentGroup;
 import entity.Test;
 import entity.User;
 import javafx.application.Application;
@@ -16,9 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.LoginLogic;
 import logic.StatisticsLogic;
-import service.AnsweredTestService;
-import service.TestService;
-import service.UserService;
+import service.*;
 import view.menuBars.MenuBarHelper;
 
 import java.util.ArrayList;
@@ -35,17 +34,26 @@ public class StatisticsView{
     List<User> userList;
     List<Test> userTests;
     List<Test> testList;
+    List<StudentGroup> groupList;
+    List<Test> groupTests;
 
     private ComboBox userBox;
     private ComboBox testBox;
     private ComboBox userTestBox;
-
+    private ComboBox groupBox;
+    private ComboBox groupTestBox;
 
     Label test;
+    Label gTest;
     Label nrDone;
+    Label gNrDone;
     Label nrPassed;
+    Label gNrPassed;
     Label avgScore;
+    Label gAvgScore;
     Label avgTime;
+    Label gAvgTime;
+    Label gGroup;
 
     Label status;
     Label student;
@@ -59,24 +67,10 @@ public class StatisticsView{
 
     FlowPane pane;
 
-    /*
-    - Välj elev
-        - Välj test
-            - Godkänt
-            - Poäng
-            - Tidåtgång
-
-    - Välj ett test
-        - Antal genomförda test
-        - Antal godkända test
-        - Avarage score
-        - Avarage score
-
-     */
-
     public StatisticsView (Stage window) {
         currUser = UserService.read(LoginLogic.getCurrId());
         userList = UserService.readAll();
+        groupList = StudentGroupService.readAll();
 
         Pane mainpane = new Pane();
 
@@ -107,8 +101,10 @@ public class StatisticsView{
         tp.relocate(200,100);
         mainpane.getChildren().addAll(barpane,tp);
 
-        List<String> userNames = new ArrayList<>();
+        userTestBox = new ComboBox();
+        userTestBox.setPrefWidth(200);
 
+        List<String> userNames = new ArrayList<>();
         for(User element : userList) {
             userNames.add(element.getUserName());
         }
@@ -119,8 +115,16 @@ public class StatisticsView{
         userBox = new ComboBox(availableUsers);
         userBox.setPrefWidth(200);
 
-        userTestBox = new ComboBox();
-        userTestBox.setPrefWidth(200);
+        List<String> groupNames = new ArrayList<>();
+        for(StudentGroup element : groupList) {
+            groupNames.add(element.getGroupName());
+        }
+        ObservableList<String> availableGroups =
+                FXCollections.observableArrayList(
+                        groupNames
+                );
+        groupBox = new ComboBox(availableGroups);
+        groupBox.setPrefWidth(200);
 
 
         // If logged in user is Admin, all tests are shown
@@ -177,6 +181,8 @@ public class StatisticsView{
         testBox.setOnAction(e->{
             showTestStatistics();
         });
+
+
     }
 
     public void loadUserTestBox(){
@@ -212,16 +218,15 @@ public class StatisticsView{
 
     public void loadGroupTestBox(){
         // Loads selected StudentGroup from db
-        int selectedUserIndex = userBox.getSelectionModel().getSelectedIndex();
-        User selectedUser = userList.get(selectedUserIndex);
+        int selectedGroupIndex = groupBox.getSelectionModel().getSelectedIndex();
+        StudentGroup selectedGroup = groupList.get(selectedGroupIndex);
 
-        // Loads all tests shared with selected user from db
-        userTests = TestService.readAllByStudent(selectedUser.getUserId());
+        // Loads all tests
+        groupTests = TestService.readAll();
 
-
-        // Creates new ComboBox userTestBox to show all tests shared with selected user
+        // Creates new ComboBox userTestBox to show all tests
         List<String> testNames = new ArrayList<>();
-        for(Test element : userTests) {
+        for(Test element : groupTests) {
             testNames.add(element.gettTitle());
         }
         ObservableList<String> availableTests =
@@ -229,15 +234,15 @@ public class StatisticsView{
                         testNames
                 );
         studentpane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
-        userTestBox = new ComboBox(availableTests);
-        userTestBox.setPrefWidth(200);
+        groupTestBox = new ComboBox(availableTests);
+        groupTestBox.setPrefWidth(200);
 
         studentpane.getChildren().addAll(userTestBox);
-        userTestBox.relocate(350,100);
+        groupTestBox.relocate(350,100);
 
-        // When a test is selected for the user selected in userBox
-        userTestBox.setOnAction(e-> {
-            showUserTestStatistics(selectedUser);
+        // When a test is selected for the group
+        groupTestBox.setOnAction(e-> {
+            showGroupTestStatistics(selectedGroup);
         });
     }
 
@@ -317,6 +322,37 @@ public class StatisticsView{
             studentpane.getChildren().addAll(student, uTest, grade, points, uTime);
         }
 
+    }
+
+    public void showGroupTestStatistics(StudentGroup selectedStudentGroup) {
+        studentpane.getChildren().removeAll(test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
+
+        // Loads selected test from db
+        int selectedTestIndex = groupTestBox.getSelectionModel().getSelectedIndex();
+        Test selectedTest = groupTests.get(selectedTestIndex);
+
+        // Stores all members in StudentGroup
+        List<User> allMembers = StudentGroupService.readByGroup(selectedStudentGroup.getStudentGroupId());
+        // Stores all AnsweredTests for the test taken by members
+        List<AnsweredTest> allAnsweredTests = AnsweredTestService.read(allMembers, selectedTest.getTestId());
+        // These variables store how many members had access to test and how many have taken the test so far
+        int membersAccessToTest = TestAccessService.read(allMembers, selectedTest.getTestId());
+        int membersDoneTest = 0;
+            for(AnsweredTest at : allAnsweredTests) {
+                membersDoneTest++;
+            }
+
+        gTest  = new Label("Prov: " + selectedTest.gettTitle());
+        gGroup = new Label("Vald grupp: " + selectedStudentGroup.getGroupName());
+        gNrDone = new Label("Antal genomförda: " + membersDoneTest + " / " + membersAccessToTest);
+        gNrPassed = new Label("Antal godkända: " + StatisticsLogic.getNrPassed(allMembers, selectedTest.getTestId()));
+        gAvgScore = new Label("Snittpoäng: " + StatisticsLogic.getAvgScore(allMembers, selectedTest.getTestId()) + " / "
+                + selectedTest.gettMaxPoints());
+        int avgTimeSec = StatisticsLogic.getAvgTime(allMembers, selectedTest.getTestId());
+        int avgTimeMin = avgTimeSec / 60;
+        int leftOverSec = avgTimeSec % 60;
+        gAvgTime = new Label("Snittid: " + avgTimeMin + " min " +
+                leftOverSec + " sek / " + selectedTest.gettTimeMin() + " min");
     }
 
     public void loadTestBox() {

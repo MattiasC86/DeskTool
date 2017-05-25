@@ -2,6 +2,7 @@ package logic;
 
 import entity.AnsweredTest;
 import entity.TestAccess;
+import entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -48,6 +49,7 @@ public class StatisticsLogic {
         return nrDone;
     }
 
+    // Returns how many of alla users passed the test
     public static int getNrPassed(int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
@@ -58,6 +60,27 @@ public class StatisticsLogic {
         int nrPassed = 0;
         for(AnsweredTest element : atList) {
             nrPassed++;
+        }
+
+        entityManager.close();
+        emFactory.close();
+
+        return nrPassed;
+    }
+
+    // Returns how many of selected users passed the test
+    public static int getNrPassed(List<User> users, int testId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        int nrPassed = 0;
+        for(User user : users) {
+            Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.test.testId = " + testId + " and " +
+                    "at.user.userId = " + user.getUserId() + " and " + "(at.aTGrade = 'G' or at.aTGrade = 'VG')");
+            List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
+            for(AnsweredTest element : atList) {
+                nrPassed++;
+            }
         }
 
         entityManager.close();
@@ -90,6 +113,34 @@ public class StatisticsLogic {
         return avgScore;
     }
 
+    // Returns avg score for specific users and specific test
+    public static double getAvgScore(List<User> users, int testId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        int nrAnswered = 0;
+        int totalScore = 0;
+
+        for(User user : users) {
+            Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.test.testId = " + testId +
+                " and at.user.userId = " + user.getUserId());
+            List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
+            for(AnsweredTest element : atList) {
+                nrAnswered++;
+                totalScore += element.getaTPoints();
+            }
+        }
+
+        double avgScore = totalScore/nrAnswered;
+
+
+        entityManager.close();
+        emFactory.close();
+
+        return avgScore;
+    }
+
+    // Returns avg time for selected test and all users
     public static int getAvgTime(int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
@@ -107,7 +158,33 @@ public class StatisticsLogic {
 
         int avgTime = totalTime/nrAnswered;
 
+        entityManager.close();
+        emFactory.close();
 
+        return avgTime;
+    }
+
+    // Returns avg time for selected test and users
+    public static int getAvgTime(List<User> users, int testId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        int nrAnswered = 0;
+        int totalTime = 0;
+
+        for(User user : users) {
+            Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.test.testId = " + testId +
+                " and at.user.userId = " + user.getUserId());
+            List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
+
+            for(AnsweredTest element : atList) {
+                nrAnswered++;
+                totalTime += element.getaTTimeSec();
+            }
+        }
+
+
+        int avgTime = totalTime/nrAnswered;
 
         entityManager.close();
         emFactory.close();

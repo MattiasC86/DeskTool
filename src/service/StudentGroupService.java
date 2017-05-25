@@ -42,6 +42,7 @@ public class StudentGroupService {
         emFactory.close();
     }
 
+    // Returns all StudentGroups
     public static List<StudentGroup> readAll() {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
@@ -54,6 +55,7 @@ public class StudentGroupService {
         return sgList;
     }
 
+    // Returns all members in selected StudentGroup
     public static List<User> readByGroup(int studentGroupId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();

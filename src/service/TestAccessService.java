@@ -1,5 +1,6 @@
 package service;
 
+import entity.AnsweredTest;
 import entity.Test;
 import entity.TestAccess;
 import entity.User;
@@ -7,6 +8,8 @@ import entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,8 +55,25 @@ public class TestAccessService {
         emFactory.close();
     }
 
-    public static void read() {
+    // Returns nr of TestAccess for specific users and specific test
+    public static int read(List<User> users, int testId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
 
+        int nrAccess = 0;
+
+        // This for loop adds 1 to nrAccess each time match is found
+        for(User user : users) {
+            Query query = entityManager.createQuery( "Select ta from TestAccess ta where ta.user.userId = " + user.getUserId() +
+                    " and ta.test.testId = " + testId);
+            List<TestAccess> taList = (List<TestAccess>)query.getResultList();
+            for(TestAccess ta : taList) {
+                nrAccess++;
+            }
+        }
+        entityManager.close();
+        emFactory.close();
+        return nrAccess;
     }
 
     public static void update() {
