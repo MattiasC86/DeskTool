@@ -153,17 +153,41 @@
     -fx-tab-max-width:100px;
     -fx-tab-min-height:30px;
     -fx-tab-max-height:30px;
+    -fx-background-color: transparent;
 }
 
 .tab {
     -fx-font-family: Arial;
     -fx-font-size: 18;
-    /*-fx-background-color:royalblue ;*/
+    -fx-background-color: rgba(152, 152, 152, 0.9);
+
 }
 
 .tab:selected {
-    /*-fx-background-color:blue ;*/
+    -fx-background-color: #ff6b13;
+    -fx-text-fill: white;
+
 }
 
+#tabStudent{
+    -fx-background-color: white;
+
+}
+
+#tabTest{
+    -fx-background-color: white;
+}
+
+#tabGroup{
+    -fx-background-color: white;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: white ;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
 /*STATICS*/
 /*STATICS*/

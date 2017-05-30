@@ -169,6 +169,11 @@ public class StatisticsView{
         grouppane.getChildren().addAll(groupBox, groupTestBox);
         group.setContent(grouppane);
 
+        mainpane.setId("firstpagePane");
+        studentpane.setId("tabStudent");
+        testpane.setId("tabTest");
+        grouppane.setId("tabGroup");
+
         Scene scene = new Scene(mainpane, 1600, 900);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(scene);
