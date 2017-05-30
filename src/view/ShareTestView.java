@@ -158,9 +158,12 @@ public class ShareTestView {
                 shareTest();
             });
             mailBtn.setOnAction(d->{
+                int selectedTestIndex = testBox.getSelectionModel().getSelectedIndex();
+                Test selectedTest = testList.get(selectedTestIndex);
+
                 int selectedUserIndex = userSelectBox.getSelectionModel().getSelectedIndex();
                 selectedUser = userList.get(selectedUserIndex);
-                sm.sendmail(selectedUser.getEmail());
+                sm.sendmail(selectedUser, selectedTest);
                 System.out.print("ok");
             });
 
