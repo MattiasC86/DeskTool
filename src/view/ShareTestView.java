@@ -8,10 +8,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.LoginLogic;
+import logic.SendMailLogic;
 import service.*;
 import view.menuBars.MenuBarHelper;
 
@@ -23,6 +26,9 @@ import java.util.List;
  */
 public class ShareTestView {
     User currUser;
+    User selectedUser;
+
+    SendMailLogic sm = new SendMailLogic();
     FlowPane flowpane = new FlowPane();
 
     ComboBox testBox;
@@ -152,6 +158,9 @@ public class ShareTestView {
                 shareTest();
             });
             mailBtn.setOnAction(d->{
+                int selectedUserIndex = userSelectBox.getSelectionModel().getSelectedIndex();
+                selectedUser = userList.get(selectedUserIndex);
+                sm.sendmail(selectedUser.getEmail());
                 System.out.print("ok");
             });
 
@@ -165,7 +174,7 @@ public class ShareTestView {
 
         if(shareTypeBox.getSelectionModel().getSelectedItem() == "Dela till enskild elev") {
             int selectedUserIndex = userSelectBox.getSelectionModel().getSelectedIndex();
-            User selectedUser = userList.get(selectedUserIndex);
+            selectedUser = userList.get(selectedUserIndex);
             TestAccessService.create(selectedUser, selectedTest);
         } else if(shareTypeBox.getSelectionModel().getSelectedItem() == "Dela till grupp") {
             int selectedGroupIndex = userSelectBox.getSelectionModel().getSelectedIndex();
