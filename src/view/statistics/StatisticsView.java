@@ -64,8 +64,8 @@ public class StatisticsView{
 
     Pane studentpane;
     Pane testpane;
+    Pane grouppane;
 
-    FlowPane pane;
 
     public StatisticsView (Stage window) {
         currUser = UserService.read(LoginLogic.getCurrId());
@@ -75,9 +75,6 @@ public class StatisticsView{
         Pane mainpane = new Pane();
 
         Pane barpane = new Pane();
-
-        //Pane tabpane = new Pane();
-
 
         MenuBarHelper.getMenuBar(window, barpane);
 
@@ -95,8 +92,12 @@ public class StatisticsView{
         testpane.setPrefWidth(1200);
         testpane.setPrefHeight(600);
 
-        tp.getTabs().addAll(student, test);
+        Tab group = new Tab("Grupper");
+        grouppane = new Pane();
+        grouppane.setPrefWidth(1200);
+        grouppane.setPrefHeight(600);
 
+        tp.getTabs().addAll(student, test, group);
 
         tp.relocate(200,100);
         mainpane.getChildren().addAll(barpane,tp);
@@ -149,16 +150,24 @@ public class StatisticsView{
         testBox = new ComboBox(availableTests);
         testBox.setPrefWidth(200);
 
+        groupTestBox = new ComboBox(availableTests);
+        groupTestBox.setPrefWidth(200);
 
 
-        userTestBox.relocate(350, 100);
+
         userBox.relocate(100,100);
+        userTestBox.relocate(350, 100);
         studentpane.getChildren().addAll(userBox, userTestBox);
         student.setContent(studentpane);
 
         testBox.relocate(100,100);
         testpane.getChildren().addAll(testBox);
         test.setContent(testpane);
+
+        groupBox.relocate(100, 100);
+        groupTestBox.relocate(350,100);
+        grouppane.getChildren().addAll(groupBox, groupTestBox);
+        group.setContent(grouppane);
 
         Scene scene = new Scene(mainpane, 1600, 900);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
@@ -167,9 +176,6 @@ public class StatisticsView{
 
         //////////////////////////////////////////////////////////////////////////////
 
-        pane = new FlowPane();
-        //barpane.getChildren().add(pane);
-        pane.relocate(0,100);
 
 
         // When a user is selected in userBox
@@ -180,6 +186,9 @@ public class StatisticsView{
         // When a test is selected in testBox
         testBox.setOnAction(e->{
             showTestStatistics();
+        });
+        groupBox.setOnAction(e->{
+            loadGroupTestBox();
         });
 
 
@@ -204,11 +213,10 @@ public class StatisticsView{
                         testNames
                 );
         studentpane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
-        userTestBox = new ComboBox(availableTests);
-        userTestBox.setPrefWidth(200);
 
+        userTestBox.getItems().clear();
+        userTestBox.getItems().addAll(availableTests);
         studentpane.getChildren().addAll(userTestBox);
-        userTestBox.relocate(350,100);
 
         // When a test is selected for the user selected in userBox
         userTestBox.setOnAction(e-> {
@@ -224,7 +232,7 @@ public class StatisticsView{
         // Loads all tests
         groupTests = TestService.readAll();
 
-        // Creates new ComboBox userTestBox to show all tests
+        // Creates new ComboBox groupTestBox to show all tests
         List<String> testNames = new ArrayList<>();
         for(Test element : groupTests) {
             testNames.add(element.gettTitle());
@@ -233,11 +241,11 @@ public class StatisticsView{
                 FXCollections.observableArrayList(
                         testNames
                 );
-        studentpane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
+        studentpane.getChildren().removeAll(groupTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
         groupTestBox = new ComboBox(availableTests);
         groupTestBox.setPrefWidth(200);
 
-        studentpane.getChildren().addAll(userTestBox);
+        studentpane.getChildren().addAll(groupTestBox);
         groupTestBox.relocate(350,100);
 
         // When a test is selected for the group
