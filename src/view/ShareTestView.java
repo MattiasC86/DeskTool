@@ -30,6 +30,7 @@ public class ShareTestView {
     ComboBox userSelectBox;
 
     Button shareBtn;
+    Button mailBtn;
 
     List<Test> testList;
     List<User> userList;
@@ -145,10 +146,15 @@ public class ShareTestView {
 
         userSelectBox.setOnAction(e->{
             shareBtn = new Button("Dela prov");
-            flowpane.getChildren().addAll(shareBtn);
+            mailBtn = new Button("Send mail");
+            flowpane.getChildren().addAll(shareBtn, mailBtn);
             shareBtn.setOnAction(d->{
                 shareTest();
             });
+            mailBtn.setOnAction(d->{
+                System.out.print("ok");
+            });
+
         });
     }
 
