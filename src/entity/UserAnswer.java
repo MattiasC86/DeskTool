@@ -12,8 +12,9 @@ public class UserAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userAnswerId;   // Sätts automatiskt i databasen, finns inte med i konstruktorn
-    private int checkedAnswer;  //ska vara 1 om användaren klickat i, annars 0. Kan vara 0 på alla ranked
-    private int order;  // 0,1,2,3...etc, används vid ranked questions, spelar annars ingen roll.
+
+    private int uACheckedAnswer;  //ska vara 1 om användaren klickat i, annars 0. Kan vara 0 på alla ranked
+    private int uAOrder;  // 0,1,2,3...etc, används vid ranked questions, spelar annars ingen roll.
 
     //OBS! Tog bort UAText. Eftersom varje UserAnswer ska ha en koppling till ett Answer-objekt så kan
     // texten alltid hämtas från Answer-objektet
@@ -23,9 +24,9 @@ public class UserAnswer {
     @OneToOne
     private Answer answer;  // Måste ha en koppling till sitt Answer-objekt. Viktigt!
 
-    public UserAnswer(int checkedAnswer, int order, Question question, Answer answer) {
-        this.setCheckedAnswer(checkedAnswer);
-        this.setOrder(order);
+    public UserAnswer(int uACheckedAnswer, int uAOrder, Question question, Answer answer) {
+        this.setUACheckedAnswer(uACheckedAnswer);
+        this.setUAOrder(uAOrder);
         this.setQuestion(question);
         this.setAnswer(answer);
     }
@@ -40,20 +41,20 @@ public class UserAnswer {
         this.userAnswerId = userAnswerId;
     }
 
-    public int getCheckedAnswer() {
-        return checkedAnswer;
+    public int getUACheckedAnswer() {
+        return uACheckedAnswer;
     }
 
-    public void setCheckedAnswer(int checkedAnswer) {
-        this.checkedAnswer = checkedAnswer;
+    public void setUACheckedAnswer(int checkedAnswer) {
+        this.uACheckedAnswer = uACheckedAnswer;
     }
 
-    public int getOrder() {
-        return order;
+    public int getUAOrder() {
+        return uAOrder;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setUAOrder(int uAOrder) {
+        this.uAOrder = uAOrder;
     }
 
 
