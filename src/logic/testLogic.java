@@ -29,7 +29,7 @@ public class TestLogic {
             switch(question.getqType()) {
                 case "Single":
                     for(int i = 0; i < answers.size(); i++) {
-                        if((answers.get(i).getaPoints() == 1) && (uAnswers.get(i).getCheckedAnswer() == 1)) {
+                        if((answers.get(i).getaPoints() == 1) && (uAnswers.get(i).getUACheckedAnswer() == 1)) {
                             totalScore++;
                         }
                     }
@@ -37,7 +37,7 @@ public class TestLogic {
 
                 case "Multiple":
                     for(int i = 0; i < answers.size(); i++) {
-                        if(answers.get(i).getaPoints() != uAnswers.get(i).getCheckedAnswer()){
+                        if(answers.get(i).getaPoints() != uAnswers.get(i).getUACheckedAnswer()){
                             break;
                         }
                     }
@@ -46,7 +46,7 @@ public class TestLogic {
 
                 case "Ranked":
                     for(int i = 0; i < answers.size(); i++) {
-                        if(answers.get(i).getaOrder() != uAnswers.get(i).getOrder()) {
+                        if(answers.get(i).getaOrder() != uAnswers.get(i).getUAOrder()) {
                             break;
                         }
                     }
