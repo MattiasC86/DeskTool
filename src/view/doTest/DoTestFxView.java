@@ -96,8 +96,8 @@ public class DoTestFxView {
                         if(qListGraphicObject.get(i).answerBox[d].isSelected() && currentAnswerList.get(d).getaPoints() == 1){
                             i++;
                         }
-                        UserAnswer currentUserAnswer = new UserAnswer(qListGraphicObject.get(i).answerBox[d].getText(), answeredQ, currentAnswerList.get(d));
-                        userAnsweredList.add(currentUserAnswer);
+                        //UserAnswer currentUserAnswer = new UserAnswer(qListGraphicObject.get(i).answerBox[d].getText(), answeredQ, currentAnswerList.get(d));
+                       //userAnsweredList.add(currentUserAnswer);
                     }
                 }
                 else if(qList.get(i).getqType().equalsIgnoreCase("Multiple")){

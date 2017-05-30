@@ -20,6 +20,8 @@ import service.AnswerService;
 import service.QuestionService;
 import service.UserService;
 import view.menuBars.MenuBarAdmin;
+import view.menuBars.MenuBarHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +49,8 @@ public class SelectTestView {
 
         user = UserService.read(LoginLogic.getCurrId());
         tests = UserLogic.getAvailableTests(user);
-        
-        MenuBarAdmin x = new MenuBarAdmin(pane, window);
+
+        MenuBarHelper.getMenuBar(window, pane);
 
         // Fills testBox with all tests available to user
         List<String> testTitles = new ArrayList<>();
