@@ -15,15 +15,17 @@ public class Test {
     private int tTimeMin;
     private int tMaxPoints;
     private int tSelfCorrecting;
+    private int tDisplayResult;
 
     @ManyToOne
     private User user;
 
-    public Test(String tTitle, int tTimeMin, int tMaxPoints, int tSelfCorrecting, User user) {
+    public Test(String tTitle, int tTimeMin, int tMaxPoints, int tSelfCorrecting, int tDisplayResult, User user) {
         this.tTitle = tTitle;
         this.tTimeMin = tTimeMin;
         this.tMaxPoints = tMaxPoints;
         this.tSelfCorrecting = tSelfCorrecting;
+        this.tDisplayResult = tDisplayResult;
         this.setUser(user);
     }
     public Test (String tTitle, int tTimeMin, int tMaxPoints){
@@ -80,5 +82,13 @@ public class Test {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int gettDisplayResult() {
+        return tDisplayResult;
+    }
+
+    public void settDisplayResult(int tDisplayResult) {
+        this.tDisplayResult = tDisplayResult;
     }
 }

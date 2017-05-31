@@ -10,7 +10,7 @@ public class AnsweredTest {
     private int answeredTestId;
 
     private boolean aTCorrected;
-    private boolean aTShowResult;
+    private int aTShowResult;
     private int aTPoints;
     private int aTTimeSec;
     private String aTGrade;
@@ -23,7 +23,7 @@ public class AnsweredTest {
     private
     Test test;
 
-    public AnsweredTest(boolean aTCorrected, boolean aTShowResult, int aTPoints, int aTTimeSec, String aTGrade, User user, Test test) {
+    public AnsweredTest(boolean aTCorrected, int aTShowResult, int aTPoints, int aTTimeSec, String aTGrade, User user, Test test) {
         this.setaTCorrected(aTCorrected);
         this.setaTShowResult(aTShowResult);
         this.setaTPoints(aTPoints);
@@ -51,11 +51,11 @@ public class AnsweredTest {
         this.aTCorrected = aTCorrected;
     }
 
-    public boolean isaTShowResult() {
+    public int getaTShowResult() {
         return aTShowResult;
     }
 
-    public void setaTShowResult(boolean aTShowResult) {
+    public void setaTShowResult(int aTShowResult) {
         this.aTShowResult = aTShowResult;
     }
 

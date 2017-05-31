@@ -1,9 +1,7 @@
 package service;
 
-import entity.Answer;
-import entity.AnsweredTest;
-import entity.Question;
-import entity.User;
+import entity.*;
+import logic.TestLogic;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,6 +25,23 @@ public class AnsweredTestService {
 
         entityManager.close();
         emFactory.close();
+    }
+
+    public static void create(AnsweredTest answeredTest, List<UserAnswer> uAList) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(answeredTest);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        emFactory.close();
+
+        UserAnswerService.create(uAList);
+        TestLogic.selfCorrectTest(answeredTest);
+
+        System.out.println("(ATESTSERVIC)ANSWEREDTEST SCORE: " + answeredTest.getaTPoints());
     }
 
     public static AnsweredTest read(int userId, int testId) {
@@ -72,5 +87,18 @@ public class AnsweredTestService {
         entityManager.close();
         emFactory.close();
         return atList;
+    }
+
+    public static void update(AnsweredTest aTest, int score) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+        aTest.setaTPoints(score);
+        System.out.println("SCORE: " + aTest.getaTPoints());
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        emFactory.close();
     }
 }

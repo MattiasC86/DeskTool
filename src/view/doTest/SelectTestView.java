@@ -112,13 +112,15 @@ public class SelectTestView {
             DoTestFxView dtfv = new DoTestFxView(window);
             dtfv.setTestInfo(selectedTest.gettTitle(), testQuestions.size(), selectedTest.gettTimeMin());
 
+            doTestQuestionsList = new ArrayList();
+
             for(int i = 0; i < testQuestions.size(); i++) {
 
                 String qType = testQuestions.get(i).getqType();
 
                 List<Answer> list = testAnswers.get(i);
 
-                doTestQuestionsList = new ArrayList();
+
 
                 if (qType.equalsIgnoreCase("Single")) {
                     doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.TestList);
