@@ -101,9 +101,6 @@ public class DoTestFxView {
                 // Ranked question  (Kommer funka men rankade frågor får ingen answersBox i doTestQuestio rankedQuestion() metoden
                 else if(qList.get(i).getqType().equalsIgnoreCase("Ranked")){
                     List<Answer> currentAnswerList = aListList.get(i);
-                    System.out.println("RANKED CURRLIST: " + currentAnswerList.get(i).getaText());
-                    System.out.println("RANKED FRÅGA: " + qListGraphicObject.get(i).answerBox[0]);
-
 
                     int order = 0;
                     for(int d = 0; d < currentAnswerList.size(); d++){

@@ -1,6 +1,7 @@
 package view.createTest;
 
 import entity.Question;
+import entity.User;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -10,6 +11,8 @@ import javafx.stage.Stage;
 import logic.LoginLogic;
 import logic.TestLogic;
 import service.UserService;
+import view.homepage.AdminFirstpage;
+import view.homepage.TeacherFirstpage;
 import view.menuBars.MenuBarAdmin;
 
 import java.util.ArrayList;
@@ -28,35 +31,41 @@ public class FxView {
 
         Pane pane = new Pane();
 
+        Pane contentPane = new Pane();
+        contentPane.setPrefSize(1300,850);
+        contentPane.relocate(150,10);
+        contentPane.getStyleClass().add("QuestionPane");
+        pane.getChildren().add(contentPane);
+
         Label labeltitel = new Label("Titel:");
         labeltitel.setStyle("-fx-font-size: 20pt");
-        labeltitel.relocate(600, 50);
-        pane.getChildren().add(labeltitel);
+        labeltitel.relocate(300, 15);
+        contentPane.getChildren().add(labeltitel);
 
         titleTest = new TextField();
         titleTest.setPromptText("Titel");
         titleTest.setStyle("-fx-font-size: 14pt");
-        titleTest.relocate(660, 50);
-        pane.getChildren().add(titleTest);
+        titleTest.relocate(360, 15);
+        contentPane.getChildren().add(titleTest);
 
         CheckBox box = new CheckBox("Självrättande");
         box.setScaleX(1.5);
         box.setScaleY(1.5);
-        box.relocate(1000, 60);
+        box.relocate(800, 35);
         pane.getChildren().add(box);
 
         box1 = new CheckBox("Tidsbegränsning");
         box1.setScaleX(1.5);
         box1.setScaleY(1.5);
-        box1.relocate(650, 140);
-        pane.getChildren().add(box1);
+        box1.relocate(350, 100);
+        contentPane.getChildren().add(box1);
 
         minutesField = new TextField();
         minutesField.setPromptText("Minuter");
         minutesField.setStyle("-fx-font-size: 14pt");
-        minutesField.relocate(840, 130);
+        minutesField.relocate(540, 90);
         minutesField.setVisible(false);
-        pane.getChildren().add(minutesField);
+        contentPane.getChildren().add(minutesField);
 
         box1.setOnAction(e->{
             if(box1.isSelected()){
@@ -69,20 +78,20 @@ public class FxView {
 
         numberOfQuestion = new Label("Antal frågor: 0");
         numberOfQuestion.setStyle("-fx-font-size: 20pt; -fx-border-width: 2pt");
-        numberOfQuestion.relocate(1300, 50);
-        pane.getChildren().add(numberOfQuestion);
+        numberOfQuestion.relocate(1050, 20);
+        contentPane.getChildren().add(numberOfQuestion);
 
         QuestionList = new ListView<Pane>();
         QuestionList.setStyle("-fx-border-color: black");
         QuestionList.setPrefSize(1200, 600);
-        QuestionList.relocate(300, 200);
-        pane.getChildren().add(QuestionList);
+        QuestionList.relocate(50, 160);
+        contentPane.getChildren().add(QuestionList);
 
         Button btn = new Button("Envalsfråga");
         btn.setStyle("-fx-font-size: 14pt");
         btn.setPrefWidth(200);
-        btn.relocate(300, 50);
-        pane.getChildren().add(btn);
+        btn.relocate(50, 10);
+        contentPane.getChildren().add(btn);
 
         btn.setOnAction(e->{
             PreQuestion Question1 = new PreQuestion(QuestionList);
@@ -94,13 +103,10 @@ public class FxView {
         Button btn1 = new Button("Flervalsfråga");
         btn1.setStyle("-fx-font-size: 14pt");
         btn1.setPrefWidth(200);
-        btn1.relocate(300, 100);
-        pane.getChildren().add(btn1);
+        btn1.relocate(50, 60);
+        contentPane.getChildren().add(btn1);
 
         btn1.setOnAction(e->{
-
-            messageBox("Hejsan");
-
             PreQuestion Question2 = new PreQuestion(QuestionList);
             Question2.manyAnswerQuestion();
             questions.add(Question2);
@@ -110,8 +116,8 @@ public class FxView {
         Button btn2 = new Button("Rangordningsfråga");
         btn2.setStyle("-fx-font-size: 14pt");
         btn2.setPrefWidth(200);
-        btn2.relocate(300, 150);
-        pane.getChildren().add(btn2);
+        btn2.relocate(50, 110);
+        contentPane.getChildren().add(btn2);
 
         btn2.setOnAction(e->{
             PreQuestion Question3 = new PreQuestion(QuestionList);
@@ -123,8 +129,8 @@ public class FxView {
         Button btn3 = new Button("Ta bort markerad fråga");
         btn3.setStyle("-fx-font-size: 12pt");
         btn3.setPrefWidth(200);
-        btn3.relocate(1300, 150);
-        pane.getChildren().add(btn3);
+        btn3.relocate(1050, 110);
+        contentPane.getChildren().add(btn3);
 
         btn3.setOnAction(e->{
             questions.remove(QuestionList.getSelectionModel().getSelectedIndex());
@@ -138,7 +144,10 @@ public class FxView {
         pane.getChildren().add(btnSaveTest);
 
         btnSaveTest.setOnAction(e->{
-            validateInput();
+
+            if(validateInput() == false){
+                return;
+            }
 
             int selfCorrect;
             if(box.isSelected()){
@@ -149,6 +158,15 @@ public class FxView {
             }
             TestLogic.saveTest(questions, titleTest.getText(), selfCorrect, 0, 1, UserService.read(LoginLogic.getCurrId()));
 
+            messageBox("Test skapat!");
+
+            User user = UserService.read(LoginLogic.getCurrId());
+            if(user.getRole().equalsIgnoreCase("Admin")){
+                AdminFirstpage afp = new AdminFirstpage(window);
+            }
+            else if(user.getRole().equalsIgnoreCase("Lärare")){
+                TeacherFirstpage tfp = new TeacherFirstpage(window);
+            }
         });
 
         BorderPane bp = new BorderPane();
@@ -162,7 +180,7 @@ public class FxView {
         window.setTitle("Skapa test");
         window.setOnCloseRequest(e -> Platform.exit());
         Scene scene = new Scene(bp, 1600, 900);
-        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/TestViewCSS.css").toExternalForm());
         window.setScene(scene);
         window.show();
     }
@@ -170,7 +188,6 @@ public class FxView {
     private void setNumberOfQuestions(){
         numberOfQuestion.setText("Antal frågor: " + QuestionList.getItems().size());
     }
-
 
     private boolean validateInput(){
         //Kolla titel är anvigen
@@ -268,7 +285,6 @@ public class FxView {
         }
         return true;
     }
-
 
     private void messageBox(String text){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
