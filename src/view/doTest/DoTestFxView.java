@@ -4,26 +4,18 @@ package view.doTest;
         import java.util.*;
 
         import entity.*;
-        import javafx.application.Application;
         import javafx.application.Platform;
-        import javafx.beans.property.ObjectProperty;
-        import javafx.beans.property.SimpleObjectProperty;
-        import javafx.collections.FXCollections;
-        import javafx.collections.ObservableList;
         import javafx.scene.Scene;
         import javafx.scene.control.*;
-        import javafx.scene.input.*;
         import javafx.scene.layout.Pane;
         import javafx.stage.Stage;
         import logic.LoginLogic;
-        import logic.TestLogic;
-        import logic.UserLogic;
         import service.*;
 
 public class DoTestFxView {
 
 
-    ListView<Pane> TestList;
+    ListView<Pane> testList;
     Label labeltitel;
     Label testInfo;
     Label timeLabel;
@@ -48,11 +40,11 @@ public class DoTestFxView {
         timeLabel.relocate(1200, 70);
         pane.getChildren().add(timeLabel);
 
-        TestList = new ListView<Pane>();
-        TestList.setPrefSize(1200, 600);
-        TestList.relocate(300, 200);
-        TestList.setFocusTraversable( false );
-        pane.getChildren().add(TestList);
+        testList = new ListView<Pane>();
+        testList.setPrefSize(1200, 600);
+        testList.relocate(300, 200);
+        testList.setFocusTraversable( false );
+        pane.getChildren().add(testList);
 
         Button testDone = new Button("Lämna in");
         testDone.relocate(1350, 820);
@@ -60,13 +52,11 @@ public class DoTestFxView {
         testDone.setStyle("-fx-font-size: 16pt");
         pane.getChildren().add(testDone);
 
-
-
-
+        // Turning in the test
         testDone.setOnAction(e->{
-            int numberOfQuestion = TestList.getItems().size();
+            int numberOfQuestion = testList.getItems().size();
 
-            //List with Stuff in
+            // List with Stuff in
             Test selectedTest = SelectTestView.getSelectedTest();
             List<Question> qList = SelectTestView.testQuestions;
             List<List> aListList = SelectTestView.testAnswers;

@@ -5,7 +5,6 @@ import entity.Question;
 import entity.Test;
 import entity.User;
 import javafx.application.Platform;
-import javafx.beans.binding.ListBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -19,7 +18,6 @@ import logic.UserLogic;
 import service.AnswerService;
 import service.QuestionService;
 import service.UserService;
-import view.menuBars.MenuBarAdmin;
 import view.menuBars.MenuBarHelper;
 
 import java.util.ArrayList;
@@ -123,17 +121,17 @@ public class SelectTestView {
 
 
                 if (qType.equalsIgnoreCase("Single")) {
-                    doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.TestList);
+                    doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.testList);
                     q.singleQuestion();
                     doTestQuestionsList.add(q);
                 }
                 else if (qType.equalsIgnoreCase("Multiple")) {
-                    doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.TestList);
+                    doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.testList);
                     q.manyQuestion();
                     doTestQuestionsList.add(q);
                 }
                 else if (qType.equalsIgnoreCase("Ranked")) {
-                    doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.TestList);
+                    doTestQuestion q = new doTestQuestion(list.size(), testQuestions.get(i).getqText(), list, dtfv.testList);
                     q.rankedQuestion();
                     doTestQuestionsList.add(q);
                 }
