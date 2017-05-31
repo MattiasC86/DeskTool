@@ -14,6 +14,8 @@ import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -71,6 +73,11 @@ public class StatisticsView{
     Pane studentpane;
     Pane testpane;
     Pane grouppane;
+
+    PieChart chart;
+    PieChart chart2;
+    PieChart chart3;
+    PieChart chart4;
 
     public StatisticsView (Stage window) {
         currUser = UserService.read(LoginLogic.getCurrId());
@@ -269,7 +276,7 @@ public class StatisticsView{
 
     // Shows statistics for selected test
     public void showTestStatistics() {
-        testpane.getChildren().removeAll(userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
+        testpane.getChildren().removeAll(chart ,userTestBox, test, nrDone, nrPassed, avgScore, avgTime, status, student, uTest, grade, points, uTime);
 
         // Loads selected test from db
         int selectedTestIndex = testBox.getSelectionModel().getSelectedIndex();
@@ -301,17 +308,62 @@ public class StatisticsView{
             avgScore.relocate(100, 300);
             avgTime.relocate(100, 350);
 
+            /*Button test1 = new Button();
+            //test1.setStyle("-fx-background-image: url('../../pic')");
+            test1.relocate(50,250);
+
+            test1.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../../pic/pieChart.png"))));
+
+            test1.setOnAction(e->{
+                 testpane.getChildren().removeAll(chart);
+
+             });*/
+            VBox boxHolder = new VBox();
+
+            ListView<VBox> chartView = new ListView<VBox>();
+            chartView.getItems().addAll(boxHolder);
+            chartView.relocate(400,50);
+            chartView.setPrefSize(700,500);
+
 
             ObservableList<PieChart.Data> doneChartData =
                     FXCollections.observableArrayList(
                             new PieChart.Data("Gjorda test", StatisticsLogic.getNrDone(selectedTest.getTestId())),
                             new PieChart.Data("Ogjorda test", StatisticsLogic.getNrAccess(selectedTest.getTestId()) - StatisticsLogic.getNrDone(selectedTest.getTestId())));
-            final PieChart chart = new PieChart(doneChartData);
+            chart = new PieChart(doneChartData);
             chart.setTitle("Antal genomförda test");
-            chart.relocate( 500,100);
+
+            ObservableList<PieChart.Data> okayChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("Antal godkända", StatisticsLogic.getNrPassed(selectedTest.getTestId()) ),
+                            new PieChart.Data("Antal gjorda test", StatisticsLogic.getNrDone(selectedTest.getTestId()) - StatisticsLogic.getNrPassed(selectedTest.getTestId())));
+            chart2 = new PieChart(okayChartData);
+            chart2.setTitle("Antal godkända");
+
+            ObservableList<PieChart.Data> snittChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("Snittpoäng", StatisticsLogic.getAvgScore(selectedTest.getTestId())),
+                            new PieChart.Data("Maxpoäng", selectedTest.gettMaxPoints() - (StatisticsLogic.getAvgScore(selectedTest.getTestId()))));
+            chart3 = new PieChart(snittChartData);
+            chart3.setTitle("Snittpoäng");
+
+            ObservableList<PieChart.Data> timeChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("Snittid", StatisticsLogic.getAvgTime(selectedTest.getTestId())),
+                            new PieChart.Data("Maxtid", (selectedTest.gettTimeMin() * 60) - StatisticsLogic.getAvgTime(selectedTest.getTestId())));
+            chart4 = new PieChart(timeChartData);
+            chart4.setTitle("Snittid");
 
 
-            testpane.getChildren().addAll(nrPassed, avgScore, avgTime, chart);
+            System.out.println("snittid" + (StatisticsLogic.getAvgTime(selectedTest.getTestId())));
+            System.out.println("maxtid" + ((selectedTest.gettTimeMin() * 60) - StatisticsLogic.getAvgTime(selectedTest.getTestId())));
+
+
+            boxHolder.getChildren().addAll(chart, chart2, chart3, chart4);
+
+
+
+            testpane.getChildren().addAll(nrPassed, avgScore, avgTime, chartView);
 
         }
     }

@@ -17,7 +17,6 @@ public class StartView extends Application{
         LoginPage startView = new LoginPage(window);
     }
 
-
     public static void main(String[] args) {
         launch(args);
     }
