@@ -1,3 +1,7 @@
+/*
+* AnsweredQuestion entity connected to a Question and an AnsweredTest
+*/
+
 package entity;
 
 import javax.persistence.*;

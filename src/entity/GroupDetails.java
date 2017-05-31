@@ -1,3 +1,7 @@
+/*
+* GroupDetails entity containing info about which User is connected to which StudentGroup
+*/
+
 package entity;
 
 import javax.persistence.*;

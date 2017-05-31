@@ -1,3 +1,7 @@
+/*
+* AnsweredTest entity connected to the User who turned in the AnsweredTest and to the original Test
+*/
+
 package entity;
 
 import javax.persistence.*;

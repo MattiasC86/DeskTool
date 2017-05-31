@@ -1,3 +1,7 @@
+/*
+* Question entity directly connected to a Test
+*/
+
 package entity;
 
 import javax.persistence.*;

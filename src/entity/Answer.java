@@ -1,3 +1,7 @@
+/*
+* Answer entity directly connected to a Question
+*/
+
 package entity;
 
 import javax.persistence.*;
