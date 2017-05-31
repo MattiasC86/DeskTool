@@ -13,7 +13,7 @@ import entity.User;
 
 public class SendMailLogic {
 
-    final String username = "sebbejava@gmail.com";
+    final String username = "desktesttool@gmail.com";
     final String password = "hejsan1234";
     User user;
 
