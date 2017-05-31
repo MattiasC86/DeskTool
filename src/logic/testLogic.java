@@ -69,7 +69,7 @@ public class TestLogic {
             AnsweredTest aTest = entityManager.find(AnsweredTest.class, answeredTest.getAnsweredTestId());
             aTest.setaTPoints(totalScore);
             double d = totalScore * 1.0 / aTest.getTest().gettMaxPoints();
-            if(d >= 0.5) {
+            if(d >= 0.6) {
                 aTest.setaTGrade("G");
             } else {
                 aTest.setaTGrade("IG");
