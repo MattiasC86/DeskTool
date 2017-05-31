@@ -335,8 +335,8 @@ public class StatisticsView{
 
             ObservableList<PieChart.Data> okayChartData =
                     FXCollections.observableArrayList(
-                            new PieChart.Data("Antal godkända", StatisticsLogic.getNrPassed(selectedTest.getTestId()) ),
-                            new PieChart.Data("Antal gjorda test", StatisticsLogic.getNrDone(selectedTest.getTestId()) - StatisticsLogic.getNrPassed(selectedTest.getTestId())));
+                            new PieChart.Data("Godkända", StatisticsLogic.getNrPassed(selectedTest.getTestId()) ),
+                            new PieChart.Data("Underkända", StatisticsLogic.getNrDone(selectedTest.getTestId()) - StatisticsLogic.getNrPassed(selectedTest.getTestId())));
             chart2 = new PieChart(okayChartData);
             chart2.setTitle("Antal godkända");
 
