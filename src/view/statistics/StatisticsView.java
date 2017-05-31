@@ -5,15 +5,21 @@ import entity.StudentGroup;
 import entity.Test;
 import entity.User;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import logic.LoginLogic;
 import logic.StatisticsLogic;
@@ -66,7 +72,6 @@ public class StatisticsView{
     Pane testpane;
     Pane grouppane;
 
-
     public StatisticsView (Stage window) {
         currUser = UserService.read(LoginLogic.getCurrId());
         userList = UserService.readAll();
@@ -81,6 +86,7 @@ public class StatisticsView{
 
         TabPane tp = new TabPane();
         tp.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
 
         Tab student = new Tab("Student");
         studentpane = new Pane();
@@ -173,6 +179,8 @@ public class StatisticsView{
         studentpane.setId("tabStudent");
         testpane.setId("tabTest");
         grouppane.setId("tabGroup");
+
+
 
         Scene scene = new Scene(mainpane, 1600, 900);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
@@ -294,7 +302,17 @@ public class StatisticsView{
             avgTime.relocate(100, 350);
 
 
-            testpane.getChildren().addAll(nrPassed, avgScore, avgTime);
+            ObservableList<PieChart.Data> doneChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("Gjorda test", StatisticsLogic.getNrDone(selectedTest.getTestId())),
+                            new PieChart.Data("Ogjorda test", StatisticsLogic.getNrAccess(selectedTest.getTestId()) - StatisticsLogic.getNrDone(selectedTest.getTestId())));
+            final PieChart chart = new PieChart(doneChartData);
+            chart.setTitle("Antal genomförda test");
+            chart.relocate( 500,100);
+
+
+            testpane.getChildren().addAll(nrPassed, avgScore, avgTime, chart);
+
         }
     }
 
