@@ -112,8 +112,8 @@ public class TestService {
         User user2 = new User("Olof", "Olofsson", "Olofmeister", "olof@meister.com", "olof", "Student");
 
 
-        Test test1 = new Test("Djungeltest", 20, 100, 1, user1);
-        Test test2 = new Test("Newton Quiz", 15, 5, 1, user1);
+        Test test1 = new Test("Djungeltest", 20, 100, 1, 1, user1);
+        Test test2 = new Test("Newton Quiz", 15, 5, 1, 1, user1);
 
 
         Question question1 = new Question("Hur många bor det i skogen?", 1, "Single", 0, "G", test1);
@@ -167,6 +167,7 @@ public class TestService {
         TestAccessService.create(user1, test2);
         TestAccessService.create(user2, test2);
 
-        AnsweredTestService.create(new AnsweredTest(false, false, 5, 400, "G", user1, test2));
+        AnsweredTestService.create(new AnsweredTest(false, 1, 5, 400, "G", user1, test2));
+        //UserAnswerService.create(new UserAnswer());
     }
 }

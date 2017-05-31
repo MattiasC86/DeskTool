@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logic.LoginLogic;
 import logic.StatisticsLogic;
 import service.TestService;
 import service.UserService;
@@ -39,7 +40,7 @@ public class ResultsView {
 
 
     public ResultsView(Stage window) {
-        currUser = UserService.read(1); //LoginLogic.getCurrId();
+        currUser = UserService.read(LoginLogic.getCurrId());
 
         Pane menuPane = new Pane();
 
@@ -50,7 +51,7 @@ public class ResultsView {
 
         MenuBarHelper.getMenuBar(window, menuPane);
 
-        tests = StatisticsLogic.getCorrected(1);
+        tests = StatisticsLogic.getCorrected(LoginLogic.getCurrId());
 
         List<String> testNames = new ArrayList<>();
 

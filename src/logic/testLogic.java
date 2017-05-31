@@ -4,6 +4,9 @@ import entity.*;
 import service.*;
 import view.createTest.PreQuestion;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,52 +21,73 @@ public class TestLogic {
 
     // Auto corrects an answered test and returns the score.
     // OBS!! Lägg till så att den sparar score specifikt per fråga i AnsweredQuestion, samt att db ska uppdateras med allt
-    public static int selfCorrectTest(AnsweredTest answeredTest) {
-        List<Question> questions = QuestionService.read(answeredTest.getTest().getTestId());
-        int totalScore = 0;
+    public static void selfCorrectTest(AnsweredTest answeredTest) {
+        if(answeredTest.getTest().gettSelfCorrecting() == 1) {
+            List<Question> questions = QuestionService.read(answeredTest.getTest().getTestId());
+            int totalScore = 0;
 
-        for(Question question : questions) {
-            List<Answer> answers = AnswerService.read(question.getQuestionId());
-            List<UserAnswer> uAnswers = UserAnswerService.read(question.getQuestionId());
+            for(Question question : questions) {
+                List<Answer> answers = AnswerService.read(question.getQuestionId());
+                List<UserAnswer> uAnswers = UserAnswerService.read(question.getQuestionId(), answeredTest);
 
-            switch(question.getqType()) {
-                case "Single":
-                    for(int i = 0; i < answers.size(); i++) {
-                        if((answers.get(i).getaPoints() == 1) && (uAnswers.get(i).getUACheckedAnswer() == 1)) {
-                            totalScore++;
+                switch(question.getqType()) {
+                    case "Single":
+                        for(int i = 0; i < answers.size(); i++) {
+                            if((answers.get(i).getaPoints() == 1) && (uAnswers.get(i).getUACheckedAnswer() == 1)) {
+                                totalScore++;
+                                System.out.println("Ett single-poäng");
+                            }
                         }
-                    }
-                    break;
+                        break;
 
-                case "Multiple":
-                    for(int i = 0; i < answers.size(); i++) {
-                        if(answers.get(i).getaPoints() != uAnswers.get(i).getUACheckedAnswer()){
-                            break;
+                    case "Multiple":
+                        for(int i = 0; i < answers.size(); i++) {
+                            if(answers.get(i).getaPoints() != uAnswers.get(i).getUACheckedAnswer()){
+                                break;
+                            }
+                            if(i == answers.size() - 1) {
+                                System.out.println("Ett multipoäng");
+                                totalScore++;
+                            }
                         }
-                    }
-                    totalScore++;
-                    break;
+                        break;
 
-                case "Ranked":
-                    for(int i = 0; i < answers.size(); i++) {
-                        if(answers.get(i).getaOrder() != uAnswers.get(i).getUAOrder()) {
-                            break;
+                    case "Ranked":
+                        for(int i = 0; i < answers.size(); i++) {
+                            if(answers.get(i).getaOrder() != uAnswers.get(i).getUAOrder()) {
+                                break;
+                            }
                         }
-                    }
-                    totalScore++;
-                    break;
+                        totalScore++;
+                        break;
+                }
             }
+            EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+            EntityManager entityManager = emFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+
+            AnsweredTest aTest = entityManager.find(AnsweredTest.class, answeredTest.getAnsweredTestId());
+            aTest.setaTPoints(totalScore);
+            double d = totalScore * 1.0 / aTest.getTest().gettMaxPoints();
+            if(d >= 0.5) {
+                aTest.setaTGrade("G");
+            } else {
+                aTest.setaTGrade("IG");
+            }
+
+            entityManager.getTransaction().commit();
+            entityManager.close();
+            emFactory.close();
         }
-        return totalScore;
     }
 
 
-    public static void saveTest(ArrayList<PreQuestion> list, String title, int selfCorrecting, int timeMin, User user) {
+    public static void saveTest(ArrayList<PreQuestion> list, String title, int selfCorrecting, int timeMin, int showResult, User user) {
 
         int nrOfQuestions = list.size();
 
         // Saves Test entity to database
-        Test test = new Test(title, timeMin, nrOfQuestions, selfCorrecting, user);
+        Test test = new Test(title, timeMin, nrOfQuestions, selfCorrecting, showResult, user);
         TestService.create(test);
 
         // ArrayLists for Question and Answer entities
@@ -76,11 +100,11 @@ public class TestLogic {
             System.out.println(i);
             String questionType = "";
             switch(element.getType()) {
-                case 0: questionType = "single";
-                break;
-                case 1: questionType = "multiple";
+                case 0: questionType = "Single";
                     break;
-                case 2: questionType = "rank";
+                case 1: questionType = "Multiple";
+                    break;
+                case 2: questionType = "Ranked";
                     break;
             }
             Question question = new Question(element.QuestionField.getText(), 1, questionType, i, "G", test);

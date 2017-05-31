@@ -147,7 +147,7 @@ public class FxView {
             else{
                 selfCorrect = 0;
             }
-            TestLogic.saveTest(questions, titleTest.getText(), selfCorrect, 0, UserService.read(LoginLogic.getCurrId()));
+            TestLogic.saveTest(questions, titleTest.getText(), selfCorrect, 0, 1, UserService.read(LoginLogic.getCurrId()));
 
         });
 

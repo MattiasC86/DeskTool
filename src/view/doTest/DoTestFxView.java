@@ -16,11 +16,9 @@ package view.doTest;
         import javafx.scene.layout.Pane;
         import javafx.stage.Stage;
         import logic.LoginLogic;
+        import logic.TestLogic;
         import logic.UserLogic;
-        import service.AnswerService;
-        import service.QuestionService;
-        import service.TestService;
-        import service.UserService;
+        import service.*;
 
 public class DoTestFxView {
 
@@ -66,60 +64,62 @@ public class DoTestFxView {
 
 
         testDone.setOnAction(e->{
-
-            AnsweredTest AnsweredTestCurrent = new AnsweredTest(false, false, 1, 10, "g", UserService.read(LoginLogic.getCurrId()), SelectTestView.getSelectedTest());
-
             int numberOfQuestion = TestList.getItems().size();
 
             //List with Stuff in
+            Test selectedTest = SelectTestView.getSelectedTest();
             List<Question> qList = SelectTestView.testQuestions;
             List<List> aListList = SelectTestView.testAnswers;
             List<doTestQuestion> qListGraphicObject = SelectTestView.doTestQuestionsList;
 
+            // BEHÖVER LÄGGAS IN TIMESEC
+            AnsweredTest answeredTest = new AnsweredTest(false, selectedTest.gettDisplayResult(), 0, 10, "", UserService.read(LoginLogic.getCurrId()), selectedTest);
 
             //List to be inserted!
             List<AnsweredQuestion> answeredQList = new ArrayList<AnsweredQuestion>();
             List<UserAnswer> userAnsweredList = new ArrayList<>();
 
-
             int points = 0;
 
             for(int i = 0; i < numberOfQuestion; i++){
 
-                AnsweredQuestion answeredQ = new AnsweredQuestion(0, qList.get(i), AnsweredTestCurrent);
+                AnsweredQuestion answeredQ = new AnsweredQuestion(0, qList.get(i), answeredTest);
                 answeredQList.add(answeredQ);
 
-                //Envalsfråga
-                if(qList.get(i).getqType().equalsIgnoreCase("Single")){
+                // Single or multiple question
+                if(qList.get(i).getqType().equalsIgnoreCase("Single") || qList.get(i).getqType().equalsIgnoreCase("Multiple")){
                     List<Answer> currentAnswerList = aListList.get(i);
                     for(int d = 0; d < currentAnswerList.size(); d++){
-                        if(qListGraphicObject.get(i).answerBox[d].isSelected() && currentAnswerList.get(d).getaPoints() == 1){
-                            i++;
+                        int checked = 0;
+                        if(qListGraphicObject.get(i).answerBox[d].isSelected()){
+                            checked = 1;
                         }
-                        //UserAnswer currentUserAnswer = new UserAnswer(qListGraphicObject.get(i).answerBox[d].getText(), answeredQ, currentAnswerList.get(d));
-                       //userAnsweredList.add(currentUserAnswer);
+                        UserAnswer currentUserAnswer = new UserAnswer(checked, d, qList.get(i), currentAnswerList.get(d), answeredTest);
+                        userAnsweredList.add(currentUserAnswer);
                     }
                 }
-                else if(qList.get(i).getqType().equalsIgnoreCase("Multiple")){
-
-                }
+                // Ranked question  (Kommer funka men rankade frågor får ingen answersBox i doTestQuestio rankedQuestion() metoden
                 else if(qList.get(i).getqType().equalsIgnoreCase("Ranked")){
+                    List<Answer> currentAnswerList = aListList.get(i);
+                    System.out.println("RANKED CURRLIST: " + currentAnswerList.get(i).getaText());
+                    System.out.println("RANKED FRÅGA: " + qListGraphicObject.get(i).answerBox[0]);
 
 
+                    int order = 0;
+                    for(int d = 0; d < currentAnswerList.size(); d++){
+                        for(int y = 0; y < qListGraphicObject.size(); y++) {
+                            System.out.println("qList answerbox y: " + y + qListGraphicObject.get(i).answerBox[y].getText());
+                            System.out.println("currentAnswer d: " + d + currentAnswerList.get(d).getaText());
+                            if(qListGraphicObject.get(i).answerBox[y].getText().equals(currentAnswerList.get(d).getaText())){
+                                order = y;
+                            }
+                            UserAnswer currentUserAnswer = new UserAnswer(0, order, qList.get(i), currentAnswerList.get(d), answeredTest);
+                            userAnsweredList.add(currentUserAnswer);
+                        }
+                    }
                 }
-
-
-
-
-
-
-
-
-
             }
-
-
-
+            AnsweredTestService.create(answeredTest, userAnsweredList);
 
         });
 

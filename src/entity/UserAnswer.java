@@ -23,12 +23,23 @@ public class UserAnswer {
     private Question question;  //Måste ha en koppling till den fråga det hör till
     @OneToOne
     private Answer answer;  // Måste ha en koppling till sitt Answer-objekt. Viktigt!
+    @ManyToOne
+    private AnsweredTest answeredTest;
 
-    public UserAnswer(int uACheckedAnswer, int uAOrder, Question question, Answer answer) {
+    public UserAnswer(int uACheckedAnswer, int uAOrder, Question question, Answer answer, AnsweredTest answeredTest) {
         this.setUACheckedAnswer(uACheckedAnswer);
         this.setUAOrder(uAOrder);
         this.setQuestion(question);
         this.setAnswer(answer);
+        this.setAnsweredTest(answeredTest);
+    }
+
+    public void setAnsweredTest(AnsweredTest answeredTest) {
+        this.answeredTest = answeredTest;
+    }
+
+    public AnsweredTest getAnsweredTest() {
+        return answeredTest;
     }
 
     public UserAnswer(){}
@@ -45,7 +56,7 @@ public class UserAnswer {
         return uACheckedAnswer;
     }
 
-    public void setUACheckedAnswer(int checkedAnswer) {
+    public void setUACheckedAnswer(int uACheckedAnswer) {
         this.uACheckedAnswer = uACheckedAnswer;
     }
 
