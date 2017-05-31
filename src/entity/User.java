@@ -1,3 +1,7 @@
+/*
+* User entity
+*/
+
 package entity;
 
 import javax.persistence.*;

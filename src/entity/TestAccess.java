@@ -1,3 +1,7 @@
+/*
+* TestAccess entity detailing which User has access to which Test
+*/
+
 package entity;
 
 

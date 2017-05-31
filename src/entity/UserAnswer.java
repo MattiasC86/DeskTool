@@ -1,3 +1,7 @@
+/*
+* UserAnswer entity directly connected to an AnsweredTest, to a Question and to an Answer
+*/
+
 package entity;
 
 import javax.persistence.*;

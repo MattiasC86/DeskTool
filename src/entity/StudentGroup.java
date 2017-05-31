@@ -1,3 +1,7 @@
+/*
+* StudentGroup entity only storing the StudentGroup name
+*/
+
 package entity;
 
 import javax.persistence.Entity;

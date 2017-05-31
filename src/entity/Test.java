@@ -1,3 +1,7 @@
+/*
+* Test entity connected to the User who created the Test
+*/
+
 package entity;
 
 import javax.persistence.*;
