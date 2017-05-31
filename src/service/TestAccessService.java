@@ -45,9 +45,23 @@ public class TestAccessService {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
+        Query query = entityManager.createQuery( "Select ta from TestAccess ta where ta.test.testId = " + test.getTestId());
+        List<TestAccess> taList = (List<TestAccess>)query.getResultList();
+
         entityManager.getTransaction().begin();
+
+        int i = 0;
         for(User user : userList) {
-            entityManager.persist(new TestAccess(user, test));
+            i = 0;
+            for(TestAccess tA : taList) {
+                if(user.getUserId() == tA.getUser().getUserId()) {
+                    break;
+                }
+                if(i == taList.size() - 1) {
+                    entityManager.persist(new TestAccess(user, test));
+                }
+                i++;
+            }
         }
         entityManager.getTransaction().commit();
 
