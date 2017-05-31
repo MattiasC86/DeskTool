@@ -15,9 +15,7 @@ public class UserAnswer {
 
     private int uACheckedAnswer;  //ska vara 1 om användaren klickat i, annars 0. Kan vara 0 på alla ranked
     private int uAOrder;  // 0,1,2,3...etc, används vid ranked questions, spelar annars ingen roll.
-
-    //OBS! Tog bort UAText. Eftersom varje UserAnswer ska ha en koppling till ett Answer-objekt så kan
-    // texten alltid hämtas från Answer-objektet
+    private String uAText;
 
     @OneToOne
     private Question question;  //Måste ha en koppling till den fråga det hör till
@@ -26,9 +24,10 @@ public class UserAnswer {
     @ManyToOne
     private AnsweredTest answeredTest;
 
-    public UserAnswer(int uACheckedAnswer, int uAOrder, Question question, Answer answer, AnsweredTest answeredTest) {
+    public UserAnswer(int uACheckedAnswer, int uAOrder, String uAText, Question question, Answer answer, AnsweredTest answeredTest) {
         this.setUACheckedAnswer(uACheckedAnswer);
         this.setUAOrder(uAOrder);
+        this.setUAText(uAText);
         this.setQuestion(question);
         this.setAnswer(answer);
         this.setAnsweredTest(answeredTest);
@@ -83,5 +82,13 @@ public class UserAnswer {
 
     public void setAnswer(Answer answer) {
         this.answer = answer;
+    }
+
+    public String getUAText() {
+        return uAText;
+    }
+
+    public void setUAText(String UAText) {
+        this.uAText = UAText;
     }
 }

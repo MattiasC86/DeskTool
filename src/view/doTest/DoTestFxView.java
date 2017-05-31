@@ -94,7 +94,7 @@ public class DoTestFxView {
                         if(qListGraphicObject.get(i).answerBox[d].isSelected()){
                             checked = 1;
                         }
-                        UserAnswer currentUserAnswer = new UserAnswer(checked, d, qList.get(i), currentAnswerList.get(d), answeredTest);
+                        UserAnswer currentUserAnswer = new UserAnswer(checked, d, qListGraphicObject.get(i).answerBox[d].getText(), qList.get(i), currentAnswerList.get(d), answeredTest);
                         userAnsweredList.add(currentUserAnswer);
                     }
                 }
@@ -104,16 +104,13 @@ public class DoTestFxView {
 
                     for(int d = 0; d < currentAnswerList.size(); d++){
 
-                        qListGraphicObject.get(i).rankQuestionList.getItems().get(d);
-
-                        UserAnswer currentUserAnswer = new UserAnswer(0, d, qList.get(i), currentAnswerList.get(d), answeredTest);
+                        UserAnswer currentUserAnswer = new UserAnswer(0, d, qListGraphicObject.get(i).rankQuestionList.getItems().get(d), qList.get(i), currentAnswerList.get(d), answeredTest);
                         userAnsweredList.add(currentUserAnswer);
 
                     }
                 }
             }
             AnsweredTestService.create(answeredTest, userAnsweredList);
-
         });
 
 

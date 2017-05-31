@@ -54,11 +54,14 @@ public class TestLogic {
 
                     case "Ranked":
                         for(int i = 0; i < answers.size(); i++) {
-                            if(answers.get(i).getaOrder() != uAnswers.get(i).getUAOrder()) {
+                            if(!answers.get(i).getaText().equals(uAnswers.get(i).getUAText())) {
                                 break;
                             }
+                            if(i == answers.size() - 1) {
+                                System.out.println("Ett rankpoäng");
+                                totalScore++;
+                            }
                         }
-                        totalScore++;
                         break;
                 }
             }
