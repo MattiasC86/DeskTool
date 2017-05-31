@@ -18,21 +18,23 @@ import view.register.Register;
 /**
  * Created by Rasmus on 2017-05-03.
  */
+
+
 public class MenuBarAdmin {
 
 
     public MenuBarAdmin(Pane pane, Stage window){
 
+        //Creates a menu thats used to get to the firstpage
+        Menu home = new Menu("Hem");
 
-        Menu menu1 = new Menu("Hem");
+        //Creates a menu for tests and users.
+        Menu arkivMenu = new Menu("Arkiv");
 
-        //skapar en huvudmeny med namn arkiv
-        Menu menu2 = new Menu("Arkiv");
+        //Creates a submenu for the menu arkivMenu that contains everthings for tests
+        Menu testMenu = new Menu("Test");
 
-        //skapar en submeny med namn test i menyn arkiv
-        Menu createMenu = new Menu("Test");
-
-        //skapar menuItems att fylla submenyn Test med
+        //Creates MenuItems for testMenu
         MenuItem createTest = new MenuItem("Skapa Test");
         MenuItem shareTest = new MenuItem("Dela Test");
         MenuItem correctTest = new MenuItem("Rätta Test");
@@ -41,30 +43,32 @@ public class MenuBarAdmin {
         MenuItem reuseTest = new MenuItem("Återanvända Test");
         MenuItem doneTest = new MenuItem("Statistik");
 
-
-        //skapar en submeny med namn registrera till menyn arkiv
+        //Creates a MenuItem for akrivMenu
         MenuItem registerMenu = new MenuItem("Registrera Användare");
 
-        //skapar en huvudmeny med namn Inställningar
-        Menu menu3 = new Menu("Inställningar");
 
-        //skapar menuItems som ska fylla menyn Inställningar
+        //Creates a menu for settings
+        Menu settingsMenu = new Menu("Inställningar");
+
+        //Creates a MenuItem for the settingsMenu
         MenuItem editUser = new MenuItem("Redigera användare");
 
-        //Skapar en huvudmeny med namn logga ut
+
+        //Creates a Menu thats used to logout
         Menu menu4 = new Menu("Logga ut");
 
-        /*MenuItem logoutItem = new MenuItem("Logga ut");
-        menu4.getItems().addAll(logoutItem);*/
 
-        menu2.getItems().addAll(createMenu, registerMenu);
+        //Adds childrens to all the menues
+        arkivMenu.getItems().addAll(testMenu, registerMenu);
 
-        createMenu.getItems().addAll(createTest, shareTest, correctTest, changeTest, doTest, reuseTest, doneTest);
+        testMenu.getItems().addAll(createTest, shareTest, correctTest, changeTest, doTest, reuseTest, doneTest);
 
-        menu3.getItems().addAll(editUser);
+        settingsMenu.getItems().addAll(editUser);
 
-        MenuBar menuAdmin = new MenuBar(menu1, menu2, menu3);
+        //Adds all menu to the menubar
+        MenuBar menuAdmin = new MenuBar(home, arkivMenu, settingsMenu);
 
+        //Adds all menu to the menubar
         MenuBar menuAdmin2 = new MenuBar(menu4);
         menuAdmin.setPrefWidth(1510); //Double.MAX_VALUE
 
@@ -74,41 +78,46 @@ public class MenuBarAdmin {
 
 
 
-        MenuBarHelper.onAction(menu1);
+        MenuBarHelper.onAction(home);
         MenuBarHelper.onAction(menu4);
 
-        //ActionEvent för loginknappen.
+        //ActionEvent for loginbutton.
         menu4.setOnAction(e -> {
             LoginPage lp = new LoginPage(window);
         });
 
-        //ActionEvent för Registrera lärare.
+        //ActionEvent for register user.
         registerMenu.setOnAction(e->{
             Register rt = new Register(window);
         });
 
-        //ActionEvent för hemknappen.
-        menu1.setOnAction(e->{
+        //ActionEvent for home button.
+        home.setOnAction(e->{
             AdminFirstpage afp = new AdminFirstpage(window);
         });
 
-        //ActionEvent för SkapaTest.
+        //ActionEvent for createtest button.
         createTest.setOnAction(e->{
             FxView fv = new FxView(window);
         });
 
+        //ActionEvent for editUser button.
         editUser.setOnAction(e->{
             Settings st = new Settings(window);
         });
 
+        //ActionEvent for doTest.
         doTest.setOnAction(e->{
             SelectTestView stv = new SelectTestView(window);
         });
 
+
+        //ActionEvent for statistics.
         doneTest.setOnAction(e->{
             StatisticsView ssv = new StatisticsView(window);
         });
 
+        //ActionEvent for shareTest.
         shareTest.setOnAction(e->{
             ShareTestView stv = new ShareTestView(window);
         });
