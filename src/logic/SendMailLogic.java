@@ -39,10 +39,14 @@ public class SendMailLogic {
         try {
 
             Message message = new MimeMessage(session);
+            //The mail it sends from.
             message.setFrom(new InternetAddress("from-email@gmail.com"));
+            //The mail sends to.
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(receive));
+            //The Titel of the mail.
             message.setSubject("New test available");
+            //The content of the mail.
             message.setText("Hey "+ user.getFirstName()+" "+ user.getLastName() +","
                     + "\n\n You can now take the "+ test.gettTitle() +" test!"+
                     "\n\n Your login name is " + user.getUserName()+
