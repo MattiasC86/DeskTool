@@ -75,17 +75,11 @@ public class DoTestFxView {
             // BEHÖVER LÄGGAS IN TIMESEC
             AnsweredTest answeredTest = new AnsweredTest(false, selectedTest.gettDisplayResult(), 0, 10, "", UserService.read(LoginLogic.getCurrId()), selectedTest);
 
-            //List to be inserted!
-            List<AnsweredQuestion> answeredQList = new ArrayList<AnsweredQuestion>();
+            // Will contain all useranswers
             List<UserAnswer> userAnsweredList = new ArrayList<>();
 
-            int points = 0;
-
+            // Loops through questions one by one
             for(int i = 0; i < numberOfQuestion; i++){
-
-                AnsweredQuestion answeredQ = new AnsweredQuestion(0, qList.get(i), answeredTest);
-                answeredQList.add(answeredQ);
-
                 // Single or multiple question
                 if(qList.get(i).getqType().equalsIgnoreCase("Single") || qList.get(i).getqType().equalsIgnoreCase("Multiple")){
                     List<Answer> currentAnswerList = aListList.get(i);
@@ -98,15 +92,12 @@ public class DoTestFxView {
                         userAnsweredList.add(currentUserAnswer);
                     }
                 }
-                // Ranked question  (Kommer funka men rankade frågor får ingen answersBox i doTestQuestio rankedQuestion() metoden
+                // Ranked question
                 else if(qList.get(i).getqType().equalsIgnoreCase("Ranked")){
                     List<Answer> currentAnswerList = aListList.get(i);
-
                     for(int d = 0; d < currentAnswerList.size(); d++){
-
                         UserAnswer currentUserAnswer = new UserAnswer(0, d, qListGraphicObject.get(i).rankQuestionList.getItems().get(d), qList.get(i), currentAnswerList.get(d), answeredTest);
                         userAnsweredList.add(currentUserAnswer);
-
                     }
                 }
             }
