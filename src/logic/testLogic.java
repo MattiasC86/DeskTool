@@ -1,3 +1,7 @@
+/*
+* TestLogic contains methods used in conjunction with Test creation annd answered tests self correcting
+*/
+
 package logic;
 
 import entity.*;

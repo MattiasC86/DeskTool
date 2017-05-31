@@ -1,3 +1,8 @@
+/*
+* StatisticsLogic contains logic methods used for getting and calculating
+* different values used for displaying Test statistics
+*/
+
 package logic;
 
 import entity.AnsweredTest;

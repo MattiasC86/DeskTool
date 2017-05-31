@@ -1,8 +1,12 @@
+/*
+* LoginLogic class contains validation logic for login screen,
+* also stores a static variable of currently logged in users Id
+*/
+
 package logic;
+
 import entity.User;
 import service.UserService;
-import logic.UserLogic;
-
 
 public class LoginLogic {
 
