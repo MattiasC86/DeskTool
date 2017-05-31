@@ -26,6 +26,7 @@ public class doTestQuestion {
     private List <Answer> aList;
     private Pane pane;
     private ListView<Pane> testList;
+    public ListView<String> rankQuestionList;
 
     //I klassen
     Label label;
@@ -95,7 +96,7 @@ public class doTestQuestion {
         label.setText("Rangordningsfråga (Rangordna svarven uppifrån och ner):");
         label1.relocate(510, 5);
 
-        ListView<String> rankQuestionList = new ListView<String>();
+        rankQuestionList = new ListView<String>();
         rankQuestionList.setPrefSize(1140, 150);
         rankQuestionList.relocate(20, 45);
         rankQuestionList.setStyle("-fx-font-size: 12pt");

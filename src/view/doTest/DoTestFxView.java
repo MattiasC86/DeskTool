@@ -102,17 +102,13 @@ public class DoTestFxView {
                 else if(qList.get(i).getqType().equalsIgnoreCase("Ranked")){
                     List<Answer> currentAnswerList = aListList.get(i);
 
-                    int order = 0;
                     for(int d = 0; d < currentAnswerList.size(); d++){
-                        for(int y = 0; y < qListGraphicObject.size(); y++) {
-                            System.out.println("qList answerbox y: " + y + qListGraphicObject.get(i).answerBox[y].getText());
-                            System.out.println("currentAnswer d: " + d + currentAnswerList.get(d).getaText());
-                            if(qListGraphicObject.get(i).answerBox[y].getText().equals(currentAnswerList.get(d).getaText())){
-                                order = y;
-                            }
-                            UserAnswer currentUserAnswer = new UserAnswer(0, order, qList.get(i), currentAnswerList.get(d), answeredTest);
-                            userAnsweredList.add(currentUserAnswer);
-                        }
+
+                        qListGraphicObject.get(i).rankQuestionList.getItems().get(d);
+
+                        UserAnswer currentUserAnswer = new UserAnswer(0, d, qList.get(i), currentAnswerList.get(d), answeredTest);
+                        userAnsweredList.add(currentUserAnswer);
+
                     }
                 }
             }
