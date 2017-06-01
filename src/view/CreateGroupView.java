@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import service.GroupDetailsService;
 import service.StudentGroupService;
+import service.TestAccessService;
 import service.UserService;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class CreateGroupView extends Application {
     Button btnRemove;
     Button btnCreateGroup;
     Button btnRemoveGroup;
+    Button btnReviewMembers;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -76,9 +78,10 @@ public class CreateGroupView extends Application {
         btnRemove = new Button("Ta bort elev");
         btnCreateGroup = new Button("Skapa grupp");
         btnRemoveGroup = new Button("Radera grupp");
+        btnReviewMembers = new Button("Se gruppmedlemmar");
 
         pane.getChildren().addAll(groupNameInput, userListView, selUsersListView, btnAdd, btnRemove, groupsListView,
-                btnCreateGroup, btnRemoveGroup);
+                btnCreateGroup, btnRemoveGroup, btnReviewMembers);
 
 
         Scene scene = new Scene(pane, 1200, 800);
@@ -91,6 +94,7 @@ public class CreateGroupView extends Application {
         btnRemove.setOnAction(e -> removeUser());
         btnCreateGroup.setOnAction(e -> createGroup());
         btnRemoveGroup.setOnAction(e -> removeGroup());
+        btnReviewMembers.setOnAction(e -> reviewMembers());
 
         //NÄR MAN TRYCKER PÅ KNAPPEN "SPARA GRUPP" --->
         //StudentGroupService.create(groupName, selectedUsers);
@@ -132,23 +136,57 @@ public class CreateGroupView extends Application {
         }
     }
 
+    // Saves the new group in database unless groupname is taken
     public void createGroup() {
-        StudentGroup studentGroup = new StudentGroup(groupNameInput.getText());
-
-        StudentGroupService.create(studentGroup);
-        for(User user : selectedUsers) {
-            GroupDetailsService.create(new GroupDetails(studentGroup, user));
+        boolean validated = true;
+        for(StudentGroup group : allGroups) {
+            if(group.getGroupName().equals(groupNameInput.getText())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Gruppnamn upptaget.");
+                alert.setContentText("Vänligen fyll i ett nytt gruppnamn");
+                validated = false;
+                alert.showAndWait();
+            }
         }
-        groupsListView.getItems().add(studentGroup.getGroupName());
-        allGroups.add(studentGroup);
+
+        if(validated) {
+            StudentGroup studentGroup = new StudentGroup(groupNameInput.getText());
+
+            StudentGroupService.create(studentGroup);
+            for(User user : selectedUsers) {
+                GroupDetailsService.create(new GroupDetails(studentGroup, user));
+            }
+            groupsListView.getItems().add(studentGroup.getGroupName());
+            allGroups.add(studentGroup);
+        }
     }
 
+    // Removes selected group from database
     public void removeGroup() {
         int index = groupsListView.getSelectionModel().getSelectedIndex();
         StudentGroupService.delete(allGroups.get(index));
         groupsListView.getItems().remove(index);
         allGroups.remove(index);
 
+    }
+
+    public void reviewMembers() {
+        int index = groupsListView.getSelectionModel().getSelectedIndex();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(groupsListView.getItems().get(index));
+        alert.setHeaderText("Medlemmar i " + groupsListView.getItems().get(index) + ":");
+
+        List<User> members = StudentGroupService.readByGroup(allGroups.get(index).getStudentGroupId());
+        String membersList = "";
+        for(User user : members) {
+            membersList += user.getFirstName() + " " + user.getLastName() + "\n";
+        }
+
+        alert.setContentText(membersList);
+
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {

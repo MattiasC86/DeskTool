@@ -60,7 +60,7 @@ public class StudentGroupService {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
-        List<User> userList = entityManager.createQuery("select gd.user from GroupDetails gd where gd.StudentGroup.StudentGroupId = " + studentGroupId)
+        List<User> userList = entityManager.createQuery("select gd.user from GroupDetails gd where gd.studentGroup.StudentGroupId = " + studentGroupId)
                 .getResultList();
 
         entityManager.close();
