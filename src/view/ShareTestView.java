@@ -14,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import logic.LoginLogic;
@@ -31,6 +33,7 @@ import java.util.List;
 public class ShareTestView {
     User currUser;
     User selectedUser;
+    Test selectedTest;
 
     StudentGroup selectedGrupp;
 
@@ -43,6 +46,10 @@ public class ShareTestView {
 
     Button shareBtn;
     Button mailBtn;
+
+    ToggleButton elevorgrupp = new ToggleButton("Toggle");
+
+    Rectangle rect;
 
     Object val;
 
@@ -66,7 +73,10 @@ public class ShareTestView {
         MenuBarHelper.getMenuBar(window, menuPane);
         Pane mainPane = new Pane();
 
-        ObservableList<Test> tsList = FXCollections.observableArrayList(TestService.readAll());
+        //Empty space
+        rect = new Rectangle(500, 250);
+        rect.setFill(Color.TRANSPARENT);
+
         ObservableList<User> userList = FXCollections.observableArrayList(UserService.readAll());
         ObservableList<StudentGroup> groupList = FXCollections.observableArrayList(StudentGroupService.readAll());
 
@@ -120,7 +130,6 @@ public class ShareTestView {
         personTable.getColumns().add(anvandareCol);
         personTable.setItems(userList);
 
-
         //Grupp Tableview
         gruppTable = new TableView();
         TableColumn gruppCol = new TableColumn("Grupp");
@@ -132,6 +141,18 @@ public class ShareTestView {
         deselectPerson();
         deselectTest();
         deselectGrupp();
+
+
+        if(elevorgrupp.isSelected()){
+            gruppTable.setVisible(false);
+            personTable.setVisible(true);
+        }
+
+        else {
+            gruppTable.setVisible(true);
+            personTable.setVisible(false);
+        }
+
 
         shareBtn = new Button("Dela prov");
         mailBtn = new Button("Send mail");
@@ -150,8 +171,10 @@ public class ShareTestView {
         gp.add(testTable, 0, 0);
         gp.add(personTable, 1, 0);
         gp.add(gruppTable, 2, 0);
-        gp.add(shareBtn, 3, 1);
-        gp.add(mailBtn, 4, 1);
+        gp.add(elevorgrupp,3,0);
+        gp.add(rect,3,1);
+        gp.add(shareBtn, 4, 2);
+        gp.add(mailBtn, 5, 2);
         gp.setPadding(new Insets(150));
 
         mainPane.getChildren().addAll(menuPane, gp);
@@ -162,17 +185,17 @@ public class ShareTestView {
     }
 
     public void  shareTest() {
-        //int selectedTestIndex = testBox.getSelectionModel().getSelectedIndex();
-        //Test selectedTest = testList.get(selectedTestIndex);
 
+        //selectedTest = testTable.getSelectionModel().getSelectedItem();
         selectedUser = personTable.getSelectionModel().getSelectedItem();
         selectedGrupp = gruppTable.getSelectionModel().getSelectedItem();
         System.out.print("\n Person "+selectedUser.getUserName()+"\n grupp "+selectedGrupp.getGroupName());
+        //selectedTest = getTests().getSelectionModel().getSelectedItem();
 
-
-        //Elev
-        /*if() {
+        /*//Elev
+        if(elevorgrupp.isSelected()) {
             selectedUser = personTable.getSelectionModel().getSelectedItem();
+            val ==
             TestAccessService.create(selectedUser, val);
         } else if(shareTypeBox.getSelectionModel().getSelectedItem() == "Dela till grupp") {
             int selectedGroupIndex = userSelectBox.getSelectionModel().getSelectedIndex();
@@ -190,6 +213,7 @@ public class ShareTestView {
                     testList.get(i).getUser().getFirstName() + " " + testList.get(i).getUser().getLastName()));
         }
 
+        //select marked test
         testTable.getSelectionModel().setCellSelectionEnabled(true);
         ObservableList selectedCells = testTable.getSelectionModel().getSelectedCells();
 
@@ -247,7 +271,7 @@ public class ShareTestView {
                 row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
                     final int index = row.getIndex();
                     if (index >= 0 && index < gruppTable.getItems().size() && gruppTable.getSelectionModel().isSelected(index)  ) {
-                        testTable.getSelectionModel().clearSelection();
+                        gruppTable.getSelectionModel().clearSelection();
                         event.consume();
                     }
                 });
