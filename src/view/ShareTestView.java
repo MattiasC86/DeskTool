@@ -4,6 +4,7 @@ import entity.StudentGroup;
 import entity.Test;
 import entity.User;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -42,6 +43,8 @@ public class ShareTestView {
 
     Button shareBtn;
     Button mailBtn;
+
+    Object val;
 
     List<Test> testList;
     //List<User> userList;
@@ -166,10 +169,11 @@ public class ShareTestView {
         selectedGrupp = gruppTable.getSelectionModel().getSelectedItem();
         System.out.print("\n Person "+selectedUser.getUserName()+"\n grupp "+selectedGrupp.getGroupName());
 
-        /*if(shareTypeBox.getSelectionModel().getSelectedItem() == "Dela till enskild elev") {
-            int selectedUserIndex = userSelectBox.getSelectionModel().getSelectedIndex();
-            selectedUser = userList.get(selectedUserIndex);
-            TestAccessService.create(selectedUser, selectedTest);
+
+        //Elev
+        /*if() {
+            selectedUser = personTable.getSelectionModel().getSelectedItem();
+            TestAccessService.create(selectedUser, val);
         } else if(shareTypeBox.getSelectionModel().getSelectedItem() == "Dela till grupp") {
             int selectedGroupIndex = userSelectBox.getSelectionModel().getSelectedIndex();
             StudentGroup selectedGroup = groupList.get(selectedGroupIndex);
@@ -185,6 +189,19 @@ public class ShareTestView {
             tests.addAll(new Table(testList.get(i).gettTitle(), testList.get(i).gettTimeMin(), testList.get(i).gettMaxPoints(),
                     testList.get(i).getUser().getFirstName() + " " + testList.get(i).getUser().getLastName()));
         }
+
+        testTable.getSelectionModel().setCellSelectionEnabled(true);
+        ObservableList selectedCells = testTable.getSelectionModel().getSelectedCells();
+
+        selectedCells.addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(Change c) {
+                TablePosition tablePosition = (TablePosition) selectedCells.get(0);
+                val = tablePosition.getTableColumn().getCellData(tablePosition.getRow());
+                System.out.println("Selected Value" + val);
+            }
+        });
+
         return tests;
     }
 
