@@ -30,11 +30,12 @@ public class FxView {
     public FxView(Stage window) {
 
         Pane pane = new Pane();
+        pane.getStyleClass().add("BackGroundPane");
 
         Pane contentPane = new Pane();
         contentPane.setPrefSize(1300,850);
         contentPane.relocate(150,10);
-        contentPane.getStyleClass().add("QuestionPane");
+        contentPane.getStyleClass().add("ContentPane");
         pane.getChildren().add(contentPane);
 
         Label labeltitel = new Label("Titel:");
@@ -139,9 +140,10 @@ public class FxView {
         });
 
         Button btnSaveTest = new Button("Spara Test");
-        btnSaveTest.relocate(1390, 820);
+        btnSaveTest.relocate(1100, 770);
+        btnSaveTest.setPrefWidth(150);
         btnSaveTest.setStyle("-fx-font-size: 14pt");
-        pane.getChildren().add(btnSaveTest);
+        contentPane.getChildren().add(btnSaveTest);
 
         btnSaveTest.setOnAction(e->{
 
