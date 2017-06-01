@@ -111,6 +111,9 @@ public class TestService {
         User user1 = new User("Mattias", "Crusell", "Crusse", "crusell@mail.com", "goteborg", "Admin");
         User user2 = new User("Olof", "Olofsson", "Olofmeister", "olof@meister.com", "olof", "Student");
 
+        StudentGroup studentGroup1 = new StudentGroup("Java2");
+        GroupDetails groupDetails1 = new GroupDetails(studentGroup1, user1);
+        GroupDetails groupDetails2 = new GroupDetails(studentGroup1, user2);
 
         Test test1 = new Test("Djungeltest", 20, 100, 1, 1, user1);
         Test test2 = new Test("Newton Quiz", 15, 5, 1, 1, user1);
@@ -159,6 +162,9 @@ public class TestService {
 
         UserService.create(user1);
         UserService.create(user2);
+        StudentGroupService.create(studentGroup1);
+        GroupDetailsService.create(groupDetails1);
+        GroupDetailsService.create(groupDetails2);
         create(test1);
         create(test2);
         QuestionService.create(questions);
