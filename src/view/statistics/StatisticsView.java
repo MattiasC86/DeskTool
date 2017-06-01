@@ -308,16 +308,7 @@ public class StatisticsView{
             avgScore.relocate(100, 300);
             avgTime.relocate(100, 350);
 
-            /*Button test1 = new Button();
-            //test1.setStyle("-fx-background-image: url('../../pic')");
-            test1.relocate(50,250);
 
-            test1.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../../pic/pieChart.png"))));
-
-            test1.setOnAction(e->{
-                 testpane.getChildren().removeAll(chart);
-
-             });*/
             VBox boxHolder = new VBox();
 
             ListView<VBox> chartView = new ListView<VBox>();
