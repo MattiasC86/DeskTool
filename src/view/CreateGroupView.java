@@ -147,6 +147,7 @@ public class CreateGroupView extends Application {
         int index = groupsListView.getSelectionModel().getSelectedIndex();
         StudentGroupService.delete(allGroups.get(index));
         groupsListView.getItems().remove(index);
+        allGroups.remove(index);
 
     }
 
