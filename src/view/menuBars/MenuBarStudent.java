@@ -35,7 +35,6 @@ public class MenuBarStudent {
 
         Menu menu1 = new Menu("Hem");
 
-
         //skapar en huvudmeny med namn arkiv
         Menu menu2 = new Menu("Arkiv");
 
@@ -45,7 +44,6 @@ public class MenuBarStudent {
         //skapar menuItems att fylla submenyn Test med
         MenuItem doTest = new MenuItem("Gör Test");
         MenuItem doneTest = new MenuItem("Rättade Test");
-
 
         //skapar en huvudmeny med namn Inställningar
         Menu menu3 = new Menu("Inställningar");

@@ -11,6 +11,9 @@ package view.doTest;
         import javafx.stage.Stage;
         import logic.LoginLogic;
         import service.*;
+        import view.homepage.AdminFirstpage;
+        import view.homepage.StudentFirstpage;
+        import view.homepage.TeacherFirstpage;
 
 public class DoTestFxView {
 
@@ -19,8 +22,10 @@ public class DoTestFxView {
     Label labeltitel;
     Label testInfo;
     Label timeLabel;
+    Stage window;
 
     public DoTestFxView(Stage window) {
+        this.window = window;
 
         Pane pane = new Pane();
 
@@ -54,46 +59,9 @@ public class DoTestFxView {
 
         // Turning in the test
         testDone.setOnAction(e->{
-            int numberOfQuestion = testList.getItems().size();
-
-            // List with Stuff in
-            Test selectedTest = SelectTestView.getSelectedTest();
-            List<Question> qList = SelectTestView.testQuestions;
-            List<List> aListList = SelectTestView.testAnswers;
-            List<doTestQuestion> qListGraphicObject = SelectTestView.doTestQuestionsList;
-
-            // BEHÖVER LÄGGAS IN TIMESEC
-            AnsweredTest answeredTest = new AnsweredTest(false, selectedTest.gettDisplayResult(), 0, 10, "", UserService.read(LoginLogic.getCurrId()), selectedTest);
-
-            // Will contain all useranswers
-            List<UserAnswer> userAnsweredList = new ArrayList<>();
-
-            // Loops through questions one by one
-            for(int i = 0; i < numberOfQuestion; i++){
-                // Single or multiple question
-                if(qList.get(i).getqType().equalsIgnoreCase("Single") || qList.get(i).getqType().equalsIgnoreCase("Multiple")){
-                    List<Answer> currentAnswerList = aListList.get(i);
-                    for(int d = 0; d < currentAnswerList.size(); d++){
-                        int checked = 0;
-                        if(qListGraphicObject.get(i).answerBox[d].isSelected()){
-                            checked = 1;
-                        }
-                        UserAnswer currentUserAnswer = new UserAnswer(checked, d, qListGraphicObject.get(i).answerBox[d].getText(), qList.get(i), currentAnswerList.get(d), answeredTest);
-                        userAnsweredList.add(currentUserAnswer);
-                    }
-                }
-                // Ranked question
-                else if(qList.get(i).getqType().equalsIgnoreCase("Ranked")){
-                    List<Answer> currentAnswerList = aListList.get(i);
-                    for(int d = 0; d < currentAnswerList.size(); d++){
-                        UserAnswer currentUserAnswer = new UserAnswer(0, d, qListGraphicObject.get(i).rankQuestionList.getItems().get(d), qList.get(i), currentAnswerList.get(d), answeredTest);
-                        userAnsweredList.add(currentUserAnswer);
-                    }
-                }
-            }
-            AnsweredTestService.create(answeredTest, userAnsweredList);
+            messageBox("Test inlämnat! Bra jobbat!");
+            handInTest();
         });
-
 
         window.setTitle("Göra test");
         window.setOnCloseRequest(e -> Platform.exit());
@@ -119,16 +87,77 @@ public class DoTestFxView {
                 seconds--;
                 Platform.runLater(() -> timeLabel.setText("Minuter: " + calcMinutes + " Sekunder: " + seconds));
                 if(seconds == 0){
+                    if(calcMinutes == 0 && seconds == 0){
+                        timer.cancel();
+                        Platform.runLater(() -> messageBox("Tiden är nu ute! Ditt test har lämnats in!"));
+                        Platform.runLater(() -> handInTest());
+                    }
                     calcMinutes--;
                     seconds = 60;
-                    if(calcMinutes <= 0){
-                        System.out.println("Tiden ute");
-                        timer.cancel();
-                    }
                 }
             }
         }, 0, 1000);
     }
 
+    public void handInTest(){
+
+        int numberOfQuestion = testList.getItems().size();
+
+        // List with Stuff in
+        Test selectedTest = SelectTestView.getSelectedTest();
+        List<Question> qList = SelectTestView.testQuestions;
+        List<List> aListList = SelectTestView.testAnswers;
+        List<doTestQuestion> qListGraphicObject = SelectTestView.doTestQuestionsList;
+
+        // BEHÖVER LÄGGAS IN TIMESEC
+        AnsweredTest answeredTest = new AnsweredTest(false, selectedTest.gettDisplayResult(), 0, 10, "", UserService.read(LoginLogic.getCurrId()), selectedTest);
+
+        // Will contain all useranswers
+        List<UserAnswer> userAnsweredList = new ArrayList<>();
+
+        // Loops through questions one by one
+        for(int i = 0; i < numberOfQuestion; i++){
+            // Single or multiple question
+            if(qList.get(i).getqType().equalsIgnoreCase("Single") || qList.get(i).getqType().equalsIgnoreCase("Multiple")){
+                List<Answer> currentAnswerList = aListList.get(i);
+                for(int d = 0; d < currentAnswerList.size(); d++){
+                    int checked = 0;
+                    if(qListGraphicObject.get(i).answerBox[d].isSelected()){
+                        checked = 1;
+                    }
+                    UserAnswer currentUserAnswer = new UserAnswer(checked, d, qListGraphicObject.get(i).answerBox[d].getText(), qList.get(i), currentAnswerList.get(d), answeredTest);
+                    userAnsweredList.add(currentUserAnswer);
+                }
+            }
+            // Ranked question
+            else if(qList.get(i).getqType().equalsIgnoreCase("Ranked")){
+                List<Answer> currentAnswerList = aListList.get(i);
+                for(int d = 0; d < currentAnswerList.size(); d++){
+                    UserAnswer currentUserAnswer = new UserAnswer(0, d, qListGraphicObject.get(i).rankQuestionList.getItems().get(d), qList.get(i), currentAnswerList.get(d), answeredTest);
+                    userAnsweredList.add(currentUserAnswer);
+                }
+            }
+        }
+        AnsweredTestService.create(answeredTest, userAnsweredList);
+
+        User user = UserService.read(LoginLogic.getCurrId());
+        if(user.getRole().equalsIgnoreCase("Admin")){
+            AdminFirstpage afp = new AdminFirstpage(window);
+        }
+        else if(user.getRole().equalsIgnoreCase("Lärare")){
+            TeacherFirstpage tfp = new TeacherFirstpage(window);
+        }
+        else if(user.getRole().equalsIgnoreCase("Student")){
+            StudentFirstpage sfp = new StudentFirstpage(window);
+        }
+    }
+
+    private void messageBox(String text){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information saknas");
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
+    }
 }
 

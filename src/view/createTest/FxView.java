@@ -158,7 +158,19 @@ public class FxView {
             else{
                 selfCorrect = 0;
             }
-            TestLogic.saveTest(questions, titleTest.getText(), selfCorrect, 0, 1, UserService.read(LoginLogic.getCurrId()));
+
+            int timeLimit = 0;
+            if(box1.isSelected()){
+
+                String text = minutesField.getText();
+                timeLimit = Integer.parseInt(text);
+            }
+            else{
+                timeLimit = 0;
+            }
+
+
+            TestLogic.saveTest(questions, titleTest.getText(), selfCorrect, timeLimit, 1, UserService.read(LoginLogic.getCurrId()));
 
             messageBox("Test skapat!");
 
@@ -205,6 +217,11 @@ public class FxView {
             }
 
             if (minutesField.getText().matches("[0-9]+")) {
+                String text = minutesField.getText();
+                if(Integer.parseInt(text) == 0){
+                    messageBox("Tidsgränsen kan inte vara noll ");
+                    return false;
+                }
                 //ok
             }
             else{
