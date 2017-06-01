@@ -140,6 +140,7 @@ public class CreateGroupView extends Application {
             GroupDetailsService.create(new GroupDetails(studentGroup, user));
         }
         groupsListView.getItems().add(studentGroup.getGroupName());
+        allGroups.add(studentGroup);
     }
 
     public void removeGroup() {
