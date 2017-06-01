@@ -19,7 +19,7 @@ public class RegisterLogic {
         }
 
         //If username already exists in db - return 1
-        else if(result1.equals(userName)) {
+        else if(result1.toLowerCase().equals(userName.toLowerCase())) {
             return 1;
         }
         //If email already exists in db - return 2
