@@ -69,4 +69,22 @@ public class StudentGroupService {
         return userList;
     }
 
+    // Deletes selected StudentGroup
+    public static void delete(StudentGroup studentGroup) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        List<GroupDetails> groupDetailsList = entityManager.createQuery("select gd from GroupDetails gd where " +
+                "gd.studentGroup.StudentGroupId = " + studentGroup.getStudentGroupId()).getResultList();
+        GroupDetailsService.delete(groupDetailsList);
+
+        StudentGroup sGroup = entityManager.find(StudentGroup.class, studentGroup.getStudentGroupId());
+
+        entityManager.getTransaction().begin();
+        entityManager.remove(sGroup);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        emFactory.close();
+    }
 }
