@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import service.GroupDetailsService;
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by matti on 2017-05-24.
  */
 public class CreateGroupView extends Application {
-    FlowPane pane = new FlowPane();
+    Pane pane = new Pane();
     List<User> allUsers;
     List<User> selectedUsers;
     List<StudentGroup> allGroups;
@@ -44,23 +45,24 @@ public class CreateGroupView extends Application {
     Button btnRemoveGroup;
     Button btnReviewMembers;
 
+    Label lblSelectUser;
+    Label lblSelectedUsers;
+    Label lblGroups;
+    Label lblGroupName;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         allUsers = UserService.readAll();
         selectedUsers = new ArrayList<>();
 
+        lblSelectUser = new Label("Välj användare att lägga till");
+        lblSelectedUsers = new Label("Valda användare");
+        lblGroups = new Label("Befintliga grupper");
+        lblGroupName = new Label("Välj gruppnamn");
+
         groupNameInput = new TextField();
         groupNameInput.setPromptText("Fyll i namn på gruppen");
-
-        // Creating ListView containing all existing groups
-        allGroups = StudentGroupService.readAll();
-        groupsListView = new ListView<>();
-        groupsObsList = FXCollections.observableArrayList();
-        for(StudentGroup group : allGroups){
-            groupsObsList.add(group.getGroupName());
-        }
-        groupsListView.setItems(groupsObsList);
 
         // Creating ListView containing all users
         userListView = new ListView<>();
@@ -74,30 +76,51 @@ public class CreateGroupView extends Application {
         selUsersObsList = FXCollections.observableArrayList();
         selUsersListView = new ListView<>(selUsersObsList);
 
-        btnAdd = new Button("Lägg till elev");
-        btnRemove = new Button("Ta bort elev");
-        btnCreateGroup = new Button("Skapa grupp");
+        // Creating ListView containing all existing groups
+        allGroups = StudentGroupService.readAll();
+        groupsListView = new ListView<>();
+        groupsObsList = FXCollections.observableArrayList();
+        for(StudentGroup group : allGroups){
+            groupsObsList.add(group.getGroupName());
+        }
+        groupsListView.setItems(groupsObsList);
+
+        // Button creations
+        btnAdd = new Button(">>");
+        btnRemove = new Button("<<");
+        btnCreateGroup = new Button("SPARA GRUPP");
         btnRemoveGroup = new Button("Radera grupp");
         btnReviewMembers = new Button("Se gruppmedlemmar");
 
+        // Node relocations in pane
+        groupNameInput.relocate(300, 620);
+        lblSelectUser.relocate(300, 120);
+        lblSelectedUsers.relocate(620, 120);
+        lblGroups.relocate(950, 120);
+        lblGroupName.relocate(300, 590);
+        userListView.relocate(300, 150);
+        selUsersListView.relocate(620, 150);
+        groupsListView.relocate(950,150);
+        btnAdd.relocate(565, 300);
+        btnRemove.relocate(565, 350);
+        btnRemoveGroup.relocate(930, 560);
+        btnReviewMembers.relocate(1060, 560);
+        btnCreateGroup.relocate(300,680);
+
         pane.getChildren().addAll(groupNameInput, userListView, selUsersListView, btnAdd, btnRemove, groupsListView,
-                btnCreateGroup, btnRemoveGroup, btnReviewMembers);
+                btnCreateGroup, btnRemoveGroup, btnReviewMembers, lblSelectUser, lblSelectedUsers, lblGroups, lblGroupName);
 
 
-        Scene scene = new Scene(pane, 1200, 800);
+        Scene scene = new Scene(pane, 1600, 900);
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
-
+        // Button listeners
         btnAdd.setOnAction(e -> addUser());
         btnRemove.setOnAction(e -> removeUser());
         btnCreateGroup.setOnAction(e -> createGroup());
         btnRemoveGroup.setOnAction(e -> removeGroup());
         btnReviewMembers.setOnAction(e -> reviewMembers());
-
-        //NÄR MAN TRYCKER PÅ KNAPPEN "SPARA GRUPP" --->
-        //StudentGroupService.create(groupName, selectedUsers);
     }
 
     public void addUser() {
