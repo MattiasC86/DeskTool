@@ -126,6 +126,7 @@ public class StatisticsView{
                 );
         groupBox = new ComboBox(availableGroups);
         groupBox.setPrefWidth(200);
+        groupBox.setPromptText("Välj grupp");
 
 
         // If logged in user is Admin, all tests are shown
@@ -154,6 +155,7 @@ public class StatisticsView{
 
         groupTestBox = new ComboBox(availableTests);
         groupTestBox.setPrefWidth(200);
+        groupTestBox.setPromptText("Välj prov");
 
 
 
@@ -166,8 +168,8 @@ public class StatisticsView{
         testpane.getChildren().addAll(testBox);
         test.setContent(testpane);
 
-        groupBox.relocate(100, 100);
-        groupTestBox.relocate(350,100);
+        groupBox.relocate(100, 50);
+        groupTestBox.relocate(100,100);
         grouppane.getChildren().addAll(groupBox, groupTestBox);
         group.setContent(grouppane);
 
