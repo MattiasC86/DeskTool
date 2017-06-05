@@ -133,8 +133,8 @@ public class Settings {
         currentEmail.setId("settingsLabel");
         currentPassword.setId("settingsLabel");
         currentUsername.setId("settingsLabel");
-        buttonChangeEmail.setId("btnSettings");
-        buttonChangePassword.setId("btnSettings");
+        buttonChangeEmail.setId("btnRegister");
+        buttonChangePassword.setId("btnRegister");
 
 
 
