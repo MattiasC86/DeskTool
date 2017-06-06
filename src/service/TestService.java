@@ -82,16 +82,30 @@ public class TestService {
         return testList;
     }
 
-    public static void update(Test test) {
+    // Used when unlocking/opening displayResult for test, returns a 0 if already unlocked, otherwise returns a 1
+    public static int update(Test test) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(test);
-        entityManager.getTransaction().commit();
+        Test selTest = entityManager.find(Test.class, test.getTestId());
 
-        entityManager.close();
-        emFactory.close();
+        if(selTest.gettDisplayResult() == 1) {
+            return 0;
+        } else {
+            entityManager.getTransaction().begin();
+            selTest.settDisplayResult(1);
+            entityManager.persist(selTest);
+            entityManager.getTransaction().commit();
+
+            entityManager.close();
+            emFactory.close();
+
+            return 1;
+        }
+
+
+
+
     }
 
     public static void delete(Test test) {
