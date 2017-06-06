@@ -52,10 +52,11 @@ public class ShareTestView {
     Rectangle rect;
 
     Object val;
+    int intval;
 
     List<Test> testList;
-    //List<User> userList;
-    //List<StudentGroup> groupList;
+    List<User> userList;
+    List<StudentGroup> groupList;
 
     /*
 
@@ -99,7 +100,7 @@ public class ShareTestView {
                 FXCollections.observableArrayList(
                         testNames
                 );
-        /*
+
         List<String> listItems = new ArrayList<>();
 
         //userList = UserService.readStudents();
@@ -110,7 +111,7 @@ public class ShareTestView {
         ObservableList<String> availableUsers =
                 FXCollections.observableArrayList(
                         listItems
-                );*/
+                );
 
 
         //Test Tableview
@@ -143,7 +144,7 @@ public class ShareTestView {
         deselectGrupp();
 
 
-        if(elevorgrupp.isSelected()){
+        /*if(elevorgrupp.isSelected()){
             gruppTable.setVisible(false);
             personTable.setVisible(true);
         }
@@ -151,7 +152,7 @@ public class ShareTestView {
         else {
             gruppTable.setVisible(true);
             personTable.setVisible(false);
-        }
+        }*/
 
 
         shareBtn = new Button("Dela prov");
@@ -186,24 +187,16 @@ public class ShareTestView {
 
     public void  shareTest() {
 
-        //selectedTest = testTable.getSelectionModel().getSelectedItem();
+        selectedTest = TestService.read(intval);
         selectedUser = personTable.getSelectionModel().getSelectedItem();
         selectedGrupp = gruppTable.getSelectionModel().getSelectedItem();
-        System.out.print("\n Person "+selectedUser.getUserName()+"\n grupp "+selectedGrupp.getGroupName());
-        //selectedTest = getTests().getSelectionModel().getSelectedItem();
 
-        /*//Elev
-        if(elevorgrupp.isSelected()) {
-            selectedUser = personTable.getSelectionModel().getSelectedItem();
-            val ==
-            TestAccessService.create(selectedUser, val);
-        } else if(shareTypeBox.getSelectionModel().getSelectedItem() == "Dela till grupp") {
-            int selectedGroupIndex = userSelectBox.getSelectionModel().getSelectedIndex();
-            StudentGroup selectedGroup = groupList.get(selectedGroupIndex);
+        TestAccessService.create(selectedUser, selectedTest);
 
-            List<User> selectedUsers = StudentGroupService.readByGroup(selectedGroup.getStudentGroupId());
-            TestAccessService.create(selectedUsers, selectedTest);
-        }*/
+        //List<User> selectedUsers = StudentGroupService.readByGroup(selectedGrupp.getStudentGroupId());
+        //TestAccessService.create(selectedUsers, selectedTest);
+        System.out.print("button test " + selectedTest);
+
     }
 
     public ObservableList<Table> getTests(){
@@ -211,19 +204,19 @@ public class ShareTestView {
         for(int i = 0; i < testList.size(); i++) {
             tests.addAll(new Table(testList.get(i).gettTitle(), testList.get(i).gettTimeMin(), testList.get(i).gettMaxPoints(),
                     testList.get(i).getUser().getFirstName() + " " + testList.get(i).getUser().getLastName()));
-        }
+            }
 
         //select marked test
         testTable.getSelectionModel().setCellSelectionEnabled(true);
         ObservableList selectedCells = testTable.getSelectionModel().getSelectedCells();
 
-        selectedCells.addListener(new ListChangeListener() {
-            @Override
-            public void onChanged(Change c) {
-                TablePosition tablePosition = (TablePosition) selectedCells.get(0);
-                val = tablePosition.getTableColumn().getCellData(tablePosition.getRow());
-                System.out.println("Selected Value" + val);
-            }
+        selectedCells.addListener((ListChangeListener) c -> {
+            TablePosition tablePosition = (TablePosition) selectedCells.get(0);
+
+            //Validation
+            val = tablePosition.getTableColumn().getCellData(tablePosition.getRow());
+            intval = tablePosition.getRow();
+            System.out.println("Selected Value " + val + " " + selectedTest + " " + testList.indexOf(val)+ " " + intval);
         });
 
         return tests;
