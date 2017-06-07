@@ -51,7 +51,6 @@ public class CreateGroupView  {
     Label lblSelectedUsers;
     Label lblGroups;
     Label lblGroupName;
-    Label lblStatus;
 
 
     public CreateGroupView(Stage window){
@@ -66,8 +65,6 @@ public class CreateGroupView  {
         lblSelectedUsers = new Label("Valda användare");
         lblGroups = new Label("Befintliga grupper");
         lblGroupName = new Label("Välj gruppnamn");
-        lblStatus = new Label("");
-        lblStatus.setVisible(false);
 
         groupNameInput = new TextField();
         groupNameInput.setPromptText("Fyll i namn på gruppen");
@@ -114,10 +111,9 @@ public class CreateGroupView  {
         btnRemoveGroup.relocate(930, 560);
         btnReviewMembers.relocate(1060, 560);
         btnCreateGroup.relocate(300,680);
-        lblStatus.relocate(300, 720);
 
         pane.getChildren().addAll(groupNameInput, userListView, selUsersListView, btnAdd, btnRemove, groupsListView,
-                btnCreateGroup, btnRemoveGroup, btnReviewMembers, lblSelectUser, lblSelectedUsers, lblGroups, lblGroupName, lblStatus);
+                btnCreateGroup, btnRemoveGroup, btnReviewMembers, lblSelectUser, lblSelectedUsers, lblGroups, lblGroupName);
 
 
         Scene scene = new Scene(pane, 1600, 900);
