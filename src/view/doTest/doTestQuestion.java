@@ -93,7 +93,7 @@ public class doTestQuestion {
 
     public void rankedQuestion(){
 
-        label.setText("Rangordningsfråga (Rangordna svarven uppifrån och ner):");
+        label.setText("Rangordningsfråga (Rangordna svaren uppifrån och ner):");
         label1.relocate(510, 5);
 
         rankQuestionList = new ListView<String>();
