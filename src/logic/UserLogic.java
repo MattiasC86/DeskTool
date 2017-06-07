@@ -26,25 +26,16 @@ public class UserLogic {
 
         List<Test> testList = (List<Test>)query.getResultList();
         List<Test> dateCheckedTestList = new ArrayList<>();
-        System.out.println("innan datum");
+
         Date utilDate = Calendar.getInstance().getTime();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-        System.out.println("efter datum");
+        // If current time is between start and end dates of Test, test is added to dateCheckedTestList
         for(Test test : testList) {
-            System.out.println("I TESTLIST FOR LOOP");
             if((test.gettStartTestDate().before(sqlDate) || test.gettStartTestDate().equals(sqlDate))) {
                 if(sqlDate.before(test.gettEndTestDate()) || sqlDate.toString().equals(test.gettEndTestDate().toString())) {
                     dateCheckedTestList.add(test);
-                    System.out.println(test.gettTitle() + " ADDADES till datecheckedlist!");
-                    System.out.println(test.gettStartTestDate() + " vs " + sqlDate);
                 }
-                else {
-                    System.out.println(test.gettTitle() + " PASSERADE INTE");
-                    System.out.println(test.gettEndTestDate() + " vs " + sqlDate);
-                }
-            } else {
-                System.out.println("VILLE INTE IN I FÖRSTA IF");
             }
         }
 
