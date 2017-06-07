@@ -49,7 +49,7 @@ public class MenuBarTeacher {
                 MenuItem shareResultTest = new MenuItem("Dela resultat");
                 MenuItem doTest = new MenuItem("Gör Test");
                 MenuItem reuseTest = new MenuItem("Återanvända Test");
-                MenuItem doneTest = new MenuItem("Statestik");
+                MenuItem doneTest = new MenuItem("Statistik");
 
 
                 //skapar en huvudmeny med namn Inställningar

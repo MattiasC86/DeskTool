@@ -128,7 +128,7 @@ public class StatisticsView{
         groupBox.setPrefWidth(200);
         groupBox.setPromptText("Välj grupp");
 
-
+        testList = new ArrayList<>();
         // If logged in user is Admin, all tests are shown
         // If user is Teacher, only the tests created by this teacher is shown
         switch (currUser.getRole()) {
