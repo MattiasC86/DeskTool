@@ -14,6 +14,15 @@
     -fx-text-fill: #ede7f3;
     -fx-background-color: linear-gradient(#744417, #ff7717 );
 }
+#btnLogin:hover{
+    -fx-background-color: linear-gradient(#ad741b, #ff9e67);
+    -fx-text-fill: #f9f3ff ;
+}
+#btnLogin:pressed{
+    -fx-background-color: linear-gradient(#161183, #7e90ff);
+    -fx-text-fill: #f9f3ff ;
+}
+
 #loginPane {
     -fx-background-image: url('../pic/loginPage2.jpg');
     -fx-background-repeat: stretch;

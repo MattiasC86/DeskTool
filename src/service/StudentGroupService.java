@@ -52,6 +52,7 @@ public class StudentGroupService {
         entityManager.close();
         emFactory.close();
 
+
         return sgList;
     }
 
@@ -65,6 +66,7 @@ public class StudentGroupService {
 
         entityManager.close();
         emFactory.close();
+
 
         return userList;
     }
