@@ -108,8 +108,8 @@ public class DoTestFxView {
                         calcMinutes--;
                         secondsLeft = 60;
                     }
-                    handInMinutes = calcMinutes;
-                    handInSeconds = secondsLeft;
+                    handInMinutes = SelectTestView.getSelectedTest().gettTimeMin() - calcMinutes - 1;
+                    handInSeconds = 60 - secondsLeft;
                 }
 
 
