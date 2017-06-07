@@ -49,7 +49,7 @@ public class FxView {
         titleTest.relocate(360, 15);
         contentPane.getChildren().add(titleTest);
 
-        CheckBox box = new CheckBox("Självrättande");
+        CheckBox box = new CheckBox("Låt elever se resultat");
         box.setScaleX(1.5);
         box.setScaleY(1.5);
         box.relocate(800, 35);
@@ -151,12 +151,12 @@ public class FxView {
                 return;
             }
 
-            int selfCorrect;
+            int showResult;
             if(box.isSelected()){
-                selfCorrect = 1;
+                showResult = 1;
             }
             else{
-                selfCorrect = 0;
+                showResult = 0;
             }
 
             int timeLimit = 0;
@@ -170,7 +170,7 @@ public class FxView {
             }
 
 
-            TestLogic.saveTest(questions, titleTest.getText(), selfCorrect, timeLimit, 1, UserService.read(LoginLogic.getCurrId()));
+            TestLogic.saveTest(questions, titleTest.getText(), 1, timeLimit, showResult, UserService.read(LoginLogic.getCurrId()));
 
             messageBox("Test skapat!");
 
