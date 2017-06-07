@@ -45,10 +45,7 @@ public class MenuBarTeacher {
                 //skapar menuItems att fylla submenyn Test med
                 MenuItem createTest = new MenuItem("Skapa Test");
                 MenuItem shareTest = new MenuItem("Dela Test");
-                MenuItem correctTest = new MenuItem("Rätta Test");
                 MenuItem shareResultTest = new MenuItem("Dela resultat");
-                MenuItem doTest = new MenuItem("Gör Test");
-                MenuItem reuseTest = new MenuItem("Återanvända Test");
                 MenuItem doneTest = new MenuItem("Statistik");
 
 
@@ -64,7 +61,7 @@ public class MenuBarTeacher {
 
                 menu2.getItems().addAll(createMenu);
 
-                createMenu.getItems().addAll(createTest, correctTest, shareResultTest, doTest, reuseTest, doneTest);
+                createMenu.getItems().addAll(createTest, shareTest, shareResultTest, doneTest);
 
                 menu3.getItems().addAll(editUser);
 
@@ -95,12 +92,13 @@ public class MenuBarTeacher {
                         FxView fv = new FxView(window);
                 });
 
-                editUser.setOnAction(e -> {
-                        Settings st = new Settings(window);
+                //ActionEvent for shareTest.
+                shareTest.setOnAction(e->{
+                        ShareTestView stv = new ShareTestView(window);
                 });
 
-                doTest.setOnAction(e -> {
-                        SelectTestView stv = new SelectTestView(window);
+                editUser.setOnAction(e -> {
+                        Settings st = new Settings(window);
                 });
 
                 doneTest.setOnAction(e -> {
