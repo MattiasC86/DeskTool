@@ -44,15 +44,14 @@ public class UnlockResultView extends Application {
 
         // If user is Admin, all tests are added to list
         // If user is Teacher, only tests created by this teacher are added to list
-        testList = TestService.readAll();
-        /*switch(UserService.read(LoginLogic.getCurrId()).getRole()) {
+        switch(UserService.read(LoginLogic.getCurrId()).getRole()) {
             case "Admin":
                 testList = TestService.readAll();
                 break;
             case "Teacher":
                 testList = TestService.readAll(LoginLogic.getCurrId());
                 break;
-        }*/
+        }
 
         // Fills testBox with test titles
         for(Test test : testList) {
