@@ -68,6 +68,19 @@ public class AnsweredTestService {
         return atList;
     }
 
+    // Returns list of Tests which User has answered and which has tDisplayResults 1
+    public static List<AnsweredTest> readIfResultShared(int userId) {
+        EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entityManager = emFactory.createEntityManager();
+
+        Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.user.userId = " + userId + " and " +
+                "at.test.tDisplayResult = 1");
+
+        List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
+
+        return atList;
+    }
+
     // Returns all AnsweredTests for specific users and specific test
     public static List<AnsweredTest> read(List<User> users, int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");

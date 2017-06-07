@@ -48,7 +48,7 @@ public class Register {
         Button registerButton = new Button("Registrera");
 
         ChoiceBox privilege = new ChoiceBox();
-        privilege.setItems(FXCollections.observableArrayList("Student", "Lärare", "Admin"));
+        privilege.setItems(FXCollections.observableArrayList("Student", "Teacher", "Admin"));
         privilege.setValue("Student");
 
 
