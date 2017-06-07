@@ -124,7 +124,7 @@ public class MenuBarAdmin {
         });
 
         shareResultTest.setOnAction(e->{
-            //UnlockResultView urv = new UnlockResultView(window);
+            UnlockResultView urv = new UnlockResultView(window);
         });
 
     }

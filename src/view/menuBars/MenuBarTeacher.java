@@ -112,7 +112,7 @@ public class MenuBarTeacher {
                 });
 
                 shareResultTest.setOnAction(e->{
-                        //UnlockResultView urv = new UnlockResultView(window);
+                        UnlockResultView urv = new UnlockResultView(window);
                 });
 
         }

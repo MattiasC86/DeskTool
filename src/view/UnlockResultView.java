@@ -3,6 +3,7 @@
 package view;
 
 import entity.Test;
+import entity.User;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,13 +15,15 @@ import javafx.stage.Stage;
 import logic.LoginLogic;
 import service.TestService;
 import service.UserService;
+import view.menuBars.MenuBarHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by matti on 2017-06-06.
  */
-public class UnlockResultView extends Application {
+public class UnlockResultView {
     Label lUnlock;
     Label lSelectTest;
     Label lStatus;
@@ -30,9 +33,16 @@ public class UnlockResultView extends Application {
     ComboBox testBox;
     Button btnUnlock;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+
+    public UnlockResultView(Stage window) {
+
+        User user = UserService.read(LoginLogic.getCurrId());
+
         pane = new Pane();
+
+
+        MenuBarHelper.getMenuBar(window, pane);
+
         testBox = new ComboBox();
         btnUnlock = new Button("Lås upp resultat");
         testList = new ArrayList<>();
@@ -67,8 +77,8 @@ public class UnlockResultView extends Application {
         pane.getChildren().addAll(testBox, btnUnlock, lUnlock, lSelectTest, lStatus);
 
         Scene scene = new Scene(pane, 1600, 900);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        window.setScene(scene);
+        window.show();
 
         testBox.setOnAction(e -> lStatus.setVisible(false));
 
@@ -92,7 +102,4 @@ public class UnlockResultView extends Application {
         });
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
