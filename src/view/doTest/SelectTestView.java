@@ -17,6 +17,7 @@ import logic.LoginLogic;
 import logic.UserLogic;
 import service.AnswerService;
 import service.QuestionService;
+import service.TestService;
 import service.UserService;
 import view.menuBars.MenuBarHelper;
 
@@ -46,7 +47,17 @@ public class SelectTestView {
         Pane pane = new Pane();
 
         user = UserService.read(LoginLogic.getCurrId());
-        tests = UserLogic.getAvailableTests(user);
+
+        // If user is Admin, show all tests. If user is Student, show tests available to this Student
+        tests = new ArrayList<>();
+        switch(user.getRole()) {
+            case "Admin":
+                tests = TestService.readAll();
+                break;
+            case "Student":
+                tests = UserLogic.getAvailableTests(user);
+                break;
+        }
 
         MenuBarHelper.getMenuBar(window, pane);
 
