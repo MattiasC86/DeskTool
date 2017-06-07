@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.LoginLogic;
 import logic.StatisticsLogic;
+import service.AnsweredTestService;
 import service.TestService;
 import service.UserService;
 import view.menuBars.MenuBarHelper;
@@ -51,7 +52,7 @@ public class ResultsView {
 
         MenuBarHelper.getMenuBar(window, menuPane);
 
-        tests = StatisticsLogic.getCorrected(LoginLogic.getCurrId());
+        tests = AnsweredTestService.readIfResultShared(LoginLogic.getCurrId());
 
         List<String> testNames = new ArrayList<>();
 
