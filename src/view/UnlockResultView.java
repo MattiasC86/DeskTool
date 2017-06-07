@@ -58,7 +58,7 @@ public class UnlockResultView {
             case "Admin":
                 testList = TestService.readAll();
                 break;
-            case "Lärare":
+            case "Teacher":
                 testList = TestService.readAll(LoginLogic.getCurrId());
                 break;
         }

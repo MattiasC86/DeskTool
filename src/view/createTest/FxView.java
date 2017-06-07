@@ -178,7 +178,7 @@ public class FxView {
             if(user.getRole().equalsIgnoreCase("Admin")){
                 AdminFirstpage afp = new AdminFirstpage(window);
             }
-            else if(user.getRole().equalsIgnoreCase("Lärare")){
+            else if(user.getRole().equalsIgnoreCase("Teacher")){
                 TeacherFirstpage tfp = new TeacherFirstpage(window);
             }
         });
