@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -27,45 +28,34 @@ import view.menuBars.MenuBarHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by matti on 2017-05-24.
- */
 public class ShareTestView {
+    FlowPane pane = new FlowPane();
+
     User currUser;
     User selectedUser;
     Test selectedTest;
-
-    StudentGroup selectedGrupp;
-
-    SendMailLogic sm = new SendMailLogic();
-    GridPane gp = new GridPane();
-
-    TableView testTable;
-    TableView<User> personTable;
-    TableView<StudentGroup> gruppTable;
-
-    Button shareBtn;
-    Button mailBtn;
-
-    ToggleButton elevorgrupp = new ToggleButton("Toggle");
-
-    Rectangle rect;
-
-    Object val;
-    int intval;
+    StudentGroup selectedGroup;
 
     List<Test> testList;
     List<User> userList;
     List<StudentGroup> groupList;
 
-    /*
+    ListView<String> testTable;
+    ListView<String> userTable;
+    ListView<String> groupTable;
 
-    -Välj test
-        -Dela till elev/grupp
-            -Välj specifik elev/grupp
-            -Dela
+    String selector;
 
-    */
+    Label lChosenTest;
+    Label lChosenTarget;
+
+    Button shareBtn;
+    Button mailBtn;
+
+    SendMailLogic sm = new SendMailLogic();
+    Rectangle rect;
+    Object val;
+    int intval;
 
     public ShareTestView(Stage window) {
         currUser = UserService.read(LoginLogic.getCurrId());
@@ -74,16 +64,18 @@ public class ShareTestView {
         MenuBarHelper.getMenuBar(window, menuPane);
         Pane mainPane = new Pane();
 
+        selector = "";
+        lChosenTest = new Label("Valt test: ");
+        lChosenTarget = new Label("Dela till: ");
+
         //Empty space
         rect = new Rectangle(500, 250);
         rect.setFill(Color.TRANSPARENT);
 
-        ObservableList<User> userList = FXCollections.observableArrayList(UserService.readAll());
-        ObservableList<StudentGroup> groupList = FXCollections.observableArrayList(StudentGroupService.readAll());
-
-
+        // Test ListVIew
         // If logged in user is Admin, all tests are shown
         // If user is Teacher, only the tests created by this teacher is shown
+        testList = new ArrayList<>();
         switch (currUser.getRole()) {
             case "Admin":
                 testList = TestService.readAll();
@@ -92,74 +84,39 @@ public class ShareTestView {
                 testList = TestService.readAll(currUser.getUserId());
                 break;
         }
-        List<String> testNames = new ArrayList<>();
-        for (Test element : testList) {
-            testNames.add(element.gettTitle());
+        testTable = new ListView<>();
+        List<String> testListNames = new ArrayList<>();
+        for(Test test : testList) {
+            testListNames.add(test.gettTitle());
         }
-        ObservableList<String> availableTests =
-                FXCollections.observableArrayList(
-                        testNames
-                );
+        testTable.getItems().addAll(testListNames);
 
-        List<String> listItems = new ArrayList<>();
-
-        //userList = UserService.readStudents();
-        for(User element : userList) {
-            listItems.add(element.getFirstName() + " " + element.getLastName());
+        //Person ListVIew
+        userList = UserService.readStudents();
+        userTable = new ListView<>();
+        List<String> userListNames = new ArrayList<>();
+        for(User user : userList) {
+            userListNames.add(user.getFirstName() + " " + user.getLastName());
         }
+        userTable.getItems().addAll(userListNames);
 
-        ObservableList<String> availableUsers =
-                FXCollections.observableArrayList(
-                        listItems
-                );
-
-
-        //Test Tableview
-        testTable = new TableView();
-        TableColumn<Table, String> testName = new TableColumn<>("Prov");
-        testName.setMinWidth(200);
-        testName.setCellValueFactory(new PropertyValueFactory<>("title"));
-
-        testTable.setItems(getTests());
-        testTable.getColumns().add(testName);
-
-        //Person tableview
-        personTable = new TableView();
-        TableColumn anvandareCol = new TableColumn("Användare");
-        anvandareCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
-
-        personTable.getColumns().add(anvandareCol);
-        personTable.setItems(userList);
-
-        //Grupp Tableview
-        gruppTable = new TableView();
-        TableColumn gruppCol = new TableColumn("Grupp");
-        gruppCol.setCellValueFactory(new PropertyValueFactory<>("groupName"));
-
-        gruppTable.getColumns().addAll(gruppCol);
-        gruppTable.setItems(groupList);
-
-        deselectPerson();
-        deselectTest();
-        deselectGrupp();
-
-
-        /*if(elevorgrupp.isSelected()){
-            gruppTable.setVisible(false);
-            personTable.setVisible(true);
+        //Group ListVIew
+        groupList = StudentGroupService.readAll();
+        groupTable = new ListView<>();
+        List<String> groupListNames = new ArrayList<>();
+        for(StudentGroup group: groupList) {
+            groupListNames.add(group.getGroupName());
         }
-
-        else {
-            gruppTable.setVisible(true);
-            personTable.setVisible(false);
-        }*/
-
+        groupTable.getItems().addAll(groupListNames);
 
         shareBtn = new Button("Dela prov");
+        shareBtn.setDisable(true);  // Disabled until both a test and a student or group has been selected
         mailBtn = new Button("Send mail");
+
         shareBtn.setOnAction(d->{
             shareTest();
         });
+
         mailBtn.setOnAction(d->{
             /*int selectedTestIndex = testBox.getSelectionModel().getSelectedIndex();
             Test selectedTest = testList.get(selectedTestIndex);
@@ -169,107 +126,59 @@ public class ShareTestView {
             sm.sendmail(selectedUser, selectedTest);*/
         });
 
-        gp.add(testTable, 0, 0);
-        gp.add(personTable, 1, 0);
-        gp.add(gruppTable, 2, 0);
-        gp.add(elevorgrupp,3,0);
-        gp.add(rect,3,1);
-        gp.add(shareBtn, 4, 2);
-        gp.add(mailBtn, 5, 2);
-        gp.setPadding(new Insets(150));
+        pane.getChildren().addAll(testTable, userTable, groupTable, shareBtn, mailBtn, lChosenTest, lChosenTarget);
 
-        mainPane.getChildren().addAll(menuPane, gp);
-        Scene scene = new Scene(mainPane, 1600, 900);
+        Scene scene = new Scene(pane, 1600, 900);
         window.setTitle("Dela prov");
         window.setScene(scene);
         window.show();
+
+        // Variables are set when items are selected in the tables
+        testTable.setOnMouseClicked(event -> {
+            int selIndex = testTable.getSelectionModel().getSelectedIndex();
+            lChosenTest.setText("Valt test: " + testTable.getItems().get(selIndex));
+            selectedTest = testList.get(selIndex);
+            if(!lChosenTarget.getText().equals("Dela till: ")) {
+                System.out.println("WHAT");
+                shareBtn.setDisable(false);
+            }
+        });
+
+        userTable.setOnMouseClicked(event -> {
+            int selIndex = userTable.getSelectionModel().getSelectedIndex();
+            lChosenTarget.setText("Dela till: " + userTable.getItems().get(selIndex));
+            selectedUser = userList.get(selIndex);
+            selector = "User";
+            groupTable.getSelectionModel().clearSelection();
+            if(!lChosenTest.getText().equals("Valt test: ")) {
+                shareBtn.setDisable(false);
+            }
+        });
+
+        groupTable.setOnMouseClicked(event -> {
+            int selIndex = groupTable.getSelectionModel().getSelectedIndex();
+            lChosenTarget.setText("Dela till: " + groupTable.getItems().get(selIndex));
+            selectedGroup = groupList.get(selIndex);
+            userTable.getSelectionModel().clearSelection();
+            selector = "Group";
+            if(!lChosenTest.getText().equals("Valt test: ")) {
+                shareBtn.setDisable(false);
+            }
+        });
     }
 
     public void  shareTest() {
-
-        selectedTest = TestService.read(intval);
-        selectedUser = personTable.getSelectionModel().getSelectedItem();
-        selectedGrupp = gruppTable.getSelectionModel().getSelectedItem();
-
-        TestAccessService.create(selectedUser, selectedTest);
-
-        //List<User> selectedUsers = StudentGroupService.readByGroup(selectedGrupp.getStudentGroupId());
-        //TestAccessService.create(selectedUsers, selectedTest);
-        System.out.print("button test " + selectedTest);
-
-    }
-
-    public ObservableList<Table> getTests(){
-        ObservableList<Table> tests = FXCollections.observableArrayList();
-        for(int i = 0; i < testList.size(); i++) {
-            tests.addAll(new Table(testList.get(i).gettTitle(), testList.get(i).gettTimeMin(), testList.get(i).gettMaxPoints(),
-                    testList.get(i).getUser().getFirstName() + " " + testList.get(i).getUser().getLastName()));
-            }
-
-        //select marked test
-        testTable.getSelectionModel().setCellSelectionEnabled(true);
-        ObservableList selectedCells = testTable.getSelectionModel().getSelectedCells();
-
-        selectedCells.addListener((ListChangeListener) c -> {
-            TablePosition tablePosition = (TablePosition) selectedCells.get(0);
-
-            //Validation
-            val = tablePosition.getTableColumn().getCellData(tablePosition.getRow());
-            intval = tablePosition.getRow();
-            System.out.println("Selected Value " + val + " " + selectedTest + " " + testList.indexOf(val)+ " " + intval);
-        });
-
-        return tests;
-    }
-
-    public void deselectPerson(){
-        personTable.setRowFactory(new Callback<TableView<User>, TableRow<User>>() {
-            @Override
-            public TableRow<User> call(TableView<User> tableView2) {
-                final TableRow<User> row = new TableRow<>();
-                row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                    final int index = row.getIndex();
-                    if (index >= 0 && index < personTable.getItems().size() && personTable.getSelectionModel().isSelected(index)  ) {
-                        personTable.getSelectionModel().clearSelection();
-                        event.consume();
-                    }
-                });
-                return row;
-            }
-        });
-    }
-
-    public void deselectTest(){
-        testTable.setRowFactory(new Callback<TableView<Test>, TableRow<Test>>() {
-            @Override
-            public TableRow<Test> call(TableView<Test> tableView2) {
-                final TableRow<Test> row = new TableRow<>();
-                row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                    final int index = row.getIndex();
-                    if (index >= 0 && index < testTable.getItems().size() && testTable.getSelectionModel().isSelected(index)  ) {
-                        testTable.getSelectionModel().clearSelection();
-                        event.consume();
-                    }
-                });
-                return row;
-            }
-        });
-    }
-
-    public void deselectGrupp(){
-        gruppTable.setRowFactory(new Callback<TableView<StudentGroup>, TableRow<StudentGroup>>() {
-            @Override
-            public TableRow<StudentGroup> call(TableView<StudentGroup> tableView2) {
-                final TableRow<StudentGroup> row = new TableRow<>();
-                row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                    final int index = row.getIndex();
-                    if (index >= 0 && index < gruppTable.getItems().size() && gruppTable.getSelectionModel().isSelected(index)  ) {
-                        gruppTable.getSelectionModel().clearSelection();
-                        event.consume();
-                    }
-                });
-                return row;
-            }
-        });
+        System.out.println("DELAR " + selectedTest.gettTitle() + "TILL: ");
+        switch(selector) {
+            case "User":
+                System.out.println("Elev " + selectedUser.getFirstName() + " " + selectedUser.getLastName());
+                TestAccessService.create(selectedUser, selectedTest);
+                break;
+            case "Group":
+                System.out.println("Gruppen " + selectedGroup.getGroupName());
+                List<User> selectedUsers = StudentGroupService.readByGroup(selectedGroup.getStudentGroupId());
+                TestAccessService.create(selectedUsers, selectedTest);
+                break;
+        }
     }
 }
