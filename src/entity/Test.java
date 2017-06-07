@@ -5,6 +5,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 
 @Entity
@@ -20,16 +21,20 @@ public class Test {
     private int tMaxPoints;
     private int tSelfCorrecting;
     private int tDisplayResult;
+    private Date tStartTestDate;
+    private Date tEndTestDate;
 
     @ManyToOne
     private User user;
 
-    public Test(String tTitle, int tTimeMin, int tMaxPoints, int tSelfCorrecting, int tDisplayResult, User user) {
+    public Test(String tTitle, int tTimeMin, int tMaxPoints, int tSelfCorrecting, int tDisplayResult, Date tStartTestDate, Date tEndTestDate, User user) {
         this.tTitle = tTitle;
         this.tTimeMin = tTimeMin;
         this.tMaxPoints = tMaxPoints;
         this.tSelfCorrecting = tSelfCorrecting;
         this.tDisplayResult = tDisplayResult;
+        this.tStartTestDate = tStartTestDate;
+        this.tEndTestDate = tEndTestDate;
         this.setUser(user);
     }
     public Test (String tTitle, int tTimeMin, int tMaxPoints){
@@ -94,5 +99,21 @@ public class Test {
 
     public void settDisplayResult(int tDisplayResult) {
         this.tDisplayResult = tDisplayResult;
+    }
+
+    public Date gettStartTestDate() {
+        return tStartTestDate;
+    }
+
+    public void settStartTestDate(Date tStartTestDate) {
+        this.tStartTestDate = tStartTestDate;
+    }
+
+    public Date gettEndTestDate() {
+        return tEndTestDate;
+    }
+
+    public void settEndTestDate(Date tEndTestDate) {
+        this.tEndTestDate = tEndTestDate;
     }
 }

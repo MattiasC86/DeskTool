@@ -3,6 +3,8 @@ package view.createTest;
 import entity.Question;
 import entity.User;
 import javafx.application.Platform;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -15,6 +17,8 @@ import view.homepage.AdminFirstpage;
 import view.homepage.TeacherFirstpage;
 import view.menuBars.MenuBarAdmin;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FxView {
@@ -26,6 +30,9 @@ public class FxView {
     TextField minutesField;
 
     ArrayList<PreQuestion> questions = new ArrayList<PreQuestion>();
+
+    Date startDate;
+    Date endDate;
 
     public FxView(Stage window) {
 
@@ -58,13 +65,35 @@ public class FxView {
         box1 = new CheckBox("Tidsbegränsning");
         box1.setScaleX(1.5);
         box1.setScaleY(1.5);
-        box1.relocate(350, 100);
+        box1.relocate(340, 75);
         contentPane.getChildren().add(box1);
+
+        final DatePicker datePickerStartDate = new DatePicker();
+        datePickerStartDate.setOnAction(t -> {
+            LocalDate locStartDate = datePickerStartDate.getValue();
+            startDate = Date.valueOf(locStartDate);
+            System.err.println("Selected date: " + startDate);
+        });
+        datePickerStartDate.setPromptText("Startdatum");
+        datePickerStartDate.relocate(305,115);
+        contentPane.getChildren().add(datePickerStartDate);
+
+        final DatePicker datePickerEndDate = new DatePicker();
+        datePickerEndDate.setOnAction(t -> {
+            LocalDate locEndDate = datePickerEndDate.getValue();
+            endDate = Date.valueOf(locEndDate);
+            System.err.println("Selected date: " + endDate);
+        });
+        datePickerEndDate.setPromptText("Slutdatum");
+        datePickerEndDate.relocate(540,115);
+        contentPane.getChildren().add(datePickerEndDate);
+
+
 
         minutesField = new TextField();
         minutesField.setPromptText("Minuter");
         minutesField.setStyle("-fx-font-size: 14pt");
-        minutesField.relocate(540, 90);
+        minutesField.relocate(530, 65);
         minutesField.setVisible(false);
         contentPane.getChildren().add(minutesField);
 
@@ -170,7 +199,7 @@ public class FxView {
             }
 
 
-            TestLogic.saveTest(questions, titleTest.getText(), 1, timeLimit, showResult, UserService.read(LoginLogic.getCurrId()));
+            TestLogic.saveTest(questions, titleTest.getText(), 1, timeLimit, showResult, startDate, endDate, UserService.read(LoginLogic.getCurrId()));
 
             messageBox("Test skapat!");
 
