@@ -85,7 +85,7 @@ public class SelectTestView {
         Label currentTotalQuestion = new Label("");
         Label currentMaxPoints = new Label("");
 
-        Button startTest = new Button("Stata prov");
+        Button startTest = new Button("Starta prov");
 
         chooseTest.relocate(400,50);
         testBox.relocate(500,50);
