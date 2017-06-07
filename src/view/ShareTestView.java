@@ -3,33 +3,19 @@ package view;
 import entity.StudentGroup;
 import entity.Test;
 import entity.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import logic.LoginLogic;
 import logic.SendMailLogic;
 import service.*;
-import view.homepage.Table;
 import view.menuBars.MenuBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShareTestView {
-    FlowPane pane = new FlowPane();
 
     User currUser;
     User selectedUser;
@@ -53,9 +39,6 @@ public class ShareTestView {
     Button mailBtn;
 
     SendMailLogic sm = new SendMailLogic();
-    Rectangle rect;
-    Object val;
-    int intval;
 
     public ShareTestView(Stage window) {
         currUser = UserService.read(LoginLogic.getCurrId());
@@ -67,10 +50,6 @@ public class ShareTestView {
         selector = "";
         lChosenTest = new Label("Valt test: ");
         lChosenTarget = new Label("Dela till: ");
-
-        //Empty space
-        rect = new Rectangle(500, 250);
-        rect.setFill(Color.TRANSPARENT);
 
         // Test ListVIew
         // If logged in user is Admin, all tests are shown
@@ -118,17 +97,22 @@ public class ShareTestView {
         });
 
         mailBtn.setOnAction(d->{
-            /*int selectedTestIndex = testBox.getSelectionModel().getSelectedIndex();
-            Test selectedTest = testList.get(selectedTestIndex);
-
-            int selectedUserIndex = userSelectBox.getSelectionModel().getSelectedIndex();
-            selectedUser = userList.get(selectedUserIndex);
-            sm.sendmail(selectedUser, selectedTest);*/
+            sendMail();
         });
 
-        pane.getChildren().addAll(testTable, userTable, groupTable, shareBtn, mailBtn, lChosenTest, lChosenTarget);
 
-        Scene scene = new Scene(pane, 1600, 900);
+        testTable.relocate(150,200);
+        userTable.relocate(400,200);
+        groupTable.relocate(650, 200);
+        shareBtn.relocate(920,575);
+        mailBtn.relocate(1000, 575);
+        lChosenTest.relocate(920, 555);
+        lChosenTarget.relocate(1070,555);
+        menuPane.relocate(0,0);
+
+        mainPane.getChildren().addAll(testTable, userTable, groupTable, shareBtn, mailBtn, lChosenTest, lChosenTarget, menuPane);
+
+        Scene scene = new Scene(mainPane, 1600, 900);
         window.setTitle("Dela prov");
         window.setScene(scene);
         window.show();
@@ -173,6 +157,20 @@ public class ShareTestView {
             case "User":
                 System.out.println("Elev " + selectedUser.getFirstName() + " " + selectedUser.getLastName());
                 TestAccessService.create(selectedUser, selectedTest);
+                break;
+            case "Group":
+                System.out.println("Gruppen " + selectedGroup.getGroupName());
+                List<User> selectedUsers = StudentGroupService.readByGroup(selectedGroup.getStudentGroupId());
+                TestAccessService.create(selectedUsers, selectedTest);
+                break;
+        }
+    }
+
+    public void sendMail(){
+        switch(selector) {
+            case "User":
+                System.out.println("Elev " + selectedUser.getFirstName() + " " + selectedUser.getLastName());
+                sm.sendmail(selectedUser, selectedTest);
                 break;
             case "Group":
                 System.out.println("Gruppen " + selectedGroup.getGroupName());
