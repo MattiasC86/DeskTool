@@ -89,7 +89,7 @@ public class SendMailLogic {
             for (User user: userEmailList) {
                 message.addRecipients(Message.RecipientType.CC, InternetAddress.parse(user.getEmail()));
             }
-
+            
             //The Titel of the mail.
             message.setSubject("New test available");
             //The content of the mail.

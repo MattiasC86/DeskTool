@@ -20,14 +20,12 @@
 }
 
 Button{
-
-    -fx-background-color: grey;
+    -fx-background-color: #F0FFF0;
     -fx-text-fill: black;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-border-color: black;
-    -fx-border-width: 2pt;
-
+    -fx-border-width: 1pt;
 }
 
 Button:hover{
@@ -35,8 +33,8 @@ Button:hover{
     -fx-text-fill: black;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-border-color: white;
-    -fx-border-width: 2pt;
+    -fx-border-color: black;
+    -fx-border-width: 1pt;
 
 }
 
@@ -47,5 +45,13 @@ Button:pressed{
     -fx-background-radius: 5;
     -fx-border-color: blue;
     -fx-border-width: 2pt;
+}
 
+ComboBox{
+    -fx-background-color: #F0FFF0;
+    -fx-text-fill: black;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-color: black;
+    -fx-border-width: 1pt;
 }

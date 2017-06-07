@@ -16,8 +16,7 @@ package view.doTest;
         import view.homepage.TeacherFirstpage;
 
 public class DoTestFxView {
-
-
+    
     ListView<Pane> testList;
     Label labeltitel;
     Label testInfo;
@@ -71,6 +70,9 @@ public class DoTestFxView {
         window.show();
     }
 
+    int handInMinutes;
+    int handInSeconds;
+
     public void setTestInfo(String titel, int number, int time){
 
         labeltitel.setText(titel);
@@ -78,25 +80,44 @@ public class DoTestFxView {
 
         //Countdown
         int minutes = time;
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            int calcMinutes = minutes - 1;
-            int seconds = 60;
-            @Override
-            public void run() {
-                seconds--;
-                Platform.runLater(() -> timeLabel.setText("Minuter: " + calcMinutes + " Sekunder: " + seconds));
-                if(seconds == 0){
-                    if(calcMinutes == 0 && seconds == 0){
-                        timer.cancel();
-                        Platform.runLater(() -> messageBox("Tiden är nu ute! Ditt test har lämnats in!"));
-                        Platform.runLater(() -> handInTest());
+        if(minutes == 0){
+            //DO nothing no timer
+            timeLabel.setText("Ingen tidsgräns");
+        }
+        else{
+
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                int calcMinutes = minutes - 1;
+                int secondsLeft = 60;
+
+                @Override
+                public void run() {
+                    secondsLeft--;
+
+
+                    Platform.runLater(() -> timeLabel.setText("Minuter: " + calcMinutes + " Sekunder: " + secondsLeft));
+                    if(secondsLeft == 0){
+                        if(calcMinutes == 0 && secondsLeft == 0){
+                            handInMinutes = calcMinutes;
+                            handInSeconds = secondsLeft;
+                            timer.cancel();
+                            Platform.runLater(() -> messageBox("Tiden är nu ute! Ditt test har lämnats in!"));
+                            Platform.runLater(() -> handInTest());
+                        }
+                        calcMinutes--;
+                        secondsLeft = 60;
                     }
-                    calcMinutes--;
-                    seconds = 60;
+                    handInMinutes = calcMinutes;
+                    handInSeconds = secondsLeft;
                 }
-            }
-        }, 0, 1000);
+
+
+            }, 0, 1000);
+
+
+
+        }
     }
 
     public void handInTest(){
@@ -109,8 +130,13 @@ public class DoTestFxView {
         List<List> aListList = SelectTestView.testAnswers;
         List<doTestQuestion> qListGraphicObject = SelectTestView.doTestQuestionsList;
 
+        int finalHandInSeonds = (handInMinutes * 60) +handInSeconds;
+
+
+
+
         // BEHÖVER LÄGGAS IN TIMESEC
-        AnsweredTest answeredTest = new AnsweredTest(false, selectedTest.gettDisplayResult(), 0, 10, "", UserService.read(LoginLogic.getCurrId()), selectedTest);
+        AnsweredTest answeredTest = new AnsweredTest(false, selectedTest.gettDisplayResult(), 0, finalHandInSeonds, "", UserService.read(LoginLogic.getCurrId()), selectedTest);
 
         // Will contain all useranswers
         List<UserAnswer> userAnsweredList = new ArrayList<>();
