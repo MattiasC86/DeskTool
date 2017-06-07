@@ -45,6 +45,16 @@ public class SelectTestView {
         window.setTitle("Välj test");
 
         Pane pane = new Pane();
+        pane.getStyleClass().add("BackGroundPane");
+
+
+        Pane contentPane = new Pane();
+        contentPane.setPrefSize(400,500);
+        contentPane.relocate(600,200);
+        contentPane.getStyleClass().add("ContentPane");
+        pane.getChildren().add(contentPane);
+
+
 
         user = UserService.read(LoginLogic.getCurrId());
 
@@ -71,6 +81,7 @@ public class SelectTestView {
                         testTitles
                 );
         testBox = new ComboBox(availableTests);
+        testBox.setMinWidth(200);
 
         Label chooseTest = new Label("Välj prov:");
         Label testName = new Label("Valt prov:");
@@ -85,34 +96,50 @@ public class SelectTestView {
         Label currentTotalQuestion = new Label("");
         Label currentMaxPoints = new Label("");
 
+        //Sätt textstorlek
+        chooseTest.setStyle("-fx-font-size: 12pt");
+        testName.setStyle("-fx-font-size: 12pt");
+        teacherName.setStyle("-fx-font-size: 12pt");
+        timeLimit.setStyle("-fx-font-size: 12pt");
+        totalQuestion.setStyle("-fx-font-size: 12pt");
+        maxPoints.setStyle("-fx-font-size: 12pt");
+        currentTestName.setStyle("-fx-font-size: 12pt");
+        currentTeacherName.setStyle("-fx-font-size: 12pt");
+        currentTimeLimit.setStyle("-fx-font-size: 12pt");
+        currentTotalQuestion.setStyle("-fx-font-size: 12pt");
+        currentMaxPoints.setStyle("-fx-font-size: 12pt");
+
+
         Button startTest = new Button("Starta prov");
 
-        chooseTest.relocate(400,50);
-        testBox.relocate(500,50);
+        chooseTest.relocate(20,50);
+        testBox.relocate(120,50);
 
-        testName.relocate(400,100);
-        currentTestName.relocate(500,100);
+        testName.relocate(20,100);
+        currentTestName.relocate(140,100);
 
-        teacherName.relocate(400, 150);
-        currentTeacherName.relocate(500,150);
+        teacherName.relocate(20, 150);
+        currentTeacherName.relocate(140,150);
 
-        timeLimit.relocate(400, 200);
-        currentTimeLimit.relocate(500,200);
+        timeLimit.relocate(20, 200);
+        currentTimeLimit.relocate(140,200);
 
-        totalQuestion.relocate(400, 250);
-        currentTotalQuestion.relocate(500,250);
+        totalQuestion.relocate(20, 250);
+        currentTotalQuestion.relocate(140,250);
 
-        maxPoints.relocate(400, 300);
-        currentMaxPoints.relocate(500,300);
+        maxPoints.relocate(20, 300);
+        currentMaxPoints.relocate(140,300);
 
-        startTest.relocate(400,350);
+        startTest.relocate(120,350);
+        startTest.setPrefSize(160, 50);
+        startTest.setStyle("-fx-font-size: 16pt");
 
-        pane.getChildren().addAll(chooseTest,testBox,testName,teacherName,timeLimit,totalQuestion,maxPoints,startTest);
-        pane.getChildren().addAll(currentTestName, currentTeacherName, currentTimeLimit, currentTotalQuestion, currentMaxPoints);
+        contentPane.getChildren().addAll(chooseTest,testBox,testName,teacherName,timeLimit,totalQuestion,maxPoints,startTest);
+        contentPane.getChildren().addAll(currentTestName, currentTeacherName, currentTimeLimit, currentTotalQuestion, currentMaxPoints);
 
         window.setOnCloseRequest(e -> Platform.exit());
         Scene scene = new Scene(pane, 1600, 900);
-        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/TestViewCSS.css").toExternalForm());
         window.setScene(scene);
         window.show();
 

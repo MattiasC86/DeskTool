@@ -90,10 +90,6 @@ public class SendMailLogic {
             List<User> userEmailList = userList;
 
 
-            Address[] to = new Address[] {InternetAddress.parse("avdq@abc.com"),
-                    InternetAddress.parse("tvdq@abc.com"),
-                    InternetAddress.parse("pvdq@abc.com")};
-            message.addRecipients(Message.RecipientType.TO, to);
 
             //The mail sends to.
             //message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receive));
