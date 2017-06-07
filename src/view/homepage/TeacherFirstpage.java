@@ -1,18 +1,28 @@
 package view.homepage;
 
+import entity.Test;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logic.LoginLogic;
+import service.TestService;
 import view.menuBars.MenuBarTeacher;
+
+import java.util.List;
 
 /**
  * Created by Rasmus on 2017-05-16.
  */
 public class TeacherFirstpage {
+
+    List<Test> testList;
 
     public TeacherFirstpage(Stage window){
 
@@ -36,26 +46,34 @@ public class TeacherFirstpage {
         l2.relocate(700,50);
         pane.getChildren().add(l2);
 
+        testList = TestService.readAll(LoginLogic.getCurrId());
+
         TableView table = new TableView();
         table.relocate(700, 100);
         table.setPrefSize(800, 700);
         table.setStyle("-fx-font-size: 12pt");
         pane.getChildren().add(table);
+        table.setItems(getTests());
 
 
-        TableColumn testCol = new TableColumn("Prov");
-        testCol.setPrefWidth(200);
+        TableColumn<Table, String> testName = new TableColumn<>("Prov");
+        testName.setMinWidth(200);
+        testName.setCellValueFactory(new PropertyValueFactory<>("title"));
 
-        TableColumn timeCol = new TableColumn("Tidsgräns");
-        timeCol.setPrefWidth(200);
+        TableColumn<Table, Integer> testTime = new TableColumn<>("Tidsgräns / min");
+        testTime.setMinWidth(200);
+        testTime.setCellValueFactory(new PropertyValueFactory<>("timeLimit"));
 
-        TableColumn questionsCol = new TableColumn("Antal fråor");
-        questionsCol.setPrefWidth(200);
+        TableColumn<Table, Integer> testQuestions = new TableColumn<>("Antal frågor");
+        testQuestions.setMinWidth(200);
+        testQuestions.setCellValueFactory(new PropertyValueFactory<>("questions"));
 
-        TableColumn createdCol = new TableColumn("Lärare");
-        createdCol.setPrefWidth(200);
+        TableColumn<Table, Integer> teacher = new TableColumn<>("Lärare");
+        teacher.setMinWidth(200);
+        teacher.setCellValueFactory(new PropertyValueFactory<>("user"));
 
-        table.getColumns().addAll(testCol, timeCol, questionsCol, createdCol);
+
+        table.getColumns().addAll(testName, testTime, testQuestions, teacher);
 
         Scene welcomeScene = new Scene(bp, 1600,900);
         welcomeScene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
@@ -64,5 +82,14 @@ public class TeacherFirstpage {
 
 
 
+    }
+
+    public ObservableList<Table> getTests(){
+        ObservableList<Table> tests = FXCollections.observableArrayList();
+        for(int i = 0; i < testList.size(); i++) {
+            tests.addAll(new Table(testList.get(i).gettTitle(), testList.get(i).gettTimeMin(), testList.get(i).gettMaxPoints(),
+                    testList.get(i).getUser().getFirstName() + " " + testList.get(i).getUser().getLastName()));
+        }
+        return tests;
     }
 }
