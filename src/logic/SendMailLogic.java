@@ -62,9 +62,6 @@ public class SendMailLogic {
     }
 
     public void sendMulti(List<User> userList, Test test){
-        String receive = user.getEmail();
-
-
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -87,16 +84,12 @@ public class SendMailLogic {
             //The mail it sends from.
             message.setFrom(new InternetAddress("from-email@gmail.com"));
 
-            List<User> userEmailList = userList;
-
-
-            Address[] to = new Address[] {InternetAddress.parse("avdq@abc.com"),
-                    InternetAddress.parse("tvdq@abc.com"),
-                    InternetAddress.parse("pvdq@abc.com")};
-            message.addRecipients(Message.RecipientType.TO, to);
-
             //The mail sends to.
-            //message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receive));
+            List<User> userEmailList = userList;
+            for (User user: userEmailList) {
+                message.addRecipients(Message.RecipientType.CC, InternetAddress.parse(user.getEmail()));
+            }
+
             //The Titel of the mail.
             message.setSubject("New test available");
             //The content of the mail.
@@ -106,8 +99,7 @@ public class SendMailLogic {
                     "\n Your password is " + user.getPassword());
 
             Transport.send(message);
-
-            System.out.println("Done");
+            System.out.println("Done"+user.getEmail());
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);

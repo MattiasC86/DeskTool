@@ -175,7 +175,7 @@ public class ShareTestView {
             case "Group":
                 System.out.println("Gruppen " + selectedGroup.getGroupName());
                 List<User> selectedUsers = StudentGroupService.readByGroup(selectedGroup.getStudentGroupId());
-                TestAccessService.create(selectedUsers, selectedTest);
+                sm.sendMulti(selectedUsers, selectedTest);
                 break;
         }
     }
