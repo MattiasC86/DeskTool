@@ -34,6 +34,9 @@ public class ShareTestView {
 
     Label lChosenTest;
     Label lChosenTarget;
+    Label labelTest;
+    Label labelUser;
+    Label labelGroup;
 
     Button shareBtn;
     Button mailBtn;
@@ -45,6 +48,7 @@ public class ShareTestView {
 
         Pane menuPane = new Pane();
         MenuBarHelper.getMenuBar(window, menuPane);
+        Pane itemPane = new Pane();
         Pane mainPane = new Pane();
 
         selector = "";
@@ -99,19 +103,36 @@ public class ShareTestView {
         mailBtn.setOnAction(d->{
             sendMail();
         });
+        labelTest = new Label("Välj test");
+        labelUser = new Label("Välj användare");
+        labelGroup = new Label("Välj grupp");
 
 
-        testTable.relocate(150,200);
-        userTable.relocate(400,200);
-        groupTable.relocate(650, 200);
-        shareBtn.relocate(920,575);
-        mailBtn.relocate(1000, 575);
-        lChosenTest.relocate(920, 555);
-        lChosenTarget.relocate(1070,555);
+        labelTest.relocate(50, 50);
+        labelUser.relocate(350, 50);
+        labelGroup.relocate(650, 50);
+
+        testTable.relocate(50,100);
+        userTable.relocate(350,100);
+        groupTable.relocate(650, 100);
+        shareBtn.relocate(920,475);
+        mailBtn.relocate(1020, 475);
+        lChosenTest.relocate(920, 355);
+        lChosenTarget.relocate(920,405);
         menuPane.relocate(0,0);
+        itemPane.relocate(200,100);
+        itemPane.setPrefSize(1200,600);
 
-        mainPane.getChildren().addAll(testTable, userTable, groupTable, shareBtn, mailBtn, lChosenTest, lChosenTarget, menuPane);
+        itemPane.setId("settingsPane");
+        mainPane.setId("settingsBk");
+        mailBtn.setId("btnRegister");
+        shareBtn.setId("btnRegister");
 
+
+        itemPane.getChildren().addAll(testTable, userTable, groupTable, shareBtn, mailBtn, lChosenTest, lChosenTarget, labelTest, labelUser, labelGroup);
+
+        mainPane.getChildren().addAll(itemPane,menuPane);
+        mainPane.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         Scene scene = new Scene(mainPane, 1600, 900);
         window.setTitle("Dela prov");
         window.setScene(scene);

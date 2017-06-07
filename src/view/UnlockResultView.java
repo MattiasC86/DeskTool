@@ -35,7 +35,7 @@ public class UnlockResultView {
 
 
     public UnlockResultView(Stage window) {
-        
+
 
         pane = new Pane();
 
