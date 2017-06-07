@@ -38,10 +38,8 @@ public class MenuBarAdmin {
         //Creates MenuItems for testMenu
         MenuItem createTest = new MenuItem("Skapa Test");
         MenuItem shareTest = new MenuItem("Dela Test");
-        MenuItem correctTest = new MenuItem("Rätta Test");
         MenuItem shareResultTest = new MenuItem("Dela resultat");
         MenuItem doTest = new MenuItem("Gör Test");
-        MenuItem reuseTest = new MenuItem("Återanvända Test");
         MenuItem doneTest = new MenuItem("Statistik");
 
         //Creates a MenuItem for akrivMenu
@@ -62,7 +60,7 @@ public class MenuBarAdmin {
         //Adds childrens to all the menues
         arkivMenu.getItems().addAll(testMenu, registerMenu);
 
-        testMenu.getItems().addAll(createTest, shareTest, correctTest, shareResultTest, doTest, reuseTest, doneTest);
+        testMenu.getItems().addAll(createTest, shareTest, shareResultTest, doTest, doneTest);
 
         settingsMenu.getItems().addAll(editUser);
 
