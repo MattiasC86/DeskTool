@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.ShareTestView;
+import view.UnlockResultView;
 import view.statistics.StatisticsView;
 import view.doTest.SelectTestView;
 import view.homepage.AdminFirstpage;
@@ -38,7 +39,7 @@ public class MenuBarAdmin {
         MenuItem createTest = new MenuItem("Skapa Test");
         MenuItem shareTest = new MenuItem("Dela Test");
         MenuItem correctTest = new MenuItem("Rätta Test");
-        MenuItem changeTest = new MenuItem("Ändra Test");
+        MenuItem shareResultTest = new MenuItem("Dela resultat");
         MenuItem doTest = new MenuItem("Gör Test");
         MenuItem reuseTest = new MenuItem("Återanvända Test");
         MenuItem doneTest = new MenuItem("Statistik");
@@ -61,7 +62,7 @@ public class MenuBarAdmin {
         //Adds childrens to all the menues
         arkivMenu.getItems().addAll(testMenu, registerMenu);
 
-        testMenu.getItems().addAll(createTest, shareTest, correctTest, changeTest, doTest, reuseTest, doneTest);
+        testMenu.getItems().addAll(createTest, shareTest, correctTest, shareResultTest, doTest, reuseTest, doneTest);
 
         settingsMenu.getItems().addAll(editUser);
 
@@ -120,6 +121,10 @@ public class MenuBarAdmin {
         //ActionEvent for shareTest.
         shareTest.setOnAction(e->{
             ShareTestView stv = new ShareTestView(window);
+        });
+
+        shareResultTest.setOnAction(e->{
+            //UnlockResultView urv = new UnlockResultView(window);
         });
 
     }
