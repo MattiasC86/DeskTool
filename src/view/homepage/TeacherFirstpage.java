@@ -31,7 +31,7 @@ public class TeacherFirstpage {
         l1.relocate(100,100);
         pane.getChildren().add(l1);
 
-        Label l2 = new Label("Prov i databasen");
+        Label l2 = new Label("Dina skapade prov");
         l2.setStyle("-fx-font-size: 24pt");
         l2.relocate(700,50);
         pane.getChildren().add(l2);
