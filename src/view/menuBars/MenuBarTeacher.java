@@ -6,12 +6,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.ShareTestView;
-import view.UnlockResultView;
+import view.*;
 import view.statistics.StatisticsView;
 import view.doTest.SelectTestView;
-import view.LoginPage;
-import view.Settings;
 import view.createTest.FxView;
 import view.homepage.TeacherFirstpage;
 
@@ -46,6 +43,7 @@ public class MenuBarTeacher {
                 MenuItem createTest = new MenuItem("Skapa Test");
                 MenuItem shareTest = new MenuItem("Dela Test");
                 MenuItem shareResultTest = new MenuItem("Dela resultat");
+                MenuItem makeGroups = new MenuItem("Skapa grupper");
                 MenuItem doneTest = new MenuItem("Statistik");
 
 
@@ -59,7 +57,7 @@ public class MenuBarTeacher {
                 Menu menu4 = new Menu("Logga ut");
 
 
-                menu2.getItems().addAll(createMenu);
+                menu2.getItems().addAll(createMenu,makeGroups);
 
                 createMenu.getItems().addAll(createTest, shareTest, shareResultTest, doneTest);
 
@@ -111,6 +109,10 @@ public class MenuBarTeacher {
 
                 shareResultTest.setOnAction(e->{
                         UnlockResultView urv = new UnlockResultView(window);
+                });
+
+                makeGroups.setOnAction(e-> {
+                        CreateGroupView cgv = new CreateGroupView(window);
                 });
 
         }

@@ -35,8 +35,7 @@ public class UnlockResultView {
 
 
     public UnlockResultView(Stage window) {
-
-        User user = UserService.read(LoginLogic.getCurrId());
+        
 
         pane = new Pane();
 

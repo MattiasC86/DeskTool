@@ -12,10 +12,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import logic.LoginLogic;
 import service.GroupDetailsService;
 import service.StudentGroupService;
 import service.TestAccessService;
 import service.UserService;
+import view.menuBars.MenuBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ import java.util.List;
 /**
  * Created by matti on 2017-05-24.
  */
-public class CreateGroupView extends Application {
+public class CreateGroupView  {
     Pane pane = new Pane();
     List<User> allUsers;
     List<User> selectedUsers;
@@ -50,8 +52,11 @@ public class CreateGroupView extends Application {
     Label lblGroups;
     Label lblGroupName;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+
+    public CreateGroupView(Stage window){
+
+
+        MenuBarHelper.getMenuBar(window, pane);
 
         allUsers = UserService.readAll();
         selectedUsers = new ArrayList<>();
@@ -112,8 +117,8 @@ public class CreateGroupView extends Application {
 
 
         Scene scene = new Scene(pane, 1600, 900);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        window.setScene(scene);
+        window.show();
 
         // Button listeners
         btnAdd.setOnAction(e -> addUser());
@@ -212,7 +217,4 @@ public class CreateGroupView extends Application {
         alert.showAndWait();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
