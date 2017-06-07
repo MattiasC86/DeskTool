@@ -58,7 +58,7 @@ public class CreateGroupView  {
 
         MenuBarHelper.getMenuBar(window, pane);
 
-        allUsers = UserService.readAll();
+        allUsers = UserService.readStudents();
         selectedUsers = new ArrayList<>();
 
         lblSelectUser = new Label("Välj användare att lägga till");
@@ -69,7 +69,7 @@ public class CreateGroupView  {
         groupNameInput = new TextField();
         groupNameInput.setPromptText("Fyll i namn på gruppen");
 
-        // Creating ListView containing all users
+        // Creating ListView containing all students
         userListView = new ListView<>();
         allUsersObsList = FXCollections.observableArrayList();
             for(User user : allUsers){
