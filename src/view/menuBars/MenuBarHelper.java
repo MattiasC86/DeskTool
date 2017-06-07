@@ -27,7 +27,7 @@ public class MenuBarHelper {
 
         if (user.getRole().equalsIgnoreCase("Admin")) {
             MenuBarAdmin x = new MenuBarAdmin(pane, window);
-        } else if (user.getRole().equalsIgnoreCase("Lärare")) {
+        } else if (user.getRole().equalsIgnoreCase("Teacher")) {
             MenuBarTeacher x = new MenuBarTeacher(pane, window);
         } else if (user.getRole().equalsIgnoreCase("Student")) {
             MenuBarStudent x = new MenuBarStudent(pane, window);
