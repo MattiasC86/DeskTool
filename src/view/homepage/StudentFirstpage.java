@@ -6,6 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import view.menuBars.MenuBarAdmin;
 import view.menuBars.MenuBarStudent;
@@ -28,21 +29,25 @@ public class StudentFirstpage {
 
         Label l1 = new Label("Välkommen till Newtons Provportal");
         l1.setStyle("-fx-font-size: 24pt");
+        l1.setTextFill(Color.WHITE);
         l1.relocate(100,100);
         pane.getChildren().add(l1);
 
         Label l2 = new Label("Till höger ser du 'dina prov'");
         l2.setStyle("-fx-font-size: 18pt");
-        l2.relocate(100,200);
+        l2.setTextFill(Color.WHITE);
+        l2.relocate(100,160);
         pane.getChildren().add(l2);
 
         Label l3 = new Label("För att göra prov gå in på akriv");
         l3.setStyle("-fx-font-size: 18pt");
-        l3.relocate(100,300);
+        l3.setTextFill(Color.WHITE);
+        l3.relocate(100,190);
         pane.getChildren().add(l3);
 
         Label l4 = new Label("Dina prov");
         l4.setStyle("-fx-font-size: 24pt");
+        l4.setTextFill(Color.WHITE);
         l4.relocate(700,50);
         pane.getChildren().add(l4);
 
