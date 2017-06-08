@@ -27,34 +27,41 @@ public class DoTestFxView {
         this.window = window;
 
         Pane pane = new Pane();
+        pane.getStyleClass().add("BackGroundPane");
+
+        Pane contentPane = new Pane();
+        contentPane.setPrefSize(1300,850);
+        contentPane.relocate(150,10);
+        contentPane.getStyleClass().add("ContentPane");
+        pane.getChildren().add(contentPane);
 
         labeltitel = new Label("Prov:");
-        labeltitel.setStyle("-fx-font-size: 40pt");
-        labeltitel.relocate(300, 50);
-        pane.getChildren().add(labeltitel);
+        labeltitel.setStyle("-fx-font-size: 30  pt");
+        labeltitel.relocate(50, 50);
+        contentPane.getChildren().add(labeltitel);
 
         //Antal frågor och tid
         testInfo = new Label();
         testInfo.setStyle("-fx-font-size: 20pt");
-        testInfo.relocate(600, 70);
-        pane.getChildren().add(testInfo);
+        testInfo.relocate(350, 70);
+        contentPane.getChildren().add(testInfo);
 
         timeLabel = new Label();
         timeLabel.setStyle("-fx-font-size: 20pt");
-        timeLabel.relocate(1200, 70);
-        pane.getChildren().add(timeLabel);
+        timeLabel.relocate(950, 70);
+        contentPane.getChildren().add(timeLabel);
 
         testList = new ListView<Pane>();
         testList.setPrefSize(1200, 600);
-        testList.relocate(300, 200);
+        testList.relocate(50, 150);
         testList.setFocusTraversable( false );
-        pane.getChildren().add(testList);
+        contentPane.getChildren().add(testList);
 
         Button testDone = new Button("Lämna in");
-        testDone.relocate(1350, 820);
+        testDone.relocate(1100, 770);
         testDone.setPrefSize(150,50);
         testDone.setStyle("-fx-font-size: 16pt");
-        pane.getChildren().add(testDone);
+        contentPane.getChildren().add(testDone);
 
         // Turning in the test
         testDone.setOnAction(e->{
@@ -65,7 +72,7 @@ public class DoTestFxView {
         window.setTitle("Göra test");
         window.setOnCloseRequest(e -> Platform.exit());
         Scene scene = new Scene(pane, 1600, 900);
-        scene.getStylesheets().add("css/testCSS.css");
+        scene.getStylesheets().add("css/TestViewCSS.css");
         window.setScene(scene);
         window.show();
     }

@@ -93,6 +93,8 @@ public class doTestQuestion {
 
     public void rankedQuestion(){
 
+        pane.setPrefHeight(230);
+
         label.setText("Rangordningsfråga (Rangordna svarven uppifrån och ner):");
         label1.relocate(510, 5);
 

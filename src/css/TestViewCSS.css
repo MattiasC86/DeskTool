@@ -2,7 +2,9 @@
 
 .QuestionPane{
     -fx-border-color: black;
-    -fx-border-radius: 10pt;
+    -fx-border-radius: 20;
+    -fx-border-color: black;
+    -fx-border-width: 1pt;
 }
 
 .ContentPane{
@@ -48,6 +50,28 @@ Button:pressed{
 }
 
 ComboBox{
+    -fx-background-color: #F0FFF0;
+    -fx-text-fill: black;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-color: black;
+    -fx-border-width: 1pt;
+}
+
+CheckBox{
+    -fx-text-fill: black;
+}
+
+TextField{
+    -fx-background-color: #F0FFF0;
+    -fx-text-fill: black;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-color: black;
+    -fx-border-width: 1pt;
+}
+
+ListView{
     -fx-background-color: #F0FFF0;
     -fx-text-fill: black;
     -fx-border-radius: 5;

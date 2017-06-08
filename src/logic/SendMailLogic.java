@@ -90,13 +90,12 @@ public class SendMailLogic {
             List<User> userEmailList = userList;
 
 
-<<<<<<< HEAD
-=======
+
             /*Address[] to = new Address[] {InternetAddress.parse("avdq@abc.com"),
                     InternetAddress.parse("tvdq@abc.com"),
                     InternetAddress.parse("pvdq@abc.com")};
             message.addRecipients(Message.RecipientType.TO, to);*/
->>>>>>> origin/master
+
 
             //The mail sends to.
             //message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receive));

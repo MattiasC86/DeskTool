@@ -27,6 +27,7 @@ public class PreQuestion {
             QuestionPane = new Pane();
             QuestionPane.setPrefHeight(200);
             QuestionPane.setStyle("-fx-border-color: black");
+            QuestionPane.getStyleClass().add("QuestionPane");
 
             label = new Label();
             label.setStyle("-fx-font-size: 14pt; -fx-underline: true");
@@ -50,6 +51,7 @@ public class PreQuestion {
             CBox.getItems().addAll(2, 3, 4, 5, 6);
             QuestionPane.getChildren().add(CBox);
             CBox.setValue(2);
+            CBox.setStyle("-fx-font-size: 10pt");
 
             CBox.setOnAction(e->{
                 numberOfAnswers(CBox.getValue());
