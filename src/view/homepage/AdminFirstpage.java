@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -54,6 +55,7 @@ public class AdminFirstpage {
 
         Label l2 = new Label("Prov i databasen");
         l2.setStyle("-fx-font-size: 24pt");
+        l2.setTextFill(Color.WHITE);
         l2.relocate(700, 50);
         mainPane.getChildren().add(l2);
 
