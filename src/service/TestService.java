@@ -1,3 +1,7 @@
+/*
+* Service class for Test entity
+*/
+
 package service;
 
 import entity.*;
@@ -12,7 +16,6 @@ import java.util.List;
 
 
 public class TestService {
-
 
     public static void create(Test test) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");

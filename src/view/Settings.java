@@ -121,7 +121,7 @@ public class Settings {
         mainPane.getChildren().addAll(bp,pane);
 
         bp.setId("settingsPane");
-        mainPane.setId("settingsBk");
+        mainPane.setId("");
         labelFirstname.setId("settingsLabel");
         labelLastname.setId("settingsLabel");
         labelEmail.setId("settingsLabel");

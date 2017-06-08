@@ -16,6 +16,7 @@ import service.UserService;
 import view.homepage.AdminFirstpage;
 import view.homepage.TeacherFirstpage;
 import view.menuBars.MenuBarAdmin;
+import view.menuBars.MenuBarHelper;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -215,7 +216,7 @@ public class FxView {
 
         BorderPane bp = new BorderPane();
         Pane menubarpane = new Pane();
-        MenuBarAdmin mba = new MenuBarAdmin(menubarpane, window);
+        MenuBarHelper.getMenuBar(window, menubarpane);
         bp.setTop(menubarpane);
         bp.setCenter(pane);
 

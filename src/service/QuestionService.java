@@ -1,16 +1,15 @@
+/*
+* Service class for Question entity
+*/
+
 package service;
 
-import entity.Answer;
 import entity.Question;
-import entity.Test;
-import entity.User;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 

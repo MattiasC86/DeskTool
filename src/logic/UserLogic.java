@@ -18,6 +18,7 @@ import java.util.List;
 
 public class UserLogic {
 
+    // Returns all Tests available to User
     public static List<Test> getAvailableTests (User user) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
@@ -59,6 +60,7 @@ public class UserLogic {
         return dateCheckedTestList;
     }
 
+    // Returns all AnsweredTests by User
     public static List<Test> checkIfAnswered (User user) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
@@ -66,10 +68,6 @@ public class UserLogic {
         Query query = entityManager.createQuery( "Select t from Test t inner join AnsweredTest at on at.test.testId = t.testId WHERE at.user.userId = " + user.getUserId());
 
         List<Test> atList = (List<Test>)query.getResultList();
-
-        for(Test at : atList) {
-            System.out.println(at.gettTitle());
-        }
 
         entityManager.close();
         emFactory.close();

@@ -1,8 +1,11 @@
+/*
+* Service class for AnsweredTest entity
+*/
+
 package service;
 
 import entity.*;
 import logic.TestLogic;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -10,9 +13,7 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by matti on 2017-05-18.
- */
+
 public class AnsweredTestService {
 
     public static void create(AnsweredTest answeredTest) {
