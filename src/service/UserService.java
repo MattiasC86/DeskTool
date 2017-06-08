@@ -1,3 +1,7 @@
+/*
+* Service class for User entity
+*/
+
 package service;
 
 

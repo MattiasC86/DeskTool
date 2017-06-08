@@ -1,3 +1,7 @@
+/*
+* Service class for GroupDetails entity
+*/
+
 package service;
 
 import entity.GroupDetails;

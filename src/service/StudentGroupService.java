@@ -1,3 +1,7 @@
+/*
+* Service class for StudentGroup entity
+*/
+
 package service;
 
 import entity.GroupDetails;

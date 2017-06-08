@@ -1,3 +1,7 @@
+/*
+* Service class for TestAccess entity
+*/
+
 package service;
 
 import entity.AnsweredTest;

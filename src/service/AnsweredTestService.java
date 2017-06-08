@@ -1,3 +1,7 @@
+/*
+* Service class for AnsweredTest entity
+*/
+
 package service;
 
 import entity.*;

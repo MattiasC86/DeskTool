@@ -1,3 +1,7 @@
+/*
+* Service class for Answer entity
+*/
+
 package service;
 
 import entity.Answer;

@@ -1,3 +1,7 @@
+/*
+* Service class for Test entity
+*/
+
 package service;
 
 import entity.*;
