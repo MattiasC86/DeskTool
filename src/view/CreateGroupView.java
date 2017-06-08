@@ -22,9 +22,7 @@ import view.menuBars.MenuBarHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by matti on 2017-05-24.
- */
+
 public class CreateGroupView  {
     Pane pane = new Pane();
     List<User> allUsers;
@@ -55,8 +53,13 @@ public class CreateGroupView  {
 
     public CreateGroupView(Stage window){
 
+        Pane mainPane = new Pane();
 
-        MenuBarHelper.getMenuBar(window, pane);
+        pane.setPrefSize(1200, 700);
+        pane.relocate(200,100);
+
+
+        MenuBarHelper.getMenuBar(window, mainPane);
 
         allUsers = UserService.readStudents();
         selectedUsers = new ArrayList<>();
@@ -98,25 +101,35 @@ public class CreateGroupView  {
         btnReviewMembers = new Button("Se gruppmedlemmar");
 
         // Node relocations in pane
-        groupNameInput.relocate(300, 620);
-        lblSelectUser.relocate(300, 120);
-        lblSelectedUsers.relocate(620, 120);
-        lblGroups.relocate(950, 120);
-        lblGroupName.relocate(300, 590);
-        userListView.relocate(300, 150);
-        selUsersListView.relocate(620, 150);
-        groupsListView.relocate(950,150);
-        btnAdd.relocate(565, 300);
-        btnRemove.relocate(565, 350);
-        btnRemoveGroup.relocate(930, 560);
-        btnReviewMembers.relocate(1060, 560);
-        btnCreateGroup.relocate(300,680);
+        lblSelectUser.relocate(100, 50);
+        lblSelectedUsers.relocate(420, 50);
+        lblGroups.relocate(750, 50);
+
+        userListView.relocate(100, 100);
+        selUsersListView.relocate(420, 100);
+        groupsListView.relocate(750,100);
+
+        btnAdd.relocate(365, 250);
+        btnRemove.relocate(365, 300);
+
+        btnRemoveGroup.relocate(730, 520);
+        btnReviewMembers.relocate(860, 520);
+
+
+        lblGroupName.relocate(100, 520);
+        groupNameInput.relocate(100, 550);
+        btnCreateGroup.relocate(100,600);
 
         pane.getChildren().addAll(groupNameInput, userListView, selUsersListView, btnAdd, btnRemove, groupsListView,
                 btnCreateGroup, btnRemoveGroup, btnReviewMembers, lblSelectUser, lblSelectedUsers, lblGroups, lblGroupName);
 
+        mainPane.getChildren().addAll(pane);
 
-        Scene scene = new Scene(pane, 1600, 900);
+        mainPane.setId("settingsBk");
+        pane.setId("settingsPane");
+
+        Scene scene = new Scene(mainPane, 1600, 900);
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/style.css").toExternalForm());
         window.setScene(scene);
         window.show();
 
@@ -205,7 +218,7 @@ public class CreateGroupView  {
         }
     }
 
-    // Removes selected group from database
+    //Removes selected group from database
     public void removeGroup() {
         int index = groupsListView.getSelectionModel().getSelectedIndex();
         StudentGroupService.delete(allGroups.get(index));
