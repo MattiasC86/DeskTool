@@ -97,7 +97,6 @@ public class SendMailLogic {
             //The mail it sends from.
             message.setFrom(new InternetAddress("from-email@gmail.com"));
 
-<<<<<<< HEAD
             List<User> userEmailList = userList;
 
 
@@ -108,8 +107,6 @@ public class SendMailLogic {
             message.addRecipients(Message.RecipientType.TO, to);*/
 
 
-=======
->>>>>>> origin/master
             //The mail sends to.
             message.addRecipients(Message.RecipientType.CC, InternetAddress.parse(tempList));
 
