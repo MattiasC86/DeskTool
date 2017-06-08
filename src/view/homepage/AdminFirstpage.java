@@ -16,9 +16,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import service.TestService;
 import view.menuBars.MenuBarAdmin;
+import javafx.scene.paint.Color;
 
 import javax.persistence.TemporalType;
+
 import java.util.List;
+
+import static java.awt.Color.*;
 
 
 /**
@@ -28,7 +32,7 @@ public class AdminFirstpage {
 
     List<Test> testList;
 
-
+    //Firstpage for admin
     public AdminFirstpage(Stage window) {
 
         window.setTitle("Hem");
@@ -44,9 +48,6 @@ public class AdminFirstpage {
         textPane.setPrefHeight(700);
         textPane.setPrefWidth(500);
 
-
-
-
         Label l1 = new Label("Välkommen!");
         l1.setStyle("-fx-font-size: 24pt");
         l1.relocate(50, 20);
@@ -55,6 +56,7 @@ public class AdminFirstpage {
         Label l2 = new Label("Prov i databasen");
         l2.setStyle("-fx-font-size: 24pt");
         l2.relocate(700, 50);
+        l2.setTextFill(Color.WHITE);
         mainPane.getChildren().add(l2);
 
         // testList will contain all Tests from database

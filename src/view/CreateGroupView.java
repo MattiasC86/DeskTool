@@ -26,6 +26,7 @@ import java.util.List;
  * Created by matti on 2017-05-24.
  */
 public class CreateGroupView  {
+
     Pane pane = new Pane();
     List<User> allUsers;
     List<User> selectedUsers;

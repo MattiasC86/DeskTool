@@ -20,7 +20,7 @@ import view.homepage.TeacherFirstpage;
  */
 public class LoginPage {
 
-
+     //Logg in view class
    public LoginPage(Stage window) {
 
         BorderPane bp = new BorderPane();

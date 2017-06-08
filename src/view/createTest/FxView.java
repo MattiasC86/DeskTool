@@ -34,6 +34,7 @@ public class FxView {
     Date startDate;
     Date endDate;
 
+    //This class i for creating Test view
     public FxView(Stage window) {
 
         Pane pane = new Pane();
@@ -232,6 +233,7 @@ public class FxView {
         numberOfQuestion.setText("Antal frågor: " + QuestionList.getItems().size());
     }
 
+    //Check what the user has entered and see if everythings is correct
     private boolean validateInput(){
         //Kolla titel är anvigen
         if(titleTest.getText().isEmpty()){
@@ -333,7 +335,7 @@ public class FxView {
         }
         return true;
     }
-
+    //Popup message box
     private void messageBox(String text){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information saknas");

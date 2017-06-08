@@ -99,7 +99,7 @@ public class SendMailLogic {
             Message message = new MimeMessage(session);
             //The mail it sends from.
             message.setFrom(new InternetAddress("from-email@gmail.com"));
-            
+
             //The mail sends to.
             message.addRecipients(Message.RecipientType.CC, InternetAddress.parse(tempList));
 

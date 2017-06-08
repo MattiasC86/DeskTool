@@ -20,7 +20,7 @@ import view.register.Register;
 
 public class MenuBarAdmin {
 
-
+    //Menubar for Admin user
     public MenuBarAdmin(Pane pane, Stage window){
 
         //Creates a menu thats used to get to the firstpage

@@ -22,6 +22,7 @@ public class PreQuestion {
 
     int questionType;
 
+    //Create a question to add to create test view
     public PreQuestion(ListView<Pane> List){
 
             QuestionPane = new Pane();
@@ -60,7 +61,7 @@ public class PreQuestion {
             List.getItems().add(QuestionPane);
             List.scrollTo(List.getItems().size() - 1);
         }
-
+    //Create single answer question
     public void oneAnswerQuestion(){
 
         label.setText("Envalsfråga");
@@ -94,6 +95,7 @@ public class PreQuestion {
         questionType = 0;
     }
 
+    //Create many answer question
     public void manyAnswerQuestion(){
 
         label.setText("Flervalsfråga");
@@ -117,7 +119,7 @@ public class PreQuestion {
         numberOfAnswers(2);
         questionType = 1;
     }
-
+    //Create ranked question
     public void rankedQuestion(){
 
         label.setText("Rangordningsfråga");

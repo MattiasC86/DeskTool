@@ -23,6 +23,7 @@ public class DoTestFxView {
     Label timeLabel;
     Stage window;
 
+    //This class is for when you actually do the test
     public DoTestFxView(Stage window) {
         this.window = window;
 
@@ -80,6 +81,7 @@ public class DoTestFxView {
     int handInMinutes;
     int handInSeconds;
 
+    //Get the test info and set it
     public void setTestInfo(String titel, int number, int time){
 
         labeltitel.setText(titel);
@@ -127,6 +129,7 @@ public class DoTestFxView {
         }
     }
 
+    //Sends the the to the database
     public void handInTest(){
 
         int numberOfQuestion = testList.getItems().size();
@@ -185,6 +188,7 @@ public class DoTestFxView {
         }
     }
 
+    //Popup messagebox
     private void messageBox(String text){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information saknas");

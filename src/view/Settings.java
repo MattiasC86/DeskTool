@@ -28,6 +28,7 @@ import view.menuBars.MenuBarHelper;
 
 public class Settings {
 
+    //Setting calss is for change user details
     public Settings(Stage window) {
 
         User user = UserService.read(LoginLogic.getCurrId());

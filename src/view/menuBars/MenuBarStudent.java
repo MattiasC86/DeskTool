@@ -17,7 +17,7 @@ import view.homepage.StudentFirstpage;
  */
 public class MenuBarStudent {
 
-
+    //Menubar for student user
     public MenuBarStudent(Pane pane, Stage window) {
 
         /*FileInputStream homeIcon = null;
@@ -35,23 +35,23 @@ public class MenuBarStudent {
 
         Menu menu1 = new Menu("Hem");
 
-        //skapar en huvudmeny med namn arkiv
+        //Menu "Arkiv"
         Menu menu2 = new Menu("Arkiv");
 
-        //skapar en submeny med namn test i menyn arkiv
+        //Menu "Test"
         Menu testMenu = new Menu("Test");
 
-        //skapar menuItems att fylla submenyn Test med
+        //Menu "items for test"
         MenuItem doTest = new MenuItem("Gör Test");
         MenuItem doneTest = new MenuItem("Rättade Test");
 
-        //skapar en huvudmeny med namn Inställningar
+        //Menu for "settings"
         Menu menu3 = new Menu("Inställningar");
 
-        //skapar menuItems som ska fylla menyn Inställningar
+        //Menuitem for "settings"
         MenuItem editUser = new MenuItem("Redigera användare");
 
-        //Skapar en huvudmeny med namn logga ut
+        //Logg out
         Menu menu4 = new Menu("Logga ut");
 
 
@@ -73,13 +73,13 @@ public class MenuBarStudent {
         MenuBarHelper.onAction(menu1);
         MenuBarHelper.onAction(menu4);
 
-        //ActionEvent för loginknappen.
+        //ActionEvent for loggin page.
         menu4.setOnAction(e -> {
             LoginPage lp = new LoginPage(window);
         });
 
 
-        //ActionEvent för hemknappen.
+        //ActionEvent for homepage.
         menu1.setOnAction(e->{
             StudentFirstpage sfp = new StudentFirstpage(window);
         });

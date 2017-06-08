@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 public class StartView extends Application{
     Stage window;
 
+    //Start class with main method
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;

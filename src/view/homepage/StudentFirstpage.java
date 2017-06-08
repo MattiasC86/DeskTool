@@ -28,6 +28,7 @@ public class StudentFirstpage {
 
     List<Test> testList;
 
+    //Firstpage for student
     public StudentFirstpage(Stage window){
 
         window.setTitle("Hem");

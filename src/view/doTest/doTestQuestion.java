@@ -32,6 +32,7 @@ public class doTestQuestion {
     Label label;
     Label label1;
 
+    //Class for questions that will be added when you do the thest
     public doTestQuestion(int answerNumber, String Question, List<Answer> answersList, ListView<Pane> testList){
 
         this.aNumber = answerNumber;
@@ -55,6 +56,7 @@ public class doTestQuestion {
 
     public CheckBox[] answerBox;
 
+    //Single answer question
     public void singleQuestion(){
 
         label.setText("Envalsfråga (Ett rätt svar)");
@@ -77,6 +79,7 @@ public class doTestQuestion {
         testList.getItems().add(pane);
     }
 
+    //Many answer question
     public void manyQuestion(){
 
         label.setText("Flervalsfråga (Ett eller flera rätta svar)");
@@ -91,6 +94,7 @@ public class doTestQuestion {
         testList.getItems().add(pane);
     }
 
+    //Ranked answer question
     public void rankedQuestion(){
 
         pane.setPrefHeight(230);

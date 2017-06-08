@@ -17,6 +17,7 @@ import view.homepage.TeacherFirstpage;
  */
 public class MenuBarTeacher {
 
+        //Menubar for teacher user
         public MenuBarTeacher(Pane pane, Stage window) {
 
                 /*FileInputStream homeIcon = null;
@@ -33,13 +34,13 @@ public class MenuBarTeacher {
 
                 Menu menu1 = new Menu("Hem");
 
-                //skapar en huvudmeny med namn arkiv
+                //Menu "Arkiv"
                 Menu menu2 = new Menu("Arkiv");
 
-                //skapar en submeny med namn test i menyn arkiv
+                //Menu "Test"
                 Menu createMenu = new Menu("Test");
 
-                //skapar menuItems att fylla submenyn Test med
+                //Menuitems to fill the menu
                 MenuItem createTest = new MenuItem("Skapa Test");
                 MenuItem shareTest = new MenuItem("Dela Test");
                 MenuItem shareResultTest = new MenuItem("Dela resultat");
@@ -47,13 +48,13 @@ public class MenuBarTeacher {
                 MenuItem doneTest = new MenuItem("Statistik");
 
 
-                //skapar en huvudmeny med namn Inställningar
+                //Menu settings
                 Menu menu3 = new Menu("Inställningar");
 
-                //skapar menuItems som ska fylla menyn Inställningar
+                //Menu change users
                 MenuItem editUser = new MenuItem("Redigera användare");
 
-                //Skapar en huvudmeny med namn logga ut
+                //Menu loggout
                 Menu menu4 = new Menu("Logga ut");
 
 
@@ -75,17 +76,17 @@ public class MenuBarTeacher {
                 MenuBarHelper.onAction(menu1);
                 MenuBarHelper.onAction(menu4);
 
-                //ActionEvent för loginknappen.
+                //ActionEvent for loggin
                 menu4.setOnAction(e -> {
                         LoginPage lp = new LoginPage(window);
                 });
 
-                //ActionEvent för hemknappen.
+                //ActionEvent for home.
                 menu1.setOnAction(e -> {
                         TeacherFirstpage tfp = new TeacherFirstpage(window);
                 });
 
-                //ActionEvent för SkapaTest.
+                //ActionEvent for createTEst.
                 createTest.setOnAction(e -> {
                         FxView fv = new FxView(window);
                 });

@@ -43,6 +43,7 @@ public class ShareTestView {
 
     SendMailLogic sm = new SendMailLogic();
 
+    //Share test is for giving student the test
     public ShareTestView(Stage window) {
         currUser = UserService.read(LoginLogic.getCurrId());
 
@@ -172,6 +173,7 @@ public class ShareTestView {
         });
     }
 
+
     public void  shareTest() {
         System.out.println("DELAR " + selectedTest.gettTitle() + "TILL: ");
         switch(selector) {
@@ -187,6 +189,7 @@ public class ShareTestView {
         }
     }
 
+    //Sending the mail
     public void sendMail(){
         switch(selector) {
             case "User":

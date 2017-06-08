@@ -34,10 +34,18 @@ public class UnlockResultView {
     Button btnUnlock;
 
 
+    //This calss is for allowing students to see tests
     public UnlockResultView(Stage window) {
 
 
         pane = new Pane();
+        pane.getStyleClass().add("BackGroundPane");
+
+        Pane contentPane = new Pane();
+        contentPane.setPrefSize(500,400);
+        contentPane.relocate(550,250);
+        contentPane.getStyleClass().add("ContentPane");
+        pane.getChildren().add(contentPane);
 
 
         MenuBarHelper.getMenuBar(window, pane);
@@ -67,15 +75,16 @@ public class UnlockResultView {
             testBox.getItems().add(test.gettTitle());
         }
 
-        lSelectTest.relocate(300,200);
-        testBox.relocate(300,230);
-        lUnlock.relocate(300, 350);
-        btnUnlock.relocate(300,400);
-        lStatus.relocate(300, 450);
+        lSelectTest.relocate(100,40);
+        testBox.relocate(100,70);
+        lUnlock.relocate(100, 190);
+        btnUnlock.relocate(100,240);
+        lStatus.relocate(100, 290);
 
-        pane.getChildren().addAll(testBox, btnUnlock, lUnlock, lSelectTest, lStatus);
+        contentPane.getChildren().addAll(testBox, btnUnlock, lUnlock, lSelectTest, lStatus);
 
         Scene scene = new Scene(pane, 1600, 900);
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/TestViewCSS.css").toExternalForm());
         window.setScene(scene);
         window.show();
 

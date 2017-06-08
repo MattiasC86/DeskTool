@@ -30,6 +30,7 @@ public class ResultsView {
     User currUser;
     FlowPane flowpane = new FlowPane();
     Pane pane;
+    Pane contentPane;
 
     List<AnsweredTest> tests;
     ComboBox testBox;
@@ -43,14 +44,16 @@ public class ResultsView {
     public ResultsView(Stage window) {
         currUser = UserService.read(LoginLogic.getCurrId());
 
-        Pane menuPane = new Pane();
-
-        Pane mainPane = new Pane();
-
         pane = new Pane();
-        pane.relocate(200,100);
+        pane.getStyleClass().add("BackGroundPane");
 
-        MenuBarHelper.getMenuBar(window, menuPane);
+        contentPane = new Pane();
+        contentPane.setPrefSize(500,400);
+        contentPane.relocate(550,250);
+        contentPane.getStyleClass().add("ContentPane");
+        pane.getChildren().add(contentPane);
+
+        MenuBarHelper.getMenuBar(window, pane);
 
         tests = AnsweredTestService.readIfResultShared(LoginLogic.getCurrId());
 
@@ -66,13 +69,12 @@ public class ResultsView {
 
 
         testBox = new ComboBox(availableTests);
-        testBox.relocate(100,100);
+        testBox.relocate(130,70);
 
-        pane.getChildren().addAll(testBox);
+        contentPane.getChildren().addAll(testBox);
 
-        mainPane.getChildren().addAll(menuPane, pane);
-
-        Scene scene = new Scene(mainPane, 1600, 900);
+        Scene scene = new Scene(pane, 1600, 900);
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("./css/TestViewCSS.css").toExternalForm());
         window.setScene(scene);
         window.show();
 
@@ -100,12 +102,12 @@ public class ResultsView {
                 + leftOverSec + " sek / " + selectedTest.getTest().gettTimeMin() + " min");
         grade = new Label("Betyg: " + selectedTest.getaTGrade());
 
-        testTitle.relocate(100,150);
-        points.relocate(100, 200);
-        time.relocate(100, 250);
-        grade.relocate(100, 300);
+        testTitle.relocate(130,120);
+        points.relocate(130, 170);
+        time.relocate(130, 220);
+        grade.relocate(130, 270);
 
-        pane.getChildren().addAll(testTitle, points, time, grade);
+        contentPane.getChildren().addAll(testTitle, points, time, grade);
     }
 
 
