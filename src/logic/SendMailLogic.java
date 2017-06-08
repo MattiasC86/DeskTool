@@ -99,20 +99,7 @@ public class SendMailLogic {
             Message message = new MimeMessage(session);
             //The mail it sends from.
             message.setFrom(new InternetAddress("from-email@gmail.com"));
-
-<<<<<<< HEAD
-            List<User> userEmailList = userList;
-
-
-
-            /*Address[] to = new Address[] {InternetAddress.parse("avdq@abc.com"),
-                    InternetAddress.parse("tvdq@abc.com"),
-                    InternetAddress.parse("pvdq@abc.com")};
-            message.addRecipients(Message.RecipientType.TO, to);*/
-
-
-=======
->>>>>>> origin/master
+            
             //The mail sends to.
             message.addRecipients(Message.RecipientType.CC, InternetAddress.parse(tempList));
 
