@@ -1,5 +1,5 @@
 /*
-* TestLogic contains methods used in conjunction with Test creation annd answered tests self correcting
+* TestLogic contains methods used in conjunction with Test creation and AnsweredTest's self correcting
 */
 
 package logic;
@@ -20,12 +20,7 @@ import java.util.List;
  */
 public class TestLogic {
 
-    public static void saveAnsweredTest() {
-        // Ta in test, frågor, svar, tidsåtgång, user
-    }
-
     // Auto corrects an answered test and returns the score.
-    // OBS!! Lägg till så att den sparar score specifikt per fråga i AnsweredQuestion, samt att db ska uppdateras med allt
     public static void selfCorrectTest(AnsweredTest answeredTest) {
         if(answeredTest.getTest().gettSelfCorrecting() == 1) {
             List<Question> questions = QuestionService.read(answeredTest.getTest().getTestId());
@@ -89,7 +84,7 @@ public class TestLogic {
         }
     }
 
-
+    // Saves test to database
     public static void saveTest(ArrayList<PreQuestion> list, String title, int selfCorrecting, int timeMin, int showResult, Date startDate, Date endDate, User user) {
 
         int nrOfQuestions = list.size();
