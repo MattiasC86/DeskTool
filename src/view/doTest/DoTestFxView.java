@@ -115,8 +115,8 @@ public class DoTestFxView {
                         calcMinutes--;
                         secondsLeft = 60;
                     }
-                    handInMinutes = calcMinutes;
-                    handInSeconds = secondsLeft;
+                    handInMinutes = SelectTestView.getSelectedTest().gettTimeMin() - calcMinutes - 1;
+                    handInSeconds = 60 - secondsLeft;
                 }
 
 
@@ -177,7 +177,7 @@ public class DoTestFxView {
         if(user.getRole().equalsIgnoreCase("Admin")){
             AdminFirstpage afp = new AdminFirstpage(window);
         }
-        else if(user.getRole().equalsIgnoreCase("Lärare")){
+        else if(user.getRole().equalsIgnoreCase("Teacher")){
             TeacherFirstpage tfp = new TeacherFirstpage(window);
         }
         else if(user.getRole().equalsIgnoreCase("Student")){

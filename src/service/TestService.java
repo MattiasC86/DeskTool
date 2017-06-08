@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,8 +130,8 @@ public class TestService {
         GroupDetails groupDetails1 = new GroupDetails(studentGroup1, user1);
         GroupDetails groupDetails2 = new GroupDetails(studentGroup1, user2);
 
-        Test test1 = new Test("Djungeltest", 20, 100, 1, 1, user1);
-        Test test2 = new Test("Newton Quiz", 15, 5, 1, 1, user1);
+        Test test1 = new Test("Djungeltest", 20, 100, 1, 1, new Date(117,5,1), new Date(117,11,1), user1);
+        Test test2 = new Test("Newton Quiz", 15, 5, 1, 1, new Date(117,5,1), new Date(117,11,1), user1);
 
 
         Question question1 = new Question("Hur många bor det i skogen?", 1, "Single", 0, "G", test1);

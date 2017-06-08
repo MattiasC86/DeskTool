@@ -28,7 +28,7 @@ public class LoginLogic {
             if(user.getRole().equals("Student")){
                 return 1;
             }
-            else if(user.getRole().equals("Lärare")){
+            else if(user.getRole().equals("Teacher")){
                 return 2;
             }
             else if(user.getRole().equals("Admin")){

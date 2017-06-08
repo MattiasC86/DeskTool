@@ -6,13 +6,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.ShareTestView;
-import view.UnlockResultView;
+import view.*;
 import view.statistics.StatisticsView;
 import view.doTest.SelectTestView;
 import view.homepage.AdminFirstpage;
-import view.LoginPage;
-import view.Settings;
 import view.createTest.FxView;
 import view.register.Register;
 
@@ -38,10 +35,9 @@ public class MenuBarAdmin {
         //Creates MenuItems for testMenu
         MenuItem createTest = new MenuItem("Skapa Test");
         MenuItem shareTest = new MenuItem("Dela Test");
-        MenuItem correctTest = new MenuItem("Rätta Test");
         MenuItem shareResultTest = new MenuItem("Dela resultat");
         MenuItem doTest = new MenuItem("Gör Test");
-        MenuItem reuseTest = new MenuItem("Återanvända Test");
+        MenuItem makeGroups = new MenuItem("Skapa grupper");
         MenuItem doneTest = new MenuItem("Statistik");
 
         //Creates a MenuItem for akrivMenu
@@ -60,9 +56,9 @@ public class MenuBarAdmin {
 
 
         //Adds childrens to all the menues
-        arkivMenu.getItems().addAll(testMenu, registerMenu);
+        arkivMenu.getItems().addAll(testMenu, registerMenu,makeGroups);
 
-        testMenu.getItems().addAll(createTest, shareTest, correctTest, shareResultTest, doTest, reuseTest, doneTest);
+        testMenu.getItems().addAll(createTest, shareTest, shareResultTest, doTest, doneTest);
 
         settingsMenu.getItems().addAll(editUser);
 
@@ -125,6 +121,10 @@ public class MenuBarAdmin {
 
         shareResultTest.setOnAction(e->{
             UnlockResultView urv = new UnlockResultView(window);
+        });
+
+        makeGroups.setOnAction(e-> {
+            CreateGroupView cgv = new CreateGroupView(window);
         });
 
     }

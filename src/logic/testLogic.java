@@ -11,6 +11,7 @@ import view.createTest.PreQuestion;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,12 +90,12 @@ public class TestLogic {
     }
 
 
-    public static void saveTest(ArrayList<PreQuestion> list, String title, int selfCorrecting, int timeMin, int showResult, User user) {
+    public static void saveTest(ArrayList<PreQuestion> list, String title, int selfCorrecting, int timeMin, int showResult, Date startDate, Date endDate, User user) {
 
         int nrOfQuestions = list.size();
 
         // Saves Test entity to database
-        Test test = new Test(title, timeMin, nrOfQuestions, selfCorrecting, showResult, user);
+        Test test = new Test(title, timeMin, nrOfQuestions, selfCorrecting, showResult, startDate, endDate, user);
         TestService.create(test);
 
         // ArrayLists for Question and Answer entities

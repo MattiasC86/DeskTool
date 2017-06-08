@@ -12,10 +12,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import logic.LoginLogic;
 import service.GroupDetailsService;
 import service.StudentGroupService;
 import service.TestAccessService;
 import service.UserService;
+import view.menuBars.MenuBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ import java.util.List;
 /**
  * Created by matti on 2017-05-24.
  */
-public class CreateGroupView extends Application {
+public class CreateGroupView  {
     Pane pane = new Pane();
     List<User> allUsers;
     List<User> selectedUsers;
@@ -50,10 +52,13 @@ public class CreateGroupView extends Application {
     Label lblGroups;
     Label lblGroupName;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
 
-        allUsers = UserService.readAll();
+    public CreateGroupView(Stage window){
+
+
+        MenuBarHelper.getMenuBar(window, pane);
+
+        allUsers = UserService.readStudents();
         selectedUsers = new ArrayList<>();
 
         lblSelectUser = new Label("Välj användare att lägga till");
@@ -64,7 +69,7 @@ public class CreateGroupView extends Application {
         groupNameInput = new TextField();
         groupNameInput.setPromptText("Fyll i namn på gruppen");
 
-        // Creating ListView containing all users
+        // Creating ListView containing all students
         userListView = new ListView<>();
         allUsersObsList = FXCollections.observableArrayList();
             for(User user : allUsers){
@@ -112,8 +117,8 @@ public class CreateGroupView extends Application {
 
 
         Scene scene = new Scene(pane, 1600, 900);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        window.setScene(scene);
+        window.show();
 
         // Button listeners
         btnAdd.setOnAction(e -> addUser());
@@ -172,6 +177,21 @@ public class CreateGroupView extends Application {
                 alert.showAndWait();
             }
         }
+        if(groupNameInput.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Fält för gruppnamn är tomt.");
+            alert.setContentText("Vänligen fyll i ett  gruppnamn.");
+            alert.showAndWait();
+            validated = false;
+        } else if(selectedUsers.size() == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Inga medlemmar valda.");
+            alert.setContentText("Vänligen välj minst en medlem för gruppen.");
+            alert.showAndWait();
+            validated = false;
+        }
 
         if(validated) {
             StudentGroup studentGroup = new StudentGroup(groupNameInput.getText());
@@ -212,7 +232,4 @@ public class CreateGroupView extends Application {
         alert.showAndWait();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

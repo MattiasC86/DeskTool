@@ -93,9 +93,13 @@ public class doTestQuestion {
 
     public void rankedQuestion(){
 
+<<<<<<< HEAD
         pane.setPrefHeight(230);
 
         label.setText("Rangordningsfråga (Rangordna svarven uppifrån och ner):");
+=======
+        label.setText("Rangordningsfråga (Rangordna svaren uppifrån och ner):");
+>>>>>>> origin/master
         label1.relocate(510, 5);
 
         rankQuestionList = new ListView<String>();
