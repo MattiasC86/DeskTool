@@ -20,60 +20,62 @@ import java.util.List;
  */
 public class StatisticsLogic {
 
+    // Returns number of User's with access to specific Test
     public static int getNrAccess(int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
         Query query = entityManager.createQuery( "Select ta from TestAccess ta where ta.test.testId = " + testId);
         List<TestAccess> taList = (List<TestAccess>)query.getResultList();
+
         int nrAccess = 0;
         for(TestAccess element : taList) {
             nrAccess++;
         }
-
         entityManager.close();
         emFactory.close();
 
         return nrAccess;
     }
 
+    // Returns number of User's who have completed specific Test
     public static int getNrDone(int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
         Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.test.testId = " + testId);
         List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
+
         int nrDone = 0;
         for(AnsweredTest element : atList) {
             nrDone++;
         }
-
         entityManager.close();
         emFactory.close();
 
         return nrDone;
     }
 
-    // Returns how many of alla users passed the test
+    // Returns how many of all User's passed the Test
     public static int getNrPassed(int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
         Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.test.testId = " + testId + " and " +
                 "(at.aTGrade = 'G' or at.aTGrade = 'VG')");
+
         List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
         int nrPassed = 0;
         for(AnsweredTest element : atList) {
             nrPassed++;
         }
-
         entityManager.close();
         emFactory.close();
 
         return nrPassed;
     }
 
-    // Returns how many of selected users passed the test
+    // Returns how many of selected User's passed the Test
     public static int getNrPassed(List<User> users, int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
@@ -82,24 +84,26 @@ public class StatisticsLogic {
         for(User user : users) {
             Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.test.testId = " + testId + " and " +
                     "at.user.userId = " + user.getUserId() + " and " + "(at.aTGrade = 'G' or at.aTGrade = 'VG')");
+
             List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
             for(AnsweredTest element : atList) {
                 nrPassed++;
             }
         }
-
         entityManager.close();
         emFactory.close();
 
         return nrPassed;
     }
 
+    // Retuns avarage score of selected AnsweredTest
     public static double getAvgScore(int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
         Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.test.testId = " + testId);
         List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
+
         int nrAnswered = 0;
         for(AnsweredTest element : atList) {
             nrAnswered++;
@@ -118,7 +122,7 @@ public class StatisticsLogic {
         return avgScore;
     }
 
-    // Returns avg score for specific users and specific test
+    // Returns avg score for specific User's and specific AnsweredTest
     public static double getAvgScore(List<User> users, int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
@@ -129,6 +133,7 @@ public class StatisticsLogic {
         for(User user : users) {
             Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.test.testId = " + testId +
                 " and at.user.userId = " + user.getUserId());
+
             List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
             for(AnsweredTest element : atList) {
                 nrAnswered++;
@@ -138,20 +143,20 @@ public class StatisticsLogic {
 
         double avgScore = totalScore/nrAnswered;
 
-
         entityManager.close();
         emFactory.close();
 
         return avgScore;
     }
 
-    // Returns avg time for selected test and all users
+    // Returns avarage time for selected Test and all User's
     public static int getAvgTime(int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
 
         Query query = entityManager.createQuery( "Select at from AnsweredTest at where at.test.testId = " + testId);
         List<AnsweredTest> atList = (List<AnsweredTest>)query.getResultList();
+
         int nrAnswered = 0;
         for(AnsweredTest element : atList) {
             nrAnswered++;
@@ -169,7 +174,7 @@ public class StatisticsLogic {
         return avgTime;
     }
 
-    // Returns avg time for selected test and users
+    // Returns avarage time for selected Test and Users
     public static int getAvgTime(List<User> users, int testId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();
@@ -188,7 +193,6 @@ public class StatisticsLogic {
             }
         }
 
-
         int avgTime = totalTime/nrAnswered;
 
         entityManager.close();
@@ -197,6 +201,7 @@ public class StatisticsLogic {
         return avgTime;
     }
 
+    // Returns all AnsweredTest's which has been graded
     public static List<AnsweredTest> getCorrected(int userId) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entityManager = emFactory.createEntityManager();

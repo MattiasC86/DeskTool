@@ -1,5 +1,5 @@
 /*
-* LoginLogic class contains validation logic for login screen,
+* LoginLogic class handles validation logic for login screen,
 * also stores a static variable of currently logged in users Id
 */
 
@@ -10,8 +10,10 @@ import service.UserService;
 
 public class LoginLogic {
 
+    // Variable accessed from everywhere, containing User Id for currently logged in User
     private static int currId;
 
+    // Checks if username and password input is correct, returns a status code 0-3
     public static int loginValidation(String formUsername, String formPassword){
         setCurrId(0);
         String userNameHolder = "";

@@ -14,10 +14,13 @@ import entity.User;
 
 public class SendMailLogic {
 
+    //Email info of the email that sends out the emails.
     final String username = "desktesttool@gmail.com";
     final String password = "hejsan1234";
     String tempList;
 
+    //Method to send an email to one user with info of the test.
+    // The user also gain info of their log in infomation.
     public void sendmail(User user, Test test){
 
         String receive = user.getEmail();
@@ -54,7 +57,7 @@ public class SendMailLogic {
                     "\n Your password is " + user.getPassword());
 
             Transport.send(message);
-
+            //to get some respond that it works.
             System.out.println("Done");
 
         } catch (MessagingException e) {
@@ -97,6 +100,7 @@ public class SendMailLogic {
             //The mail it sends from.
             message.setFrom(new InternetAddress("from-email@gmail.com"));
 
+<<<<<<< HEAD
             List<User> userEmailList = userList;
 
 
@@ -107,6 +111,8 @@ public class SendMailLogic {
             message.addRecipients(Message.RecipientType.TO, to);*/
 
 
+=======
+>>>>>>> origin/master
             //The mail sends to.
             message.addRecipients(Message.RecipientType.CC, InternetAddress.parse(tempList));
 
