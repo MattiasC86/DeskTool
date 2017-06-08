@@ -5,8 +5,6 @@
 package service;
 
 import entity.Answer;
-import entity.Question;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,7 +14,6 @@ import java.util.List;
 
 
 public class AnswerService {
-
 
     public static void create(Answer answer) {
         EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");

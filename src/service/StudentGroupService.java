@@ -7,15 +7,12 @@ package service;
 import entity.GroupDetails;
 import entity.StudentGroup;
 import entity.User;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-/**
- * Created by matti on 2017-05-24.
- */
+
 public class StudentGroupService {
 
     public static void create(StudentGroup studentGroup) {

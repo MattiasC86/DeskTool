@@ -5,16 +5,12 @@
 package service;
 
 import entity.GroupDetails;
-import entity.StudentGroup;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-/**
- * Created by matti on 2017-06-01.
- */
+
 public class GroupDetailsService {
 
     public static void create(GroupDetails groupDetails) {
