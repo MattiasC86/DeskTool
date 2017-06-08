@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import logic.LoginLogic;
 import service.TestService;
@@ -38,11 +39,13 @@ public class TeacherFirstpage {
 
         Label l1 = new Label("Välkommen till Newtons Provportal");
         l1.setStyle("-fx-font-size: 24pt");
+        l1.setTextFill(Color.WHITE);
         l1.relocate(100,100);
         pane.getChildren().add(l1);
 
         Label l2 = new Label("Dina skapade prov");
         l2.setStyle("-fx-font-size: 24pt");
+        l2.setTextFill(Color.WHITE);
         l2.relocate(700,50);
         pane.getChildren().add(l2);
 
